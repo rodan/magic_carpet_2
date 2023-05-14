@@ -466,7 +466,7 @@ int16_t alsound_create_source(const int16_t chunk_id, al_ssp_t *ssp)
 /// \brief update entity openal source position
 /// \param entity  
 /// \param position   
-void alsound_update_source(type_event_0x6E8E *entity, axis_3d *position)
+void alsound_update_source(event_t *entity, axis_3d *position)
 {
     int16_t play_ch;
     al_chunk_t *p;

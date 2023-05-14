@@ -96,7 +96,7 @@ int32_t x_DWORD_D41A4_x9692 = -1;*/
 
 //uint8_t* x_D41A0_BYTEARRAY_4;
 
-type_x_D41A0_BYTEARRAY_4_struct x_D41A0_BYTEARRAY_4_struct;
+type_engine_db engine_db;
 
 int16_t x_D41A0_WORDARRAY[10000];
 
@@ -764,8 +764,8 @@ void support_begin()
        dword_E9C30[0][0] = 0;
        dword_E9C30[2] = new uint8_t[4096];
        dword_E9C30[4] = new uint8_t[4096]; */
-    //x_D41A0_BYTEARRAY_4_struct.player_name_57 =new char[256];
-    //x_D41A0_BYTEARRAY_4_struct.savestring_89 = new char[256];
+    //engine_db.player_name_57 =new char[256];
+    //engine_db.savestring_89 = new char[256];
 
     x_BYTE_14B4E0_second_heightmap = new uint8_t[65536];
     off_D41A8_sky = new uint8_t[1024 * 1024];
@@ -777,7 +777,7 @@ void support_begin()
     xy_DWORD_17DEC8_spritestr = new posistruct_t[1000];
 
     x_DWORD_D4188t_spritestr = new posistruct_t[1000];
-    //x_D41A0_BYTEARRAY_4_struct.player_name_57 = 0;
+    //engine_db.player_name_57 = 0;
 
     //printbuffer2[0] = '\0';
 }
@@ -799,8 +799,8 @@ void support_end()
     /*xx free(dword_E9C30[0]);
        free(dword_E9C30[2]);
        free(dword_E9C30[4]); */
-    //free(x_D41A0_BYTEARRAY_4_struct.player_name_57);
-    //if(x_D41A0_BYTEARRAY_4_struct.savestring_89)delete(x_D41A0_BYTEARRAY_4_struct.savestring_89);
+    //free(engine_db.player_name_57);
+    //if(engine_db.savestring_89)delete(engine_db.savestring_89);
 
     if (x_BYTE_14B4E0_second_heightmap)
         delete[](x_BYTE_14B4E0_second_heightmap);
@@ -1280,7 +1280,7 @@ uint32_t compare_0x6E8E(const char *filename, uint8_t *adress, uint32_t count, u
     return (i);
 };
 
-uint32_t compare_with_sequence_EA3E4(const char *filename, type_event_0x6E8E **adress,
+uint32_t compare_with_sequence_EA3E4(const char *filename, event_t **adress,
                                      uint32_t count, uint32_t size, uint8_t *origbyte,
                                      uint8_t *copybyte)
 {

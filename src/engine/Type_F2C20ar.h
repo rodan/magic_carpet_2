@@ -29,7 +29,7 @@ typedef struct {
     int32_t dword0x11;
     int32_t dword0x12;
     int32_t dword0x13;
-    type_event_0x6E8E *dword0x14x;
+    event_t *dword0x14x;
     int32_t dword0x15;
     int32_t dword0x16;
     int32_t dword0x17;

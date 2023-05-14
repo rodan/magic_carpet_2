@@ -8,5 +8,6 @@
 *.~ddp
 *.~h
 *.~dfm
+tags
 assets/biggraphics.tar.xz
 build

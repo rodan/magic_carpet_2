@@ -851,31 +851,31 @@ void InitLanguage_76A40()       //257A40
         if (configDat.configDatSign_0 == 0xfffffff7) {
             DataFileIO::Read(configdatfile, (uint8_t *) & configDat.langIndex_4, 28);
 
-            x_D41A0_BYTEARRAY_4_struct.configDatSign_0 = configDat.configDatSign_0;
-            x_D41A0_BYTEARRAY_4_struct.langIndex_4 = configDat.langIndex_4;
-            x_D41A0_BYTEARRAY_4_struct.soundVolume_6 = configDat.soundVolume_6;
-            x_D41A0_BYTEARRAY_4_struct.musicVolume_8 = configDat.musicVolume_8;
-            x_D41A0_BYTEARRAY_4_struct.byteindex_10 = configDat.byteindex_10;
-            x_D41A0_BYTEARRAY_4_struct.brightness_11 = configDat.brightness_11;
-            x_D41A0_BYTEARRAY_4_struct.brightness_12 = configDat.brightness_12;
-            x_D41A0_BYTEARRAY_4_struct.brightness_13 = configDat.brightness_13;
-            x_D41A0_BYTEARRAY_4_struct.wordindex_14 = configDat.wordindex_14;
-            x_D41A0_BYTEARRAY_4_struct.dwordindex_16 = configDat.dwordindex_16;
-            x_D41A0_BYTEARRAY_4_struct.stubb[0] = configDat.stubb[0];
-            x_D41A0_BYTEARRAY_4_struct.stubb[1] = configDat.stubb[1];
+            engine_db.configDatSign_0 = configDat.configDatSign_0;
+            engine_db.langIndex_4 = configDat.langIndex_4;
+            engine_db.soundVolume_6 = configDat.soundVolume_6;
+            engine_db.musicVolume_8 = configDat.musicVolume_8;
+            engine_db.byteindex_10 = configDat.byteindex_10;
+            engine_db.brightness_11 = configDat.brightness_11;
+            engine_db.brightness_12 = configDat.brightness_12;
+            engine_db.brightness_13 = configDat.brightness_13;
+            engine_db.wordindex_14 = configDat.wordindex_14;
+            engine_db.dwordindex_16 = configDat.dwordindex_16;
+            engine_db.stubb[0] = configDat.stubb[0];
+            engine_db.stubb[1] = configDat.stubb[1];
 
             for (int i = 0; i < 10; i++)
                 x_BYTE_EB39E_keys[i] = configDat.keys[i];
 
             DataFileIO::Close(configdatfile);
-            sub_8E470_sound_proc17_volume(x_D41A0_BYTEARRAY_4_struct.soundVolume_6);
-            sub_8E410_sound_proc16_xmidivolume(x_D41A0_BYTEARRAY_4_struct.musicVolume_8);
+            sub_8E470_sound_proc17_volume(engine_db.soundVolume_6);
+            sub_8E410_sound_proc16_xmidivolume(engine_db.musicVolume_8);
 
             sprintf(printbuffer, "%s/%s/L%d.TXT", cdDataPath.c_str(), "LANGUAGE",
-                    x_D41A0_BYTEARRAY_4_struct.langIndex_4);
+                    engine_db.langIndex_4);
             for (int i = 0; i < 2; i++) {
-                x_D41A0_BYTEARRAY_4_struct.SelectedLangIndex =
-                    x_D41A0_BYTEARRAY_4_struct.langIndex_4 & 0xff;
+                engine_db.SelectedLangIndex =
+                    engine_db.langIndex_4 & 0xff;
                 if (x_BYTE_E29E0 || x_DWORD_D41BC_langbuffer)
                     FreeMem_83E80((uint8_t *) x_DWORD_D41BC_langbuffer);
                 langfile = DataFileIO::CreateOrOpenFile(printbuffer, 512);
@@ -893,7 +893,7 @@ void InitLanguage_76A40()       //257A40
                     break;
                 }
                 sprintf(printbuffer, "%s/%s/L%d.TXT", cdDataPath.c_str(), "LANGUAGE",
-                        x_D41A0_BYTEARRAY_4_struct.SelectedLangIndex);
+                        engine_db.SelectedLangIndex);
             }
         } else {
             DataFileIO::Close(configdatfile);
@@ -902,7 +902,7 @@ void InitLanguage_76A40()       //257A40
             sub_7ADE0(1);
         }
     }
-    if (x_D41A0_BYTEARRAY_4_struct.SelectedLangIndex != 2 || !soundAble_E3798)
+    if (engine_db.SelectedLangIndex != 2 || !soundAble_E3798)
         x_BYTE_D41C0 = 1;
     x_WORD_E29D8 = 1;
 }
@@ -923,17 +923,17 @@ void Intros_76D10(char a1)      //257d10
     //signed int v3; // eax
     char dataPath[MAX_PATH];
 
-    //x_DWORD_17DE48c = x_D41A0_BYTEARRAY_4_struct.pointer_0xE2_heapbuffer_226;
+    //x_DWORD_17DE48c = engine_db.pointer_0xE2_heapbuffer_226;
     x_DWORD_17DE38str.x_DWORD_17DE54 =
-        &x_D41A0_BYTEARRAY_4_struct.pointer_0xE2_heapbuffer_226[301787];
+        &engine_db.pointer_0xE2_heapbuffer_226[301787];
     x_DWORD_17DE38str.x_DWORD_17DEC0 =
-        (posistruct2_t *) & x_D41A0_BYTEARRAY_4_struct.pointer_0xE2_heapbuffer_226[308527];
+        (posistruct2_t *) & engine_db.pointer_0xE2_heapbuffer_226[308527];
     x_DWORD_17DE38str.x_DWORD_17DEC4 =
-        (posistruct2_t *) & x_D41A0_BYTEARRAY_4_struct.pointer_0xE2_heapbuffer_226[310159];
+        (posistruct2_t *) & engine_db.pointer_0xE2_heapbuffer_226[310159];
 
     sprintf(dataPath, "%s/%s", cdDataPath.c_str(), "DATA/SCREENS/HSCREEN0.DAT");
     sub_7AA70_load_and_decompres_dat_file(dataPath,
-                                          &x_D41A0_BYTEARRAY_4_struct.
+                                          &engine_db.
                                           pointer_0xE2_heapbuffer_226[301787], 0x164FCD, 0x35C);
     sub_7AA70_load_and_decompres_dat_file(dataPath, (uint8_t *) x_DWORD_17DE38str.x_DWORD_17DEC0,
                                           0x165329, 0x224);
@@ -949,7 +949,7 @@ void Intros_76D10(char a1)      //257d10
                                       x_DWORD_17DE38str.x_DWORD_17DE54, xy_DWORD_17DEC0_spritestr);
 
     sub_2EB40();
-    if (soundAble_E3798 && x_D41A0_BYTEARRAY_4_struct.SelectedLangIndex == 2) {
+    if (soundAble_E3798 && engine_db.SelectedLangIndex == 2) {
         x_BYTE_D41C1 = 0;
         x_BYTE_D41C0 = 0;
     } else {
@@ -1095,9 +1095,9 @@ void MainMenu_76FA0( /*int a1, */ int /*a2 */ , uint16_t a3x)   //257fa0
     x_WORD_17DE26 = v4;
     //x_DWORD_17DE22 = v3;
     VGA_cleanKeyBuffer();
-    if (x_BYTE_E29E1 || x_D41A0_BYTEARRAY_4_struct.setting_byte1_22 & 0x10
+    if (x_BYTE_E29E1 || engine_db.setting_byte1_22 & 0x10
         || (NewGameDialog_77350(0), !x_WORD_E29DC)) {
-        x_D41A0_BYTEARRAY_4_struct.setting_byte1_22 &= 0xEFu;
+        engine_db.setting_byte1_22 &= 0xEFu;
         sub_7A110_load_hscreen(x_WORD_180660_VGA_type_resolution, 4);
         ResetMouse_7B5A0();
 
@@ -1107,7 +1107,7 @@ void MainMenu_76FA0( /*int a1, */ int /*a2 */ , uint16_t a3x)   //257fa0
 
         sub_8CD27_set_cursor(xy_DWORD_17DED4_spritestr[39]);
         //v6 = x_D41A0_BYTEARRAY_4;
-        x_DWORD_17DE38str.x_BYTE_17DF13 = x_D41A0_BYTEARRAY_4_struct.byteindex_10;
+        x_DWORD_17DE38str.x_BYTE_17DF13 = engine_db.byteindex_10;
         //v6 = x_DWORD_17DE38str.x_BYTE_17DF13;
         x_DWORD_17DBB8[0] = j___clock();
         v26 = j___clock();
@@ -1145,11 +1145,11 @@ void MainMenu_76FA0( /*int a1, */ int /*a2 */ , uint16_t a3x)   //257fa0
             }
             if (x_DWORD_17DE38str.x_BYTE_17DF10_get_key_scancode == 59) {
                 //v17 = x_D41A0_BYTEARRAY_4;
-                v18 = x_D41A0_BYTEARRAY_4_struct.byteindex_10;
-                x_D41A0_BYTEARRAY_4_struct.byteindex_10 = v18 != 1;
+                v18 = engine_db.byteindex_10;
+                engine_db.byteindex_10 = v18 != 1;
                 x_DWORD_17DE38str.x_BYTE_17DF13 = v18 != 1;
                 //*(x_BYTE *)(v17 + 38402) = 1;
-                x_D41A0_BYTEARRAY_4_struct.setting_38402 = 1;
+                engine_db.setting_38402 = 1;
             }
             if (x_WORD_180660_VGA_type_resolution & 1)
                 CopyScreen(x_DWORD_E9C38_smalltit, pdwScreenBuffer_351628, 320, 200);
@@ -1213,7 +1213,7 @@ bool NewGameDialog_77350(type_WORD_E1F84 *a1x)  //258350
     v1 = 0;
     x_WORD_E29D6_not_movex = 0;
     if (D41A0_0.array_0x2BDE[D41A0_0.LevelIndex_0xc].dw_w_b_0_2BDE_11230.byte[2] & 2
-        && x_D41A0_BYTEARRAY_4_struct.levelnumber_43w == 24)
+        && engine_db.levelnumber_43w == 24)
         sub_833C0();
     memset((void *)&unk_17DBA8str, 0, 16);
     unk_17DBA8str.x_BYTE_17DBB6 = 2;
@@ -1253,14 +1253,14 @@ bool NewGameDialog_77350(type_WORD_E1F84 *a1x)  //258350
         x_DWORD_17DE38str.x_WORD_17DEEC = 0;
         SetCenterScreenForFlyAssistant_6EDB0();
         sub_8CD27_set_cursor(xy_DWORD_17DED4_spritestr[239]);
-        x_DWORD_17DB70str.x_WORD_17DB8A = x_D41A0_BYTEARRAY_4_struct.levelnumber_43w;
+        x_DWORD_17DB70str.x_WORD_17DB8A = engine_db.levelnumber_43w;
         while (!v1) {
             SetFrameStart(std::chrono::system_clock::now());
             if (x_DWORD_17DE38str.x_BYTE_17DF10_get_key_scancode == 59) {
-                x_DWORD_17DE38str.x_BYTE_17DF13 = x_D41A0_BYTEARRAY_4_struct.byteindex_10 != 1;
-                x_D41A0_BYTEARRAY_4_struct.byteindex_10 =
-                    x_D41A0_BYTEARRAY_4_struct.byteindex_10 != 1;
-                x_D41A0_BYTEARRAY_4_struct.setting_38402 = 1;
+                x_DWORD_17DE38str.x_BYTE_17DF13 = engine_db.byteindex_10 != 1;
+                engine_db.byteindex_10 =
+                    engine_db.byteindex_10 != 1;
+                engine_db.setting_38402 = 1;
             }
             v1 = NewGameDraw_7EAE0(&x_DWORD_17DB70str.unk_17DB76_posx,
                                    &x_DWORD_17DB70str.unk_17DB78_posy,
@@ -1269,15 +1269,15 @@ bool NewGameDialog_77350(type_WORD_E1F84 *a1x)  //258350
                                    &x_DWORD_17DB70str.x_BYTE_17DB8F, &x_DWORD_17DB70str.unk_17DB90);
             if (CommandLineParams.ModeTestRegressionsGame()) {
                 x_DWORD_17DB70str.x_BYTE_17DB8E = 1;
-                x_D41A0_BYTEARRAY_4_struct.levelnumber_43w = test_regression_level;
+                engine_db.levelnumber_43w = test_regression_level;
                 if (mapScreenPortals_E17CC[test_regression_level].activated_18 == 1)
-                    x_D41A0_BYTEARRAY_4_struct.setting_38545 |= 4u;
+                    engine_db.setting_38545 |= 4u;
                 Type_SecretMapScreenPortals_E2970 *v46x =
-                    sub_824B0(x_D41A0_BYTEARRAY_4_struct.levelnumber_43w);
+                    sub_824B0(engine_db.levelnumber_43w);
                 if (v46x && v46x->activated_12 == 2)
-                    x_D41A0_BYTEARRAY_4_struct.setting_38545 |= 0x10u;
-                if (x_D41A0_BYTEARRAY_4_struct.levelnumber_43w == 24)
-                    x_D41A0_BYTEARRAY_4_struct.setting_38545 |= 0x20u;
+                    engine_db.setting_38545 |= 0x10u;
+                if (engine_db.levelnumber_43w == 24)
+                    engine_db.setting_38545 |= 0x20u;
                 v1 = 1;
             }
             if (x_WORD_180660_VGA_type_resolution & 1)
@@ -1304,7 +1304,7 @@ bool NewGameDialog_77350(type_WORD_E1F84 *a1x)  //258350
         result = true;
     } else {
         x_WORD_E29DC = 1;
-        x_D41A0_BYTEARRAY_4_struct.levelnumber_43w = x_BYTE_D419C_level_num;
+        engine_db.levelnumber_43w = x_BYTE_D419C_level_num;
         if (a1x)
             a1x->dword_4 = 0;
         result = true;
@@ -1338,7 +1338,7 @@ signed int sub_7E0E0_mouse_events()     //25f0e0
                cd
                123
              */
-            //x_D41A0_BYTEARRAY_4_struct.pointer_0xE2_heapbuffer_226[0x4D54A + 164829 - 1]
+            //engine_db.pointer_0xE2_heapbuffer_226[0x4D54A + 164829 - 1]
             //je asi &x_DWORD_17DED4[6 * v3]
             //123 cd
             sub_2BB40_draw_bitmap(str_WORD_E1F84[ix].xmin_10, str_WORD_E1F84[ix].ymin_12,
@@ -1454,7 +1454,7 @@ char LanguageSettingDialog_779E0(type_WORD_E1F84 *a1y)  //2589E0
         langBuffer = &x_DWORD_E9C38_smalltit[307200];   //4B000
     } else {
         tempSmalltit = x_DWORD_E9C38_smalltit;
-        x_DWORD_E9C38_smalltit = x_D41A0_BYTEARRAY_4_struct.pointer_0xE2_heapbuffer_226;        //[[2a51a4]+e2]
+        x_DWORD_E9C38_smalltit = engine_db.pointer_0xE2_heapbuffer_226;        //[[2a51a4]+e2]
         langBuffer = &x_DWORD_E9C38_smalltit[307200];   //406514+4b000
         sub_7A110_load_hscreen(x_WORD_180660_VGA_type_resolution, 14);  //25b110
     }
@@ -1476,7 +1476,7 @@ char LanguageSettingDialog_779E0(type_WORD_E1F84 *a1y)  //2589E0
             langFilename = (char *)langFileD.name;      //both are assigned the case "D2.TXT", address 3550d2
 
         posistruct_t langDatTab[1000];
-        x_D41A0_BYTEARRAY_4_struct.SelectedLangIndex = LoadLanguageFile(&tabBuffer, &tabBufferEnd, langBuffer, langFilename, langDatTab);       //2607d0
+        engine_db.SelectedLangIndex = LoadLanguageFile(&tabBuffer, &tabBufferEnd, langBuffer, langFilename, langDatTab);       //2607d0
         unknown_libname_4_find_close(&langFileD, langdhandle);  //27b1b3
         if (langlhandle == 0) {
             configFile2 = DataFileIO::CreateOrOpenFile(configFilePath, 512);
@@ -1485,7 +1485,7 @@ char LanguageSettingDialog_779E0(type_WORD_E1F84 *a1y)  //2589E0
                 if (configDat.configDatSign_0 == 0xfffffff7) {
                     DataFileIO::Read(configFile2, (uint8_t *) & configDat.langIndex_4, 2);
                     sprintf(printbuffer, "L%d.TXT", configDat.langIndex_4);
-                    x_D41A0_BYTEARRAY_4_struct.SelectedLangIndex = sub_7F960(tabBuffer, tabBufferEnd, langBuffer, printbuffer, langDatTab);     //tady se pak zmeni v1 za v1_langdattab
+                    engine_db.SelectedLangIndex = sub_7F960(tabBuffer, tabBufferEnd, langBuffer, printbuffer, langDatTab);     //tady se pak zmeni v1 za v1_langdattab
                 }
                 DataFileIO::Close(configFile2);
             }
@@ -1496,9 +1496,9 @@ char LanguageSettingDialog_779E0(type_WORD_E1F84 *a1y)  //2589E0
         while (mouseClick != 2) //adress 258c30
         {
             if (x_DWORD_17DE38str.x_BYTE_17DF10_get_key_scancode == 59) {
-                x_D41A0_BYTEARRAY_4_struct.byteindex_10 =
-                    x_D41A0_BYTEARRAY_4_struct.byteindex_10 != 1;
-                x_D41A0_BYTEARRAY_4_struct.setting_38402 = 1;
+                engine_db.byteindex_10 =
+                    engine_db.byteindex_10 != 1;
+                engine_db.setting_38402 = 1;
             }
             if (x_WORD_180660_VGA_type_resolution & 1)
                 CopyScreen(x_DWORD_E9C38_smalltit, pdwScreenBuffer_351628, 320, 200);
@@ -1506,7 +1506,7 @@ char LanguageSettingDialog_779E0(type_WORD_E1F84 *a1y)  //2589E0
                 CopyScreen(x_DWORD_E9C38_smalltit, pdwScreenBuffer_351628, 640, 480);   //write default screan 27b144  adress 258c99
             mouseClick = sub_7E0E0_mouse_events();      //25f0e0 adress 258ca1 - change button, return click
             sub_2BB40_draw_bitmap(263, 134, langDatTab[1]);     //20cb40 adress 258cba - change flag
-            if (x_D41A0_BYTEARRAY_4_struct.byteindex_10 == 1)   //is 1 not zero!
+            if (engine_db.byteindex_10 == 1)   //is 1 not zero!
             {
                 if (codeBranch == 2) {
                     actualTime = j___clock();   //279786 , adresa 258cd9
@@ -1543,7 +1543,7 @@ char LanguageSettingDialog_779E0(type_WORD_E1F84 *a1y)  //2589E0
                 }
                 // L2.TXT
                 selectLang2 = sub_7F960(tabBuffer, tabBufferEnd, langBuffer, langFileL.name, langDatTab);       //adress 258dec
-                if (x_D41A0_BYTEARRAY_4_struct.SelectedLangIndex == selectLang2) {
+                if (engine_db.SelectedLangIndex == selectLang2) {
                     if (unknown_libname_3_findnext(&langFileL, langlhandle)) {
                         unknown_libname_4_find_close(&langFileL, langlhandle);
                         langlhandle = unknown_libname_2_findfirst(languagePathL, 0, &langFileL);
@@ -1553,7 +1553,7 @@ char LanguageSettingDialog_779E0(type_WORD_E1F84 *a1y)  //2589E0
                 } else {
                     selectLang3 = selectLang2;
                 }
-                x_D41A0_BYTEARRAY_4_struct.SelectedLangIndex = selectLang3;
+                engine_db.SelectedLangIndex = selectLang3;
             }
         }
     }
@@ -1561,21 +1561,21 @@ char LanguageSettingDialog_779E0(type_WORD_E1F84 *a1y)  //2589E0
     unknown_libname_4_find_close(&langFileL, langlhandle);      //adress 258EA2
     configFile = DataFileIO::CreateOrOpenFile(configFilePath, 546);
     if (configFile != nullptr) {
-        if (x_D41A0_BYTEARRAY_4_struct.setting_38402 == 1)
-            x_D41A0_BYTEARRAY_4_struct.setting_38402 = 0;
+        if (engine_db.setting_38402 == 1)
+            engine_db.setting_38402 = 0;
 
         configDat.configDatSign_0 = 0xfffffff7;
-        configDat.langIndex_4 = x_D41A0_BYTEARRAY_4_struct.SelectedLangIndex;
-        configDat.soundVolume_6 = x_D41A0_BYTEARRAY_4_struct.soundVolume_6;
-        configDat.musicVolume_8 = x_D41A0_BYTEARRAY_4_struct.musicVolume_8;
-        configDat.byteindex_10 = x_D41A0_BYTEARRAY_4_struct.byteindex_10;
-        configDat.brightness_11 = x_D41A0_BYTEARRAY_4_struct.brightness_11;
-        configDat.brightness_12 = x_D41A0_BYTEARRAY_4_struct.brightness_12;
-        configDat.brightness_13 = x_D41A0_BYTEARRAY_4_struct.brightness_13;
-        configDat.wordindex_14 = x_D41A0_BYTEARRAY_4_struct.wordindex_14;
-        configDat.dwordindex_16 = x_D41A0_BYTEARRAY_4_struct.dwordindex_16;
-        configDat.stubb[0] = x_D41A0_BYTEARRAY_4_struct.stubb[0];
-        configDat.stubb[1] = x_D41A0_BYTEARRAY_4_struct.stubb[1];
+        configDat.langIndex_4 = engine_db.SelectedLangIndex;
+        configDat.soundVolume_6 = engine_db.soundVolume_6;
+        configDat.musicVolume_8 = engine_db.musicVolume_8;
+        configDat.byteindex_10 = engine_db.byteindex_10;
+        configDat.brightness_11 = engine_db.brightness_11;
+        configDat.brightness_12 = engine_db.brightness_12;
+        configDat.brightness_13 = engine_db.brightness_13;
+        configDat.wordindex_14 = engine_db.wordindex_14;
+        configDat.dwordindex_16 = engine_db.dwordindex_16;
+        configDat.stubb[0] = engine_db.stubb[0];
+        configDat.stubb[1] = engine_db.stubb[1];
         for (int i = 0; i < 10; i++)
             configDat.keys[i] = x_BYTE_EB39E_keys[i];
 
@@ -1644,7 +1644,7 @@ signed int sub_7E640(type_WORD_E1F84 *a1x)      //25f640
     else
         v1 = 1;
     if (v1 == 1) {
-        x_D41A0_BYTEARRAY_4_struct.levelnumber_43w = 0;
+        engine_db.levelnumber_43w = 0;
         memset(x_DWORD_17DBC8x, 0, 500);
         memset(x_DWORD_17DDBCx, 0, 100);
         //for (i = (x_WORD*)unk_E17CC_0x194; i[2]; *(i - 3) = 70)
@@ -1767,9 +1767,9 @@ char LoadGameDialog_780F0(type_WORD_E1F84 *a1x) //0x2590f0
                     DataFileIO::Read(FILE,
                                      (uint8_t *) & x_DWORD_17DE38str.
                                      xx_BYTE_17DF14[(x_DWORD_17DE38str.x_WORD_17DF04 - 1)][0], 20);
-                    DataFileIO::Read(FILE, (uint8_t *) x_D41A0_BYTEARRAY_4_struct.player_name_57ar,
+                    DataFileIO::Read(FILE, (uint8_t *) engine_db.player_name_57ar,
                                      32);
-                    DataFileIO::Read(FILE, (uint8_t *) x_D41A0_BYTEARRAY_4_struct.savestring_89,
+                    DataFileIO::Read(FILE, (uint8_t *) engine_db.savestring_89,
                                      32);
 
                     //Load completed Secret Portals
@@ -1814,7 +1814,7 @@ char LoadGameDialog_780F0(type_WORD_E1F84 *a1x) //0x2590f0
                     //Set current level number
                     while (mapScreenPortals_E17CC[i].viewPortPosX_4) {
                         if (mapScreenPortals_E17CC[i].activated_18 == 1)
-                            x_D41A0_BYTEARRAY_4_struct.levelnumber_43w = i;
+                            engine_db.levelnumber_43w = i;
                         i++;
                     }
                     x_DWORD_17DB70str.x_BYTE_17DB8F = 1;
@@ -2014,7 +2014,7 @@ char SetKeysDialog_79610()      //25a610
         }
         v44 = TestMouseRegions_7E1F0();
         if (v44 == 1) {
-            x_D41A0_BYTEARRAY_4_struct.setting_38402 = 1;
+            engine_db.setting_38402 = 1;
             sub_5BCC0_set_any_variables1();
             for (int l_int = 0; str_BYTE_E25ED_2BB[l_int].word_0; l_int++)
                 str_BYTE_E25ED_2BB[l_int].word_14 = 0;
@@ -2072,7 +2072,7 @@ char SetKeysDialog_79610()      //25a610
                             }
                         }
                         if (!v18) {
-                            x_D41A0_BYTEARRAY_4_struct.setting_38402 = 1;
+                            engine_db.setting_38402 = 1;
                             //v2 += 9;//?
                             str_BYTE_E25ED_2BB[v2_int].word_14 = 0;
                             v2_int++;
@@ -2110,7 +2110,7 @@ char SetKeysDialog_79610()      //25a610
                                 }
                             }
                             if (!v22) {
-                                x_D41A0_BYTEARRAY_4_struct.setting_38402 = 1;
+                                engine_db.setting_38402 = 1;
                                 *m = x_DWORD_17DE38str.x_BYTE_17DF10_get_key_scancode;
                                 str_BYTE_E25ED_2BB[v2_int].word_14 = 0;
                                 x_DWORD_17DE38str.x_BYTE_17DF10_get_key_scancode = 0;
@@ -2528,7 +2528,7 @@ void sub_7BEC0()                //25cec0
         v1 = str_E1BAC[resultx].byte_22;
         str_E1BAC[resultx].gold_color_24 = 0;
         if (v1 == 7u) {
-            str_E1BAC[resultx].canSelect_23 = x_D41A0_BYTEARRAY_4_struct.isNetwork_216w != 0;
+            str_E1BAC[resultx].canSelect_23 = engine_db.isNetwork_216w != 0;
         } else if (v1 == 13) {
             str_E1BAC[resultx].canSelect_23 = 1;
         }
@@ -2543,7 +2543,7 @@ void sub_7BEC0()                //25cec0
        {
        if (*(off_E1BAC + i + 16) <= 7u)
        {
-       *(off_E1BAC + i + 17) = (x_D41A0_BYTEARRAY_4_struct.setting_216 != 0);
+       *(off_E1BAC + i + 17) = (engine_db.setting_216 != 0);
        }
        else if (*(off_E1BAC + i + 16) == 13)
        {
@@ -2573,7 +2573,7 @@ void sub_7DD70()                //25ed70
         if (v3 == 2)
             mapScreenPortals_E17CC[resulty].word_16 = 70;
         if (D41A0_0.array_0x2BDE[D41A0_0.LevelIndex_0xc].dw_w_b_0_2BDE_11230.byte[2] & 2
-            && x_D41A0_BYTEARRAY_4_struct.levelnumber_43w == v2) {
+            && engine_db.levelnumber_43w == v2) {
             mapScreenPortals_E17CC[resulty].activated_18 = 1;
         }
         if (mapScreenPortals_E17CC[resulty].activated_18 == 1)
@@ -2584,10 +2584,10 @@ void sub_7DD70()                //25ed70
         v2++;
         //*(x_BYTE *)(resultx - 3) = 0;
     }
-    if (x_D41A0_BYTEARRAY_4_struct.levelnumber_43w > 0x18u) {
+    if (engine_db.levelnumber_43w > 0x18u) {
         //for (result = (int)x_WORD_E2970; *(x_WORD *)(result + 12); result += 17)
         for (int ir = 0; secretMapScreenPortals_E2970[ir].activated_12; ir++) {
-            if (x_D41A0_BYTEARRAY_4_struct.levelnumber_43w ==
+            if (engine_db.levelnumber_43w ==
                 secretMapScreenPortals_E2970[ir].levelNumber_6) {
                 if (D41A0_0.array_0x2BDE[D41A0_0.LevelIndex_0xc].dw_w_b_0_2BDE_11230.byte[2] & 2) {
                     secretMapScreenPortals_E2970[ir].activated_12 = 1;
@@ -2805,7 +2805,7 @@ signed int sub_7E320_draw_bitmaps_and_play_sounds( /*__int16 a1, int a2*/ )     
         goto LABEL_33;
     }
     str_E23E0[ky].gold_color_24 = 1;
-    if (x_D41A0_BYTEARRAY_4_struct.byteindex_10 != 1)
+    if (engine_db.byteindex_10 != 1)
         return 0;
     v11y = 0;
     if (!str_E2516[v11y].word_2)
@@ -3001,8 +3001,8 @@ char SaveGameDialog_78730(type_WORD_E1F84 *a1x) //259730
                                 (uint8_t *) & x_DWORD_17DE38str.xx_BYTE_17DF14[x_DWORD_17DE38str.
                                                                                x_WORD_17DF04 -
                                                                                1][0], 20);
-                WriteFile_98CAA(file2, (uint8_t *) x_D41A0_BYTEARRAY_4_struct.player_name_57ar, 32);
-                WriteFile_98CAA(file2, (uint8_t *) x_D41A0_BYTEARRAY_4_struct.savestring_89, 32);
+                WriteFile_98CAA(file2, (uint8_t *) engine_db.player_name_57ar, 32);
+                WriteFile_98CAA(file2, (uint8_t *) engine_db.savestring_89, 32);
                 WriteFile_98CAA(file2, (uint8_t *) & secretMapScreenPortals_E2970, 102);
                 WriteFile_98CAA(file2, (uint8_t *) & D41A0_0.m_GameSettings, 16);
                 WriteFile_98CAA(file2, (uint8_t *) & v55, 4);
@@ -3333,7 +3333,7 @@ void sub_7D400_draw_texts_and_play_sounds(int /*a1 */ , __int16 a2, __int16 a3, 
     }
     //VGA_Debug_Blit(640, 480, pdwScreenBuffer_351628);
     //LOBYTE(j) = a4;
-    if (a4 == 3 && x_D41A0_BYTEARRAY_4_struct.byteindex_10 == 1) {
+    if (a4 == 3 && engine_db.byteindex_10 == 1) {
         v38x = x_DWORD_17DE38str.x_DWORD_17DEC0;
         v37x = x_DWORD_17DE38str.x_DWORD_17DEC4;
         x_DWORD_17DE38str.x_DWORD_17DEC0 = x_DWORD_17DE38str.x_DWORD_17DEC8;
@@ -3606,7 +3606,7 @@ int NewGameDraw_7EAE0(int16_t *posx, int16_t *posy, __int16 *a3, __int16 *a4, in
                             x_DWORD_17DE28str.x_WORD_17DE30_posx = *posx;
                             x_DWORD_17DE28str.x_WORD_17DE32_posy = *posy;
                             x_DWORD_17DE28str.x_BYTE_17DE34 =
-                                ((x_D41A0_BYTEARRAY_4_struct.setting_byte3_24 & 0x40) != 0) + 1;
+                                ((engine_db.setting_byte3_24 & 0x40) != 0) + 1;
                             x_DWORD_17DE28str.x_DWORD_17DE28 = j___clock();
                         }
                     }
@@ -3625,7 +3625,7 @@ int NewGameDraw_7EAE0(int16_t *posx, int16_t *posy, __int16 *a3, __int16 *a4, in
                         x_DWORD_17DE28str.x_WORD_17DE30_posx = *posx;
                         x_DWORD_17DE28str.x_WORD_17DE32_posy = *posy;
                         x_DWORD_17DE28str.x_BYTE_17DE34 =
-                            ((x_D41A0_BYTEARRAY_4_struct.setting_byte3_24 & 0x40) != 0) + 1;
+                            ((engine_db.setting_byte3_24 & 0x40) != 0) + 1;
                         x_DWORD_17DE28str.x_DWORD_17DE28 = j___clock();
                     }
                     break;
@@ -3646,7 +3646,7 @@ int NewGameDraw_7EAE0(int16_t *posx, int16_t *posy, __int16 *a3, __int16 *a4, in
             x_DWORD_17DE28str.x_WORD_17DE30_posx = *posx;
             x_DWORD_17DE28str.x_WORD_17DE32_posy = *posy;
             x_DWORD_17DE28str.x_BYTE_17DE34 =
-                ((x_D41A0_BYTEARRAY_4_struct.setting_byte3_24 & 0x40) != 0) + 1;
+                ((engine_db.setting_byte3_24 & 0x40) != 0) + 1;
             x_DWORD_17DE28str.x_DWORD_17DE28 = j___clock();
         }
         goto LABEL_92;
@@ -3867,18 +3867,18 @@ int NewGameDraw_7EAE0(int16_t *posx, int16_t *posy, __int16 *a3, __int16 *a4, in
                                                                         mapScreenPortals_E17CC
                                                                         [v44x].activated_18);
                                 x_DWORD_17DB70str.x_BYTE_17DB8E = 1;
-                                x_D41A0_BYTEARRAY_4_struct.levelnumber_43w = v68;
+                                engine_db.levelnumber_43w = v68;
 
                                 if (CommandLineParams.ModeTestRegressionsGame()) {
-                                    //x_D41A0_BYTEARRAY_4_struct.levelnumber_43w = 1;
+                                    //engine_db.levelnumber_43w = 1;
                                 }
                                 if (mapScreenPortals_E17CC[v44x].activated_18 == 1)
-                                    x_D41A0_BYTEARRAY_4_struct.setting_38545 |= 4u;
-                                v46x = sub_824B0(x_D41A0_BYTEARRAY_4_struct.levelnumber_43w);
+                                    engine_db.setting_38545 |= 4u;
+                                v46x = sub_824B0(engine_db.levelnumber_43w);
                                 if (v46x && v46x->activated_12 == 2)
-                                    x_D41A0_BYTEARRAY_4_struct.setting_38545 |= 0x10u;
-                                if (x_D41A0_BYTEARRAY_4_struct.levelnumber_43w == 24)
-                                    x_D41A0_BYTEARRAY_4_struct.setting_38545 |= 0x20u;
+                                    engine_db.setting_38545 |= 0x10u;
+                                if (engine_db.levelnumber_43w == 24)
+                                    engine_db.setting_38545 |= 0x20u;
                                 break;
                             }
                             if (mapScreenPortals_E17CC[v44x].activated_18 == 2)
@@ -3908,7 +3908,7 @@ int NewGameDraw_7EAE0(int16_t *posx, int16_t *posy, __int16 *a3, __int16 *a4, in
                                         goto LABEL_179;
                                 }
                                 if (secretMapScreenPortals_E2970[v47i].activated_12 == 1)
-                                    x_D41A0_BYTEARRAY_4_struct.setting_38545 |= 4u;
+                                    engine_db.setting_38545 |= 4u;
                                 x_DWORD_17DB70str.x_WORD_17DB84 =
                                     secretMapScreenPortals_E2970[v47i].word_8;
                                 x_DWORD_17DB70str.x_WORD_17DB86 =
@@ -3922,7 +3922,7 @@ int NewGameDraw_7EAE0(int16_t *posx, int16_t *posy, __int16 *a3, __int16 *a4, in
                                                                         x_WORD_17DB86, 1);
                                 v51 = secretMapScreenPortals_E2970[v47i].levelNumber_6;
                                 x_DWORD_17DB70str.x_BYTE_17DB8E = 1;
-                                x_D41A0_BYTEARRAY_4_struct.levelnumber_43w = v51;
+                                engine_db.levelnumber_43w = v51;
                             }
                         }
                     } else if (x_DWORD_17DE38str.x_WORD_17DEEE_mouse_buttons & 2) {
@@ -4161,7 +4161,7 @@ void DrawText_80C30(__int16 posX, __int16 posY, __int16 a3)     //261c30
                                         (signed __int16)(posX + 4 * v9), v8, posY, 5, v7, 1);
         //"You must explore the outer Netherworlds while you learn its magic. Your first destination is the ancient city of Jahwl."+
     }
-    if (x_DWORD_17DE28str.x_BYTE_17DE34 != 3 && x_D41A0_BYTEARRAY_4_struct.setting_byte3_24 & 0x40
+    if (x_DWORD_17DE28str.x_BYTE_17DE34 != 3 && engine_db.setting_byte3_24 & 0x40
         && !x_BYTE_17E09D) {
         x_BYTE_17E09D = 1;
         if ((signed __int16)v3 != -1)
@@ -4360,24 +4360,24 @@ void WriteConfigDat_81DB0()     //262db0
     FILE *configDatFile;
     TypeConfigDat configDat;
 
-    if (x_D41A0_BYTEARRAY_4_struct.setting_38402 == 1) {
+    if (engine_db.setting_38402 == 1) {
         memset(printbuffer, 0, 80);
         sprintf(printbuffer, "%s/%s", gameDataPath.c_str(), "CONFIG.DAT");
         memset(&configDat, 0, sizeof(TypeConfigDat));
         configDatFile = DataFileIO::CreateOrOpenFile(printbuffer, 546);
         if (configDatFile != nullptr) {
             configDat.configDatSign_0 = 0xfffffff7;
-            configDat.langIndex_4 = x_D41A0_BYTEARRAY_4_struct.SelectedLangIndex;
-            configDat.soundVolume_6 = x_D41A0_BYTEARRAY_4_struct.soundVolume_6;
-            configDat.musicVolume_8 = x_D41A0_BYTEARRAY_4_struct.musicVolume_8;
-            configDat.byteindex_10 = x_D41A0_BYTEARRAY_4_struct.byteindex_10;
-            configDat.brightness_11 = x_D41A0_BYTEARRAY_4_struct.brightness_11;
-            configDat.brightness_12 = x_D41A0_BYTEARRAY_4_struct.brightness_12;
-            configDat.brightness_13 = x_D41A0_BYTEARRAY_4_struct.brightness_13;
-            configDat.wordindex_14 = x_D41A0_BYTEARRAY_4_struct.wordindex_14;
-            configDat.dwordindex_16 = x_D41A0_BYTEARRAY_4_struct.dwordindex_16;
-            configDat.stubb[0] = x_D41A0_BYTEARRAY_4_struct.stubb[0];
-            configDat.stubb[1] = x_D41A0_BYTEARRAY_4_struct.stubb[1];
+            configDat.langIndex_4 = engine_db.SelectedLangIndex;
+            configDat.soundVolume_6 = engine_db.soundVolume_6;
+            configDat.musicVolume_8 = engine_db.musicVolume_8;
+            configDat.byteindex_10 = engine_db.byteindex_10;
+            configDat.brightness_11 = engine_db.brightness_11;
+            configDat.brightness_12 = engine_db.brightness_12;
+            configDat.brightness_13 = engine_db.brightness_13;
+            configDat.wordindex_14 = engine_db.wordindex_14;
+            configDat.dwordindex_16 = engine_db.dwordindex_16;
+            configDat.stubb[0] = engine_db.stubb[0];
+            configDat.stubb[1] = engine_db.stubb[1];
 
             for (int i = 0; i < 10; i++)
                 configDat.keys[i] = x_BYTE_EB39E_keys[i];
@@ -4385,7 +4385,7 @@ void WriteConfigDat_81DB0()     //262db0
             WriteFile_98CAA(configDatFile, (uint8_t *) & configDat, sizeof(TypeConfigDat));
             DataFileIO::Close(configDatFile);
         }
-        x_D41A0_BYTEARRAY_4_struct.setting_38402 = 0;
+        engine_db.setting_38402 = 0;
     }
 }
 
@@ -4418,7 +4418,7 @@ void sub_82510( /*__int16 a1*//*, int *a2 */ )  //263510
     v13s = xy_DWORD_17DEC0_spritestr;   //fixed
     xy_DWORD_17DEC0_spritestr = xy_DWORD_17DEC8_spritestr;      //fixed
 
-    if (x_D41A0_BYTEARRAY_4_struct.byteindex_10 == 1) {
+    if (engine_db.byteindex_10 == 1) {
         switchbit = unk_17DBA8str.x_BYTE_17DBB6;        //*((x_BYTE *)a2 + 14);
         if (switchbit == 2) {
             v2 = j___clock();
@@ -4503,8 +4503,8 @@ void sub_82670()                //263670
     LastPressedKey_1806E4 = 0;
     if (!x_BYTE_E29E1) {
         //LOWORD(v1) = (uint16)x_D41A0_BYTEARRAY_4;
-        if (!(x_D41A0_BYTEARRAY_4_struct.setting_byte1_22 & 0x10)) {
-            v2 = x_D41A0_BYTEARRAY_4_struct.pointer_0xE2_heapbuffer_226;
+        if (!(engine_db.setting_byte1_22 & 0x10)) {
+            v2 = engine_db.pointer_0xE2_heapbuffer_226;
             x_BYTE_D41C1 = 0;
             x_DWORD_17DE38str.x_DWORD_17DE48c = v2;
             x_DWORD_17DE38str.x_DWORD_17DE54 = (uint8_t *) v2 + 301787;
@@ -4518,16 +4518,16 @@ void sub_82670()                //263670
 
             //sub_7AA70_load_and_decompres_dat_file(0, 0, 0, 0);//can remove this?
 
-            //if (*(x_BYTE *)(2124 * D41A0_BYTESTR_0.word_0xc + x_D41A0_BYTEARRAY_0 + 11232) & 2 || x_D41A0_BYTEARRAY_4_struct.levelnumber_43 > 0x18u)
+            //if (*(x_BYTE *)(2124 * D41A0_BYTESTR_0.word_0xc + x_D41A0_BYTEARRAY_0 + 11232) & 2 || engine_db.levelnumber_43 > 0x18u)
             if (D41A0_0.array_0x2BDE[D41A0_0.LevelIndex_0xc].dw_w_b_0_2BDE_11230.byte[2] & 2
-                || x_D41A0_BYTEARRAY_4_struct.levelnumber_43w > 0x18u) {
+                || engine_db.levelnumber_43w > 0x18u) {
                 //v3 = byte_E16E0;//str_E16E0
                 v3x = 0;
                 //LOWORD(v1) = 1;
                 v1x = 1;
                 //while (*((x_BYTE*)v3 + 4))
                 while (str_E16E0[v3x].byte_4) {
-                    if (x_D41A0_BYTEARRAY_4_struct.levelnumber_43w + 1 == str_E16E0[v3x].byte_4) {
+                    if (engine_db.levelnumber_43w + 1 == str_E16E0[v3x].byte_4) {
                         if (!str_E16E0[v3x].byte_5) {
                             v0 = v1x;
                             str_E16E0[v3x].byte_5 = 1;
@@ -4540,7 +4540,7 @@ void sub_82670()                //263670
                 }
                 if (!v0) {
                     //LOWORD(v1) = (uint16)x_D41A0_BYTEARRAY_4;
-                    v4 = x_D41A0_BYTEARRAY_4_struct.levelnumber_43w;
+                    v4 = engine_db.levelnumber_43w;
                     if ((unsigned __int16)v4 > 0x18u) {
                         //v1 = sub_824E0(v4);
                         v5x = sub_824E0(v4);
@@ -4566,7 +4566,7 @@ void sub_82670()                //263670
                     }
                 }
                 if (v0) {
-                    if (x_D41A0_BYTEARRAY_4_struct.SelectedLangIndex == 2 && soundAble_E3798
+                    if (engine_db.SelectedLangIndex == 2 && soundAble_E3798
                         || v0 >= 6) {
                         x_BYTE_D41C1 = 0;
                         x_BYTE_D41C0 = 0;
@@ -4752,9 +4752,9 @@ void sub_833C0()                //2643c0
     x_DWORD_17DE38str.x_WORD_17DEEC = 0;
     x_DWORD_17DE38str.x_DWORD_17DE40 = pdwScreenBuffer_351628;
     x_DWORD_17DE38str.x_DWORD_17DEE0_filedesc = NULL;
-    //v0 = x_D41A0_BYTEARRAY_4_struct.pointer_0xE2_heapbuffer_226;
+    //v0 = engine_db.pointer_0xE2_heapbuffer_226;
     x_DWORD_17DE38str.x_DWORD_17DEDC = 0;
-    x_DWORD_17DE38str.x_DWORD_17DE48c = x_D41A0_BYTEARRAY_4_struct.pointer_0xE2_heapbuffer_226;
+    x_DWORD_17DE38str.x_DWORD_17DE48c = engine_db.pointer_0xE2_heapbuffer_226;
     sub_7B5D0();
 
     x_DWORD_17DE38str.x_DWORD_17DE54 = x_DWORD_17DE38str.x_DWORD_17DE48c + 0x49ADB;
@@ -5479,7 +5479,7 @@ void DrawEndGameTable_82C20(__int16 a1) //263c20
  LABEL_47:
             v21++;
         }
-        if (x_D41A0_BYTEARRAY_4_struct.SelectedLangIndex != 2) {
+        if (engine_db.SelectedLangIndex != 2) {
             v43 = v21 * xy_DWORD_17DEC0_spritestr[65].height_5;
             sub_7FB90_draw_text(v24x[v22],
                                 (signed __int16)(v20 + 2 * xy_DWORD_17DEC0_spritestr[65].width_4),
@@ -5723,7 +5723,7 @@ char SetPlayerNameDialog_78E00( /*int a1, int a2, */ type_WORD_E1F84 *a3x)      
                v14[1] = v16;
                v14 += 2;
                } while (v16); */
-            v17 = x_D41A0_BYTEARRAY_4_struct.player_name_57ar;  //38cf89
+            v17 = engine_db.player_name_57ar;  //38cf89
             v18 = D41A0_0.array_0x2BDE[D41A0_0.LevelIndex_0xc].array_0x39f_2BFA_12157;  //wizard name
             strcpy(v17, v18);
             /*do
@@ -5738,7 +5738,7 @@ char SetPlayerNameDialog_78E00( /*int a1, int a2, */ type_WORD_E1F84 *a3x)      
                v17 += 2;
                } while (v20); */
         } else {
-            *x_D41A0_BYTEARRAY_4_struct.player_name_57ar = 0;   //fixed x_D41A0_BYTEARRAY_4_struct.player_name_57 = 0;
+            *engine_db.player_name_57ar = 0;   //fixed engine_db.player_name_57 = 0;
         }
         v21 = x_DWORD_17DE38str.x_DWORD_17DE50;
         v22 = D41A0_0.array_0x2BDE[D41A0_0.LevelIndex_0xc].array_0x39f_2BFA_12157;      //wizard name
@@ -6180,11 +6180,11 @@ char MultiplayerMenu_7DE80(type_WORD_E1F84 *a2x)        //25ee80
             x_WORD_E131A = 0;
             x_DWORD_17DE38str.networkSession_17DEFA = (unsigned __int8)x_BYTE_E29DF_skip_screen;
             ResetMouse_7B5A0();
-            if (1 == x_D41A0_BYTEARRAY_4_struct.byteindex_10)
+            if (1 == engine_db.byteindex_10)
                 v24 = x_DWORD_17DE38str.x_BYTE_17DF13;
             sub_8CD27_set_cursor((*filearray_2aa18c[filearrayindex_POINTERSDATTAB].posistruct)[0]);
             a2x->dword_4 = sub_77680() != 0;
-            if (x_D41A0_BYTEARRAY_4_struct.byteindex_10 == 1)
+            if (engine_db.byteindex_10 == 1)
                 x_DWORD_17DE38str.x_BYTE_17DF13 = v24;
         } else {
             x_BYTE_E29DF_skip_screen = x_DWORD_17DE38str.networkSession_17DEFA;
@@ -6209,7 +6209,7 @@ int DrawScrollDialog_7BF20(type_str_word_26 *a1x)       //25cf20
     //result = 0;
     if (!a1x->x1_26_0)
         return 0;
-    if (x_D41A0_BYTEARRAY_4_struct.byteindex_10 == 1)
+    if (engine_db.byteindex_10 == 1)
         x_DWORD_17DE38str.x_BYTE_17DF13 = 0;
     DrawHelpText_6FC50(1);
     if (!a1x->click_40_7) {
@@ -6243,7 +6243,7 @@ int DrawScrollDialog_7BF20(type_str_word_26 *a1x)       //25cf20
     //v6 = (int)x_D41A0_BYTEARRAY_4;
     int16_t result = a1x->click_40_7;
     a1x->click_40_7 = 0;
-    if (x_D41A0_BYTEARRAY_4_struct.byteindex_10 == 1)
+    if (engine_db.byteindex_10 == 1)
         x_DWORD_17DE38str.x_BYTE_17DF13 = 1;
     return result;
 }
@@ -6543,10 +6543,10 @@ char /*__fastcall*/ sub_77680() //258680
         x_DWORD_17DE38str.x_DWORD_17DEE4_mouse_positionx = 0x140;
         x_DWORD_17DE38str.x_DWORD_17DEE6_mouse_positiony = 0xf0;        //test and fix it
 
-        if (x_D41A0_BYTEARRAY_4_struct.levelnumber_43w >= 0x32u)
-            //x_DWORD_17DE38str.x_BYTE_17DE68x[0xa + 11 * x_DWORD_17DE38str.x_WORD_17DEFC] = *(x_BYTE*)(x_D41A0_BYTEARRAY_4_struct.levelnumber_43w);
+        if (engine_db.levelnumber_43w >= 0x32u)
+            //x_DWORD_17DE38str.x_BYTE_17DE68x[0xa + 11 * x_DWORD_17DE38str.x_WORD_17DEFC] = *(x_BYTE*)(engine_db.levelnumber_43w);
             x_DWORD_17DE38str.array_BYTE_17DE68x[x_DWORD_17DE38str.serverIndex_17DEFC].
-                selectedLevel_10 = x_D41A0_BYTEARRAY_4_struct.levelnumber_43w;
+                selectedLevel_10 = engine_db.levelnumber_43w;
         else
             //x_DWORD_17DE38str.x_BYTE_17DE68x[0xa + 11 * x_DWORD_17DE38str.x_WORD_17DEFC] = 50;
             x_DWORD_17DE38str.array_BYTE_17DE68x[x_DWORD_17DE38str.serverIndex_17DEFC].
@@ -6557,13 +6557,13 @@ char /*__fastcall*/ sub_77680() //258680
         while (!a3a) {
             if (x_DWORD_17DE38str.x_BYTE_17DF10_get_key_scancode == 59) {
                 //v4 = (uint8)x_D41A0_BYTEARRAY_4;
-                x_D41A0_BYTEARRAY_4_struct.byteindex_10 =
-                    x_D41A0_BYTEARRAY_4_struct.byteindex_10 != 1;
-                x_D41A0_BYTEARRAY_4_struct.setting_38402 = 1;
+                engine_db.byteindex_10 =
+                    engine_db.byteindex_10 != 1;
+                engine_db.setting_38402 = 1;
             }
             a3a = sub_7C390();
             //v6 = (uint8)x_D41A0_BYTEARRAY_4;
-            if (x_D41A0_BYTEARRAY_4_struct.byteindex_10 == 1) {
+            if (engine_db.byteindex_10 == 1) {
                 //LOBYTE(v6) = v15;
                 if (v15 == 2) {
                     v13 = j___clock();
@@ -6698,7 +6698,7 @@ char DrawAndServe_7B250( /*int a1, int a2 *//*, __int16 a3 */ ) //25c250
         }
     }
  LABEL_28:
-    if (x_D41A0_BYTEARRAY_4_struct.byteindex_10 != 1 || !x_DWORD_17DE38str.x_BYTE_17DF13
+    if (engine_db.byteindex_10 != 1 || !x_DWORD_17DE38str.x_BYTE_17DF13
         || x_WORD_E29DC)
         return 0;
     //a3 = x_BYTE_17DBC6;
@@ -6800,7 +6800,7 @@ signed int sub_7C390()          //25d390
     sprintf(dataPath, "%s/%s", cdDataPath.c_str(), "DATA/SCREENS/HSCREEN0.DAT");
 
     v6x = x_DWORD_E9C38_smalltit;
-    x_DWORD_E9C38_smalltit = x_D41A0_BYTEARRAY_4_struct.pointer_0xE2_heapbuffer_226;
+    x_DWORD_E9C38_smalltit = engine_db.pointer_0xE2_heapbuffer_226;
     x_DWORD_17DE38str.x_WORD_17DF00 = x_DWORD_17DE38str.x_WORD_17DEFE;
     qmemcpy(x_BYTE_E1BA4, x_BYTE_E1B9C, sizeof(x_BYTE_E1BA4));
     if (SetMultiplayerColors_7CE50()) {

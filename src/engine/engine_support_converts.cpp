@@ -344,7 +344,7 @@ void convert_struct_to_array_0x5E_94(type_str_0x5E_94 *input, uint8_t *output)
     memcpy(output + 0x22, &input->word_0x80_128, 2);
 }
 
-void convert_struct_to_array_0x6E8E(type_event_0x6E8E *input, uint8_t *output)
+void convert_struct_to_array_0x6E8E(event_t *input, uint8_t *output)
 {
     //struct _str_0x6E8E* next_0;
     memcpy(output + 0, &input->next_0, 4);

@@ -35,7 +35,7 @@ bool MainInitTmaps_71520(unsigned __int16 a1)
     }
     if (i <= 0) {
         InitTmaps(a1);
-        x_D41A0_BYTEARRAY_4_struct.byteindex_177 = 5;
+        engine_db.byteindex_177 = 5;
     }
     return str_DWORD_F66F0x[a1] != 0;
 }
@@ -406,7 +406,7 @@ void InitTmaps(unsigned __int16 a1)     //251f50
         }
     }
 
-    v5 = x_D41A0_BYTEARRAY_4_struct.byteindex_26;
+    v5 = engine_db.byteindex_26;
     //index = (int)TMAPS00TAB_BEGIN_BUFFER;
     //str_TMAPS00TAB_BEGIN_BUFFER[a1].word_8
     v2 = str_TMAPS00TAB_BEGIN_BUFFER[a1].word_8;

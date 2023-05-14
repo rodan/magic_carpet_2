@@ -224,10 +224,10 @@ typedef struct {//begin 0x649 //lenght 0x1F9
 	int8_t byte_0x45E_1118;
 	int8_t byte_0x45E_1119;
 
-	//0x100//x_D41A0_BYTEARRAY_4_struct.byteindex_256ar
-	//280=byteindex_256ar[24];//x_D41A0_BYTEARRAY_4_struct.byteindex_256ar[24]
-	//565=byteindex_256ar[309];//0x235//x_D41A0_BYTEARRAY_4_struct.byteindex_256ar[309]
-	//1865=byteindex_256ar[1609];//0x749//x_D41A0_BYTEARRAY_4_struct.byteindex_256ar[1609]
+	//0x100//engine_db.byteindex_256ar
+	//280=byteindex_256ar[24];//engine_db.byteindex_256ar[24]
+	//565=byteindex_256ar[309];//0x235//engine_db.byteindex_256ar[309]
+	//1865=byteindex_256ar[1609];//0x749//engine_db.byteindex_256ar[1609]
 	//end 2224
 	uint8_t stubb[6];
 }
@@ -386,156 +386,156 @@ typedef struct {                //lenght 14
     int8_t stubb[2];
 } type_index_242ar;
 
-typedef struct Type_x_D41A0_BYTEARRAY_4_struct {
+typedef struct engine_db_t {
     //uint8_t harddisk_number;
 
     //uint8_t setting_byte5_19;
-    uint32_t configDatSign_0;   //x_D41A0_BYTEARRAY_4_struct.dwordindex_0
-    uint16_t langIndex_4;       //x_D41A0_BYTEARRAY_4_struct.byteindex_4
-    uint16_t soundVolume_6;     //x_D41A0_BYTEARRAY_4_struct.wordindex_6
-    uint16_t musicVolume_8;     //x_D41A0_BYTEARRAY_4_struct.wordindex_8
-    uint8_t byteindex_10;       //0xa//x_D41A0_BYTEARRAY_4_struct.byteindex_10//show help
-    int8_t brightness_11;       //0xb//x_D41A0_BYTEARRAY_4_struct.byteindex_11
-    int8_t brightness_12;       //0xc//x_D41A0_BYTEARRAY_4_struct.byteindex_12
-    int8_t brightness_13;       //0xd//x_D41A0_BYTEARRAY_4_struct.byteindex_13
+    uint32_t configDatSign_0;   //engine_db.dwordindex_0
+    uint16_t langIndex_4;       //engine_db.byteindex_4
+    uint16_t soundVolume_6;     //engine_db.wordindex_6
+    uint16_t musicVolume_8;     //engine_db.wordindex_8
+    uint8_t byteindex_10;       //0xa//engine_db.byteindex_10//show help
+    int8_t brightness_11;       //0xb//engine_db.byteindex_11
+    int8_t brightness_12;       //0xc//engine_db.byteindex_12
+    int8_t brightness_13;       //0xd//engine_db.byteindex_13
     uint16_t wordindex_14;
-    uint32_t dwordindex_16;     //0x10//x_D41A0_BYTEARRAY_4_struct.dwordindex_16
+    uint32_t dwordindex_16;     //0x10//engine_db.dwordindex_16
     uint8_t stubb[2];
-    uint8_t setting_byte1_22;   //x_D41A0_BYTEARRAY_4_struct.setting_byte1_22
-    int8_t setting_byte2_23;    //0x17//x_D41A0_BYTEARRAY_4_struct.setting_byte2_23
-    uint8_t setting_byte3_24;   //cheats? 0x20==free spell//x_D41A0_BYTEARRAY_4_struct.setting_byte3_24
+    uint8_t setting_byte1_22;   //engine_db.setting_byte1_22
+    int8_t setting_byte2_23;    //0x17//engine_db.setting_byte2_23
+    uint8_t setting_byte3_24;   //cheats? 0x20==free spell//engine_db.setting_byte3_24
     //spell on - 0x20
     uint8_t setting_byte4_25;   //cheats? 0x1==Invincability 0x8==tester 0x40==music
     //invincability - 1;
-    uint8_t byteindex_26 = 0;   //x_D41A0_BYTEARRAY_4_struct.byteindex_26
+    uint8_t byteindex_26 = 0;   //engine_db.byteindex_26
     uint8_t stubc[3];
-    uint8_t setting_30;         //x_D41A0_BYTEARRAY_4_struct.setting_30
+    uint8_t setting_30;         //engine_db.setting_30
     uint8_t stubd[3];
     //FILE* moviemvidatfile_byte4_33;
     uint8_t m_wHighSpeedSystem;
     FILE *moviemvidatfile_byte4_35;
-    uint16_t moviemvinumber_byte4_39;   //x_D41A0_BYTEARRAY_4_struct.moviemvinumber_byte4_39
+    uint16_t moviemvinumber_byte4_39;   //engine_db.moviemvinumber_byte4_39
     uint8_t stube[2];
-    uint16_t levelnumber_43w;   //x_D41A0_BYTEARRAY_4_struct.levelnumber_43
+    uint16_t levelnumber_43w;   //engine_db.levelnumber_43
     //uint8_t stubf[1];
     uint16_t setting_45w;
     uint8_t stubg[3];
-    int8_t byteindex_50;        //0x32//x_D41A0_BYTEARRAY_4_struct.byteindex_50
-    uint8_t byteindex_51;       //0x33//x_D41A0_BYTEARRAY_4_struct.byteindex_51
-    uint8_t byteindex_52;       //0x34//x_D41A0_BYTEARRAY_4_struct.byteindex_52
-    uint8_t byteindex_53;       //0x35//x_D41A0_BYTEARRAY_4_struct.byteindex_53
+    int8_t byteindex_50;        //0x32//engine_db.byteindex_50
+    uint8_t byteindex_51;       //0x33//engine_db.byteindex_51
+    uint8_t byteindex_52;       //0x34//engine_db.byteindex_52
+    uint8_t byteindex_53;       //0x35//engine_db.byteindex_53
     uint8_t stubh[3];
     char player_name_57ar[32];
     char savestring_89[32];
-    uint8_t byteindex_121[16];  //0x79//x_D41A0_BYTEARRAY_4_struct.byteindex_121
-    //uint8_t byteindex_122;//0x7a//x_D41A0_BYTEARRAY_4_struct.byteindex_121[1]
-    //uint8_t byteindex_123;//0x7b//x_D41A0_BYTEARRAY_4_struct.byteindex_121[2]
-    //uint8_t byteindex_124;//0x7c//x_D41A0_BYTEARRAY_4_struct.byteindex_121[3]
-    //uint8_t byteindex_125;//0x7d//x_D41A0_BYTEARRAY_4_struct.byteindex_121[4]
-    //uint8_t byteindex_127;//0x7f//x_D41A0_BYTEARRAY_4_struct.byteindex_121[6]
+    uint8_t byteindex_121[16];  //0x79//engine_db.byteindex_121
+    //uint8_t byteindex_122;//0x7a//engine_db.byteindex_121[1]
+    //uint8_t byteindex_123;//0x7b//engine_db.byteindex_121[2]
+    //uint8_t byteindex_124;//0x7c//engine_db.byteindex_121[3]
+    //uint8_t byteindex_125;//0x7d//engine_db.byteindex_121[4]
+    //uint8_t byteindex_127;//0x7f//engine_db.byteindex_121[6]
     uint8_t stubi[8];
-    char byteindex_145ar[32];   //x_D41A0_BYTEARRAY_4_struct.byteindex_145ar
+    char byteindex_145ar[32];   //engine_db.byteindex_145ar
 
-    uint8_t byteindex_177;      //0xb1//x_D41A0_BYTEARRAY_4_struct.byteindex_177
-    uint8_t speedIndex;         //0xb2//x_D41A0_BYTEARRAY_4_struct.byteindex_178
+    uint8_t byteindex_177;      //0xb1//engine_db.byteindex_177
+    uint8_t speedIndex;         //0xb2//engine_db.byteindex_178
     uint8_t SelectedLangIndex;
-    uint8_t byteindex_180;      //0xb4//x_D41A0_BYTEARRAY_4_struct.byteindex_180
-    uint8_t byteindex_181;      //0xb5//x_D41A0_BYTEARRAY_4_struct.byteindex_181
-    uint8_t byteindex_183;      //0xb7//x_D41A0_BYTEARRAY_4_struct.byteindex_183
-    uint16_t byteindex_184w;    //0xb8//x_D41A0_BYTEARRAY_4_struct.byteindex_184
+    uint8_t byteindex_180;      //0xb4//engine_db.byteindex_180
+    uint8_t byteindex_181;      //0xb5//engine_db.byteindex_181
+    uint8_t byteindex_183;      //0xb7//engine_db.byteindex_183
+    uint16_t byteindex_184w;    //0xb8//engine_db.byteindex_184
     //uint8_t stubj[1];
-    uint8_t byteindex_186;      //0xba//x_D41A0_BYTEARRAY_4_struct.byteindex_186
+    uint8_t byteindex_186;      //0xba//engine_db.byteindex_186
     uint8_t stubk[1];
-    uint32_t dwordindex_188;    //x_D41A0_BYTEARRAY_4_struct.byteindex_188
-    //uint8_t byteindex_189;//x_D41A0_BYTEARRAY_4_struct.byteindex_189
-    //uint8_t byteindex_190;//x_D41A0_BYTEARRAY_4_struct.byteindex_190
+    uint32_t dwordindex_188;    //engine_db.byteindex_188
+    //uint8_t byteindex_189;//engine_db.byteindex_189
+    //uint8_t byteindex_190;//engine_db.byteindex_190
 
     //1(0x1)-help//2(0x2)-sound//3(0x4)-music//4(0x8)-speek//5(0x10)-fly//6(0x20)-bright//7(0x40)speed//8(0x80)screen
     //9(0x100)-reflection//10(0x200)-sky//11(0x400)-shadows//12(0x800)-light/13(0x1000)-icons//14(0x2000)-transparency//15(0x4000)-flat     //16(0x8000)-resolution
     //17(0x10000)-names
 
-    uint32_t dwordindex_192;    //0xc0//x_D41A0_BYTEARRAY_4_struct.byteindex_192
-    //uint8_t byteindex_193;//0xc1//x_D41A0_BYTEARRAY_4_struct.byteindex_193
-    //uint8_t byteindex_194;//0xc2//x_D41A0_BYTEARRAY_4_struct.byteindex_194
+    uint32_t dwordindex_192;    //0xc0//engine_db.byteindex_192
+    //uint8_t byteindex_193;//0xc1//engine_db.byteindex_193
+    //uint8_t byteindex_194;//0xc2//engine_db.byteindex_194
 
     //1(0x1)-help//2(0x2)-sound//3(0x4)-music//4(0x8)-speek//5(0x10)-fly//6(0x20)-bright//7(0x40)speed//8(0x80)screen
     //9(0x100)-reflection//10(0x200)-sky//11(0x400)-shadows//12(0x800)-light/13(0x1000)-icons//14(0x2000)-transparency//15(0x4000)-flat     //16(0x8000)-resolution
     //17(0x10000)-names
 
-    uint8_t byteindex_196;      //0xc4//x_D41A0_BYTEARRAY_4_struct.byteindex_196
+    uint8_t byteindex_196;      //0xc4//engine_db.byteindex_196
     uint8_t stubl[3];
-    uint8_t transfer_rate_dwordindex_200;       //0xc8//x_D41A0_BYTEARRAY_4_struct.transfer_rate_dwordindex_200
+    uint8_t transfer_rate_dwordindex_200;       //0xc8//engine_db.transfer_rate_dwordindex_200
     uint8_t stubm[3];
-    uint8_t byteindex_204;      //0xCC//x_D41A0_BYTEARRAY_4_struct.byteindex_204
-    uint8_t byteindex_205;      //0xCD//x_D41A0_BYTEARRAY_4_struct.byteindex_205
-    uint8_t byteindex_206;      //0xce//x_D41A0_BYTEARRAY_4_struct.byteindex_206
-    uint8_t byteindex_207;      //0xcf//x_D41A0_BYTEARRAY_4_struct.byteindex_207
-    uint8_t byteindex_208;      //0xd0//x_D41A0_BYTEARRAY_4_struct.byteindex_208
+    uint8_t byteindex_204;      //0xCC//engine_db.byteindex_204
+    uint8_t byteindex_205;      //0xCD//engine_db.byteindex_205
+    uint8_t byteindex_206;      //0xce//engine_db.byteindex_206
+    uint8_t byteindex_207;      //0xcf//engine_db.byteindex_207
+    uint8_t byteindex_208;      //0xd0//engine_db.byteindex_208
     uint8_t stubmm[1];
-    uint32_t byteindex_210d;    //0xd2//x_D41A0_BYTEARRAY_4_struct.byteindex_210
+    uint32_t byteindex_210d;    //0xd2//engine_db.byteindex_210
     //uint8_t stubn[3];
-    uint16_t byteindex_214w;    //0xd6//x_D41A0_BYTEARRAY_4_struct.byteindex_214
+    uint16_t byteindex_214w;    //0xd6//engine_db.byteindex_214
     //uint8_t stubo[1];
     uint16_t isNetwork_216w;
     //uint8_t stubp[1];
-    uint16_t byteindex_218w;    //0xda//x_D41A0_BYTEARRAY_4_struct.byteindex_218
+    uint16_t byteindex_218w;    //0xda//engine_db.byteindex_218
     //uint8_t stubq[1];
 
-    uint8_t byteindex_220;      //0xdc//x_D41A0_BYTEARRAY_4_struct.byteindex_220
-    uint8_t byteindex_221ar[3]; //0xe0//x_D41A0_BYTEARRAY_4_struct.byteindex_221ar
-    uint8_t byteindex_224;      //0xe0//x_D41A0_BYTEARRAY_4_struct.byteindex_224
-    uint8_t byteindex_225;      //0xe1//x_D41A0_BYTEARRAY_4_struct.byteindex_225
-    uint8_t *pointer_0xE2_heapbuffer_226;       //x_D41A0_BYTEARRAY_4_struct.pointer_0xE2_heapbuffer_226
-    uint32_t dword_0xE6_heapsize_230;   //x_D41A0_BYTEARRAY_4_struct.dword_0xE6_heapsize_230
+    uint8_t byteindex_220;      //0xdc//engine_db.byteindex_220
+    uint8_t byteindex_221ar[3]; //0xe0//engine_db.byteindex_221ar
+    uint8_t byteindex_224;      //0xe0//engine_db.byteindex_224
+    uint8_t byteindex_225;      //0xe1//engine_db.byteindex_225
+    uint8_t *pointer_0xE2_heapbuffer_226;       //engine_db.pointer_0xE2_heapbuffer_226
+    uint32_t dword_0xE6_heapsize_230;   //engine_db.dword_0xE6_heapsize_230
     uint8_t stubr[8];
-    type_index_242ar str_index_242ar;   //0xf2//x_D41A0_BYTEARRAY_4_struct.byteindex_242ar
-    //uint8_t byteindex_246;//0xf6//x_D41A0_BYTEARRAY_4_struct.byteindex_242ar[4]
-    //uint8_t byteindex_250;//x_D41A0_BYTEARRAY_4_struct.byteindex_242ar[8]
+    type_index_242ar str_index_242ar;   //0xf2//engine_db.byteindex_242ar
+    //uint8_t byteindex_246;//0xf6//engine_db.byteindex_242ar[4]
+    //uint8_t byteindex_250;//engine_db.byteindex_242ar[8]
 
-    type_str_0x2BDE byteindex_256ar;    //0x100//x_D41A0_BYTEARRAY_4_struct.byteindex_256ar
-    //280=byteindex_256ar[24];//x_D41A0_BYTEARRAY_4_struct.byteindex_256ar[24]
-    //565=byteindex_256ar[309];//0x235//x_D41A0_BYTEARRAY_4_struct.byteindex_256ar[309]
-    //1865=byteindex_256ar[1609];//0x749//x_D41A0_BYTEARRAY_4_struct.byteindex_256ar[1609]
+    type_str_0x2BDE byteindex_256ar;    //0x100//engine_db.byteindex_256ar
+    //280=byteindex_256ar[24];//engine_db.byteindex_256ar[24]
+    //565=byteindex_256ar[309];//0x235//engine_db.byteindex_256ar[309]
+    //1865=byteindex_256ar[1609];//0x749//engine_db.byteindex_256ar[1609]
     //end 2224
 
-    //uint8_t byteindex_2255ar[26];//0x100//x_D41A0_BYTEARRAY_4_struct.byteindex_2255ar
+    //uint8_t byteindex_2255ar[26];//0x100//engine_db.byteindex_2255ar
     //type_2255ar str_2255ar;
     //end 2281
     //uint8_t stubs[9];
-    uint32_t dwordindex_2380;   //0x94c//x_D41A0_BYTEARRAY_4_struct.dwordindex_2380
+    uint32_t dwordindex_2380;   //0x94c//engine_db.dwordindex_2380
     uint8_t stubt[4];
-    uint32_t dwordindex_2388;   //0x954//x_D41A0_BYTEARRAY_4_struct.dwordindex_2388
-    uint32_t dwordindex_2392;   //0x958//x_D41A0_BYTEARRAY_4_struct.dwordindex_2392
+    uint32_t dwordindex_2388;   //0x954//engine_db.dwordindex_2388
+    uint32_t dwordindex_2392;   //0x958//engine_db.dwordindex_2392
 
-    //uint8_t byteindex_8618;//0x21aa//x_D41A0_BYTEARRAY_4_struct.byteindex_8618
+    //uint8_t byteindex_8618;//0x21aa//engine_db.byteindex_8618
     //uint8_t setting_38545;
     uint8_t stubu[36000];
-    type_event_0x6E8E *dwordindex_38396;        //0x95FC//x_D41A0_BYTEARRAY_4_struct.dwordindex_38396
-    uint8_t byteindex_38400;    //0x9600//x_D41A0_BYTEARRAY_4_struct.byteindex_38400
-    uint8_t byteindex_38401;    //0x9601//x_D41A0_BYTEARRAY_4_struct.byteindex_38401
+    event_t *dwordindex_38396;        //0x95FC//engine_db.dwordindex_38396
+    uint8_t byteindex_38400;    //0x9600//engine_db.byteindex_38400
+    uint8_t byteindex_38401;    //0x9601//engine_db.byteindex_38401
 
-    uint8_t setting_38402;      //0x9602//x_D41A0_BYTEARRAY_4_struct.setting_38402
+    uint8_t setting_38402;      //0x9602//engine_db.setting_38402
 
-    type_event_0x6E8E *bytearray_38403x[30];    //array 116//0x9603//x_D41A0_BYTEARRAY_4_struct.bytearray_38403
+    event_t *bytearray_38403x[30];    //array 116//0x9603//engine_db.bytearray_38403
     /*
        creatures
        8-dead
        69-dead
      */
-    //bytearray_38419=bytearray_38403[16]//0x965b//x_D41A0_BYTEARRAY_4_struct.bytearray_38403[16]
-    //bytearray_38439=bytearray_38403[36]//0x965b//x_D41A0_BYTEARRAY_4_struct.bytearray_38403[36]
-    //bytearray_38403[88]//uint32_t dword_38491;//0x965b//x_D41A0_BYTEARRAY_4_struct.bytearray_38403[88]
+    //bytearray_38419=bytearray_38403[16]//0x965b//engine_db.bytearray_38403[16]
+    //bytearray_38439=bytearray_38403[36]//0x965b//engine_db.bytearray_38403[36]
+    //bytearray_38403[88]//uint32_t dword_38491;//0x965b//engine_db.bytearray_38403[88]
 
-    //bytearray_38451=bytearray_38403[48]//0x965b//x_D41A0_BYTEARRAY_4_struct.bytearray_38403[48]
-    //bytearray_38455=bytearray_38403[52]//0x965b//x_D41A0_BYTEARRAY_4_struct.bytearray_38403[52]
+    //bytearray_38451=bytearray_38403[48]//0x965b//engine_db.bytearray_38403[48]
+    //bytearray_38455=bytearray_38403[52]//0x965b//engine_db.bytearray_38403[52]
 
-    //bytearray_38511=bytearray_38403[108]//0x965b//x_D41A0_BYTEARRAY_4_struct.bytearray_38403[108]
-    //bytearray_38515=bytearray_38403[112]//0x965b//x_D41A0_BYTEARRAY_4_struct.bytearray_38403[112]
+    //bytearray_38511=bytearray_38403[108]//0x965b//engine_db.bytearray_38403[108]
+    //bytearray_38515=bytearray_38403[112]//0x965b//engine_db.bytearray_38403[112]
 
-    //bytearray_38535=bytearray_38403[132]//0x965b//x_D41A0_BYTEARRAY_4_struct.bytearray_38403[132]
+    //bytearray_38535=bytearray_38403[132]//0x965b//engine_db.bytearray_38403[132]
 
     //endarray - dword_38519
-    type_event_0x6E8E *entity_head;     //0x9677//x_D41A0_BYTEARRAY_4_struct.dword_38519
+    event_t *event_head;     //0x9677//engine_db.dword_38519
     /*
        entite
        8-dead
@@ -546,23 +546,23 @@ typedef struct Type_x_D41A0_BYTEARRAY_4_struct {
        3-ballon
        144-mana
      */
-    type_event_0x6E8E *dword_38523;     //0x967b//x_D41A0_BYTEARRAY_4_struct.dword_38523
-    type_event_0x6E8E *dword_38527;     //0x967F//x_D41A0_BYTEARRAY_4_struct.dword_38527
-    type_event_0x6E8E *dword_38531;     //0x9683//x_D41A0_BYTEARRAY_4_struct.dword_38531
-    type_event_0x6E8E *dword_38535;     //x_D41A0_BYTEARRAY_4_struct.dword_38535
+    event_t *dword_38523;     //0x967b//engine_db.dword_38523
+    event_t *dword_38527;     //0x967F//engine_db.dword_38527
+    event_t *dword_38531;     //0x9683//engine_db.dword_38531
+    event_t *dword_38535;     //engine_db.dword_38535
     uint8_t stubv[5];
-    uint8_t byte_38544;         //x_D41A0_BYTEARRAY_4_struct.byte_38544
-    uint8_t setting_38545;      //0x9691//x_D41A0_BYTEARRAY_4_struct.setting_38545
-    uint8_t SelectedMenuItem_38546;     //0x9692//x_D41A0_BYTEARRAY_4_struct.byte_38546
+    uint8_t byte_38544;         //engine_db.byte_38544
+    uint8_t setting_38545;      //0x9691//engine_db.setting_38545
+    uint8_t SelectedMenuItem_38546;     //0x9692//engine_db.byte_38546
     uint8_t stubw[44];
-    uint8_t byte_38591;         //0x96BF//x_D41A0_BYTEARRAY_4_struct.byte_38591
+    uint8_t byte_38591;         //0x96BF//engine_db.byte_38591
 
     //uint32_t dword_616432;
-} type_x_D41A0_BYTEARRAY_4_struct;
+} type_engine_db;
 
 doublebyte doublebyte_conv(uint16_t a2);
 
-extern type_x_D41A0_BYTEARRAY_4_struct x_D41A0_BYTEARRAY_4_struct;
+extern type_engine_db engine_db;
 extern int16_t x_D41A0_WORDARRAY[];
 
 //extern uint32_t x_D41A0_BYTEARRAY_4_0xE6_heapsize;
@@ -600,7 +600,7 @@ typedef struct {                //lenght 30
     std::array < int16_t, 5 > axis_2;   // 1=textIndex 3=lineX1, 4=lineY1
     //int16_t axis_4[3];//?? str_E2A74[].axis_2[0]
     //int16_t stuba;
-    type_event_0x6E8E *dword_12;        //str_E2A74[].dword_12
+    event_t *dword_12;        //str_E2A74[].dword_12
     int32_t dword_16;
     int32_t dword_20;           //str_E2A74[].dword_20
     int32_t dword_24;           //str_E2A74[].dword_24
@@ -669,7 +669,7 @@ uint32_t compare_with_sequence_array_222BD3(const char *filename, uint8_t * adre
 uint32_t compare_with_sequence_D41A0_4(const char *filename, uint8_t * adress, uint32_t adressdos,
                                        uint32_t count, uint32_t size, uint8_t * origbyte,
                                        uint8_t * copybyte, long offset = 0);
-uint32_t compare_with_sequence_EA3E4(const char *filename, type_event_0x6E8E ** adress,
+uint32_t compare_with_sequence_EA3E4(const char *filename, event_t ** adress,
                                      uint32_t count, uint32_t size, uint8_t * origbyte,
                                      uint8_t * copybyte);
 uint32_t compare_0x6E8E(const char *filename, uint8_t * adress, uint32_t count, uint32_t size,
@@ -713,7 +713,7 @@ typedef struct {//lenght 8
 typedef union {
     uint32_t dword;
     axis_2du axis;
-    type_event_0x6E8E *pointer_0x6E8E;
+    event_t *pointer_0x6E8E;
 } un1;
 
 typedef struct {                //lenght 8
@@ -1010,7 +1010,7 @@ typedef union {
     uint32_t dword;
     uint16_t *ptr16u;
     type_entity_0x30311 *ptr0x30311;
-    type_event_0x6E8E *ptr0x6E8E;
+    event_t *ptr0x6E8E;
 } un_str_36552;
 typedef struct {                //size 10 count 8
     int8_t stages_3654C_byte0;  //222540
@@ -1198,9 +1198,9 @@ typedef struct {                //lenght 224791
     int32_t dword_0x23a;
     int32_t dword_0x23e;
     int32_t dword_0x242;
-    type_event_0x6E8E *pointers_0x246[1000];    //pointers
+    event_t *pointers_0x246[1000];    //pointers
     int32_t dword_0x11e6;       //second entity counter
-    type_event_0x6E8E *dword_0x11EA[1000];      //??4586
+    event_t *dword_0x11EA[1000];      //??4586
     GameSettingsStruct_t m_GameSettings;
     uint32_t dword_0x219A;      //8602
     uint32_t dword_0x219E;      //8606
@@ -1216,7 +1216,7 @@ typedef struct {                //lenght 224791
     uint8_t stub3d[1791];
     type_str_0x2BDE array_0x2BDE[8];
     type_str_0x6E3E array_0x6E3E[8];    //28222 lenght 0xa size 0x8// game events
-    type_event_0x6E8E struct_0x6E8E[1000];      //28302 a8*3e8
+    event_t struct_0x6E8E[1000];      //28302 a8*3e8
     type_str_2FECE terrain_2FECE;       // a1 = &x_D41A0_BYTEARRAY_0[0x2FECE/*196302*/];//fix - size 0x6604u//compress level
     type_str_0x364D2 str_0x364D2;       //lenght 108
     int16_t word_0x3653E;       //

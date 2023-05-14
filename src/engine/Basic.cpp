@@ -116,7 +116,7 @@ uint8_t unk_F0A20x[1024];
 char isCaveLevel_D41B6 = 1;
 __int16 x_WORD_D4B7C = 254;     // some key color?
 __int16 x_WORD_D4B7E = 0;       // some key color?
-type_event_0x6E8E *x_DWORD_EA3E4[1001]; //2bb3e4
+event_t *x_DWORD_EA3E4[1001]; //2bb3e4
 
 uint8_t x_BYTE_F6EE0_tablesx[83456];    // (uint8_t*)&x_BYTE_F6EE0_tablesbuff;//animated sprites
 uint8_t *x_BYTE_F6EE0_tablesx_pre = (uint8_t *) x_BYTE_F6EE0_tablesx;
@@ -3694,7 +3694,7 @@ void sub_99AEB_create_index_dattab_minus(uint8_t *tabbuffer, uint8_t *tabbuffere
 signed int GetTrueWizardNumber_61790(signed int inputnumber)    //242790
 {
     signed int outputNumber = inputnumber;
-    if (x_D41A0_BYTEARRAY_4_struct.setting_byte1_22 & 0x10) {
+    if (engine_db.setting_byte1_22 & 0x10) {
         switch (D41A0_0.array_0x2BDE[inputnumber].dword_0x3E6_2BE4_12228.byte_0x1C0_448) {
         case 0:
             outputNumber = 0;
@@ -3814,10 +3814,10 @@ void Convert_from_shadow_D41A0_BYTESTR_0(type_shadow_D41A0_BYTESTR_0 *from,
     to->dword_0x23e = from->dword_0x23e;
     to->dword_0x242 = from->dword_0x242;
     for (int i = 0; i < 0x3e8; i++)
-        to->pointers_0x246[i] = (type_event_0x6E8E *) from->pointers_0x246[i];
+        to->pointers_0x246[i] = (event_t *) from->pointers_0x246[i];
     to->dword_0x11e6 = from->dword_0x11e6;
     for (int i = 0; i < 0x3e8; i++)
-        to->dword_0x11EA[i] = (type_event_0x6E8E *) from->dword_0x11EA[i];
+        to->dword_0x11EA[i] = (event_t *) from->dword_0x11EA[i];
     to->m_GameSettings = from->m_GameSettings;
     to->dword_0x219A = from->dword_0x219A;
     to->dword_0x219E = from->dword_0x219E;
@@ -3997,7 +3997,7 @@ void Convert_from_shadow_D41A0_BYTESTR_0(type_shadow_D41A0_BYTESTR_0 *from,
         to->str_0x3664C[i].byte_3 = from->str_0x3664C[i].byte_3;
         to->str_0x3664C[i].axis3d_4 = from->str_0x3664C[i].axis3d_4;
         to->str_0x3664C[i].event_A.pointer_0x6E8E =
-            (type_event_0x6E8E *) from->str_0x3664C[i].dword_A;
+            (event_t *) from->str_0x3664C[i].dword_A;
         for (int j = 0; j < 25; j++)
             to->str_0x3664C[i].array_E[j] = from->str_0x3664C[i].array_E[j];
     }

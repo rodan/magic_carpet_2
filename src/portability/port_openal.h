@@ -49,7 +49,7 @@ uint8_t alsound_sample_status(const int32_t chunk_id);
 void alsound_set_sample_volume(const int32_t chunk_id, const int32_t volume);
 uint16_t alsound_get_chunk_flags(const int16_t chunk_id);
 int16_t alsound_create_source(const int16_t chunk_id, al_ssp_t * ssp);
-void alsound_update_source(type_event_0x6E8E * entity, axis_3d * position);
+void alsound_update_source(event_t * entity, axis_3d * position);
 void alsound_delete_source(const int16_t ch);
 uint8_t alsound_save_chunk(uint8_t * data, const uint32_t len, char *filename);
 

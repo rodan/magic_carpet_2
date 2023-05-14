@@ -355,7 +355,7 @@ typedef struct _str_0x6E8E {    //lenght a8//THING
     //uint16_t word_0xA2_162;//162
     type_str_164 *dword_0xA4_164x;      //100 // adress of xx
     int16_t play_ch;
-} type_event_0x6E8E;
+} event_t;
 
 #pragma pack (pop)
 /*
