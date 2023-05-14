@@ -17,46 +17,45 @@
 #include <cstring>
 #endif
 
-
 #if defined(__GNUC__)
-  typedef          long long ll;
-  typedef unsigned long long ull;
-  #define __int64 long long
-  #define __int32 int
-  #define __int16 short
-  #define __int8  char
-  #define MAKELL(num) num ## LL
-  #define FMT_64 "ll"
+typedef long long ll;
+typedef unsigned long long ull;
+#define __int64 long long
+#define __int32 int
+#define __int16 short
+#define __int8  char
+#define MAKELL(num) num ## LL
+#define FMT_64 "ll"
 #elif defined(_MSC_VER)
-  typedef          __int64 ll;
-  typedef unsigned __int64 ull;
-  #define MAKELL(num) num ## i64
-  #define FMT_64 "I64"
+typedef __int64 ll;
+typedef unsigned __int64 ull;
+#define MAKELL(num) num ## i64
+#define FMT_64 "I64"
 #elif defined (__BORLANDC__)
-  typedef          __int64 ll;
-  typedef unsigned __int64 ull;
-  #define MAKELL(num) num ## i64
-  #define FMT_64 "L"
+typedef __int64 ll;
+typedef unsigned __int64 ull;
+#define MAKELL(num) num ## i64
+#define FMT_64 "L"
 #else
-  #error "unknown compiler"
+#error "unknown compiler"
 #endif
 typedef unsigned int uint;
 typedef unsigned char uchar;
 typedef unsigned short ushort;
 //typedef unsigned long ulong;
 
-typedef          char   int8;
-typedef   signed char   sint8;
-typedef unsigned char   uint8;
-typedef          short  int16;
-typedef   signed short  sint16;
-typedef unsigned short  uint16;
-typedef          int    int32;
-typedef   signed int    sint32;
-typedef unsigned int    uint32;
-typedef ll              int64;
-typedef ll              sint64;
-typedef ull             uint64;
+typedef char int8;
+typedef signed char sint8;
+typedef unsigned char uint8;
+typedef short int16;
+typedef signed short sint16;
+typedef unsigned short uint16;
+typedef int int32;
+typedef signed int sint32;
+typedef unsigned int uint32;
+typedef ll int64;
+typedef ll sint64;
+typedef ull uint64;
 
 // Partially defined types:
 #define _BYTE  uint8
@@ -75,7 +74,7 @@ typedef ull             uint64;
 #endif
 typedef int64 x_QWORD;
 #ifndef __cplusplus
-typedef int bool;       // we want to use bool in our C programs
+typedef int bool;               // we want to use bool in our C programs
 #endif
 
 // Some convenience macros to make partial accesses nicer
@@ -88,7 +87,7 @@ typedef int bool;       // we want to use bool in our C programs
 #define HIDWORD(x)  (*((_DWORD*)&(x)+1))
 #define BYTEn(x, n)   (*((_BYTE*)&(x)+n))
 #define WORDn(x, n)   (*((_WORD*)&(x)+n))
-#define BYTE1(x)   BYTEn(x,  1)         // byte 1 (counting from 0)
+#define BYTE1(x)   BYTEn(x,  1) // byte 1 (counting from 0)
 #define BYTE2(x)   BYTEn(x,  2)
 #define BYTE3(x)   BYTEn(x,  3)
 #define BYTE4(x)   BYTEn(x,  4)
@@ -104,7 +103,7 @@ typedef int bool;       // we want to use bool in our C programs
 #define BYTE14(x)  BYTEn(x, 14)
 #define BYTE15(x)  BYTEn(x, 15)
 #define WORD1(x)   WORDn(x,  1)
-#define WORD2(x)   WORDn(x,  2)         // third word of the object, unsigned
+#define WORD2(x)   WORDn(x,  2) // third word of the object, unsigned
 #define WORD3(x)   WORDn(x,  3)
 #define WORD4(x)   WORDn(x,  4)
 #define WORD5(x)   WORDn(x,  5)
@@ -143,7 +142,6 @@ typedef int bool;       // we want to use bool in our C programs
 #define SWORD6(x)   SWORDn(x,  6)
 #define SWORD7(x)   SWORDn(x,  7)
 
-
 // Helper functions to represent some assembly instructions.
 
 #ifdef __cplusplus
@@ -151,49 +149,70 @@ typedef int bool;       // we want to use bool in our C programs
 // Fill memory block with an integer value
 inline void memset32(void *ptr, uint32 value, int count)
 {
-	memset(ptr,value,count);
-  /*uint32 *p = (uint32 *)ptr;
-  for ( int i=0; i < count; i++ )
-    *p++ = value;*/
+    memset(ptr, value, count);
+    /*uint32 *p = (uint32 *)ptr;
+       for ( int i=0; i < count; i++ )
+       *p++ = value; */
 }
 
 // Generate a reference to pair of operands
-template<class T>  int16 __PAIR__( int8  high, T low) { return ((( int16)high) << sizeof(high)*8) | uint8(low); }
-template<class T>  int32 __PAIR__( int16 high, T low) { return ((( int32)high) << sizeof(high)*8) | uint16(low); }
-template<class T>  int64 __PAIR__( int32 high, T low) { return ((( int64)high) << sizeof(high)*8) | uint32(low); }
-template<class T> uint16 __PAIR__(uint8  high, T low) { return (((uint16)high) << sizeof(high)*8) | uint8(low); }
-template<class T> uint32 __PAIR__(uint16 high, T low) { return (((uint32)high) << sizeof(high)*8) | uint16(low); }
-template<class T> uint64 __PAIR__(uint32 high, T low) { return (((uint64)high) << sizeof(high)*8) | uint32(low); }
+template < class T > int16 __PAIR__(int8 high, T low)
+{
+    return (((int16) high) << sizeof(high) * 8) | uint8(low);
+}
+
+template < class T > int32 __PAIR__(int16 high, T low)
+{
+    return (((int32) high) << sizeof(high) * 8) | uint16(low);
+}
+
+template < class T > int64 __PAIR__(int32 high, T low)
+{
+    return (((int64) high) << sizeof(high) * 8) | uint32(low);
+}
+
+template < class T > uint16 __PAIR__(uint8 high, T low)
+{
+    return (((uint16) high) << sizeof(high) * 8) | uint8(low);
+}
+
+template < class T > uint32 __PAIR__(uint16 high, T low)
+{
+    return (((uint32) high) << sizeof(high) * 8) | uint16(low);
+}
+
+template < class T > uint64 __PAIR__(uint32 high, T low)
+{
+    return (((uint64) high) << sizeof(high) * 8) | uint32(low);
+}
 
 // rotate left
-template<class T> T __ROL__(T value, int count)
+template < class T > T __ROL__(T value, int count)
 {
-	const uint nbits = sizeof(T) * 8;
+    const uint nbits = sizeof(T) * 8;
 
-	if (count > 0)
-	{
-		count %= nbits;
-		T high = value >> (nbits - count);
-		if (T(-1) < 0) // signed value
-			high &= ~((T(-1) << count));
-		value <<= count;
-		value |= high;
-	}
-	else
-	{
-		count = -count % nbits;
-		T low = value << (nbits - count);
-		value >>= count;
-		value |= low;
-	}
-	return value;
+    if (count > 0) {
+        count %= nbits;
+        T high = value >> (nbits - count);
+        if (T(-1) < 0)          // signed value
+            high &= ~((T(-1) << count));
+        value <<= count;
+        value |= high;
+    } else {
+        count = -count % nbits;
+        T low = value << (nbits - count);
+        value >>= count;
+        value |= low;
+    }
+    return value;
 }
 
 // rotate right
-template<class T> T __ROR__(T value, int count)
+template < class T > T __ROR__(T value, int count)
 {
-	return __ROL__(value, -count);
+    return __ROL__(value, -count);
 }
+
 /*
 template<class T> T __ROR__(T value, uint count)
 {
@@ -206,16 +225,46 @@ template<class T> T __ROR__(T value, uint count)
   return value;
 }*/
 
-inline uint8 __ROL1__(uint8 value, int count) { return (value << count) | (value >> (8 - count)); }
-inline uint16 __ROL2__(uint16 value, int count) { return (value << count) | (value >> (16 - count)); }
-//inline uint32 __ROL4__(uint32 value, int count) { return (value << count) | (value >> (32 - count)); }
-inline uint64 __ROL8__(uint64 value, int count) { return (value << count) | (value >> (64 - count)); }
-inline uint8 __ROR1__(uint8 value, int count) { return (value >> count) | (value << (8 - count)); }
-inline uint16 __ROR2__(uint16 value, int count) { return (value >> count) | (value << (16 - count)); }
-inline uint32 __ROR4__(uint32 value, int count) { return (value >> count) | (value << (32 - count)); }
-inline uint64 __ROR8__(uint64 value, int count) { return (value >> count) | (value << (64 - count)); }
+inline uint8 __ROL1__(uint8 value, int count)
+{
+    return (value << count) | (value >> (8 - count));
+}
 
-inline uint32 __ROL4_16__(uint32  value) { return (value << 16) | (value >> 16); }
+inline uint16 __ROL2__(uint16 value, int count)
+{
+    return (value << count) | (value >> (16 - count));
+}
+
+//inline uint32 __ROL4__(uint32 value, int count) { return (value << count) | (value >> (32 - count)); }
+inline uint64 __ROL8__(uint64 value, int count)
+{
+    return (value << count) | (value >> (64 - count));
+}
+
+inline uint8 __ROR1__(uint8 value, int count)
+{
+    return (value >> count) | (value << (8 - count));
+}
+
+inline uint16 __ROR2__(uint16 value, int count)
+{
+    return (value >> count) | (value << (16 - count));
+}
+
+inline uint32 __ROR4__(uint32 value, int count)
+{
+    return (value >> count) | (value << (32 - count));
+}
+
+inline uint64 __ROR8__(uint64 value, int count)
+{
+    return (value >> count) | (value << (64 - count));
+}
+
+inline uint32 __ROL4_16__(uint32 value)
+{
+    return (value << 16) | (value >> 16);
+}
 
 /*
 inline uint8  __ROL1__(uint8  value, int count) { return __ROL__((uint8)value, count); }
@@ -228,13 +277,14 @@ inline uint32 __ROR4__(uint32 value, int count) { return __ROL__((uint32)value, 
 inline uint64 __ROR8__(uint64 value, int count) { return __ROL__((uint64)value, -count); }*/
 
 // carry flag of left shift
-template<class T> int8 __MKCSHL__(T value, uint count)
+template < class T > int8 __MKCSHL__(T value, uint count)
 {
-  const uint nbits = sizeof(T) * 8;
-  count %= nbits;
+    const uint nbits = sizeof(T) * 8;
+    count %= nbits;
 
-  return (value >> (nbits-count)) & 1;
+    return (value >> (nbits - count)) & 1;
 }
+
 /*
 // carry flag of right shift
 template<class T> int8 __MKCSHR__(T value, uint count)
@@ -243,75 +293,69 @@ template<class T> int8 __MKCSHR__(T value, uint count)
 }*/
 
 // sign flag
-template<class T> int8 __SETS__(T x)
+template < class T > int8 __SETS__(T x)
 {
-  if ( sizeof(T) == 1 )
-    return int8(x) < 0;
-  if ( sizeof(T) == 2 )
-    return int16(x) < 0;
-  if ( sizeof(T) == 4 )
-    return int32(x) < 0;
-  return int64(x) < 0;
+    if (sizeof(T) == 1)
+        return int8(x) < 0;
+    if (sizeof(T) == 2)
+        return int16(x) < 0;
+    if (sizeof(T) == 4)
+        return int32(x) < 0;
+    return int64(x) < 0;
 }
 
 // overflow flag of subtraction (x-y)
-template<class T, class U> int8 __OFSUB__(T x, U y)
+template < class T, class U > int8 __OFSUB__(T x, U y)
 {
-  if ( sizeof(T) < sizeof(U) )
-  {
-    U x2 = x;
-    int8 sx = __SETS__(x2);
-    return (sx ^ __SETS__(y)) & (sx ^ __SETS__(x2-y));
-  }
-  else
-  {
-    T y2 = y;
-    int8 sx = __SETS__(x);
-    return (sx ^ __SETS__(y2)) & (sx ^ __SETS__(x-y2));
-  }
+    if (sizeof(T) < sizeof(U)) {
+        U x2 = x;
+        int8 sx = __SETS__(x2);
+        return (sx ^ __SETS__(y)) & (sx ^ __SETS__(x2 - y));
+    } else {
+        T y2 = y;
+        int8 sx = __SETS__(x);
+        return (sx ^ __SETS__(y2)) & (sx ^ __SETS__(x - y2));
+    }
 }
 
 // overflow flag of addition (x+y)
-template<class T, class U> int8 __OFADD__(T x, U y)
+template < class T, class U > int8 __OFADD__(T x, U y)
 {
-  if ( sizeof(T) < sizeof(U) )
-  {
-    U x2 = x;
-    int8 sx = __SETS__(x2);
-    return ((1 ^ sx) ^ __SETS__(y)) & (sx ^ __SETS__(x2+y));
-  }
-  else
-  {
-    T y2 = y;
-    int8 sx = __SETS__(x);
-    return ((1 ^ sx) ^ __SETS__(y2)) & (sx ^ __SETS__(x+y2));
-  }
+    if (sizeof(T) < sizeof(U)) {
+        U x2 = x;
+        int8 sx = __SETS__(x2);
+        return ((1 ^ sx) ^ __SETS__(y)) & (sx ^ __SETS__(x2 + y));
+    } else {
+        T y2 = y;
+        int8 sx = __SETS__(x);
+        return ((1 ^ sx) ^ __SETS__(y2)) & (sx ^ __SETS__(x + y2));
+    }
 }
 
 // carry flag of subtraction (x-y)
-template<class T, class U> int8 __CFSUB__(T x, U y)
+template < class T, class U > int8 __CFSUB__(T x, U y)
 {
-  int size = sizeof(T) > sizeof(U) ? sizeof(T) : sizeof(U);
-  if ( size == 1 )
-    return uint8(x) < uint8(y);
-  if ( size == 2 )
-    return uint16(x) < uint16(y);
-  if ( size == 4 )
-    return uint32(x) < uint32(y);
-  return uint64(x) < uint64(y);
+    int size = sizeof(T) > sizeof(U) ? sizeof(T) : sizeof(U);
+    if (size == 1)
+        return uint8(x) < uint8(y);
+    if (size == 2)
+        return uint16(x) < uint16(y);
+    if (size == 4)
+        return uint32(x) < uint32(y);
+    return uint64(x) < uint64(y);
 }
 
 // carry flag of addition (x+y)
-template<class T, class U> int8 __CFADD__(T x, U y)
+template < class T, class U > int8 __CFADD__(T x, U y)
 {
-  int size = sizeof(T) > sizeof(U) ? sizeof(T) : sizeof(U);
-  if ( size == 1 )
-    return uint8(x) > uint8(x+y);
-  if ( size == 2 )
-    return uint16(x) > uint16(x+y);
-  if ( size == 4 )
-    return uint32(x) > uint32(x+y);
-  return uint64(x) > uint64(x+y);
+    int size = sizeof(T) > sizeof(U) ? sizeof(T) : sizeof(U);
+    if (size == 1)
+        return uint8(x) > uint8(x + y);
+    if (size == 2)
+        return uint16(x) > uint16(x + y);
+    if (size == 4)
+        return uint32(x) > uint32(x + y);
+    return uint64(x) > uint64(x + y);
 }
 
 #else
@@ -319,22 +363,22 @@ template<class T, class U> int8 __CFADD__(T x, U y)
 // uint64. The above C++ functions are good, though.
 #define __PAIR__(high, low) (((uint64)(high)<<sizeof(high)*8) | low)
 // For C, we just provide macros, they are not quite correct.
-#define __ROL__(x, y) __rotl__(x, y)      // Rotate left
-#define __ROR__(x, y) __rotr__(x, y)      // Rotate right
-#define __CFSHL__(x, y) printf("invalid_operation:__CFSHL__(x, y)") // Generate carry flag for (x<<y)
-#define __CFSHR__(x, y) invalid_operation // Generate carry flag for (x>>y)
-#define __CFADD__(x, y) invalid_operation // Generate carry flag for (x+y)
-#define __CFSUB__(x, y) invalid_operation // Generate carry flag for (x-y)
-#define __OFADD__(x, y) invalid_operation // Generate overflow flag for (x+y)
-#define __OFSUB__(x, y) invalid_operation // Generate overflow flag for (x-y)
+#define __ROL__(x, y) __rotl__(x, y)    // Rotate left
+#define __ROR__(x, y) __rotr__(x, y)    // Rotate right
+#define __CFSHL__(x, y) printf("invalid_operation:__CFSHL__(x, y)")     // Generate carry flag for (x<<y)
+#define __CFSHR__(x, y) invalid_operation       // Generate carry flag for (x>>y)
+#define __CFADD__(x, y) invalid_operation       // Generate carry flag for (x+y)
+#define __CFSUB__(x, y) invalid_operation       // Generate carry flag for (x-y)
+#define __OFADD__(x, y) invalid_operation       // Generate overflow flag for (x+y)
+#define __OFSUB__(x, y) invalid_operation       // Generate overflow flag for (x-y)
 #endif
 
 // No definition for rcl/rcr because the carry flag is unknown
 //#define __RCL__(x, y)    invalid_operation // Rotate left thru carry
 //#define __RCR__(x, y)    invalid_operation // Rotate right thru carry
-#define __MKCRCL__(x, y) invalid_operation // Generate carry flag for a RCL
-#define __MKCRCR__(x, y) invalid_operation // Generate carry flag for a RCR
-#define __SETP__(x, y)   invalid_operation // Generate parity flag for (x-y)
+#define __MKCRCL__(x, y) invalid_operation      // Generate carry flag for a RCL
+#define __MKCRCR__(x, y) invalid_operation      // Generate carry flag for a RCR
+#define __SETP__(x, y)   invalid_operation      // Generate parity flag for (x-y)
 
 // In the decompilation listing there are some objects declarared as _UNKNOWN
 // because we could not determine their types. Since the C compiler does not

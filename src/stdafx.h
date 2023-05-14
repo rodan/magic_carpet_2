@@ -10,6 +10,4 @@
 #include <stdio.h>
 #include <tchar.h>
 
-
-
 // TODO: připojit zde dodatečné hlavičkové soubory, které program vyžaduje

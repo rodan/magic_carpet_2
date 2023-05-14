@@ -1,7 +1,9 @@
 #include "engine_memstack.h"
-int get_mem_block(int size) {
-	return 0;
+int get_mem_block(int size)
+{
+    return 0;
 };
+
 /*
 31
 EAX 0100 00A0

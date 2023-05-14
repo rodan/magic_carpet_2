@@ -25,8 +25,8 @@ SOFTWARE.
 //#include "config.h"
 //#ifdef CORSIX_TH_USE_SDL_MIXER
 
-unsigned char* TranscodeXmiToMid(const unsigned char* pXmiData,
-                                 size_t iXmiLength, size_t* pMidLength);
+unsigned char *TranscodeXmiToMid(const unsigned char *pXmiData,
+                                 size_t iXmiLength, size_t *pMidLength);
 
 //#else // CORSIX_TH_USE_SDL_MIXER
 //
@@ -39,4 +39,4 @@ unsigned char* TranscodeXmiToMid(const unsigned char* pXmiData,
 //}
 
 //#endif // CORSIX_TH_USE_SDL_MIXER
-#endif // CORSIX_TH_XMI2MID_H_
+#endif                          // CORSIX_TH_XMI2MID_H_

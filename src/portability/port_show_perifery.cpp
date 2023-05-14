@@ -3,9 +3,9 @@
 #include "stdio.h"
 #include "string.h"
 
-void ShowPerifery(char* text, int a, int b, int c) {
-    if (text)
-    {
+void ShowPerifery(char *text, int a, int b, int c)
+{
+    if (text) {
         if (!strcmp(text, "cpuid"))
             Logger->debug("external pefifery - CPU identification!!!! - Fix It");
         else if (!strcmp(text, "fninit"))
@@ -42,8 +42,6 @@ void ShowPerifery(char* text, int a, int b, int c) {
             Logger->debug("external pefifery - set mouse pos");
         else
             Logger->debug("unknown external pefifery!!!! - Fix It");
-    }
-    else
+    } else
         Logger->debug("unknown external pefifery!!!! - Fix It");
-};//for devices comutications
-
+};                              //for devices comutications

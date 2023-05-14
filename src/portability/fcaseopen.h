@@ -5,11 +5,11 @@
 #include <string>
 #include <vector>
 
-FILE* fcaseopen(char const* path, char const* mode);
+FILE *fcaseopen(char const *path, char const *mode);
 
-std::vector<std::string> GetTokensFromPath(const std::string &path);
+std::vector < std::string > GetTokensFromPath(const std::string & path);
 #if !defined(_WIN32)
-std::string casepath(const std::string &path);
+std::string casepath(const std::string & path);
 #endif
 
 #endif

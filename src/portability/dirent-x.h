@@ -13,24 +13,19 @@
 #ifdef _MSC_VER
 
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
 
+    typedef struct DIR DIR;
 
-typedef struct DIR DIR;
+    struct dirent {
+        char *d_name;
+    };
 
-struct dirent
-{
-    char *d_name;
-};
-
-
-
-DIR           *opendir(const char *);
-int           closedir(DIR *);
-struct dirent *readdir(DIR *);
-void          rewinddir(DIR *);
+    DIR *opendir(const char *);
+    int closedir(DIR *);
+    struct dirent *readdir(DIR *);
+    void rewinddir(DIR *);
 
 /*
 
@@ -50,7 +45,5 @@ void          rewinddir(DIR *);
 #ifdef __cplusplus
 }
 #endif
-
-#endif //_MSC_VER
-
-#endif //DIRENT_INCLUDED
+#endif                          //_MSC_VER
+#endif                          //DIRENT_INCLUDED

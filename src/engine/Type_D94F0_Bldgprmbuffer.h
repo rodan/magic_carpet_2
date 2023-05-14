@@ -7,4 +7,4 @@
 
 extern uint8_t str_D94F0_bldgprmbuffer[3][5];
 
-#endif //TYPE_D94F0_BLDGPRMBUFFER_H
+#endif                          //TYPE_D94F0_BLDGPRMBUFFER_H

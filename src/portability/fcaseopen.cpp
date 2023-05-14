@@ -13,11 +13,11 @@
 #include <filesystem>
 #include <boost/algorithm/string.hpp>
 
-
-std::vector<std::string> GetTokensFromPath(const std::string &path) {
+std::vector < std::string > GetTokensFromPath(const std::string & path)
+{
     size_t pos = 0;
     size_t start = 0;
-    std::vector<std::string> tokens;
+    std::vector < std::string > tokens;
 
     while ((pos = path.find('/', start)) != std::string::npos) {
         if (pos != start)
@@ -29,16 +29,17 @@ std::vector<std::string> GetTokensFromPath(const std::string &path) {
     return tokens;
 }
 
-std::string casepath(const std::string &path)
+std::string casepath(const std::string & path)
 {
     // returns either a path that has upper/lower case fixed and points to an / existing file or returns the input path
 
     // split original path
-    std::vector<std::string> tokens = GetTokensFromPath(path);
+    std::vector < std::string > tokens = GetTokensFromPath(path);
 
     // iterate through directories and check if we find case-insensitive matches to the path
     // NOTE: the first match will be taken
-    std::string result {""};
+    std::string result {
+    ""};
     if (path[0] == '/')
         result = "/";
 
@@ -50,7 +51,7 @@ std::string casepath(const std::string &path)
             if (!std::filesystem::exists(result))
                 return path;
 
-            for (const auto &entry: std::filesystem::directory_iterator(result)) {
+ for (const auto & entry:std::filesystem::directory_iterator(result)) {
                 std::string test = GetTokensFromPath(entry.path().string()).back();
                 if (boost::iequals(token, test)) {
                     current = result + test;
@@ -59,7 +60,7 @@ std::string casepath(const std::string &path)
             }
         }
 
-        result = current + ((i != tokens.size()-1) ? "/" : "");
+        result = current + ((i != tokens.size() - 1) ? "/" : "");
     }
 
     if (!std::filesystem::exists(result))
@@ -69,12 +70,11 @@ std::string casepath(const std::string &path)
 }
 #endif
 
-FILE* fcaseopen(char const* path, char const* mode)
+FILE *fcaseopen(char const *path, char const *mode)
 {
-    FILE* f = fopen(path, mode);
+    FILE *f = fopen(path, mode);
 #ifdef __linux__
-    if (!f)
-    {
+    if (!f) {
         std::string r = casepath(path);
         f = fopen(r.c_str(), mode);
     }

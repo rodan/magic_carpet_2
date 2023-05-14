@@ -31,11 +31,12 @@ int master_volume = -1;
 #ifdef SOUND_SDLMIXER
 Mix_Music *GAME_music[20] =
     { NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-NULL, NULL, NULL, NULL, NULL };
+    NULL, NULL, NULL, NULL, NULL
+};
 #endif
 
-Mix_Chunk gamechunk[32]; //OPENAL_CHANNELS];
-HSAMPLE gamechunkHSAMPLE[32]; //OPENAL_CHANNELS];
+Mix_Chunk gamechunk[32];        //OPENAL_CHANNELS];
+HSAMPLE gamechunkHSAMPLE[32];   //OPENAL_CHANNELS];
 
 uint8_t sound_buffer[4][20000];
 /*
@@ -55,7 +56,7 @@ uint8_t sound_buffer[4][20000];
  2
 
 */
-void test_midi_play(uint8_t * /*data */ , uint8_t * header, int32_t track_number)
+void test_midi_play(uint8_t * /*data */ , uint8_t *header, int32_t track_number)
 {
     uint8_t *acttrack = &header[32 + track_number * 32];
     //int testsize = *(uint32_t*)(&header[32 + (track_number + 1) * 32] + 18) - *(uint32_t*)(acttrack + 18);
@@ -165,7 +166,7 @@ void SOUND_set_sequence_volume(int32_t volume, int32_t milliseconds)
 #endif                          //SOUND_SDLMIXER
 }
 
-void SOUND_init_MIDI_sequence(uint8_t * /*datax */ , type_E3808_music_header * headerx,
+void SOUND_init_MIDI_sequence(uint8_t * /*datax */ , type_E3808_music_header *headerx,
                               int32_t track_number)
 {
     //Logger->info("SOUND_init_MIDI_sequence {}", track_number);
@@ -282,7 +283,7 @@ struct {
     int a;
 } environment_string;
 
-int32_t ac_sound_call_driver(AIL_DRIVER * drvr, int32_t fn, VDI_CALL * out)
+int32_t ac_sound_call_driver(AIL_DRIVER *drvr, int32_t fn, VDI_CALL *out)
 {
     switch (fn) {
     case 0x300:{               //AIL_API_install_driver
@@ -350,8 +351,8 @@ void SOUND_set_master_volume(int32_t volume)
 void SOUND_set_sample_volume(HSAMPLE S, int32_t volume)
 {
 #ifdef SOUND_OPENAL
-	//Logger->info("SOUND_set_sample_volume id {}  vol {}", S->id, volume);
-	alsound_set_sample_volume(S->id, volume);
+    //Logger->info("SOUND_set_sample_volume id {}  vol {}", S->id, volume);
+    alsound_set_sample_volume(S->id, volume);
 #elif defined(SOUND_SDLMIXER)
     if (master_volume == -1)
         master_volume = 127;
@@ -366,21 +367,21 @@ void SOUND_start_sample(HSAMPLE S)
         return;
 
 #ifdef SOUND_OPENAL
-	uint16_t format;
+    uint16_t format;
 
-	format = alsound_get_chunk_flags(S->id);
+    format = alsound_get_chunk_flags(S->id);
 
-	if (format & AL_FORMAT_STEREO8_22050) {
-		gamechunk[S->index_sample].abuf = (uint8_t *) S->wavbuff;
-		gamechunk[S->index_sample].alen = S->len_4_5[0] * 2;
-	} else {
-		gamechunk[S->index_sample].abuf = (uint8_t *) S->start_2_3[0];
-		gamechunk[S->index_sample].alen = S->len_4_5[0];
-	}
-	gamechunk[S->index_sample].volume = S->volume_16;
-	gamechunkHSAMPLE[S->index_sample] = S;
+    if (format & AL_FORMAT_STEREO8_22050) {
+        gamechunk[S->index_sample].abuf = (uint8_t *) S->wavbuff;
+        gamechunk[S->index_sample].alen = S->len_4_5[0] * 2;
+    } else {
+        gamechunk[S->index_sample].abuf = (uint8_t *) S->start_2_3[0];
+        gamechunk[S->index_sample].alen = S->len_4_5[0];
+    }
+    gamechunk[S->index_sample].volume = S->volume_16;
+    gamechunkHSAMPLE[S->index_sample] = S;
 
-	alsound_play(S->id, &gamechunk[S->index_sample], 0, nullptr, format);
+    alsound_play(S->id, &gamechunk[S->index_sample], 0, nullptr, format);
 #elif defined (SOUND_SDLMIXER)
     if (hqsound) {
         gamechunk[S->index_sample].abuf = /*sample->abuf;// */ (uint8_t *) S->start_44mhz;
@@ -414,9 +415,9 @@ uint32_t SOUND_sample_status(HSAMPLE S)
         return 0;
 
 #ifdef SOUND_OPENAL
-	if (alsound_sample_status(S->id) == 0) {
-		return 2;
-	}
+    if (alsound_sample_status(S->id) == 0) {
+        return 2;
+    }
 #elif defined(SOUND_SDLMIXER)
     if (Mix_Playing(S->index_sample) == 0)
         return 2;
@@ -428,8 +429,8 @@ void SOUND_end_sample(HSAMPLE S)
 {
 
 #ifdef SOUND_OPENAL
-	//Logger->info("SOUND_end_sample {} {}", S->id, S->len_4_5[0] * 2);
-	alsound_end_sample(S->id);
+    //Logger->info("SOUND_end_sample {} {}", S->id, S->len_4_5[0] * 2);
+    alsound_end_sample(S->id);
 #elif defined(SOUND_SDLMIXER)
     Mix_HaltChannel(-1);
 #endif                          //SOUND_SDLMIXER
@@ -472,7 +473,7 @@ bool init_sound()
     }
 
     //Mix_SetSoundFonts("c:\\prenos\\Magic2\\sf2\\TOM-SF2.sf2");
-	Mix_SetSoundFonts("touhou.sf2");
+    Mix_SetSoundFonts("touhou.sf2");
     //load_sound_files();
     /*if(mp3music)
        load_music_files(); */
@@ -482,7 +483,7 @@ bool init_sound()
     Mix_ChannelFinished(SOUND_finalize);
 #endif
 #ifdef SOUND_OPENAL
-	alsound_init();
+    alsound_init();
 #endif
     return true;
 }
@@ -510,8 +511,6 @@ uint16_t ac_get_real_vect(uint32_t vectnum)
 void SOUND_UPDATE()
 {
 #ifdef SOUND_OPENAL
-	alsound_update();
+    alsound_update();
 #endif
 };
-
-

@@ -16,31 +16,30 @@
 #include <windows.h>
 #else
 #include <unistd.h>
-#endif // win32
+#endif                          // win32
 
-class RenderThread
-{
-private:
+class RenderThread {
+ private:
 
-	int8_t m_core;
-	std::atomic<bool> m_running;
-	std::thread m_renderThread;
-	std::function<void()> m_task;
-	std::mutex m_taskMutex;
-	std::condition_variable m_nextTaskCondition;
-	std::atomic<bool> m_isTaskRunning;
+    int8_t m_core;
+    std::atomic < bool >m_running;
+     std::thread m_renderThread;
+     std::function < void () > m_task;
+     std::mutex m_taskMutex;
+     std::condition_variable m_nextTaskCondition;
+     std::atomic < bool >m_isTaskRunning;
 
-public:
+ public:
 
-	RenderThread();
-	RenderThread(uint8_t core);
-	~RenderThread();
+     RenderThread();
+     RenderThread(uint8_t core);
+    ~RenderThread();
 
-	void StartWorkerThread(int8_t core = -1);
-	void StopWorkerThread();
-	void Run(std::function<void()> task);
-	bool IsRunning();
-	bool GetIsTaskRunning();
+    void StartWorkerThread(int8_t core = -1);
+    void StopWorkerThread();
+    void Run(std::function < void () > task);
+    bool IsRunning();
+    bool GetIsTaskRunning();
 };
 
-#endif //RENDER_THREAD
+#endif                          //RENDER_THREAD

@@ -6,13 +6,13 @@
 #include <cstdint>
 
 #if defined(WIN32) || defined(_WIN64)
-# pragma warning(disable:4996)
+#pragma warning(disable:4996)
 #endif
 
 #ifdef USE_DOSBOX
 #include "logging.h"
 #include "dos_system.h"
-#endif //USE_DOSBOX
+#endif                          //USE_DOSBOX
 
 #define x_BYTE char
 #define x_WORD short
@@ -20,16 +20,16 @@
 
 #pragma pack (1)
 typedef struct {
-	uint8_t* data;
-	uint8_t width_4;
-	uint8_t height_5;
+    uint8_t *data;
+    uint8_t width_4;
+    uint8_t height_5;
 } posistruct_t;
 
 typedef struct {
-	uint32_t data_0;
-	uint8_t width_4;
-	uint8_t height_5;
+    uint32_t data_0;
+    uint8_t width_4;
+    uint8_t height_5;
 } posistruct2_t;
 #pragma pack (16)
 
-#endif //ENGINE_TYPES_H
+#endif                          //ENGINE_TYPES_H

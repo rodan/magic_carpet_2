@@ -3,5 +3,4 @@
 
 int get_mem_block(int size);
 
-#endif ENGINE_MEMSTACK_ACTIVE
-
+#endif  /* ENGINE_MEMSTACK_ACTIVE */

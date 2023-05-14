@@ -1,5 +1,6 @@
 #!/bin/bash
 
+#export BUILDTYPE=Release
 export BUILDTYPE=Debug
 
 export LDFLAGS=""
