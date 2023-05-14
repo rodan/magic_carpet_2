@@ -1,0 +1,88 @@
+# Magic Carpet 2 HD
+Based off the Reverse engineering of game Magic Carpet 2 from assembler to c/c++ language by Tomas Versly <br />
+Forked from Tomas Vesely's repo here: https://github.com/turican0/remc2 <br/><br/>
+Tomas has done amazing work, not only reverse engineering this code but updating it to use more modern memory allocation and use the SDL library for input and sound. He has even increased the sprite resolutions.
+
+## about this fork
+
+Linux-oriented fork with a major cleanup of the repository.
+Added joystick/controller support, a linux asset-checker and completely re-written the OpenAL sound support, which is now a build dependency requirement.
+
+#### Building on Linux
+
+There are two ways to build the Linux binary.
+- Building a native binary
+  1. Pull the development branch using GitHub. When pulling the branch either do a recursive clone of the repository or ensure that after the pull you run: `git submodule init` and `git submodule update`
+  2. Make sure that you have `CMake`, `make` and a recent `GCC` installed
+  3. Make sure that you have the following dependencies as development packages (the exact names depend on your distro)
+  - SDL2
+  - SDL2_mixer
+  - SDL2_image
+  - SDL2_ttf
+  - libpng
+  - boost
+  - OpenAL
+  - boost-system
+  4. Build the code
+  ```bash
+  export BUILDTYPE=Debug # or Release
+  mkdir -p build/${BUILDTYPE}
+  cd build/${BUILDTYPE}
+  cmake -DCMAKE_BUILD_TYPE=${BUILDTYPE} -DCMAKE_INSTALL_PREFIX=./inst [SOURCE_DIR]
+  make
+  make install
+  ```
+  5. Magic Carpet 2 is now built. you can find it in `build/Debug/inst/bin`
+     - You can also run the code with sanitizers (leak, address, undefined behaviour, pointers) by passing `-DUSE_SANITIZERS=True` to CMake
+     - Additionally you can compile the code with clang-tidy analyzers by passing `-DUSE_CLANG_TIDY=True` to CMake
+
+### Providing the original game assets to `remc2` and running the game
+
+In order to run the game you need to own a copy of Magic Carpet 2. We provide a script to extract the assets from the GOG version. The following steps extract the required files from the original.
+  1. Purchase a copy of Magic Carpet 2 from GOG here: https://www.gog.com/game/magic_carpet_2_the_netherworlds
+  2. Install the game
+  3. In order to retrieve the original game's assets run the following script located in the root of the repository:
+  ```
+  bash check_install.sh -s [directory where GOG installed MC2] -d [destination directory]
+  # for example :
+  bash check_install.sh -s "${HOME}/.wine/drive_c/games/Magic Carpet 2/" -d "build/${BUILDTYPE}/inst/bin/"
+  ```
+  Please note that if you have used any other method to get the assets, at least run a check to make sure that remc2 has access to every file it needs:
+  ```
+  bash check_install.sh -d [destination directory]
+  # for example:
+  bash check_install.sh -d "build/${BUILDTYPE}/inst/bin/"
+   [ ok ] CD_Files directory
+   [ ok ] GAME directory
+  ```
+  this script will fix the permissions, make everything uppercase, check all file hashes and complain if any file is missing.
+  it's also recommended that before the first run you remove the file GAME/NETHERW/CONFIG.DAT if it exists.
+  4. NOTE: The game will search in the following locations (and in this particular order) for the game assets. For the flatpak only the first two locations can be used.
+     1. `$XDG_DATA_HOME/remc2/`
+     2. `$HOME/.local/share/remc2`
+     3. next to the `remc2` binary
+  5. Run the `remc2` executable in install directory
+  ```
+  cd magic-carpet-2-hd/build/${BUILDTYPE}/inst/bin
+  ./remc2
+  ```
+
+#### Configuring `remc2`
+
+Some settings can be configured via the file `config.ini`. An example for this file can be found in the root directory of the `remc2` repository.
+The game will search for this file in the following locations and this particular order. For the flatpak only the first two locations can be used.
+1. `$XDG_CONFIG_HOME/remc2`
+2. `$HOME/.config/remc2`
+3. next to the `remc2` binary
+
+## License ##
+### Original Source Code is Copyright 1995 Bullfrog Productions ###
+
+### Additonal Code is Licensed under the following MIT Licence: ###
+Copyright 2022 Magic Carpet 2 HD
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

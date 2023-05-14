@@ -1,0 +1,12 @@
+*.swp
+*.o
+*.a
+*.s
+*.obj
+*~
+*.~cpp
+*.~ddp
+*.~h
+*.~dfm
+assets/biggraphics.tar.xz
+bin

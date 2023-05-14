@@ -1,0 +1,6 @@
+[submodule "lib/inih"]
+	path = lib/inih
+	url = https://github.com/benhoyt/inih.git
+[submodule "lib/findfirst"]
+	path = lib/findfirst
+	url = https://github.com/MathieuTurcotte/findfirst.git
