@@ -5,7 +5,7 @@ Tomas has done amazing work, not only reverse engineering this code but updating
 
 ## about this fork
 
-this is a linux-targeted fork and changes in this fork include:
+this is a linux-targeted repository and changes include:
 
  - major cleanup of the repository
  - added check/install script
