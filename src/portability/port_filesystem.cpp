@@ -153,7 +153,7 @@ bool file_exists(const char * filename) {
 
 FILE* mycreate(const char* path, uint32_t  /*flags*/) {
 	FILE *fp = fcaseopen(path, "wb+");
-	Logger->debug("mycreate:{}", fmt::ptr(fp));
+	//Logger->debug("mycreate:{}", fmt::ptr(fp));
 	return fp;
 };
 
@@ -164,7 +164,7 @@ int32_t myaccess(const char* path, uint32_t  /*flags*/) {
 	//pathfix(path, path2);//only for DOSBOX version
 	//	Logger->debug("myaccess:fix path:%s\n", path2);
 	dir = opendir(path);
-	Logger->debug("myaccess:exit:{} {}", fmt::ptr(dir), errno);
+	//Logger->debug("myaccess:exit:{} {}", fmt::ptr(dir), errno);
 	if (dir)
 	{
 		/* Directory exists. */
@@ -194,7 +194,7 @@ int32_t /*__cdecl*/ mymkdir(const char* path) {
 	pwcsName = new WCHAR[nChars];
 	MultiByteToWideChar(CP_ACP, 0, path, -1, (LPWSTR)pwcsName, nChars);
 	// use it....
-	Logger->debug("mymkdir:path3: {}", fmt::ptr(pwcsName));
+	//Logger->debug("mymkdir:path3: {}", fmt::ptr(pwcsName));
 #endif
 
 	int result;
@@ -230,7 +230,7 @@ FILE* myopen(const char* path, int pmode, uint32_t flags) {
 	//if(file_exists(path2))
 
 	fp= fcaseopen(path, type);
-	Logger->debug("myopen:open end {}", fmt::ptr(fp));
+	//Logger->debug("myopen:open end {}", fmt::ptr(fp));
 	return fp;
 };
 int myclose(FILE* descriptor) {
@@ -263,7 +263,7 @@ int DirExists(const char* path)
 FILE* myopent(char* path, char* type) {
 	FILE *fp;
 	fp= fcaseopen(path, type);
-	Logger->debug("myopent:end: {}", fmt::ptr(fp));
+	//Logger->debug("myopent:end: {}", fmt::ptr(fp));
 	return fp;
 };
 

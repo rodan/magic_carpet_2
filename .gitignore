@@ -9,4 +9,4 @@
 *.~h
 *.~dfm
 assets/biggraphics.tar.xz
-bin
+build

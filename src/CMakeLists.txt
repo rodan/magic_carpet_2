@@ -106,18 +106,18 @@ source_group("Source Files\\engine" FILES ${SOURCE_FILES_ENGINE})
 
 
 set(SOURCE_FILES__libs__inih
-    "../inih/ini.c"
-    "../inih/ini.h"
-    "../inih/INIReader.cpp"
-    "../inih/INIReader.h"
+    "../lib/inih/ini.c"
+    "../lib/inih/ini.h"
+    "../lib/inih/cpp/INIReader.cpp"
+    "../lib/inih/cpp/INIReader.h"
 )
 source_group("Source Files\\libs\\inih" FILES ${SOURCE_FILES__libs__inih})
 
 set(SOURCE_FILES__libs__findfirst
-    "../findfirst/findfirst.c"
-    "../findfirst/findfirst.h"
-    "../findfirst/spec.c"
-    "../findfirst/spec.h"
+    "../lib/findfirst/findfirst.c"
+    "../lib/findfirst/findfirst.h"
+    "../lib/findfirst/spec.c"
+    "../lib/findfirst/spec.h"
 )
 source_group("Source Files\\libs\\findfirst" FILES ${SOURCE_FILES__libs__findfirst})
 
@@ -174,19 +174,18 @@ install(
 )
 install(
     FILES 
-    ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/font/16x16-font.bmp
-    ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/font/8x8-font.bmp
+    ${CMAKE_SOURCE_DIR}/assets/fonts/16x16-font.bmp
+    ${CMAKE_SOURCE_DIR}/assets/fonts/8x8-font.bmp
     DESTINATION bin/font
 )
 install(
     FILES 
-    ${CMAKE_SOURCE_DIR}/config.ini
+    ${CMAKE_SOURCE_DIR}/assets/config.ini
     DESTINATION bin
 )
 install(
-    DIRECTORY
-    ${CMAKE_SOURCE_DIR}/enhancedassets/music-ogg
-    ${CMAKE_SOURCE_DIR}/enhancedassets/biggraphics
+    FILES
+    ${CMAKE_SOURCE_DIR}/assets/biggraphics.tar.xz
     DESTINATION bin
 )
 
@@ -202,12 +201,12 @@ set(ROOT_NAMESPACE remc2)
 ################################################################################
 if (UNIX)
     target_include_directories(${PROJECT_NAME} PUBLIC
-        "${CMAKE_SOURCE_DIR}/remc2"
-        "${CMAKE_SOURCE_DIR}/remc2/portability"
-        "${CMAKE_SOURCE_DIR}/remc2/engine"
-        "${CMAKE_SOURCE_DIR}/inih"
-        "${CMAKE_SOURCE_DIR}/findfirst"
-        "${CMAKE_SOURCE_DIR}/spdlog/include"
+        "${CMAKE_SOURCE_DIR}/src"
+        "${CMAKE_SOURCE_DIR}/src/portability"
+        "${CMAKE_SOURCE_DIR}/src/engine"
+        "${CMAKE_SOURCE_DIR}/lib/inih"
+        "${CMAKE_SOURCE_DIR}/lib/findfirst"
+        "${CMAKE_SOURCE_DIR}/lib/spdlog/include/spdlog"
     )
     #target_compile_definitions(${PROJECT_NAME} PRIVATE
     #)
@@ -218,8 +217,9 @@ if (UNIX)
         SDL2::Mixer
         ${PNG_LIBRARY}
         findfirst
-        ADLMIDI_static
         Boost::system
+        spdlog
+        fmt
         openal
     )
     target_link_directories(${PROJECT_NAME} PUBLIC

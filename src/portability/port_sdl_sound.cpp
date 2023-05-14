@@ -1,5 +1,4 @@
 #include <iostream>
-#include <adlmidi.h>
 #include "../engine/engine_support.h"
 #include "port_openal.h"
 #include "port_sdl_sound.h"

@@ -12,10 +12,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Dependencies
 ################################################################################
 
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/sdl2)
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/assets/cmake/sdl2)
 
 if (GITHUB_CI_COMPATIBILITY_PATH)
-    set(SDL2_DIR "${GITHUB_CI_COMPATIBILITY_PATH}/cmake/SDL2")
+    set(SDL2_DIR "${GITHUB_CI_COMPATIBILITY_PATH}/assets/cmake/SDL2")
     set(CMAKE_LIBRARY_PATH "${GITHUB_CI_COMPATIBILITY_PATH}")
 endif ()
 
@@ -102,8 +102,6 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 ################################################################################
 
 # dependencies
-set(libADLMIDI_STATIC TRUE)
-add_subdirectory(libADLMIDI-master)
 add_compile_definitions(COMPILE_FOR_64BIT)
 #add_definitions(-w)
 
@@ -113,7 +111,7 @@ if (FLATPAK)
 endif ()
 
 # remc2 and tests
-add_subdirectory(remc2)
+add_subdirectory(src)
 if (UNIT_TESTS)
     add_subdirectory(remc2-unit-test)
     add_subdirectory(remc2-regression-test)
