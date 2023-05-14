@@ -535,7 +535,7 @@ typedef struct Type_x_D41A0_BYTEARRAY_4_struct {
     //bytearray_38535=bytearray_38403[132]//0x965b//x_D41A0_BYTEARRAY_4_struct.bytearray_38403[132]
 
     //endarray - dword_38519
-    type_event_0x6E8E *dword_38519;     //0x9677//x_D41A0_BYTEARRAY_4_struct.dword_38519
+    type_event_0x6E8E *entity_head;     //0x9677//x_D41A0_BYTEARRAY_4_struct.dword_38519
     /*
        entite
        8-dead

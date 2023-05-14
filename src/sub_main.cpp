@@ -6352,7 +6352,7 @@ int sub_10C80(type_event_0x6E8E *a1x, unsigned __int8 a2, unsigned __int16 a3)  
         }
         result = v3;
     } else {
-        for (iix = x_D41A0_BYTEARRAY_4_struct.dword_38519; iix > x_DWORD_EA3E4[0];
+        for (iix = x_D41A0_BYTEARRAY_4_struct.entity_head; iix > x_DWORD_EA3E4[0];
              iix = iix->next_0) {
             if (iix->model_0x40_64 == 2 && iix->id_0x1A_26 != a1x->id_0x1A_26
                 && sub_106C0(a1x, iix)) {
@@ -6517,7 +6517,7 @@ void sub_11400(type_event_0x6E8E *a1x, char a2, unsigned __int16 a3)    //1f2400
     //v3 = 1 << a2;
     if (!a2) {
         //v4 = (a1x->struct_byte_0xc_12_15.byte[2] & 1) == 0;
-        for (ix = x_D41A0_BYTEARRAY_4_struct.dword_38519; ix > x_DWORD_EA3E4[0]; ix = ix->next_0) {
+        for (ix = x_D41A0_BYTEARRAY_4_struct.entity_head; ix > x_DWORD_EA3E4[0]; ix = ix->next_0) {
             if (ix->model_0x40_64 == 2 && ix->id_0x1A_26 != a1x->id_0x1A_26 && sub_106C0(a1x, ix)) {
                 if (ix->str_0x5E_94.word_0x62_98)
                     ix->str_0x5E_94.dword_0x5E_94 += a3;
@@ -6597,7 +6597,7 @@ int sub_116A0(type_event_0x6E8E *a1x, char a2, unsigned __int16 a3)     //1f26a0
 
     v3 = 0;
     if (!a2) {
-        for (ix = x_D41A0_BYTEARRAY_4_struct.dword_38519; ix > x_DWORD_EA3E4[0]; ix = ix->next_0) {
+        for (ix = x_D41A0_BYTEARRAY_4_struct.entity_head; ix > x_DWORD_EA3E4[0]; ix = ix->next_0) {
             if (ix->model_0x40_64 == 2 && sub_106C0(a1x, ix)) {
                 ix->word_0x30_48 = 30;
                 if (ix->id_0x1A_26 != a1x->id_0x1A_26) {
@@ -6724,7 +6724,7 @@ char sub_11A10(type_event_0x6E8E *a1)   //1f2a10
     v18 = a1->array_0x52_82.pitch >> 8;
     v21 = a1->array_0x52_82.roll >> 8;
     SetShiftByCastle_49EC0(a1, a1->dword_0x10_16 + 1);
-    for (ix = x_D41A0_BYTEARRAY_4_struct.dword_38519; ix > x_DWORD_EA3E4[0]; ix = ix->next_0) {
+    for (ix = x_D41A0_BYTEARRAY_4_struct.entity_head; ix > x_DWORD_EA3E4[0]; ix = ix->next_0) {
         if (ix->model_0x40_64 == 2 && ix != a1 && sub_106C0(ix, a1)) {
             SetShiftByCastle_49EC0(a1, a1->dword_0x10_16);
             return 0;
@@ -6834,7 +6834,7 @@ bool sub_11CB0(axis_3d *a1x)    //1f2cb0
 
     v1 = a1x->y;
     v10 = 0;
-    v2x = x_D41A0_BYTEARRAY_4_struct.dword_38519;
+    v2x = x_D41A0_BYTEARRAY_4_struct.entity_head;
     v8 = a1x->x;
     while (!v10 && v2x > x_DWORD_EA3E4[0]) {
         if (v2x->model_0x40_64 == 2
@@ -8439,7 +8439,7 @@ signed int sub_13E40(type_event_0x6E8E *a1x)    //1f4e40
     if (!sub_164B0(a1x) || !a1x->dword_0xA4_164x->word_0x3A_58 && sub_146C0(a1x, 2u))
         return 0;
     v1x = 0;
-    for (ix = x_D41A0_BYTEARRAY_4_struct.dword_38519; ix > x_DWORD_EA3E4[0]; ix = ix->next_0) {
+    for (ix = x_D41A0_BYTEARRAY_4_struct.entity_head; ix > x_DWORD_EA3E4[0]; ix = ix->next_0) {
         if (ix->id_0x1A_26 != a1x->id_0x1A_26 && ix->model_0x40_64 == 2) {
             if ((v3x = x_DWORD_EA3E4[ix->id_0x1A_26],
                  50000 - a1x->dword_0xA4_164x->word_0x242_578 * (v3x->maxMana_0x8C_140 / 10) / 255 <
@@ -8490,7 +8490,7 @@ signed int sub_14030(type_event_0x6E8E *a1x)    //1f5030
     if (!sub_15E60(a1x) || !a1x->dword_0xA4_164x->word_0x3A_58 && sub_146C0(a1x, 2u))
         return 0;
     v1x = 0;
-    for (ix = x_D41A0_BYTEARRAY_4_struct.dword_38519; ix > x_DWORD_EA3E4[0]; ix = ix->next_0) {
+    for (ix = x_D41A0_BYTEARRAY_4_struct.entity_head; ix > x_DWORD_EA3E4[0]; ix = ix->next_0) {
         if (ix->id_0x1A_26 != a1x->id_0x1A_26) {
             v3 = ix->model_0x40_64;
             if ((!v3 || v3 == 1) && !sub_15760(ix, 0xBu)) {
@@ -8548,7 +8548,7 @@ signed int sub_14250(type_event_0x6E8E *a1x)    //1f5250
     if (!sub_15E60(a1x))
         return 0;
     v1x = 0;
-    for (ix = x_D41A0_BYTEARRAY_4_struct.dword_38519; ix > x_DWORD_EA3E4[0]; ix = ix->next_0) {
+    for (ix = x_D41A0_BYTEARRAY_4_struct.entity_head; ix > x_DWORD_EA3E4[0]; ix = ix->next_0) {
         if (ix->id_0x1A_26 != a1x->id_0x1A_26 && ix->model_0x40_64 == 3) {
             v3x = x_DWORD_EA3E4[ix->id_0x1A_26];
             //v8 = v3x->dword_0xA4_164;
@@ -8848,7 +8848,7 @@ type_event_0x6E8E *sub_14B10(type_event_0x6E8E *a1x, unsigned __int8 a2)        
             return resultx;
     } else if (a2 > 3u) {
         if (a2 == 0xff) {
-            for (ix = x_D41A0_BYTEARRAY_4_struct.dword_38519; ix > x_DWORD_EA3E4[0];
+            for (ix = x_D41A0_BYTEARRAY_4_struct.entity_head; ix > x_DWORD_EA3E4[0];
                  ix = ix->next_0) {
                 if (ix->id_0x1A_26 != a1x->id_0x1A_26) {
                     v5 = sub_584D0_SQdistX_SQdistY(&a1x->axis_0x4C_76, &ix->axis_0x4C_76);
@@ -8861,7 +8861,7 @@ type_event_0x6E8E *sub_14B10(type_event_0x6E8E *a1x, unsigned __int8 a2)        
         }
         return resultx;
     }
-    for (jx = x_D41A0_BYTEARRAY_4_struct.dword_38519; jx > x_DWORD_EA3E4[0]; jx = jx->next_0) {
+    for (jx = x_D41A0_BYTEARRAY_4_struct.entity_head; jx > x_DWORD_EA3E4[0]; jx = jx->next_0) {
         if (jx->id_0x1A_26 != a1x->id_0x1A_26 && jx->model_0x40_64 == a2) {
             v7 = sub_584D0_SQdistX_SQdistY(&a1x->axis_0x4C_76, &jx->axis_0x4C_76);
             if (v7 < v2) {
@@ -8887,7 +8887,7 @@ type_event_0x6E8E *sub_14BD0(type_event_0x6E8E *a1x, type_event_0x6E8E *a2x)    
 
     v2 = -1;
     resultx = 0;
-    v4x = x_D41A0_BYTEARRAY_4_struct.dword_38519;
+    v4x = x_D41A0_BYTEARRAY_4_struct.entity_head;
     if (v4x <= x_DWORD_EA3E4[0])
         return 0;
     do {
@@ -9754,7 +9754,7 @@ char sub_15EE0()                //1f6ee0
 {
     type_event_0x6E8E *v0x;     // eax
 
-    v0x = x_D41A0_BYTEARRAY_4_struct.dword_38519;
+    v0x = x_D41A0_BYTEARRAY_4_struct.entity_head;
     if (v0x <= x_DWORD_EA3E4[0])
         return 1;
     do {
@@ -9830,7 +9830,7 @@ signed int sub_15FC0(type_event_0x6E8E *a1x)    //1f6fc0
         v12x = sub_146C0(a1x, 4u);
         if (!v12x)
             return 0;
-        for (ix = x_D41A0_BYTEARRAY_4_struct.dword_38519; ix > x_DWORD_EA3E4[0]; ix = ix->next_0) {
+        for (ix = x_D41A0_BYTEARRAY_4_struct.entity_head; ix > x_DWORD_EA3E4[0]; ix = ix->next_0) {
             if (ix->id_0x1A_26 != a1x->id_0x1A_26) {
                 v5 = ix->model_0x40_64;
                 if (!v5 || v5 == 1) {
@@ -9952,7 +9952,7 @@ signed int sub_161A0(type_event_0x6E8E *a1x)    //1f71a0
             a1x->word_0x20_32 &= 0x7ff;
         }
         v6x = 0;
-        for (ix = x_D41A0_BYTEARRAY_4_struct.dword_38519; ix > x_DWORD_EA3E4[0]; ix = ix->next_0) {
+        for (ix = x_D41A0_BYTEARRAY_4_struct.entity_head; ix > x_DWORD_EA3E4[0]; ix = ix->next_0) {
             if (ix->id_0x1A_26 != a1x->id_0x1A_26) {
                 v8 = ix->model_0x40_64;
                 if (!v8 || v8 == 1) {
@@ -10612,7 +10612,7 @@ type_event_0x6E8E *sub_16FC0(type_event_0x6E8E *a1x, type_event_0x6E8E *a2x)    
 
     v2 = -1;
     v3x = 0;
-    v4x = x_D41A0_BYTEARRAY_4_struct.dword_38519;
+    v4x = x_D41A0_BYTEARRAY_4_struct.entity_head;
     if (v4x <= x_DWORD_EA3E4[0])
         return 0;
     do {
@@ -13738,7 +13738,7 @@ void sub_1BF90(type_event_0x6E8E *a1x, char a2) //1fcf90
                     v11 = a1x->dword_0xA0_160x->word_160_0x1c_28;
                     v23 = -1;
                     v24x = 0;
-                    v12x = x_D41A0_BYTEARRAY_4_struct.dword_38519;
+                    v12x = x_D41A0_BYTEARRAY_4_struct.entity_head;
                     v27 = v11 * v11;
                     while (v12x > x_DWORD_EA3E4[0]) {
                         v13 = (signed __int16)(v12x->axis_0x4C_76.x - a1x->axis_0x4C_76.x);
@@ -14808,7 +14808,7 @@ void sub_1DBF0(type_event_0x6E8E *a1x, unsigned __int16 a2)     //1febf0
                 //result = a1x->dword_0xA0_160x->word_160_0x1c_28 * a1x->dword_0xA0_160x->word_160_0x1c_28;
                 v5x = 0;
                 v12 = -1;
-                v6x = x_D41A0_BYTEARRAY_4_struct.dword_38519;
+                v6x = x_D41A0_BYTEARRAY_4_struct.entity_head;
                 v11 =
                     a1x->dword_0xA0_160x->word_160_0x1c_28 * a1x->dword_0xA0_160x->word_160_0x1c_28;
                 while (v6x > x_DWORD_EA3E4[0]) {
@@ -16164,7 +16164,7 @@ void sub_1FAA0(type_event_0x6E8E *a1x)  //200aa0
             if (!(a1x->byte_0x3E_62 % v9)) {
                 //jx = *(signed __int16 *)(v8 + 28) * *(signed __int16 *)(v8 + 28);
                 v32 = -1;
-                v10x = x_D41A0_BYTEARRAY_4_struct.dword_38519;
+                v10x = x_D41A0_BYTEARRAY_4_struct.entity_head;
                 v11x = 0;
                 v31 =
                     a1x->dword_0xA0_160x->word_160_0x1c_28 * a1x->dword_0xA0_160x->word_160_0x1c_28;
@@ -16481,7 +16481,7 @@ void sub_203D0(type_event_0x6E8E *a1x)  //2013d0
         if (!(a1x->byte_0x3E_62 % a1x->dword_0xA0_160x->word_160_0x1a_26)) {
             v8 = -1;
             v9x = 0;
-            for (jx = x_D41A0_BYTEARRAY_4_struct.dword_38519; jx > x_DWORD_EA3E4[0];
+            for (jx = x_D41A0_BYTEARRAY_4_struct.entity_head; jx > x_DWORD_EA3E4[0];
                  jx = jx->next_0) {
                 if (jx->model_0x40_64 == 2 && jx->id_0x1A_26 != a1x->id_0x1A_26) {
                     v11 = (signed __int16)(jx->axis_0x4C_76.x - a1x->axis_0x4C_76.x);
@@ -16517,7 +16517,7 @@ void sub_203D0(type_event_0x6E8E *a1x)  //2013d0
                     v15 = a1x->dword_0xA0_160x->word_160_0x1c_28;
                     v16x = 0;
                     v44 = -1;
-                    v17x = x_D41A0_BYTEARRAY_4_struct.dword_38519;
+                    v17x = x_D41A0_BYTEARRAY_4_struct.entity_head;
                     v42 = v15 * v15;
                     while (v17x > x_DWORD_EA3E4[0]) {
                         if (v17x->id_0x1A_26 != a1x->id_0x1A_26) {
@@ -18246,7 +18246,7 @@ void sub_22760(type_event_0x6E8E *a1x)  //203760
             }
         }
         if (!v9) {
-            for (jx = x_D41A0_BYTEARRAY_4_struct.dword_38519; !v9 && jx > x_DWORD_EA3E4[0];
+            for (jx = x_D41A0_BYTEARRAY_4_struct.entity_head; !v9 && jx > x_DWORD_EA3E4[0];
                  jx = jx->next_0) {
                 if (jx->model_0x40_64 == 2) {
                     v8z = abs((signed __int16)(jx->axis_0x4C_76.x - v21));
@@ -18259,7 +18259,7 @@ void sub_22760(type_event_0x6E8E *a1x)  //203760
             }
         }
         if (!v9) {
-            for (kx = x_D41A0_BYTEARRAY_4_struct.dword_38519; !v9 && kx > x_DWORD_EA3E4[0];
+            for (kx = x_D41A0_BYTEARRAY_4_struct.entity_head; !v9 && kx > x_DWORD_EA3E4[0];
                  kx = kx->next_0) {
                 if (kx->model_0x40_64 == 67) {
                     v8z = abs((signed __int16)(kx->axis_0x4C_76.x - v21));
@@ -19116,7 +19116,7 @@ void sub_23C40(type_event_0x6E8E *a1x)  //204c40
                         a1x->dword_0xA0_160x->word_160_0x1c_28;
                     v16 = -1;
                     v18x = 0;
-                    v10x = x_D41A0_BYTEARRAY_4_struct.dword_38519;
+                    v10x = x_D41A0_BYTEARRAY_4_struct.entity_head;
                     v17 = v9;
                     while (v10x > x_DWORD_EA3E4[0]) {
                         if (v10x->id_0x1A_26 != a1x->id_0x1A_26) {
@@ -19901,7 +19901,7 @@ void sub_24E20(type_event_0x6E8E *a1x)  //205e20
                         result = v3 * v3;
                         v13 = -1;
                         v4x = 0;
-                        v5x = x_D41A0_BYTEARRAY_4_struct.dword_38519;
+                        v5x = x_D41A0_BYTEARRAY_4_struct.entity_head;
                         v12 = result;
                         while (v5x > x_DWORD_EA3E4[0]) {
                             v6 = (signed __int16)(v5x->axis_0x4C_76.x - a1x->axis_0x4C_76.x);
@@ -20737,7 +20737,7 @@ char sub_26070(type_event_0x6E8E *a1x)  //207070
             v1 = v3 * v3;
             v4x = 0;
             v13 = -1;
-            v5x = x_D41A0_BYTEARRAY_4_struct.dword_38519;
+            v5x = x_D41A0_BYTEARRAY_4_struct.entity_head;
             v12 = v1;
             while (v5x > x_DWORD_EA3E4[0]) {
                 v6 = (signed __int16)(v5x->axis_0x4C_76.x - a1x->axis_0x4C_76.x);
@@ -22336,7 +22336,7 @@ type_event_0x6E8E *sub_282D0(type_event_0x6E8E *a1x)    //2092d0
 
     v1 = -1;
     v2x = 0;
-    for (ix = x_D41A0_BYTEARRAY_4_struct.dword_38519; ix > x_DWORD_EA3E4[0]; ix = ix->next_0) {
+    for (ix = x_D41A0_BYTEARRAY_4_struct.entity_head; ix > x_DWORD_EA3E4[0]; ix = ix->next_0) {
         v4 = ix->model_0x40_64;
         if (v4 <= 1u) {
             v5x = ix->dword_0xA4_164x;
@@ -22520,7 +22520,7 @@ void sub_28690(type_event_0x6E8E *a1x)  //209690
         v1 = a1x->dword_0xA0_160x->word_160_0x1c_28;
         v11 = -1;
         v10x = 0;
-        v2x = x_D41A0_BYTEARRAY_4_struct.dword_38519;
+        v2x = x_D41A0_BYTEARRAY_4_struct.entity_head;
         v9 = v1 * v1;
         while (v2x > x_DWORD_EA3E4[0]) {
             v3 = (signed __int16)(v2x->axis_0x4C_76.x - a1x->axis_0x4C_76.x);
@@ -24072,7 +24072,7 @@ type_event_0x6E8E *sub_2A6F0(type_event_0x6E8E *a1x)    //20b6f0
     v1 = a1x->dword_0xA0_160x->word_160_0x1c_28;
     v2x = 0;
     v9 = 0x10000000;
-    v3x = x_D41A0_BYTEARRAY_4_struct.dword_38519;
+    v3x = x_D41A0_BYTEARRAY_4_struct.entity_head;
     v8 = v1 * v1;
     while (v3x > x_DWORD_EA3E4[0]) {
         v4 = sub_584D0_SQdistX_SQdistY(&a1x->axis_0x4C_76, &v3x->axis_0x4C_76);
@@ -27984,7 +27984,7 @@ void sub_311E0(type_event_0x6E8E *a1x)  //2121e0
                             v45 = 0;
                         if (v13 > v45)
                             x_BYTE_14B4E0_second_heightmap[ix] = v45;
-                        for (jx = x_D41A0_BYTEARRAY_4_struct.dword_38519; jx > x_DWORD_EA3E4[0];
+                        for (jx = x_D41A0_BYTEARRAY_4_struct.entity_head; jx > x_DWORD_EA3E4[0];
                              jx = jx->next_0) {
                             if (!jx->model_0x40_64) {
                                 v15 = abs(v28x.x - jx->axis_0x4C_76.x);
@@ -29359,7 +29359,7 @@ void sub_33710(type_event_0x6E8E *a1x)  //214710
             if (CompareAxisWithShift_10750(a1x, ix))
                 sub_11900(a1x, ix, 0, a1x->word_0x2A_42);
         }
-        for (jx = x_D41A0_BYTEARRAY_4_struct.dword_38519; jx > x_DWORD_EA3E4[0]; jx = jx->next_0) {
+        for (jx = x_D41A0_BYTEARRAY_4_struct.entity_head; jx > x_DWORD_EA3E4[0]; jx = jx->next_0) {
             if (jx->model_0x40_64 == 2 && CompareAxisWithShift_10750(a1x, jx)) {
                 v4 = a1x - D41A0_0.struct_0x6E8E;
                 jx->word_0x30_48 = 30;
@@ -32163,7 +32163,7 @@ void sub_377A0(type_event_0x6E8E *a1x)  //2187a0
 {
     type_event_0x6E8E *ix;      // ebx
 
-    for (ix = x_D41A0_BYTEARRAY_4_struct.dword_38519; ix > x_DWORD_EA3E4[0]; ix = ix->next_0) {
+    for (ix = x_D41A0_BYTEARRAY_4_struct.entity_head; ix > x_DWORD_EA3E4[0]; ix = ix->next_0) {
         if (CompareAxisWithShift_10750(a1x, ix))
             sub_5FBD0(ix);
     }
@@ -33562,7 +33562,7 @@ unsigned __int8 sub_396D0(type_event_0x6E8E *a1x)       //21a6d0
                 v22++;
                 HIBYTE(v21)++;
             }
-            for (jx = x_D41A0_BYTEARRAY_4_struct.dword_38519; jx > x_DWORD_EA3E4[0];
+            for (jx = x_D41A0_BYTEARRAY_4_struct.entity_head; jx > x_DWORD_EA3E4[0];
                  jx = jx->next_0) {
                 if (jx->model_0x40_64 == 2 && jx->struct_byte_0xc_12_15.byte[2] & 0x10
                     && jx->word_0x26_38 == a1x - D41A0_0.struct_0x6E8E) {
@@ -33970,7 +33970,7 @@ void sub_3A090(type_event_0x6E8E *a1x)  //21b909
             ix->byte_0x3D_61 = 0;
         }
     }
-    for (jx = x_D41A0_BYTEARRAY_4_struct.dword_38519; jx > x_DWORD_EA3E4[0]; jx = jx->next_0) {
+    for (jx = x_D41A0_BYTEARRAY_4_struct.entity_head; jx > x_DWORD_EA3E4[0]; jx = jx->next_0) {
         if (jx->model_0x40_64 == 2 && CompareAxisWithShift_10750(a1x, jx)) {
             v3 = x_DWORD_E9B90 + 1;
             jx->struct_byte_0xc_12_15.byte[2] |= 0x10u;
@@ -34515,7 +34515,7 @@ void sub_3A8B0(type_event_0x6E8E *a1x)  //21b8b0
             return;             // v12;
         case 4:
             if (!(a1x->byte_0x3E_62 & 0xF)) {
-                for (ix = x_D41A0_BYTEARRAY_4_struct.dword_38519; ix > x_DWORD_EA3E4[0];
+                for (ix = x_D41A0_BYTEARRAY_4_struct.entity_head; ix > x_DWORD_EA3E4[0];
                      ix = ix->next_0) {
                     //LOBYTE(v12) = ix->byte_0x40_64;
                     if (ix->model_0x40_64 <= 1u && ix != v33x) {
@@ -38863,7 +38863,7 @@ type_event_0x6E8E *NewEvent_4A050()     //22b050
         memset(x_D41A0_BYTEARRAY_4_struct.bytearray_38403x, 0, sizeof(type_event_0x6E8E *) * 29);       //type_event_0x6E8E*
         x_D41A0_BYTEARRAY_4_struct.dword_38523 = 0;
         x_D41A0_BYTEARRAY_4_struct.dword_38527 = 0;
-        x_D41A0_BYTEARRAY_4_struct.dword_38519 = 0;
+        x_D41A0_BYTEARRAY_4_struct.entity_head = 0;
         x_D41A0_BYTEARRAY_4_struct.dword_38531 = 0;
         x_D41A0_BYTEARRAY_4_struct.dword_38535 = 0;
         sub_57E50(D41A0_0.dword_0x11EA[D41A0_0.dword_0x11e6]);
@@ -48492,7 +48492,7 @@ void GameEvents_51BB0()         //232bb0
                 sub_52D70(i, (char *)".. CHEAT: more mana");
                 break;
             case 3:
-                for (type_event_0x6E8E * evLoop = x_D41A0_BYTEARRAY_4_struct.dword_38519;
+                for (type_event_0x6E8E * evLoop = x_D41A0_BYTEARRAY_4_struct.entity_head;
                      evLoop > x_DWORD_EA3E4[0]; evLoop = evLoop->next_0) {
                     if (evLoop->id_0x1A_26 != actEvent->id_0x1A_26) {
                         if (!evLoop->model_0x40_64 || evLoop->model_0x40_64 == 1)
@@ -48502,7 +48502,7 @@ void GameEvents_51BB0()         //232bb0
                 sub_52D70(i, (char *)".. CHEAT: destroy all players");
                 break;
             case 4:
-                for (type_event_0x6E8E * evLoop = x_D41A0_BYTEARRAY_4_struct.dword_38519;
+                for (type_event_0x6E8E * evLoop = x_D41A0_BYTEARRAY_4_struct.entity_head;
                      evLoop > x_DWORD_EA3E4[0]; evLoop = evLoop->next_0) {
                     if (evLoop->id_0x1A_26 != actEvent->id_0x1A_26 && evLoop->model_0x40_64 == 2)
                         evLoop->life_0x8 = -1;
@@ -48510,7 +48510,7 @@ void GameEvents_51BB0()         //232bb0
                 sub_52D70(i, (char *)".. CHEAT: destroy all castles");
                 break;
             case 5:
-                for (type_event_0x6E8E * evLoop = x_D41A0_BYTEARRAY_4_struct.dword_38519;
+                for (type_event_0x6E8E * evLoop = x_D41A0_BYTEARRAY_4_struct.entity_head;
                      evLoop > x_DWORD_EA3E4[0]; evLoop = evLoop->next_0) {
                     if (evLoop->id_0x1A_26 != actEvent->id_0x1A_26 && evLoop->model_0x40_64 == 3)
                         evLoop->life_0x8 = -1;
@@ -50406,7 +50406,7 @@ bool LoadLevelSMAP_558E0(uint8_t savefileindex) //2368e0
     Logger->debug("InGameLoad-begin\n");
 
     //fix
-    x_D41A0_BYTEARRAY_4_struct.dword_38519 = x_DWORD_EA3E4[1];
+    x_D41A0_BYTEARRAY_4_struct.entity_head = x_DWORD_EA3E4[1];
     //fix
 
     // FIXME: cannot set this here.
@@ -51389,7 +51389,7 @@ void ClearSettings_567C0()      //2377c0 // clean level
     memset((void *)(&x_D41A0_BYTEARRAY_4_struct.str_index_242ar), 0, 14);
     memset((void *)(x_D41A0_BYTEARRAY_4_struct.bytearray_38403x), 0,
            sizeof(type_event_0x6E8E *) * 29);
-    memset((void *)(&x_D41A0_BYTEARRAY_4_struct.dword_38519), 0, sizeof(type_event_0x6E8E *));
+    memset((void *)(&x_D41A0_BYTEARRAY_4_struct.entity_head), 0, sizeof(type_event_0x6E8E *));
     memset((void *)(&x_D41A0_BYTEARRAY_4_struct.dword_38523), 0, sizeof(type_event_0x6E8E *));
     memset((void *)(&x_D41A0_BYTEARRAY_4_struct.dword_38527), 0, sizeof(type_event_0x6E8E *));
     memset((void *)(&x_D41A0_BYTEARRAY_4_struct.dword_38531), 0, sizeof(type_event_0x6E8E *));
@@ -52085,7 +52085,7 @@ void UpdateEntities_57730()     //238730
     v24x = 0;
     x_D41A0_BYTEARRAY_4_struct.dword_38527 = 0;
     v23x = 0;
-    x_D41A0_BYTEARRAY_4_struct.dword_38519 = 0;
+    x_D41A0_BYTEARRAY_4_struct.entity_head = 0;
     x_D41A0_BYTEARRAY_4_struct.dword_38531 = 0;
     v3x = 0;
     x_D41A0_BYTEARRAY_4_struct.dword_38535 = 0;
@@ -52098,7 +52098,7 @@ void UpdateEntities_57730()     //238730
                     if (v3x)
                         v3x->next_0 = jx;
                     else
-                        x_D41A0_BYTEARRAY_4_struct.dword_38519 = jx;
+                        x_D41A0_BYTEARRAY_4_struct.entity_head = jx;
                     v3x = jx;
                     jx->next_0 = x_DWORD_EA3E4[0];
                     continue;
@@ -52656,7 +52656,7 @@ void sub_585D0()                //2395d0
 
     //v0 = *(uint16_t*)&(unk_D7BD6[0x8d0]);  8C4 +0xc
     v0 = str_D7BD6[66].word_160_0xc_12;
-    for (ix = x_D41A0_BYTEARRAY_4_struct.dword_38519; ix > x_DWORD_EA3E4[0]; ix = ix->next_0) {
+    for (ix = x_D41A0_BYTEARRAY_4_struct.entity_head; ix > x_DWORD_EA3E4[0]; ix = ix->next_0) {
         if (!ix->model_0x40_64) {
             v2 = getTerrainAlt_10C40(&ix->axis_0x4C_76);
             if (ix->axis_0x4C_76.z < v2 + v0)
@@ -53437,7 +53437,7 @@ int sub_59C80(type_event_0x6E8E *a1x)   //23ac80
         a1x->axis_0x4C_76.z = getTerrainAlt_10C40(&a1x->axis_0x4C_76);
         //v2 = (int)x_D41A0_BYTEARRAY_4;
         //*(x_WORD *)(a1 + 80) = result;
-        for (ix = x_D41A0_BYTEARRAY_4_struct.dword_38519; ix > x_DWORD_EA3E4[0]; ix = ix->next_0) {
+        for (ix = x_D41A0_BYTEARRAY_4_struct.entity_head; ix > x_DWORD_EA3E4[0]; ix = ix->next_0) {
             if (!ix->model_0x40_64 && ix->life_0x8 >= 0) {
                 //result = sub_106C0(i, a1);
                 if (sub_106C0(ix, a1x)) {
@@ -56023,7 +56023,7 @@ void sub_5C950(type_str_0x2BDE *a1x, type_event_0x6E8E *a2x)    //23d950
     //v30 = v2x->dword_0xA4_164x;
     v2x->mana_0x90_144 = v29;
     v2x->dword_0xA4_164x->byte_0x150_336 = v29;
-    for (kx = x_D41A0_BYTEARRAY_4_struct.dword_38519; kx > x_DWORD_EA3E4[0]; kx = kx->next_0) {
+    for (kx = x_D41A0_BYTEARRAY_4_struct.entity_head; kx > x_DWORD_EA3E4[0]; kx = kx->next_0) {
         if (kx->id_0x1A_26 != v2x->id_0x1A_26) {
             v32 = kx->model_0x40_64;
             if (!v32 || v32 == 1)
@@ -58991,7 +58991,7 @@ char sub_61620(type_event_0x6E8E *a1x, type_event_0x6E8E *a2x)  //242620
     v2x = 0x10000;
     v3x = 0;
     v7 = 0;
-    for (ix = x_D41A0_BYTEARRAY_4_struct.dword_38519; ix > x_DWORD_EA3E4[0]; ix = ix->next_0) {
+    for (ix = x_D41A0_BYTEARRAY_4_struct.entity_head; ix > x_DWORD_EA3E4[0]; ix = ix->next_0) {
         if (!ix->model_0x40_64 && ix != a1x) {
             v5x = sub_61810(a1x, ix);
             if (v5x) {
@@ -63594,7 +63594,7 @@ signed int sub_67CB0(type_event_0x6E8E *a1x)    //248cb0
         v57 = -1;
         v43x = x_DWORD_EA3E4[a1x->id_0x1A_26];
         v8x = 0;
-        for (ix = x_D41A0_BYTEARRAY_4_struct.dword_38519; ix > x_DWORD_EA3E4[0]; ix = ix->next_0) {
+        for (ix = x_D41A0_BYTEARRAY_4_struct.entity_head; ix > x_DWORD_EA3E4[0]; ix = ix->next_0) {
             if (ix->id_0x1A_26 != a1x->id_0x1A_26 && !(ix->struct_byte_0xc_12_15.byte[0] & 0x20)) {
                 v10 = v43x->dword_0xA0_160x->word_160_0x1c_28;
                 if (sub_583F0_distance_3d(&ix->axis_0x4C_76, &ix->axis_0x4C_76) <= v10) {
@@ -63664,7 +63664,7 @@ signed int sub_67CB0(type_event_0x6E8E *a1x)    //248cb0
         v48 = -1;
         v36x = 0;
         v44x = x_DWORD_EA3E4[a1x->id_0x1A_26];
-        for (nx = x_D41A0_BYTEARRAY_4_struct.dword_38519; nx > x_DWORD_EA3E4[0]; nx = nx->next_0) {
+        for (nx = x_D41A0_BYTEARRAY_4_struct.entity_head; nx > x_DWORD_EA3E4[0]; nx = nx->next_0) {
             if (nx->id_0x1A_26 != a1x->id_0x1A_26 && !(nx->struct_byte_0xc_12_15.byte[0] & 0x20)) {
                 v38 = v44x->dword_0xA0_160x->word_160_0x1c_28;
                 if (sub_583F0_distance_3d(&nx->axis_0x4C_76, &a1x->axis_0x4C_76) <= v38) {
@@ -63686,7 +63686,7 @@ signed int sub_67CB0(type_event_0x6E8E *a1x)    //248cb0
     case 9:
         v1 = -1;
         v54x = 0;
-        for (iix = x_D41A0_BYTEARRAY_4_struct.dword_38519; iix > x_DWORD_EA3E4[0];
+        for (iix = x_D41A0_BYTEARRAY_4_struct.entity_head; iix > x_DWORD_EA3E4[0];
              iix = iix->next_0) {
             if (iix->id_0x1A_26 != a1x->id_0x1A_26 && !(iix->struct_byte_0xc_12_15.byte[0] & 0x20)) {
                 v3 = a1x->minSpeed_0x84_132 * a1x->maxLife_0x4;
@@ -63723,7 +63723,7 @@ signed int sub_67CB0(type_event_0x6E8E *a1x)    //248cb0
         v55 = -1;
         v45x = x_DWORD_EA3E4[a1x->id_0x1A_26];
         v18x = 0;
-        for (llx = x_D41A0_BYTEARRAY_4_struct.dword_38519; llx > x_DWORD_EA3E4[0];
+        for (llx = x_D41A0_BYTEARRAY_4_struct.entity_head; llx > x_DWORD_EA3E4[0];
              llx = llx->next_0) {
             if (llx->id_0x1A_26 != a1x->id_0x1A_26 && !(llx->struct_byte_0xc_12_15.byte[0] & 0x20)) {
                 v20 = v45x->dword_0xA0_160x->word_160_0x1c_28;
@@ -64399,7 +64399,7 @@ signed int sub_68FF0(type_event_0x6E8E *a1x, char a2, char a3)  //249f00
         v4 = getTerrainAlt_10C40(&a1x->axis_0x4C_76);
         sub_580E0(&a1x->axis_0x4C_76, v4, 0, 0x2000, -128);
         if (!(a1x->byte_0x3E_62 & 3)) {
-            for (ix = x_D41A0_BYTEARRAY_4_struct.dword_38519; ix > x_DWORD_EA3E4[0];
+            for (ix = x_D41A0_BYTEARRAY_4_struct.entity_head; ix > x_DWORD_EA3E4[0];
                  ix = ix->next_0) {
                 if (!ix->model_0x40_64 && ix->life_0x8 >= 0) {
                     //v6 = ix->dword_0xA4_164;
@@ -68272,7 +68272,7 @@ type_event_0x6E8E *AddSwitch0B_04_6F150(type_event_0x6E8E *a1x) //250150
 {
     type_event_0x6E8E *resultx; // eax
 
-    resultx = x_D41A0_BYTEARRAY_4_struct.dword_38519;
+    resultx = x_D41A0_BYTEARRAY_4_struct.entity_head;
     if (resultx > x_DWORD_EA3E4[0]) {
         while (resultx->model_0x40_64
                || !D41A0_0.struct_0x3659C[resultx->dword_0xA4_164x->word_0x38_56].substr_3659C.
@@ -68602,7 +68602,7 @@ type_event_0x6E8E *InitSwitchChainZaxisAndSound_6F850(type_event_0x6E8E *event, 
     type_event_0x6E8E *ix;      // ebx
     if (event->byte_0x3E_62 & 7)
         return 0;
-    for (ix = x_D41A0_BYTEARRAY_4_struct.dword_38519;; ix = ix->next_0) {
+    for (ix = x_D41A0_BYTEARRAY_4_struct.entity_head;; ix = ix->next_0) {
         if (ix <= x_DWORD_EA3E4[0]) {
             event->axis_0x4C_76.z = getTerrainAlt_10C40(&event->axis_0x4C_76);
             return 0;
