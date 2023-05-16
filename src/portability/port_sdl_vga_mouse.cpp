@@ -1,7 +1,19 @@
 #include "../engine/engine_support.h"
 #include "port_sdl_joystick.h"
-#include "port_sdl_vga_mouse.h"
 #include "port_time.h"
+#include "config.h"
+
+#ifdef CONFIG_IMGUI
+
+#include "imgui.h"
+#include "imgui_impl_sdl2.h"
+#include "imgui_impl_opengl3.h"
+
+#define CONFIG_IMGUI_HLVL
+#include "port_imgui.h"
+#endif
+
+#include "port_sdl_vga_mouse.h"
 
 #include <cstdint>
 
@@ -134,6 +146,10 @@ void VGA_Init(Uint32 /*flags */ , int width, int height, bool maintainAspectRati
 
             SDL_WindowFlags test_fullscr = SDL_WINDOW_SHOWN;
 
+#ifdef CONFIG_IMGUI
+            m_window = port_imgui_get_window_ptr();
+            m_renderer = port_imgui_get_renderer_ptr();
+#else
             if (forceWindow)    //window
             {
                 m_window =
@@ -154,7 +170,7 @@ void VGA_Init(Uint32 /*flags */ , int width, int height, bool maintainAspectRati
             m_renderer =
                 SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED |
                                    SDL_RENDERER_TARGETTEXTURE);
-
+#endif
             SDL_SetRenderDrawColor(m_renderer, 0x00, 0x00, 0x00, 0xFF);
 
             // Now create your surface and convert the pixel format right away!
@@ -946,6 +962,9 @@ int events()
         case SDL_QUIT:
             return 0;
         }
+#ifdef CONFIG_IMGUI
+        port_imgui_process_event(&event);
+#endif
     }
 
     gamepad_poll_data(&gpe);
@@ -968,6 +987,10 @@ void VGA_Blit(Uint8 *srcBuffer)
     if (CommandLineParams.DoHideGraphics())
         return;
     events();
+
+#ifdef CONFIG_IMGUI
+    port_imgui_loop();
+#endif
 
     if (m_iOrigh != m_gamePalletisedSurface->h) {
         SDL_RenderClear(m_renderer);

@@ -33,6 +33,7 @@ endif()
 source_group("Source Files" FILES ${SOURCE_FILES})
 
 set(SOURCE_FILES_ENGINE
+    "config.h"
     "engine/ail_sound.h"
     "engine/defs.h"
     "engine/engine_support.cpp"
@@ -121,6 +122,29 @@ set(SOURCE_FILES__libs__findfirst
 )
 source_group("Source Files\\libs\\findfirst" FILES ${SOURCE_FILES__libs__findfirst})
 
+set(SOURCE_FILES__lib__imgui
+    "../lib/imgui/imconfig.h"
+    "../lib/imgui/imgui.cpp"
+    "../lib/imgui/imgui.h"
+    "../lib/imgui/imgui_demo.cpp"
+    "../lib/imgui/imgui_draw.cpp"
+    "../lib/imgui/imgui_internal.h"
+    "../lib/imgui/imgui_tables.cpp"
+    "../lib/imgui/imgui_widgets.cpp"
+    "../lib/imgui/imstb_rectpack.h"
+    "../lib/imgui/imstb_textedit.h"
+    "../lib/imgui/imstb_truetype.h"
+)
+source_group("Source Files\\lib\\imgui" FILES ${SOURCE_FILES__lib__imgui})
+
+set(SOURCE_FILES__lib__imgui__backends
+    "../lib/imgui/backends/imgui_impl_sdl2.cpp"
+    "../lib/imgui/backends/imgui_impl_sdl2.h"
+    "../lib/imgui/backends/imgui_impl_sdlrenderer.cpp"
+    "../lib/imgui/backends/imgui_impl_sdlrenderer.h"
+)
+source_group("Source Files\\lib\\imgui\\backends" FILES ${SOURCE_FILES__lib__imgui__backends})
+
 set(SOURCE_FILES__portability
     "portability/mctypes.h"
     "portability/fcaseopen.cpp"
@@ -146,6 +170,8 @@ set(SOURCE_FILES__portability
     "portability/port_show_periphery.h"
     "portability/port_time.cpp"
     "portability/port_time.h"
+    "portability/port_imgui.cpp"
+    "portability/port_imgui.h"
     "portability/xmi2mid.cpp"
     "portability/xmi2mid.h"
 )
@@ -157,6 +183,8 @@ set(ALL_FILES
     ${SOURCE_FILES__libs__inih}
     ${SOURCE_FILES__portability}
     ${SOURCE_FILES__networklib}
+    ${SOURCE_FILES__lib__imgui}
+    ${SOURCE_FILES__lib__imgui__backends}
 )
 
 ################################################################################
@@ -206,7 +234,8 @@ if (UNIX)
         "${CMAKE_SOURCE_DIR}/src/engine"
         "${CMAKE_SOURCE_DIR}/lib/inih"
         "${CMAKE_SOURCE_DIR}/lib/findfirst"
-        "${CMAKE_SOURCE_DIR}/lib/spdlog/include/spdlog"
+        "${CMAKE_SOURCE_DIR}/lib/imgui"
+        "${CMAKE_SOURCE_DIR}/lib/imgui/backends"
     )
     #target_compile_definitions(${PROJECT_NAME} PRIVATE
     #)

@@ -137,14 +137,14 @@ uint8_t alsound_sample_status(const int32_t id)
 /// \param channel_id alc[] array index
 void alsound_delete_source(const int16_t channel_id)
 {
-    Logger->info("alsound_delete_source {}", channel_id);
+    //Logger->info("alsound_delete_source {}", channel_id);
     alDeleteSources(1, &alc[channel_id].alSource);
     alsound_error_check("alsound_delete_source alDeleteSources");
     alc[channel_id].state = 0;
     alc[channel_id].size = 0;
 }
 
-/// \brief stop chunk from playing (involves deleting it's source)
+/// \brief stop chunk from playing based on chunk id
 /// \param chunk_id  identifier
 void alsound_end_sample(const int32_t chunk_id)
 {
