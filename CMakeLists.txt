@@ -12,7 +12,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Dependencies
 ################################################################################
 
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/assets/cmake/sdl2)
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/assets/sdl2-cmake-modules)
 
 if (GITHUB_CI_COMPATIBILITY_PATH)
     set(SDL2_DIR "${GITHUB_CI_COMPATIBILITY_PATH}/assets/cmake/SDL2")

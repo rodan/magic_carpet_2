@@ -133,18 +133,25 @@ uint8_t alsound_sample_status(const int32_t id)
     return 0;
 }
 
+/// \brief delete source based on play channel id
+/// \param channel_id alc[] array index
+void alsound_delete_source(const int16_t channel_id)
+{
+    Logger->info("alsound_delete_source {}", channel_id);
+    alDeleteSources(1, &alc[channel_id].alSource);
+    alsound_error_check("alsound_delete_source alDeleteSources");
+    alc[channel_id].state = 0;
+    alc[channel_id].size = 0;
+}
+
 /// \brief stop chunk from playing (involves deleting it's source)
 /// \param chunk_id  identifier
-void alsound_end_sample(const int32_t id)
+void alsound_end_sample(const int32_t chunk_id)
 {
     int16_t ret;
-    ret = alsound_find_alc_sample(id);
+    ret = alsound_find_alc_sample(chunk_id);
     if (ret > -1) {
-        //Logger->info("alsound_end_sample {}  ch {}", id, ret);
-        alc[ret].state = 0;
-        alc[ret].size = 0;
-        alDeleteSources(1, &alc[ret].alSource);
-        alsound_error_check("alsound_end_sample alDeleteSources");
+        alsound_delete_source(ret);
     }
 }
 
@@ -319,15 +326,7 @@ void alsound_update(void)
                               i - 1);
             }
         } else if (alc[i - 1].state != 0) {
-            alDeleteSources(1, &alc[i - 1].alSource);
-            ret = alGetError();
-            if (ret != AL_NO_ERROR) {
-                Logger->error("error during alDeleteSources: {} for i {}  state {}",
-                              alsound_get_error_str(ret), i - 1, alc[i - 1].state);
-            }
-            alc[i - 1].state = 0;
-            alc[i - 1].size = 0;
-            //Logger->info("freed {}", i);
+            alsound_delete_source(i - 1);
         }
     }
 
@@ -474,7 +473,7 @@ void alsound_update_source(event_t *entity, axis_3d *position)
     if ((entity->class_0x3F_63 == 5) && (entity->model_0x40_64 == 19)) {
         // fireflies
         ent = 45;
-        //Logger->info("firefly {},{},{}", position->x, position->y, position->z);
+        //Logger->info("firefly  speed {}  hp {}  hp_max {}  id {}", entity->actSpeed_0x82_130, entity->life_0x8, entity->maxLife_0x4, entity->id_0x1A_26);
     }
 
     if (ent) {

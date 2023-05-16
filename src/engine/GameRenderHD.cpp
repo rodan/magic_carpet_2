@@ -367,7 +367,8 @@ void GameRenderHD::DrawSky_40950(int16_t roll, uint8_t startLine, uint8_t drawEv
 /*
 * Draws Terrain, Sprites and Particals using a Painter's algorithm.
 */
-void GameRenderHD::DrawTerrainAndParticles_3C080(__int16 posX, __int16 posY, __int16 yaw,
+void GameRenderHD::DrawTerrainAndParticles_3C080(__int16 posX, __int16 posY, __int16 yaw, // FIXME negative posX posY
+//void GameRenderHD::DrawTerrainAndParticles_3C080(uint16_t posX, uint16_t posY, uint16_t yaw,
                                                  signed int posZ, int pitch, int16_t roll, int fov)
 {
     int v9;                     // eax

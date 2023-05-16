@@ -4,3 +4,6 @@
 [submodule "lib/findfirst"]
 	path = lib/findfirst
 	url = https://github.com/MathieuTurcotte/findfirst.git
+[submodule "assets/sdl2-cmake-modules"]
+	path = assets/sdl2-cmake-modules
+	url = https://github.com/aminosbh/sdl2-cmake-modules.git
