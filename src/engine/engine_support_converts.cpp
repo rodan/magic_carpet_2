@@ -316,7 +316,7 @@ void convert_struct_to_array_0x2BDE(type_str_0x2BDE *input, uint8_t *output)
 
 void convert_struct_to_array_0x5E_94(type_str_0x5E_94 *input, uint8_t *output)
 {
-    //int32_t dword_0x5E_94;//94 //36 lenght
+    //int32_t dword_0x5E_94;//94 //36 length
     memcpy(output + 0x0, &input->dword_0x5E_94, 4);
     //int16_t word_0x62_98;//98 //4 // index subentity
     memcpy(output + 0x4, &input->word_0x62_98, 2);
@@ -356,7 +356,7 @@ void convert_struct_to_array_0x6E8E(event_t *input, uint8_t *output)
     memcpy(output + 12, &input->struct_byte_0xc_12_15.dword, 4);
     //int32_t dword_0x10_16;//16 // index of array
     memcpy(output + 16, &input->dword_0x10_16, 4);
-    //uint16_t word_0x14_20;//20 //random seed adress
+    //uint16_t word_0x14_20;//20 //random seed address
     memcpy(output + 20, &input->rand_0x14_20, 2);
     //uint16_t word_0x16_22;//22
     memcpy(output + 22, &input->oldMapEntity_0x16_22, 2);
@@ -418,7 +418,7 @@ void convert_struct_to_array_0x6E8E(event_t *input, uint8_t *output)
     memcpy(output + 67, &input->byte_0x43_67, 1);
     //int8_t byte_0x44_68;//68      
     memcpy(output + 68, &input->byte_0x44_68, 1);
-    //uint8_t byte_0x45_69;//69 // index of structure with lenght 14//STATE
+    //uint8_t byte_0x45_69;//69 // index of structure with length 14//STATE
     memcpy(output + 69, &input->state_0x45_69, 1);
     //uint8_t byte_0x46_70;//70 // index of bitmap
     memcpy(output + 70, &input->byte_0x46_70, 1);
@@ -462,12 +462,12 @@ void convert_struct_to_array_0x6E8E(event_t *input, uint8_t *output)
     convert_struct_to_array_axis_3d(&input->word_0x9A_154x, output + 0x9a);
     //type_str_160* dword_0xA0_160x;//160 //special settings
     memcpy(output + 160, &input->dword_0xA0_160x, 4);
-    //type_str_164* dword_0xA4_164x;//100 // adress of xx
+    //type_str_164* dword_0xA4_164x;//100 // address of xx
     memcpy(output + 164, &input->dword_0xA4_164x, 4);
 }
 
 void convert_struct_to_array_0x6E3E(type_str_0x6E3E *input, uint8_t *output)
-{                               //10 lenght
+{                               //10 length
     //int8_t str_0x6E3E_byte0;//0x6E3E-28222//D41A0_BYTESTR_0.array_0x6E3E[xx].str_0x6E3E_byte0
     memcpy(output + 0, &input->str_0x6E3E_byte0, 1);
     //int8_t str_0x6E3E_byte1;//0x6E3F-28223
@@ -487,7 +487,7 @@ void convert_struct_to_array_0x6E3E(type_str_0x6E3E *input, uint8_t *output)
 }
 
 void convert_struct_to_array_0x30311(type_entity_0x30311 *input, uint8_t *output)
-{                               //lenght 20
+{                               //length 20
     //uint16_t str_0x30311_type;//type_str_0x30311//type_str_0x30325//1091
     memcpy(output + 0, &input->type_0x30311, 2);
     //int16_t str_0x30311_subtype;//type_str_0x30313//type_str_0x30327//1091
@@ -509,7 +509,7 @@ void convert_struct_to_array_0x30311(type_entity_0x30311 *input, uint8_t *output
 }
 
 void convert_struct_to_array_0x360D2(type_str_0x360D2 *input, uint8_t *output)
-{                               //lenght 110 //word_0x360D2
+{                               //length 110 //word_0x360D2
     //uint8_t stuba[3];//0
     memset(output + 0, 0, 2);
     //int16_t word_0x360D5;//3
@@ -549,7 +549,7 @@ void convert_struct_to_array_0x36442(type_str_0x36442 *input, uint8_t *output)
 }
 
 void convert_struct_to_array_0x3647Ac(type_str_0x3647Ac *input, uint8_t *output)
-{                               //lenght 8
+{                               //length 8
     //int8_t str_0x3647A_byte_0;//array_0x3647a
     memcpy(output + 0, &input->index_0x3647A_0, 1);
     //int8_t str_0x3647A_byte_1;//array_0x3647b
@@ -561,7 +561,7 @@ void convert_struct_to_array_0x3647Ac(type_str_0x3647Ac *input, uint8_t *output)
 }
 
 void convert_struct_to_array_2FECE(type_str_2FECE *input, uint8_t *output)
-{                               //lenght 6604
+{                               //length 6604
     //type_str_0x6E8E* dword_2FECE;//D41A0_BYTESTR_0.str_2FECE.dword_2FECE
     memcpy(output + 0, &input->word_2FECE, 2);
     memcpy(output + 2, &input->word_2FED0, 2);
@@ -630,7 +630,7 @@ void convert_struct_to_array_2FECE(type_str_2FECE *input, uint8_t *output)
         convert_struct_to_array_0x30311(&input->entity_0x30311[i], output + 1091 + i * 20);
     //uint8_t next_0x360D1;//6203
     memcpy(output + 6203, &input->next_0x360D1, 1);
-    //type_str_0x360D2 next_0x360D2[8];//lenght 110//25092
+    //type_str_0x360D2 next_0x360D2[8];//length 110//25092
     for (int i = 0; i < 0x8; i++)
         convert_struct_to_array_0x360D2(&input->next_0x360D2[i], output + 1091 + i * 110);
     //type_str_0x36442 str_0x36442[8];//25972
@@ -642,10 +642,10 @@ void convert_struct_to_array_2FECE(type_str_2FECE *input, uint8_t *output)
 }                               //compress level 
 
 void convert_struct_to_array_0x364D2(type_str_0x364D2 *input, uint8_t *output)
-{                               //lenght 108
-    //uint32_t dword_0x364D2;//lenght 108
+{                               //length 108
+    //uint32_t dword_0x364D2;//length 108
     memcpy(output + 0, &input->dword_0x364D2, 4);
-    //uint32_t dword_0x364D6[26];// lenght 0x68=104 end 0x3653e
+    //uint32_t dword_0x364D6[26];// length 0x68=104 end 0x3653e
     for (int i = 0; i < 0xb; i++)
         memcpy(output + 0 + i * 4, &input->dword_0x364D6[i], 4);
 }
@@ -665,7 +665,7 @@ void convert_struct_to_array_3654C(type_str_3654C *input, uint8_t *output)
 }
 
 void convert_struct_to_array_0x3664C(type_str_0x3664C *input, uint8_t *output)
-{                               //lenght 39
+{                               //length 39
     //int8_t byte_0;
     memcpy(output + 0, &input->byte_0, 1);
     //int8_t byte_1;
@@ -760,7 +760,7 @@ void convert_struct_to_array_D41A0_0(type_D41A0_BYTESTR_0 *input, uint8_t *outpu
     //type_str_0x2BDE array_0x2BDE[8]; //0x84c*0x8 ??
     for (int i = 0; i < 0x8; i++)
         convert_struct_to_array_0x2BDE(&input->array_0x2BDE[i], output + 0x2bde + i * 0x84C);
-    //type_str_0x6E3E array_0x6E3E[8];//28222       lenght 0xa size 0x8// game events
+    //type_str_0x6E3E array_0x6E3E[8];//28222       length 0xa size 0x8// game events
     for (int i = 0; i < 0x8; i++)
         convert_struct_to_array_0x6E3E(&input->array_0x6E3E[i], output + 0x6e3e + i * 10);
     //type_str_0x6E8E struct_0x6E8E[1000];//28302 a8*3e8 
@@ -768,7 +768,7 @@ void convert_struct_to_array_D41A0_0(type_D41A0_BYTESTR_0 *input, uint8_t *outpu
         convert_struct_to_array_0x6E8E(&input->struct_0x6E8E[i], output + 0x6e8e + i * 0xa8);
     //type_str_2FECE str_2FECE;// a1 = &x_D41A0_BYTEARRAY_0[0x2FECE/*196302*/];//fix - size 0x6604u//compress level 
     convert_struct_to_array_2FECE(&input->terrain_2FECE, output + 0x2FECE);
-    //type_str_0x364D2 str_0x364D2;//lenght 108
+    //type_str_0x364D2 str_0x364D2;//length 108
     convert_struct_to_array_0x364D2(&input->str_0x364D2, output + 0x364D2);
     //int16_t word_0x3653E;//
     memcpy(output + 0x3653E, &input->word_0x3653E, 2);
@@ -793,7 +793,7 @@ void convert_struct_to_array_D41A0_0(type_D41A0_BYTESTR_0 *input, uint8_t *outpu
     //type_str_0x3647Ac array_0x365F4[11];//8x11    //set 0x58 // end 0x3664c
     for (int i = 0; i < 0x8; i++)
         convert_struct_to_array_0x3647Ac(&input->StageVars2_0x365F4[i], output + 0x365F4 + i * 8);
-    //type_str_0x3664C str_0x3664C[50];// lenght 0x79e//39x50 (end-0x36dea)
+    //type_str_0x3664C str_0x3664C[50];// length 0x79e//39x50 (end-0x36dea)
     for (int i = 0; i < 0x32; i++)
         convert_struct_to_array_0x3664C(&input->str_0x3664C[i], output + 0x3664C + i * 39);
     //int8_t byte_0x36DEA_fly_asistant;

@@ -63,7 +63,7 @@ int sub_B5D68(uint16_t a1, uint16_t a2);
 
 typedef struct {
     int index;
-    uint32_t adress;
+    uint32_t address;
 } type_compstr;
 
 extern type_compstr compstr[100];

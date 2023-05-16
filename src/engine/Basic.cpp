@@ -6,7 +6,7 @@ std::string gameDataPath;
 std::string cdDataPath;
 std::string bigGraphicsPath;
 
-//lenght 18
+//length 18
 //type_17ECA0 str_17ECA0[256]; // weak
 //uint8_t x_DWORD_17ECA0[4608]; // weak
 
@@ -76,7 +76,7 @@ uint32_t screenWidth_18062C;    // weak
 
 int iScreenWidth_DE560 = 0;     // weak //screen X // DE560
 
-//std::array<uint8_t*, 256> x_DWORD_DDF50_texture_adresses; /*= { 0,32 }*/ // weak
+//std::array<uint8_t*, 256> x_DWORD_DDF50_texture_addresses; /*= { 0,32 }*/ // weak
 
 //inputs
 __int16 x_WORD_180744_mouse_right_button;       // weak//351744
@@ -1108,7 +1108,7 @@ int sub_7FCB0_draw_text_with_border( /*int a1, */ char *textString, int32_t a3, 
             }
         }
     } else {                    //ramecek s textem
-        v104 = a4 - a3;         //adress 260cf1
+        v104 = a4 - a3;         //address 260cf1
         v88 = a8;
         //v92 = (int)xy_DWORD_17DED4_spritestr;
         v103 = xy_DWORD_17DED4_spritestr[a8].width_4;   //10
@@ -1120,7 +1120,7 @@ int sub_7FCB0_draw_text_with_border( /*int a1, */ char *textString, int32_t a3, 
             sub_7C120_draw_bitmap_640(j + a3, a5, xy_DWORD_17DED4_spritestr[a8]);       //25d120
 
 //HIWORD(v10) = HIWORD(xy_DWORD_17DED4_spritestr);
-        v10 = xy_DWORD_17DED4_spritestr[a8].height_5;   //adress 260da7
+        v10 = xy_DWORD_17DED4_spritestr[a8].height_5;   //address 260da7
         v11 = v10 + a5;
         v98 += v10;
         v12 = getPaletteIndex_5BE80(x_DWORD_17DE38str.x_DWORD_17DE38x, 0, 0, 0 /*v86 */ );
@@ -1138,7 +1138,7 @@ int sub_7FCB0_draw_text_with_border( /*int a1, */ char *textString, int32_t a3, 
         v98 += v15;
     }
     v99 = a3;
-    if (!a6)                    //adress 261023
+    if (!a6)                    //address 261023
         v98 = v8 + 12;
     v96 = 0;
     v101 = 0;
@@ -1157,10 +1157,10 @@ int sub_7FCB0_draw_text_with_border( /*int a1, */ char *textString, int32_t a3, 
                 goto LABEL_38;
         }
  LABEL_39:
-        if (v22)                //space in text adress 26107c
+        if (v22)                //space in text address 26107c
         {
             if (v101) {
-                if (a6 && a6 != 4 && a6 != 5)   //adress 261091
+                if (a6 && a6 != 4 && a6 != 5)   //address 261091
                 {
                     DrawHelpText_6FC50(1 /*v86 */ );
                     v25 = sub_6FC10_letter_width();
@@ -1169,7 +1169,7 @@ int sub_7FCB0_draw_text_with_border( /*int a1, */ char *textString, int32_t a3, 
                 }
                 v89 = k;
                 v26 = v99;
-                if (v99 + v25 * (k - v96) <= a4 - 3 * v25)      //adress 2610c2
+                if (v99 + v25 * (k - v96) <= a4 - 3 * v25)      //address 2610c2
                 {
                     v86b = &v87[strlen(v87)];
                     qmemcpy(v86b, &textString[v101 + 1], v89 - v101);
@@ -1251,7 +1251,7 @@ int sub_7FCB0_draw_text_with_border( /*int a1, */ char *textString, int32_t a3, 
                             a1 += v30;
                         }
                         //"click here" 12a 1e2 138 00
-                        sub_7FAE0_draw_text(v87, v99, a4, v98, 0 /*v86 */ );    //adress 261197 (80197)
+                        sub_7FAE0_draw_text(v87, v99, a4, v98, 0 /*v86 */ );    //address 261197 (80197)
                     }
                     if (a6 && a6 != 4 && a6 != 5) {
                         LOWORD(v44) = sub_6FC30_get34_height();
@@ -1275,7 +1275,7 @@ int sub_7FCB0_draw_text_with_border( /*int a1, */ char *textString, int32_t a3, 
         if (!textString[k])
             break;
     }
-    if (!v95)                   //adress 2614e2 (804e2) discoverwhich
+    if (!v95)                   //address 2614e2 (804e2) discoverwhich
     {
         if (a6 && a6 != 4) {
             DrawHelpText_6FC50(1 /*v86 */ );

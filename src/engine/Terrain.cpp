@@ -22,7 +22,7 @@ int getcompstrindex(uint32_t address)
 {
     int findindex = -1;
     for (int i = 0; i < countcompindexes; i++) {
-        if (compstr[i].adress == address) {
+        if (compstr[i].address == address) {
             findindex = i;
             break;
         }
@@ -30,23 +30,23 @@ int getcompstrindex(uint32_t address)
     return findindex;
 };
 
-int getcompindex(uint32_t adress)
+int getcompindex(uint32_t address)
 {
 
-    int findindex = getcompstrindex(adress);
+    int findindex = getcompstrindex(address);
 
     if (findindex > -1) {
         compstr[findindex].index++;
         return compstr[findindex].index;
     } else {
-        compstr[countcompindexes].adress = adress;
+        compstr[countcompindexes].address = address;
         countcompindexes++;
         return 0;
     }
 };
 
 type_compstr lastcompstr;
-void add_compare(uint32_t adress, bool debugafterload, int stopstep, bool skip, int exitindex,
+void add_compare(uint32_t address, bool debugafterload, int stopstep, bool skip, int exitindex,
                  int skip2)
 {
     uint8_t origbyte20 = 0;
@@ -54,20 +54,20 @@ void add_compare(uint32_t adress, bool debugafterload, int stopstep, bool skip, 
     int comp20;
 
     char buffer1[500];
-    sprintf(buffer1, "%08X-002DC4E0", adress);
+    sprintf(buffer1, "%08X-002DC4E0", address);
     char buffer2[500];
-    sprintf(buffer2, "%08X-00356038", adress);
+    sprintf(buffer2, "%08X-00356038", address);
     char buffer3[500];
-    sprintf(buffer3, "%08X-002B3A74", adress);
+    sprintf(buffer3, "%08X-002B3A74", address);
     char buffer4[500];
-    sprintf(buffer4, "%08X-003AA0A4", adress);
+    sprintf(buffer4, "%08X-003AA0A4", address);
 
     if (debugafterload) {
-        int index = getcompindex(adress);
+        int index = getcompindex(address);
         if (index >= skip2) {
             if (index >= stopstep) {
                 if (index >= exitindex) {
-                    int i = getcompstrindex(adress);
+                    int i = getcompstrindex(address);
                     if (i > -1) {
                         compstr[i].index = 0;
                     }
@@ -124,7 +124,7 @@ void add_compare(uint32_t adress, bool debugafterload, int stopstep, bool skip, 
                 }
 
                 lastcompstr.index = index;
-                lastcompstr.adress = adress;
+                lastcompstr.address = address;
             }
         }
     }
@@ -132,7 +132,7 @@ void add_compare(uint32_t adress, bool debugafterload, int stopstep, bool skip, 
 
 //for debuging
 
-void add_compare2(uint32_t adress, uint8_t *memadress, uint32_t dosmemadress, uint32_t size,
+void add_compare2(uint32_t address, uint8_t *memaddress, uint32_t dosmemaddress, uint32_t size,
                   bool debugafterload, int stopstep, bool skip, int exitindex)
 {
     uint8_t origbyte20 = 0;
@@ -140,16 +140,16 @@ void add_compare2(uint32_t adress, uint8_t *memadress, uint32_t dosmemadress, ui
     int comp20;
 
     char buffer1[500];
-    sprintf(buffer1, "%08X-08X", adress, dosmemadress);
+    sprintf(buffer1, "%08X-08X", address, dosmemaddress);
 
     if (debugafterload) {
-        int index = getcompindex(adress);
+        int index = getcompindex(address);
         if (index >= stopstep) {
             if (index >= exitindex)
                 exit(exitindex);
             if (!skip) {
                 comp20 =
-                    compare_with_sequence(buffer1, memadress, dosmemadress, index, size, size,
+                    compare_with_sequence(buffer1, memaddress, dosmemaddress, index, size, size,
                                           &origbyte20, &remakebyte20);
             }
             if (stopstep > -1) {
@@ -157,7 +157,7 @@ void add_compare2(uint32_t adress, uint8_t *memadress, uint32_t dosmemadress, ui
             }
 
             lastcompstr.index = index;
-            lastcompstr.adress = adress;
+            lastcompstr.address = address;
         }
     }
 };
@@ -1233,7 +1233,7 @@ void sub_44580()                //225580
             }
         }
     }
-    //adress 225bbd
+    //address 225bbd
 
     //  X-X
     //  | |

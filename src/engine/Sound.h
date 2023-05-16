@@ -7,10 +7,10 @@
 #include "Basic.h"
 #include "../utilities/Wave.h"
 #include "../engine/CommandLineParser.h"
-#include "../portability/port_show_perifery.h"
+#include "../portability/port_show_periphery.h"
 
 #pragma pack (1)
-typedef struct {                //lenght 12
+typedef struct {                //length 12
     int16_t word_0;
     int16_t word_1;
     int16_t word_2;

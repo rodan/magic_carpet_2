@@ -791,7 +791,7 @@ void GameRenderOriginal::DrawTerrainAndParticles_3C080(__int16 posX, __int16 pos
                                     v248x[9] = xunk_D4350[Str_E9C38_smalltit[jx].byte42_std][5];
                                     v248x[2] = xunk_D4350[Str_E9C38_smalltit[jx].byte42_std][6];
                                     v248x[3] = xunk_D4350[Str_E9C38_smalltit[jx].byte42_std][7];
-                                    x_DWORD_DE55C_ActTexture = x_DWORD_DDF50_texture_adresses[1];
+                                    x_DWORD_DE55C_ActTexture = x_DWORD_DDF50_texture_addresses[1];
                                     x_BYTE_E126D = 5;
                                     if (Str_E9C38_smalltit[jx].word38 & 1) {
                                         DrawTriangleInProjectionSpace_B6253(&v248x[18], &v248x[0],
@@ -852,7 +852,7 @@ void GameRenderOriginal::DrawTerrainAndParticles_3C080(__int16 posX, __int16 pos
                                 v248x[2] = xunk_D4350[Str_E9C38_smalltit[jx].byte42_std][6];
                                 v248x[3] = xunk_D4350[Str_E9C38_smalltit[jx].byte42_std][7];
                                 x_DWORD_DE55C_ActTexture =
-                                    x_DWORD_DDF50_texture_adresses[Str_E9C38_smalltit[jx].byte41];
+                                    x_DWORD_DDF50_texture_addresses[Str_E9C38_smalltit[jx].byte41];
                                 if (Str_E9C38_smalltit[jx].word38 & 1) {
                                     DrawTriangleInProjectionSpace_B6253(&v248x[18], &v248x[12],
                                                                         &v248x[0]);
@@ -915,7 +915,7 @@ void GameRenderOriginal::DrawTerrainAndParticles_3C080(__int16 posX, __int16 pos
                                     v248x[9] = xunk_D4350[Str_E9C38_smalltit[v83x].byte42_std][5];
                                     v248x[2] = xunk_D4350[Str_E9C38_smalltit[v83x].byte42_std][6];
                                     v248x[3] = xunk_D4350[Str_E9C38_smalltit[v83x].byte42_std][7];
-                                    x_DWORD_DE55C_ActTexture = x_DWORD_DDF50_texture_adresses[1];
+                                    x_DWORD_DE55C_ActTexture = x_DWORD_DDF50_texture_addresses[1];
                                     v96 = Str_E9C38_smalltit[v83x].word38 & 0xff;
                                     x_BYTE_E126D = 5;
                                     if (v96 & 1) {
@@ -973,7 +973,7 @@ void GameRenderOriginal::DrawTerrainAndParticles_3C080(__int16 posX, __int16 pos
                                     v248x[2] = xunk_D4350[Str_E9C38_smalltit[v83x].byte42_std][6];
                                     v248x[3] = xunk_D4350[Str_E9C38_smalltit[v83x].byte42_std][7];
                                     x_DWORD_DE55C_ActTexture =
-                                        x_DWORD_DDF50_texture_adresses[Str_E9C38_smalltit[v83x].
+                                        x_DWORD_DDF50_texture_addresses[Str_E9C38_smalltit[v83x].
                                                                        byte41];
                                     if (Str_E9C38_smalltit[v83x].word38 & 1) {
                                         DrawTriangleInProjectionSpace_B6253(&v248x[18], &v248x[12],
@@ -1207,7 +1207,7 @@ void GameRenderOriginal::DrawTerrainAndParticles_3C080(__int16 posX, __int16 pos
                                         v248x[3] =
                                             xunk_D4350[Str_E9C38_smalltit[v134x].byte42_std][7];
                                         x_DWORD_DE55C_ActTexture =
-                                            x_DWORD_DDF50_texture_adresses[Str_E9C38_smalltit
+                                            x_DWORD_DDF50_texture_addresses[Str_E9C38_smalltit
                                                                            [v134x].byte41];
                                         x_BYTE_E126D = 5;
                                         //allert_error();
@@ -1290,7 +1290,7 @@ void GameRenderOriginal::DrawTerrainAndParticles_3C080(__int16 posX, __int16 pos
                                                 xunk_D4350[Str_E9C38_smalltit[v147x].byte42_std][7];
                                             x_BYTE_E126D = 5;
                                             x_DWORD_DE55C_ActTexture =
-                                                x_DWORD_DDF50_texture_adresses[Str_E9C38_smalltit
+                                                x_DWORD_DDF50_texture_addresses[Str_E9C38_smalltit
                                                                                [v147x].byte41];
                                             //allert_error();
                                             if (Str_E9C38_smalltit[v147x].word38 & 1) {
@@ -1377,7 +1377,7 @@ void GameRenderOriginal::DrawTerrainAndParticles_3C080(__int16 posX, __int16 pos
                                 v248x[2] = xunk_D4350[Str_E9C38_smalltit[v161x].byte42_std][6];
                                 v248x[3] = xunk_D4350[Str_E9C38_smalltit[v161x].byte42_std][7];
                                 x_DWORD_DE55C_ActTexture =
-                                    x_DWORD_DDF50_texture_adresses[Str_E9C38_smalltit[v161x].
+                                    x_DWORD_DDF50_texture_addresses[Str_E9C38_smalltit[v161x].
                                                                    byte41];
                                 if (Str_E9C38_smalltit[v161x].word38 & 1) {
                                     DrawTriangleInProjectionSpace_B6253(&v248x[18], &v248x[12],
@@ -1403,7 +1403,7 @@ void GameRenderOriginal::DrawTerrainAndParticles_3C080(__int16 posX, __int16 pos
                                 v248x[2] = xunk_D4350[Str_E9C38_smalltit[v161x].byte42_std][6];
                                 v248x[3] = xunk_D4350[Str_E9C38_smalltit[v161x].byte42_std][7];
                                 x_DWORD_DE55C_ActTexture =
-                                    x_DWORD_DDF50_texture_adresses[Str_E9C38_smalltit[v161x].
+                                    x_DWORD_DDF50_texture_addresses[Str_E9C38_smalltit[v161x].
                                                                    byte41];
                                 if (Str_E9C38_smalltit[v161x].word38 & 1) {
                                     DrawTriangleInProjectionSpace_B6253(&v248x[18], &v248x[12],
@@ -1468,7 +1468,7 @@ void GameRenderOriginal::DrawTerrainAndParticles_3C080(__int16 posX, __int16 pos
                                     v248x[2] = xunk_D4350[Str_E9C38_smalltit[v178x].byte42_std][6];
                                     v248x[3] = xunk_D4350[Str_E9C38_smalltit[v178x].byte42_std][7];
                                     x_DWORD_DE55C_ActTexture =
-                                        x_DWORD_DDF50_texture_adresses[Str_E9C38_smalltit[v178x].
+                                        x_DWORD_DDF50_texture_addresses[Str_E9C38_smalltit[v178x].
                                                                        byte41];
                                     if (Str_E9C38_smalltit[v178x].word38 & 1) {
                                         DrawTriangleInProjectionSpace_B6253(&v248x[18], &v248x[12],
@@ -1495,7 +1495,7 @@ void GameRenderOriginal::DrawTerrainAndParticles_3C080(__int16 posX, __int16 pos
                                     v248x[3] = xunk_D4350[Str_E9C38_smalltit[v178x].byte42_std][7];
                                     v194 = Str_E9C38_smalltit[v178x].word38 & 0xff;
                                     x_DWORD_DE55C_ActTexture =
-                                        x_DWORD_DDF50_texture_adresses[Str_E9C38_smalltit[v178x].
+                                        x_DWORD_DDF50_texture_addresses[Str_E9C38_smalltit[v178x].
                                                                        byte41];
                                     if (v194 & 1) {
                                         DrawTriangleInProjectionSpace_B6253(&v248x[18], &v248x[12],
@@ -1707,7 +1707,7 @@ void GameRenderOriginal::DrawTerrainAndParticles_3C080(__int16 posX, __int16 pos
         v56x++;
         v209--;
     }
-    //adress 3de7d
+    //address 3de7d
     //v217 = &x_DWORD_E9C38_smalltit[35200];//21ee85
     v217x = 800;
     v289 = 20;
@@ -1754,8 +1754,8 @@ void GameRenderOriginal::DrawTerrainAndParticles_3C080(__int16 posX, __int16 pos
                 v248x[2] = xunk_D4350[Str_E9C38_smalltit[v218x].byte42_std][6];
                 v248x[3] = xunk_D4350[Str_E9C38_smalltit[v218x].byte42_std][7];
                 x_DWORD_DE55C_ActTexture =
-                    x_DWORD_DDF50_texture_adresses[Str_E9C38_smalltit[v218x].byte41];
-                if ((Str_E9C38_smalltit[v218x].word38 & 0xff) & 1) {    //adress 21ddf0
+                    x_DWORD_DDF50_texture_addresses[Str_E9C38_smalltit[v218x].byte41];
+                if ((Str_E9C38_smalltit[v218x].word38 & 0xff) & 1) {    //address 21ddf0
                     DrawTriangleInProjectionSpace_B6253(&v248x[18], &v248x[12], &v248x[0]);
                     DrawTriangleInProjectionSpace_B6253(&v248x[0], &v248x[12], &v248x[6]);
                 } else {
@@ -1812,7 +1812,7 @@ void GameRenderOriginal::DrawTerrainAndParticles_3C080(__int16 posX, __int16 pos
                     v248x[2] = xunk_D4350[Str_E9C38_smalltit[v232x].byte42_std][6];
                     v248x[3] = xunk_D4350[Str_E9C38_smalltit[v232x].byte42_std][7];
                     x_DWORD_DE55C_ActTexture =
-                        x_DWORD_DDF50_texture_adresses[Str_E9C38_smalltit[v232x].byte41];
+                        x_DWORD_DDF50_texture_addresses[Str_E9C38_smalltit[v232x].byte41];
                     if (Str_E9C38_smalltit[v232x].word38 & 1) {
                         DrawTriangleInProjectionSpace_B6253(&v248x[18], &v248x[12], &v248x[0]);
                         DrawTriangleInProjectionSpace_B6253(&v248x[0], &v248x[12], &v248x[6]);
@@ -1821,7 +1821,7 @@ void GameRenderOriginal::DrawTerrainAndParticles_3C080(__int16 posX, __int16 pos
                         DrawTriangleInProjectionSpace_B6253(&v248x[18], &v248x[6], &v248x[0]);
                     }
                 }
-                if (Str_E9C38_smalltit[v232x].word36)   //adress 21f1b5 aex 360000 ebx 3f78a0 ecx 0 edx 414eb0
+                if (Str_E9C38_smalltit[v232x].word36)   //address 21f1b5 aex 360000 ebx 3f78a0 ecx 0 edx 414eb0
                     DrawParticles_3E360( /*v217, */ v232x);
                 v232x--;
             } while (v232x >= v231x);
@@ -3082,7 +3082,7 @@ void GameRenderOriginal::DrawParticles_3E360(int a2x)   //21f360
 
     result = Str_E9C38_smalltit[a2x].word36;
     do {
-        //adress 21f370
+        //address 21f370
 
         v3x = x_DWORD_EA3E4[result];
         str_F2C20ar.dword0x14x = v3x;
@@ -3093,7 +3093,7 @@ void GameRenderOriginal::DrawParticles_3E360(int a2x)   //21f360
             if (shadows_F2CC7) {
                 if (!Str_E9C38_smalltit[a2x].byte43
                     && !(v3x->struct_byte_0xc_12_15.word[1] & 0x808)) {
-                    //adress 21f40c
+                    //address 21f40c
                     v98 = sub_B5C60_getTerrainAlt2(v3x->axis_0x4C_76.x, v4) - str_F2C20ar.dword0x20;
                     v5 = (str_F2C20ar.dword0x0f * v96 - str_F2C20ar.dword0x17 * v97) >> 16;
                     v99 = (str_F2C20ar.dword0x17 * v96 + str_F2C20ar.dword0x0f * v97) >> 16;
@@ -4386,7 +4386,7 @@ void GameRenderOriginal::DrawSprite_41BD3(uint32 a1)
                             for (i = v159; i; i--) {
                                 v133 = v165[1];
                                 if (v133 > 0) {
-                                    //adress 2237d3
+                                    //address 2237d3
 
                                     v169x = &m_str_F0E20x[*v165];
                                     v155 = 8 * (v165[2] - v116) + &x_DWORD_E9C38_smalltit[36960];
@@ -4762,7 +4762,7 @@ void GameRenderOriginal::DrawSprite_41BD3(uint32 a1)
                             if (v159 <= 0)
                                 break;
                         }
-                        //adress 223d83
+                        //address 223d83
                         v116 = 9999999;
                         for (jy = v159; jy; jy--) {
                             v174 = v158 >> 16;
@@ -4940,7 +4940,7 @@ void GameRenderOriginal::DrawSprite_41BD3(uint32 a1)
                     switch (str_F2C20ar.dword0x01_rotIdx)       //mirroring
                     {
                     case 0:
-                        //               width                  actual line                   base adress                 add index
+                        //               width                  actual line                   base address                 add index
                         //v2 = (char*)(str_F2C20ar.dword0x08_width * (str_F2C20ar.dword0x0a_actIdx >> 16) + (int)str_F2C20ar.dword0x02_data + *(x_DWORD*)(x_DWORD_E9C38_smalltit + 36964));//sprite
                         v2x = &str_F2C20ar.dword0x02_data[str_F2C20ar.dword0x08_width * (str_F2C20ar.dword0x0a_actIdx >> 16) + *(x_DWORD *) (x_DWORD_E9C38_smalltit + 36964)];  //sprite
                         v3 = (x_DWORD *) & (x_DWORD_E9C38_smalltit[36960]);
@@ -5066,7 +5066,7 @@ void GameRenderOriginal::DrawSprite_41BD3(uint32 a1)
                     case 3:
                         v23 = (x_BYTE *) (str_F2C20ar.dword0x08_width * (str_F2C20ar.dword0x0a_actIdx >> 16) + str_F2C20ar.dword0x02_data + *(x_DWORD *) (x_DWORD_E9C38_smalltit + 36964));     //from mask
                         v24 = (x_DWORD *) (&x_DWORD_E9C38_smalltit[36960]);     //from image
-                        v25 = v122x;    //to adress
+                        v25 = v122x;    //to address
                         HIWORD(v26) = 0;
                         v27 = str_F2C20ar.dword0x09_realWidth >> 1;
                         if (!(str_F2C20ar.dword0x09_realWidth & 1)) {

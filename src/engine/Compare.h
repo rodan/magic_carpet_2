@@ -5,6 +5,6 @@
 #define F_OK 00
 #endif                          /* F_OK */
 
-int getcompindex(uint32_t adress);
+int getcompindex(uint32_t address);
 void SaveCompare(char *name, int value, int len = -1, uint8_t * sequence = nullptr);
 void CompareWith(char *name, int value, int len = -1, uint8_t * sequence = nullptr);

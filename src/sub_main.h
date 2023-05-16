@@ -205,12 +205,12 @@ extern x_WORD __SS__;*/
 //extern char IsTable[];
 
 #pragma pack (1)
-typedef struct {                //lenght 6
+typedef struct {                //length 6
     int8_t *bitmapData_0;
     int16_t bitmapIndex_4;
 } sub2x_BYTE_E7EE0x;
 
-typedef struct {                //lenght 24
+typedef struct {                //length 24
     int32_t dword_0;
     int32_t dword_4;
     int32_t dword_8;
@@ -228,7 +228,7 @@ typedef struct {
     int8_t LastSprite_11;
 } type_MainMenuAnimations_E1748;
 
-typedef struct {                //lenght 30
+typedef struct {                //length 30
     int32_t dword_0;
     int32_t dword_4;
     int16_t word_8;
@@ -253,7 +253,7 @@ extern filearray_struct x_DWORD_E9B20[4];
 extern __int16 x_WORD_E29DA_type_resolution;    // weak
 
 #pragma pack (1)
-typedef struct {                //lenght 18
+typedef struct {                //length 18
     int16_t word_0;
     int16_t word_2;
     int16_t word_4;
@@ -268,7 +268,7 @@ typedef struct {                //lenght 18
 #pragma pack (16)
 
 #pragma pack (1)
-typedef struct {                //lenght 18
+typedef struct {                //length 18
     int16_t word_0;
     int16_t word_2;
     int16_t word_4;
@@ -338,7 +338,7 @@ extern uint16_t x_WORD_17B4E0;  // 34c4e0
 extern char isCaveLevel_D41B6;
 
 #pragma pack (1)
-typedef struct {                //lenght 16
+typedef struct {                //length 16
     int16_t x1_26_0;            //0 x
     int16_t y1_28_1;            //1 y
     int16_t word_30_2;          //2
@@ -350,7 +350,7 @@ typedef struct {                //lenght 16
     int16_t nocl_42_8;          //8
 } type_str_word_26;
 
-typedef struct {                //lenght 44
+typedef struct {                //length 44
     uint32_t dword_0;
     //int16_t word_2;
     int32_t dword_4;            //4 dword
@@ -381,7 +381,7 @@ typedef struct {                //lenght 44
 #pragma pack (16)
 
 #pragma pack (1)
-typedef struct                  //lenght 50
+typedef struct                  //length 50
 {
     uint32_t x_DWORD_17DB70;    // weak
     int16_t x_WORD_17DB74;      // weak 4
@@ -630,10 +630,10 @@ void CleanF5538_716A0();
 
 void CreateIndexes_6EB90(filearray_struct * a1);
 
-//type_str_0x6E8E* pre_sub_4A190(uint32_t adress, int16_t* a1,int type);
-event_t *pre_sub_4A190_axis_3d(uint32_t adress, axis_3d * a1);        //pre 22b190
+//type_str_0x6E8E* pre_sub_4A190(uint32_t address, int16_t* a1,int type);
+event_t *pre_sub_4A190_axis_3d(uint32_t address, axis_3d * a1);        //pre 22b190
 
-void pre_sub_4A190_0x6E8E(uint32_t adress, event_t * a1);     //pre 22b190
+void pre_sub_4A190_0x6E8E(uint32_t address, event_t * a1);     //pre 22b190
 
 //---------------------------
 

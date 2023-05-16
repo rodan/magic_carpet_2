@@ -6,7 +6,7 @@
 #include "stdint.h"
 
 #pragma pack (1)
-typedef struct {                //lenght 12
+typedef struct {                //length 12
     int32_t dword_0;
     int32_t dword_1;
     int32_t dword_2;

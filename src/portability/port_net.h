@@ -11,7 +11,7 @@
 extern const char *debug_net_filename1;
 extern std::string debug_net_filename2;
 
-typedef struct {                //lenght 10
+typedef struct {                //length 10
     char byte_0[50];
 } type_v2x;
 
@@ -21,7 +21,7 @@ typedef union {
 } p64align;
 
 #pragma pack (1)
-typedef struct {                //lenght 66(changed to 70)
+typedef struct {                //length 66(changed to 70)
     uint8_t ncb_command_0;
     uint8_t ncb_retcode_1;
     uint8_t ncb_lsn_2;
@@ -38,7 +38,7 @@ typedef struct {                //lenght 66(changed to 70)
     //uint8_t ncb_reserved_50[16];// not used
 } myNCB;
 
-typedef struct {                //lenght 66(changed to 70)
+typedef struct {                //length 66(changed to 70)
     uint8_t ncb_command_0;
     uint8_t ncb_retcode_1;
     uint8_t ncb_lsn_2;

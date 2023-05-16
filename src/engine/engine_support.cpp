@@ -90,7 +90,7 @@ int32_t x_DWORD_D41A4_x9692 = -1;*/
 
 //uint8_t* x_D41A0_BYTEARRAY_0;
 //12 - my be player counter(position of structure)
-//11244 - players(my by creatures, every 2124 lenght)
+//11244 - players(my by creatures, every 2124 length)
 //196302 - terrain input
 //196308 - sky and blocks
 
@@ -818,33 +818,33 @@ void support_end()
         delete[](x_DWORD_D4188t_spritestr);
 }
 
-void loadfromsnapshot(const char *filename, uint8_t *adress, uint32_t adressdos, uint32_t size)
+void loadfromsnapshot(const char *filename, uint8_t *address, uint32_t addressdos, uint32_t size)
 {
     char findnamec[500];
     FILE *fptestepc;
     sprintf(findnamec, "../remc2/memimages/engine-memory-%s", filename);
     fptestepc = fopen(findnamec, "rb");
-    fseek(fptestepc, adressdos, SEEK_SET);
-    fread(adress, size, 1, fptestepc);
+    fseek(fptestepc, addressdos, SEEK_SET);
+    fread(address, size, 1, fptestepc);
     fclose(fptestepc);
 };
 
-void loadfromsnapshot2(const char *filename, uint8_t *adress, uint32_t adressdos, uint32_t size)
+void loadfromsnapshot2(const char *filename, uint8_t *address, uint32_t addressdos, uint32_t size)
 {
     char findnamec[500];
     FILE *fptestepc;
-    uint32_t subadress;
+    uint32_t subaddress;
     sprintf(findnamec, "../remc2/memimages/engine-memory-%s", filename);
     fptestepc = fopen(findnamec, "rb");
-    fseek(fptestepc, adressdos, SEEK_SET);
-    fread(&subadress, 4, 1, fptestepc);
-    fseek(fptestepc, subadress, SEEK_SET);
-    fread(adress, size, 1, fptestepc);
+    fseek(fptestepc, addressdos, SEEK_SET);
+    fread(&subaddress, 4, 1, fptestepc);
+    fseek(fptestepc, subaddress, SEEK_SET);
+    fread(address, size, 1, fptestepc);
 
     fclose(fptestepc);
 };
 
-uint32_t compare_with_snapshot(const char *filename, uint8_t *adress, uint32_t adressdos,
+uint32_t compare_with_snapshot(const char *filename, uint8_t *address, uint32_t addressdos,
                                uint32_t size, uint8_t *origbyte, uint8_t *copybyte)
 {
     char findnamec[500];
@@ -856,14 +856,14 @@ uint32_t compare_with_snapshot(const char *filename, uint8_t *adress, uint32_t a
         mydelay(100);
         fptestepc = fopen(findnamec, "rb");
     }
-    fseek(fptestepc, adressdos, SEEK_SET);
+    fseek(fptestepc, addressdos, SEEK_SET);
 
     fread(buffer, size, 1, fptestepc);
     uint32_t i;
     for (i = 0; i < size; i++) {
-        if (buffer[i] != adress[i]) {
+        if (buffer[i] != address[i]) {
             *origbyte = buffer[i];
-            *copybyte = adress[i];
+            *copybyte = address[i];
             break;
         }
     }
@@ -873,182 +873,182 @@ uint32_t compare_with_snapshot(const char *filename, uint8_t *adress, uint32_t a
     return (i);
 };
 
-int test_E7EE0_id_pointer(uint32_t adress)
+int test_E7EE0_id_pointer(uint32_t address)
 {
-    if ((adress >= 0x28) && (adress < 0x29))
+    if ((address >= 0x28) && (address < 0x29))
         return 1;
     return 0;
 }
 
-int test_D41A0_4_id_pointer(uint32_t adress)
+int test_D41A0_4_id_pointer(uint32_t address)
 {
-    if ((adress >= 0xe2) && (adress < 0xe3))
+    if ((address >= 0xe2) && (address < 0xe3))
         return 1;
-    if ((adress >= 0x954) && (adress < 0x95a))
+    if ((address >= 0x954) && (address < 0x95a))
         return 2;
     return 0;
 }
 
-int test_EA3E4_id_pointer(uint32_t adress)
+int test_EA3E4_id_pointer(uint32_t address)
 {
-    if ((adress >= 0x0) && (adress < 0x1))
+    if ((address >= 0x0) && (address < 0x1))
         return 1;
-    if ((adress >= 0xa0) && (adress < 0xa1))
+    if ((address >= 0xa0) && (address < 0xa1))
         return 1;
-    if ((adress >= 0xa4) && (adress < 0xa5))
+    if ((address >= 0xa4) && (address < 0xa5))
         return 1;
     return 0;
 }
 
-int test_0x6E8E_id_pointer(uint32_t adress)
+int test_0x6E8E_id_pointer(uint32_t address)
 {
-    if ((adress >= 0x0) && (adress < 0x1))
+    if ((address >= 0x0) && (address < 0x1))
         return 1;
-    if ((adress >= 0xa0) && (adress < 0xa1))
+    if ((address >= 0xa0) && (address < 0xa1))
         return 1;
-    if ((adress >= 0xa4) && (adress < 0xa5))
+    if ((address >= 0xa4) && (address < 0xa5))
         return 1;
     return 0;
 }
 
-int test_D41A0_id_pointer(uint32_t adress)
+int test_D41A0_id_pointer(uint32_t address)
 {
-    if ((adress >= 0x2fc4) && (adress < 0x2fc5))
+    if ((address >= 0x2fc4) && (address < 0x2fc5))
         return 2;               //event
 
-    if ((adress >= 0x314d) && (adress < 0x3151))
+    if ((address >= 0x314d) && (address < 0x3151))
         return 2;               //clock - 4 bytes
-    if ((adress >= 0x3999) && (adress < 0x399d))
+    if ((address >= 0x3999) && (address < 0x399d))
         return 2;               //clock2 - 4 bytes
-    if ((adress >= 0x41e5) && (adress < 0x41e9))
+    if ((address >= 0x41e5) && (address < 0x41e9))
         return 2;               //clock3 - 4 bytes
-    if ((adress >= 0x4a31) && (adress < 0x4a35))
+    if ((address >= 0x4a31) && (address < 0x4a35))
         return 2;               //clock4 - 4 bytes
-    if ((adress >= 0x527d) && (adress < 0x5281))
+    if ((address >= 0x527d) && (address < 0x5281))
         return 2;               //clock5 - 4 bytes
-    if ((adress >= 0x5ac9) && (adress < 0x5acd))
+    if ((address >= 0x5ac9) && (address < 0x5acd))
         return 2;               //clock6 - 4 bytes
-    if ((adress >= 0x6315) && (adress < 0x6319))
+    if ((address >= 0x6315) && (address < 0x6319))
         return 2;               //clock7 - 4 bytes
-    if ((adress >= 0x6b61) && (adress < 0x6b65))
+    if ((address >= 0x6b61) && (address < 0x6b65))
         return 2;               //clock8 - 4 bytes
 
-    if ((adress >= 0x235) && (adress < 0x236))
+    if ((address >= 0x235) && (address < 0x236))
         return 2;               //music
 
-    if ((adress >= 0x246) && (adress < 0x2186))
+    if ((address >= 0x246) && (address < 0x2186))
         return 1;
 
-    if ((adress >= 0x36552) && (adress < 0x36553))
+    if ((address >= 0x36552) && (address < 0x36553))
         return 1;
-    if ((adress >= 0x3655c) && (adress < 0x3655d))
+    if ((address >= 0x3655c) && (address < 0x3655d))
         return 1;
-    if ((adress >= 0x3655f) && (adress < 0x36560))
+    if ((address >= 0x3655f) && (address < 0x36560))
         return 1;
-    if ((adress >= 0x36566) && (adress < 0x36567))
+    if ((address >= 0x36566) && (address < 0x36567))
         return 1;
-    if ((adress >= 0x36570) && (adress < 0x36571))
+    if ((address >= 0x36570) && (address < 0x36571))
         return 1;
-    if ((adress >= 0x36608) && (adress < 0x36609))
+    if ((address >= 0x36608) && (address < 0x36609))
         return 1;
-    //if ((adress >= 0x36625) && (adress < 0x36626))return 1;
-    if ((adress >= 0x36628) && (adress < 0x36630))
+    //if ((address >= 0x36625) && (address < 0x36626))return 1;
+    if ((address >= 0x36628) && (address < 0x36630))
         return 1;
 
-    /*if ((adress >= 0x36b36) && (adress < 0x36b37))return 1;
-       if ((adress >= 0x36b5d) && (adress < 0x36b5e))return 1;
-       if ((adress >= 0x36b84) && (adress < 0x36b85))return 1;
-       if ((adress >= 0x36bab) && (adress < 0x36bac))return 1;
-       if ((adress >= 0x36bd2) && (adress < 0x36bd3))return 1;
+    /*if ((address >= 0x36b36) && (address < 0x36b37))return 1;
+       if ((address >= 0x36b5d) && (address < 0x36b5e))return 1;
+       if ((address >= 0x36b84) && (address < 0x36b85))return 1;
+       if ((address >= 0x36bab) && (address < 0x36bac))return 1;
+       if ((address >= 0x36bd2) && (address < 0x36bd3))return 1;
      */
     for (int j = 1; j < 50; j++) {
-        if ((adress >= 0x3664C + 0xa + 39 * j) && (adress < 0x3664C + 0xa + 1 + 39 * j))
+        if ((address >= 0x3664C + 0xa + 39 * j) && (address < 0x3664C + 0xa + 1 + 39 * j))
             return 1;
     }
 
-    /*if ((adress >= 0x36656) && (adress < 0x36657))return 1;
-       if ((adress >= 0x3667d) && (adress < 0x3667e))return 1;
-       if ((adress >= 0x366a4) && (adress < 0x366a5))return 1;
-       if ((adress >= 0x366cb) && (adress < 0x366cc))return 1;
-       if ((adress >= 0x366f2) && (adress < 0x366f3))return 1;
-       if ((adress >= 0x36719) && (adress < 0x3671a))return 1;
-       if ((adress >= 0x36740) && (adress < 0x36741))return 1;
-       if ((adress >= 0x36767) && (adress < 0x36768))return 1;
-       if ((adress >= 0x3678e) && (adress < 0x3678f))return 1; */
-    if ((adress >= 0x36620) && (adress < 0x36621))
+    /*if ((address >= 0x36656) && (address < 0x36657))return 1;
+       if ((address >= 0x3667d) && (address < 0x3667e))return 1;
+       if ((address >= 0x366a4) && (address < 0x366a5))return 1;
+       if ((address >= 0x366cb) && (address < 0x366cc))return 1;
+       if ((address >= 0x366f2) && (address < 0x366f3))return 1;
+       if ((address >= 0x36719) && (address < 0x3671a))return 1;
+       if ((address >= 0x36740) && (address < 0x36741))return 1;
+       if ((address >= 0x36767) && (address < 0x36768))return 1;
+       if ((address >= 0x3678e) && (address < 0x3678f))return 1; */
+    if ((address >= 0x36620) && (address < 0x36621))
         return 1;
     for (uint32_t i = 0; i < 32; i++) {
-        if ((adress >= 0x36656 + i * 39) && (adress < 0x36657 + i * 39))
+        if ((address >= 0x36656 + i * 39) && (address < 0x36657 + i * 39))
             return 1;
     }
-    /*if ((adress >= 0x6f32) && (adress < 0x6f37))return 1;
-       if ((adress >= 0x6fd6) && (adress < 0x6fdb))return 1;
-       if ((adress >= 0x707e) && (adress < 0x707f))return 1;
-       if ((adress >= 0x7082) && (adress < 0x7083))return 1;
-       if ((adress >= 0x7126) && (adress < 0x712b))return 1;
-       if ((adress >= 0x71ce) && (adress < 0x71cf))return 1;
-       if ((adress >= 0x71d2) && (adress < 0x71d3))return 1;
-       if ((adress >= 0x7276) && (adress < 0x7277))return 1;
-       if ((adress >= 0x727a) && (adress < 0x727b))return 1;
-       if ((adress >= 0x731e) && (adress < 0x731f))return 1;
-       if ((adress >= 0x7322) && (adress < 0x7323))return 1;
-       if ((adress >= 0x73c6) && (adress < 0x73c7))return 1;
-       if ((adress >= 0x73ca) && (adress < 0x73cb))return 1;
-       if ((adress >= 0x746e) && (adress < 0x746f))return 1;
-       if ((adress >= 0x7472) && (adress < 0x7473))return 1;
-       if ((adress >= 0x7516) && (adress < 0x7517))return 1;
-       if ((adress >= 0x751a) && (adress < 0x751b))return 1;
-       if ((adress >= 0x75be) && (adress < 0x75bf))return 1;
-       if ((adress >= 0x75c2) && (adress < 0x75c3))return 1;
-       if ((adress >= 0x7666) && (adress < 0x7667))return 1;
-       if ((adress >= 0x766a) && (adress < 0x766b))return 1;
-       if ((adress >= 0x770e) && (adress < 0x770f))return 1;
-       if ((adress >= 0x7712) && (adress < 0x7713))return 1;
-       if ((adress >= 0x77b6) && (adress < 0x77b7))return 1;
-       if ((adress >= 0x77ba) && (adress < 0x77bb))return 1;
-       if ((adress >= 0x785e) && (adress < 0x7863))return 1;
-       if ((adress >= 0x7906) && (adress < 0x790b))return 1;
-       if ((adress >= 0x79ae) && (adress < 0x79b3))return 1;
-       if ((adress >= 0x7a56) && (adress < 0x7a5b))return 1;
-       if ((adress >= 0x7afe) && (adress < 0x7b03))return 1; */
+    /*if ((address >= 0x6f32) && (address < 0x6f37))return 1;
+       if ((address >= 0x6fd6) && (address < 0x6fdb))return 1;
+       if ((address >= 0x707e) && (address < 0x707f))return 1;
+       if ((address >= 0x7082) && (address < 0x7083))return 1;
+       if ((address >= 0x7126) && (address < 0x712b))return 1;
+       if ((address >= 0x71ce) && (address < 0x71cf))return 1;
+       if ((address >= 0x71d2) && (address < 0x71d3))return 1;
+       if ((address >= 0x7276) && (address < 0x7277))return 1;
+       if ((address >= 0x727a) && (address < 0x727b))return 1;
+       if ((address >= 0x731e) && (address < 0x731f))return 1;
+       if ((address >= 0x7322) && (address < 0x7323))return 1;
+       if ((address >= 0x73c6) && (address < 0x73c7))return 1;
+       if ((address >= 0x73ca) && (address < 0x73cb))return 1;
+       if ((address >= 0x746e) && (address < 0x746f))return 1;
+       if ((address >= 0x7472) && (address < 0x7473))return 1;
+       if ((address >= 0x7516) && (address < 0x7517))return 1;
+       if ((address >= 0x751a) && (address < 0x751b))return 1;
+       if ((address >= 0x75be) && (address < 0x75bf))return 1;
+       if ((address >= 0x75c2) && (address < 0x75c3))return 1;
+       if ((address >= 0x7666) && (address < 0x7667))return 1;
+       if ((address >= 0x766a) && (address < 0x766b))return 1;
+       if ((address >= 0x770e) && (address < 0x770f))return 1;
+       if ((address >= 0x7712) && (address < 0x7713))return 1;
+       if ((address >= 0x77b6) && (address < 0x77b7))return 1;
+       if ((address >= 0x77ba) && (address < 0x77bb))return 1;
+       if ((address >= 0x785e) && (address < 0x7863))return 1;
+       if ((address >= 0x7906) && (address < 0x790b))return 1;
+       if ((address >= 0x79ae) && (address < 0x79b3))return 1;
+       if ((address >= 0x7a56) && (address < 0x7a5b))return 1;
+       if ((address >= 0x7afe) && (address < 0x7b03))return 1; */
     for (uint32_t i = 0; i < 0x3e8; i++) {
-        if ((adress >= 0x6f2e + i * 168) && (adress < 0x6f37 + i * 168))
+        if ((address >= 0x6f2e + i * 168) && (address < 0x6f37 + i * 168))
             return 1;
     }
-    if ((adress >= 0x36df6) && (adress < 0x36df7))
+    if ((address >= 0x36df6) && (address < 0x36df7))
         return 1;
     return 0;
 }
 
-int test_E2A74_id_pointer(uint32_t adress)
+int test_E2A74_id_pointer(uint32_t address)
 {
-    //int offset = adress % 30;
+    //int offset = address % 30;
     //if (offset == 12 || offset == 13)
     //      return 1;
 
-    if ((adress >= 0x246) && (adress < 0x247))
+    if ((address >= 0x246) && (address < 0x247))
         return 1;
-    if ((adress >= 0x282) && (adress < 0x283))
+    if ((address >= 0x282) && (address < 0x283))
         return 1;
-    if ((adress >= 0x2a0) && (adress < 0x2a1))
+    if ((address >= 0x2a0) && (address < 0x2a1))
         return 1;
 
     return 0;
 }
 
-int test_222BD3_id_pointer(uint32_t adress)
+int test_222BD3_id_pointer(uint32_t address)
 {
-    if ((adress >= 0x8) && (adress < 0x9))
+    if ((address >= 0x8) && (address < 0x9))
         return 1;
-    if ((adress >= 0x50) && (adress < 0x51))
+    if ((address >= 0x50) && (address < 0x51))
         return 1;
-    if ((adress >= 0x68) && (adress < 0x69))
+    if ((address >= 0x68) && (address < 0x69))
         return 1;
 
     return 0;
 }
 
-uint32_t compare_with_snapshot_D41A0(const char *filename, uint8_t *adress, uint32_t adressdos,
+uint32_t compare_with_snapshot_D41A0(const char *filename, uint8_t *address, uint32_t addressdos,
                                      uint32_t size, uint8_t *origbyte, uint8_t *copybyte)
 {
     char findnamec[500];
@@ -1060,7 +1060,7 @@ uint32_t compare_with_snapshot_D41A0(const char *filename, uint8_t *adress, uint
         mydelay(100);
         fptestepc = fopen(findnamec, "rb");
     }
-    fseek(fptestepc, adressdos, SEEK_SET);
+    fseek(fptestepc, addressdos, SEEK_SET);
 
     fread(buffer, size, 1, fptestepc);
     uint32_t i;
@@ -1072,20 +1072,20 @@ uint32_t compare_with_snapshot_D41A0(const char *filename, uint8_t *adress, uint
                 testa = true;
             else
                 testa = false;
-            if (*(uint32_t *) & adress[i])
+            if (*(uint32_t *) & address[i])
                 testb = true;
             else
                 testb = false;
             if (testa != testb) {
                 *origbyte = buffer[i];
-                *copybyte = adress[i];
+                *copybyte = address[i];
                 break;
             }
             i += 3;
         } else if (testx == 0) {
-            if (buffer[i] != adress[i]) {
+            if (buffer[i] != address[i]) {
                 *origbyte = buffer[i];
-                *copybyte = adress[i];
+                *copybyte = address[i];
                 break;
             }
         }
@@ -1102,8 +1102,8 @@ uint32_t compare_with_snapshot_D41A0(const char *filename, uint8_t *adress, uint
     return (i);
 };
 
-uint32_t compare_with_sequence_E7EE0(const char *filename, uint8_t *adress,
-                                     uint32_t /*adressdos */ , uint32_t count, uint32_t size1,
+uint32_t compare_with_sequence_E7EE0(const char *filename, uint8_t *address,
+                                     uint32_t /*addressdos */ , uint32_t count, uint32_t size1,
                                      uint32_t size2, uint8_t *origbyte, uint8_t *copybyte,
                                      long offset)
 {
@@ -1131,20 +1131,20 @@ uint32_t compare_with_sequence_E7EE0(const char *filename, uint8_t *adress,
                 testa = true;
             else
                 testa = false;
-            if (*(uint32_t *) & adress[i])
+            if (*(uint32_t *) & address[i])
                 testb = true;
             else
                 testb = false;
             if (testa != testb) {
                 *origbyte = buffer[i];
-                *copybyte = adress[i];
+                *copybyte = address[i];
                 break;
             }
             i += 3;
         } else if (testx == 0) {
-            if (buffer[i] != adress[i]) {
+            if (buffer[i] != address[i]) {
                 *origbyte = buffer[i];
-                *copybyte = adress[i];
+                *copybyte = address[i];
                 break;
             }
         }
@@ -1161,8 +1161,8 @@ uint32_t compare_with_sequence_E7EE0(const char *filename, uint8_t *adress,
     return (i);
 };
 
-uint32_t compare_with_sequence_D41A0(const char *filename, uint8_t *adress,
-                                     uint32_t /*adressdos */ , uint32_t count, uint32_t size,
+uint32_t compare_with_sequence_D41A0(const char *filename, uint8_t *address,
+                                     uint32_t /*addressdos */ , uint32_t count, uint32_t size,
                                      uint8_t *origbyte, uint8_t *copybyte, long offset,
                                      bool regressions)
 {
@@ -1196,20 +1196,20 @@ uint32_t compare_with_sequence_D41A0(const char *filename, uint8_t *adress,
                 testa = true;
             else
                 testa = false;
-            if (*(uint32_t *) & adress[i])
+            if (*(uint32_t *) & address[i])
                 testb = true;
             else
                 testb = false;
             if (testa != testb) {
                 *origbyte = buffer[i];
-                *copybyte = adress[i];
+                *copybyte = address[i];
                 break;
             }
             i += 3;
         } else if (testx == 0) {
-            if (buffer[i] != adress[i]) {
+            if (buffer[i] != address[i]) {
                 *origbyte = buffer[i];
-                *copybyte = adress[i];
+                *copybyte = address[i];
                 break;
             }
         }
@@ -1226,7 +1226,7 @@ uint32_t compare_with_sequence_D41A0(const char *filename, uint8_t *adress,
     return (i);
 };
 
-uint32_t compare_0x6E8E(const char *filename, uint8_t *adress, uint32_t count, uint32_t size,
+uint32_t compare_0x6E8E(const char *filename, uint8_t *address, uint32_t count, uint32_t size,
                         uint8_t *origbyte, uint8_t *copybyte, long offset)
 {
     char findnamec[500];
@@ -1250,20 +1250,20 @@ uint32_t compare_0x6E8E(const char *filename, uint8_t *adress, uint32_t count, u
                 testa = true;
             else
                 testa = false;
-            if (*(uint32_t *) & adress[i])
+            if (*(uint32_t *) & address[i])
                 testb = true;
             else
                 testb = false;
             if (testa != testb) {
                 *origbyte = buffer[i];
-                *copybyte = adress[i];
+                *copybyte = address[i];
                 break;
             }
             i += 3;
         } else if (testx == 0) {
-            if (buffer[i] != adress[i]) {
+            if (buffer[i] != address[i]) {
                 *origbyte = buffer[i];
-                *copybyte = adress[i];
+                *copybyte = address[i];
                 break;
             }
         }
@@ -1280,7 +1280,7 @@ uint32_t compare_0x6E8E(const char *filename, uint8_t *adress, uint32_t count, u
     return (i);
 };
 
-uint32_t compare_with_sequence_EA3E4(const char *filename, event_t **adress,
+uint32_t compare_with_sequence_EA3E4(const char *filename, event_t **address,
                                      uint32_t count, uint32_t size, uint8_t *origbyte,
                                      uint8_t *copybyte)
 {
@@ -1309,20 +1309,20 @@ uint32_t compare_with_sequence_EA3E4(const char *filename, event_t **adress,
                     testa = true;
                 else
                     testa = false;
-                if (*(uint32_t *) ((uint8_t *) adress[ea] + i))
+                if (*(uint32_t *) ((uint8_t *) address[ea] + i))
                     testb = true;
                 else
                     testb = false;
                 if (testa != testb) {
                     *origbyte = buffer[i + ea * size];
-                    *copybyte = *((uint8_t *) adress[ea] + i);
+                    *copybyte = *((uint8_t *) address[ea] + i);
                     break;
                 }
                 i += 3;
             } else if (testx == 0) {
-                if (buffer[i + ea * size] != *((uint8_t *) adress[ea] + i)) {
+                if (buffer[i + ea * size] != *((uint8_t *) address[ea] + i)) {
                     *origbyte = buffer[i + ea * size];
-                    *copybyte = *((uint8_t *) adress[ea] + i);
+                    *copybyte = *((uint8_t *) address[ea] + i);
                     break;
                 }
             }
@@ -1342,8 +1342,8 @@ uint32_t compare_with_sequence_EA3E4(const char *filename, event_t **adress,
     return (1);
 };
 
-uint32_t compare_with_sequence_D41A0_4(const char *filename, uint8_t *adress,
-                                       uint32_t /*adressdos */ , uint32_t count, uint32_t size,
+uint32_t compare_with_sequence_D41A0_4(const char *filename, uint8_t *address,
+                                       uint32_t /*addressdos */ , uint32_t count, uint32_t size,
                                        uint8_t *origbyte, uint8_t *copybyte, long offset)
 {
     std::string finddir;
@@ -1369,20 +1369,20 @@ uint32_t compare_with_sequence_D41A0_4(const char *filename, uint8_t *adress,
                 testa = true;
             else
                 testa = false;
-            if (*(uint32_t *) & adress[i])
+            if (*(uint32_t *) & address[i])
                 testb = true;
             else
                 testb = false;
             if (testa != testb) {
                 *origbyte = buffer[i];
-                *copybyte = adress[i];
+                *copybyte = address[i];
                 break;
             }
             i += 3;
         } else if (testx == 0) {
-            if (buffer[i] != adress[i]) {
+            if (buffer[i] != address[i]) {
                 *origbyte = buffer[i];
-                *copybyte = adress[i];
+                *copybyte = address[i];
                 break;
             }
         }
@@ -1399,15 +1399,15 @@ uint32_t compare_with_sequence_D41A0_4(const char *filename, uint8_t *adress,
     return (i);
 };
 
-int test_F2C20ar_id_pointer(uint32_t adress)
+int test_F2C20ar_id_pointer(uint32_t address)
 {
-    if ((adress >= 0x8) && (adress < 0x9))
+    if ((address >= 0x8) && (address < 0x9))
         return 1;
     return 0;
 }
 
-uint32_t compare_with_sequence_x_DWORD_F2C20ar(const char *filename, uint8_t *adress,
-                                               uint32_t /*adressdos */ , uint32_t count,
+uint32_t compare_with_sequence_x_DWORD_F2C20ar(const char *filename, uint8_t *address,
+                                               uint32_t /*addressdos */ , uint32_t count,
                                                uint32_t size, uint8_t *origbyte, uint8_t *copybyte,
                                                int *posdiff)
 {
@@ -1435,23 +1435,23 @@ uint32_t compare_with_sequence_x_DWORD_F2C20ar(const char *filename, uint8_t *ad
                 testa = true;
             else
                 testa = false;
-            if (*(uint32_t *) & adress[i])
+            if (*(uint32_t *) & address[i])
                 testb = true;
             else
                 testb = false;
             if (testa != testb) {
                 posdiff[diffindex] = i;
                 origbyte[diffindex] = buffer[i];
-                copybyte[diffindex++] = adress[i];
+                copybyte[diffindex++] = address[i];
                 if (diffindex >= 100)
                     break;
             }
             i += 3;
         } else if (testx == 0) {
-            if (buffer[i] != adress[i]) {
+            if (buffer[i] != address[i]) {
                 posdiff[diffindex] = i;
                 origbyte[diffindex] = buffer[i];
-                copybyte[diffindex++] = adress[i];
+                copybyte[diffindex++] = address[i];
                 if (diffindex >= 100)
                     break;
             }
@@ -1469,8 +1469,8 @@ uint32_t compare_with_sequence_x_DWORD_F2C20ar(const char *filename, uint8_t *ad
     return (diffindex);
 };
 
-uint32_t compare_with_sequence_array_E2A74(const char *filename, uint8_t *adress,
-                                           uint32_t /*adressdos */ , uint32_t count, uint32_t size1,
+uint32_t compare_with_sequence_array_E2A74(const char *filename, uint8_t *address,
+                                           uint32_t /*addressdos */ , uint32_t count, uint32_t size1,
                                            uint32_t size2, uint8_t *origbyte, uint8_t *copybyte,
                                            long offset, bool regressions)
 {
@@ -1501,20 +1501,20 @@ uint32_t compare_with_sequence_array_E2A74(const char *filename, uint8_t *adress
                 testa = true;
             else
                 testa = false;
-            if (*(uint32_t *) & adress[i])
+            if (*(uint32_t *) & address[i])
                 testb = true;
             else
                 testb = false;
             if (testa != testb) {
                 *origbyte = buffer[i];
-                *copybyte = adress[i];
+                *copybyte = address[i];
                 break;
             }
             i += 3;
         } else if (testx == 0) {
-            if (buffer[i] != adress[i]) {
+            if (buffer[i] != address[i]) {
                 *origbyte = buffer[i];
-                *copybyte = adress[i];
+                *copybyte = address[i];
                 break;
             }
         }
@@ -1531,8 +1531,8 @@ uint32_t compare_with_sequence_array_E2A74(const char *filename, uint8_t *adress
     return (i);
 };
 
-uint32_t compare_with_sequence_array_222BD3(const char *filename, uint8_t *adress,
-                                            uint32_t /*adressdos */ , uint32_t count, uint32_t size,
+uint32_t compare_with_sequence_array_222BD3(const char *filename, uint8_t *address,
+                                            uint32_t /*addressdos */ , uint32_t count, uint32_t size,
                                             uint8_t *origbyte, uint8_t *copybyte, int *posdiff)
 {
     std::string finddir;
@@ -1559,23 +1559,23 @@ uint32_t compare_with_sequence_array_222BD3(const char *filename, uint8_t *adres
                 testa = true;
             else
                 testa = false;
-            if (*(uint32_t *) & adress[i])
+            if (*(uint32_t *) & address[i])
                 testb = true;
             else
                 testb = false;
             if (testa != testb) {
                 posdiff[diffindex] = i;
                 origbyte[diffindex] = buffer[i];
-                copybyte[diffindex++] = adress[i];
+                copybyte[diffindex++] = address[i];
                 if (diffindex >= 100)
                     break;
             }
             i += 3;
         } else if (testx == 0) {
-            if (buffer[i] != adress[i]) {
+            if (buffer[i] != address[i]) {
                 posdiff[diffindex] = i;
                 origbyte[diffindex] = buffer[i];
-                copybyte[diffindex++] = adress[i];
+                copybyte[diffindex++] = address[i];
                 if (diffindex >= 100)
                     break;
             }
@@ -1593,8 +1593,8 @@ uint32_t compare_with_sequence_array_222BD3(const char *filename, uint8_t *adres
     return (i);
 };
 
-uint32_t compare_with_sequence(const char *filename, const uint8_t *adress,
-                               uint32_t /*adressdos */ , long count, long size1, uint32_t size2,
+uint32_t compare_with_sequence(const char *filename, const uint8_t *address,
+                               uint32_t /*addressdos */ , long count, long size1, uint32_t size2,
                                uint8_t *origbyte, uint8_t *copybyte, long offset, bool regressions)
 {
     std::string finddir;
@@ -1637,9 +1637,9 @@ uint32_t compare_with_sequence(const char *filename, const uint8_t *adress,
     }
     //for (i = size-1; i >0; i--)
     for (i = 0; i < size2; i++) {
-        if (buffer[i] != adress[i]) {
+        if (buffer[i] != address[i]) {
             *origbyte = buffer[i];
-            *copybyte = adress[i];
+            *copybyte = address[i];
             break;
         }
     }
@@ -1655,7 +1655,7 @@ uint32_t compare_with_sequence(const char *filename, const uint8_t *adress,
     return (i);
 };
 
-void mine_texts(const char *filename, uint32_t adressdos, uint32_t count, char *outfilename)
+void mine_texts(const char *filename, uint32_t addressdos, uint32_t count, char *outfilename)
 {
     char findnamec[500];
     FILE *fptestepc;
@@ -1670,25 +1670,25 @@ void mine_texts(const char *filename, uint32_t adressdos, uint32_t count, char *
         mydelay(100);
         fptestepc = fopen(findnamec, "rb");
     }
-    fseek(fptestepc, adressdos, SEEK_SET);
-    long adressadd;
-    long adressaddall = 0;
+    fseek(fptestepc, addressdos, SEEK_SET);
+    long addressadd;
+    long addressaddall = 0;
     fread(&actchar, 1, 1, fptestepc);
     for (uint32_t i = 0; i < count; i++) {
-        adressadd = 0;
-        while ((adressaddall % 4) || (actchar == 0)) {
+        addressadd = 0;
+        while ((addressaddall % 4) || (actchar == 0)) {
             fread(&actchar, 1, 1, fptestepc);
-            adressaddall++;
+            addressaddall++;
         }
         while (actchar != 0) {
-            outtext[adressadd] = actchar;
+            outtext[addressadd] = actchar;
             fread(&actchar, 1, 1, fptestepc);
-            adressadd++;
-            adressaddall++;
+            addressadd++;
+            addressaddall++;
         }
 
-        outtext[adressadd] = 0;
-        sprintf(outtext2, "char* off_%05lX[1]={%s};\n", 0xDB06C - 0x1131 + adressaddall, outtext);
+        outtext[addressadd] = 0;
+        sprintf(outtext2, "char* off_%05lX[1]={%s};\n", 0xDB06C - 0x1131 + addressaddall, outtext);
         if (strlen(outtext2) > 1)
             fwrite(outtext2, strlen(outtext2), 1, fileout);
     }

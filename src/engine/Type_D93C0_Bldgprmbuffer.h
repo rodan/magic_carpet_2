@@ -7,7 +7,7 @@
 #include <array>
 
 #pragma pack (1)
-typedef struct {                //lenght 4
+typedef struct {                //length 4
     uint16_t word_0;
     uint8_t byte_2;
     uint8_t byte_3;

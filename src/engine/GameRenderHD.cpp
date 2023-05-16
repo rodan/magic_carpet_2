@@ -998,7 +998,7 @@ void GameRenderHD::DrawTerrainAndParticles_3C080(__int16 posX, __int16 posY, __i
         v56x++;
         v209--;
     }
-    //adress 3de7d
+    //address 3de7d
     //Draw Terrain with no reflection
     SubDrawTerrainAndParticles(projectedVertexBuffer, pitch);
 }
@@ -1101,7 +1101,7 @@ void GameRenderHD::SubDrawCaveTerrainAndParticles(std::vector < int >&projectedV
                     v69 = 0;
                     if (!(v69 & 0xF00)) {
                         DrawInverseSquareInProjectionSpace(&projectedVertexBuffer[0], v68x,
-                                                           x_DWORD_DDF50_texture_adresses.at(1));
+                                                           x_DWORD_DDF50_texture_addresses.at(1));
                     }
                 }
             }
@@ -1187,7 +1187,7 @@ void GameRenderHD::SubDrawCaveTerrainAndParticles(std::vector < int >&projectedV
                     }
                     if (!(v93 & 2)) {
                         DrawInverseSquareInProjectionSpace(&projectedVertexBuffer[0], v94x,
-                                                           x_DWORD_DDF50_texture_adresses.at(1));
+                                                           x_DWORD_DDF50_texture_addresses.at(1));
                     }
                 }
                 projectedVertexBuffer[18] = Str_E9C38_smalltit[v94x].dword16;
@@ -2713,7 +2713,7 @@ void GameRenderHD::DrawSquareInProjectionSpace(std::vector < int >&vertexs, int 
     vertexs[3] = xunk_D4350[Str_E9C38_smalltit[index].byte42_std][7];
 
     //Get Texture
-    x_DWORD_DE55C_ActTexture = x_DWORD_DDF50_texture_adresses.at(Str_E9C38_smalltit[index].byte41);
+    x_DWORD_DE55C_ActTexture = x_DWORD_DDF50_texture_addresses.at(Str_E9C38_smalltit[index].byte41);
 
     //Render
     auto vertex0 = ProjectionPolygon(&vertexs[0]);
@@ -2777,7 +2777,7 @@ void GameRenderHD::DrawSquareInProjectionSpace(std::vector < int >&vertexs, int 
 void GameRenderHD::DrawInverseSquareInProjectionSpace(int *vertexs, int index)
 {
     DrawInverseSquareInProjectionSpace(vertexs, index,
-                                       x_DWORD_DDF50_texture_adresses.at(Str_E9C38_smalltit[index].
+                                       x_DWORD_DDF50_texture_addresses.at(Str_E9C38_smalltit[index].
                                                                          byte41));
 }
 
@@ -2950,7 +2950,7 @@ void GameRenderHD::DrawParticles_3E360(int a2x, type_particle_str **str_DWORD_F6
 
     result = Str_E9C38_smalltit[a2x].word36;
     do {
-        //adress 21f370
+        //address 21f370
 
         v3x = x_DWORD_EA3E4[result];
         str_F2C20ar.dword0x14x = v3x;
@@ -2961,7 +2961,7 @@ void GameRenderHD::DrawParticles_3E360(int a2x, type_particle_str **str_DWORD_F6
             if (shadows_F2CC7) {
                 if (!Str_E9C38_smalltit[a2x].byte43
                     && !(v3x->struct_byte_0xc_12_15.word[1] & 0x808)) {
-                    //adress 21f40c
+                    //address 21f40c
                     v98 = sub_B5C60_getTerrainAlt2(v3x->axis_0x4C_76.x, v4) - str_F2C20ar.dword0x20;
                     v5 = (str_F2C20ar.dword0x0f * v96 - str_F2C20ar.dword0x17 * v97) >> 16;
                     v99 = (str_F2C20ar.dword0x17 * v96 + str_F2C20ar.dword0x0f * v97) >> 16;
@@ -4249,7 +4249,7 @@ void GameRenderHD::DrawSprite_41BD3(uint32 a1)
                             for (i = v159; i; i--) {
                                 v133 = v165[1];
                                 if (v133 > 0) {
-                                    //adress 2237d3
+                                    //address 2237d3
 
                                     v169x = &m_str_F0E20x[*v165];
                                     v155 = 8 * (v165[2] - v116) + &x_DWORD_E9C38_smalltit[36960];
@@ -4625,7 +4625,7 @@ void GameRenderHD::DrawSprite_41BD3(uint32 a1)
                             if (v159 <= 0)
                                 break;
                         }
-                        //adress 223d83
+                        //address 223d83
                         v116 = 9999999;
                         for (jy = v159; jy; jy--) {
                             v174 = v158 >> 16;
@@ -4804,7 +4804,7 @@ void GameRenderHD::DrawSprite_41BD3(uint32 a1)
                     switch (str_F2C20ar.dword0x01_rotIdx)       //mirroring
                     {
                     case 0:
-                        //               width                  actual line                   base adress                 add index
+                        //               width                  actual line                   base address                 add index
                         //v2 = (char*)(str_F2C20ar.dword0x08_width * (str_F2C20ar.dword0x0a_actIdx >> 16) + (int)str_F2C20ar.dword0x02_data + *(x_DWORD*)(x_DWORD_E9C38_smalltit + 36964));//sprite
                         v2x = &str_F2C20ar.dword0x02_data[str_F2C20ar.dword0x08_width * (str_F2C20ar.dword0x0a_actIdx >> 16) + *(x_DWORD *) (x_DWORD_E9C38_smalltit + 36964)];  //sprite
                         v3 = (x_DWORD *) & (x_DWORD_E9C38_smalltit[36960]);
@@ -4930,7 +4930,7 @@ void GameRenderHD::DrawSprite_41BD3(uint32 a1)
                     case 3:
                         v23 = (x_BYTE *) (str_F2C20ar.dword0x08_width * (str_F2C20ar.dword0x0a_actIdx >> 16) + str_F2C20ar.dword0x02_data + *(x_DWORD *) (x_DWORD_E9C38_smalltit + 36964));     //from mask
                         v24 = (x_DWORD *) (&x_DWORD_E9C38_smalltit[36960]);     //from image
-                        v25 = v122x;    //to adress
+                        v25 = v122x;    //to address
                         HIWORD(v26) = 0;
                         v27 = str_F2C20ar.dword0x09_realWidth >> 1;
                         if (!(str_F2C20ar.dword0x09_realWidth & 1)) {

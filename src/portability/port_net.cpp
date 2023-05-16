@@ -245,7 +245,7 @@ void debug_net_printf(const char *format, ...)
 
 std::vector < std::string > NetworkName;
 typedef struct {
-    std::string adress;
+    std::string address;
     int port;
 } TypeIpPort;
 std::vector < TypeIpPort > clientIpPort;
@@ -270,14 +270,14 @@ TypeIpPort GetIpPortFromName(std::string name)
         if (!NetworkName[i].compare(name))
             return clientIpPort[i];
     TypeIpPort tempIpPort;
-    tempIpPort.adress = "x999";
+    tempIpPort.address = "x999";
     return tempIpPort;
 }
 
 std::string GetNameNetworkFromId(TypeIpPort ipPort)
 {
     for (int i = 0; i < NetworkName.size(); i++)
-        if ((ipPort.adress == clientIpPort[i].adress) && (ipPort.port == clientIpPort[i].port))
+        if ((ipPort.address == clientIpPort[i].address) && (ipPort.port == clientIpPort[i].port))
             return NetworkName[i];
     return "";
 }
@@ -293,7 +293,7 @@ std::string GetNameNetwork(std::string name)
 int GetIndexNetworkIpPort(TypeIpPort ipPort)
 {
     for (int i = 0; i < clientIpPort.size(); i++)
-        if ((ipPort.adress == clientIpPort[i].adress) && (ipPort.port == clientIpPort[i].port))
+        if ((ipPort.address == clientIpPort[i].address) && (ipPort.port == clientIpPort[i].port))
             return i;
     return -1;
 }
@@ -314,14 +314,14 @@ void AddNetworkName(std::string name, TypeIpPort ipPort)
     }
 #ifdef TEST_NETWORK_MESSAGES
     debug_net_printf("AddNetworkName - net name added:%s %s %d\n", name.c_str(),
-                     ipPort.adress.c_str(), ipPort.port);
+                     ipPort.address.c_str(), ipPort.port);
 #endif                          //TEST_NETWORK_MESSAGES
 }
 
 bool ExistNetworkName(std::string name, TypeIpPort ipPort)
 {
     for (int i = 0; i < NetworkName.size(); i++)
-        if ((!name.compare(NetworkName[i])) && (clientIpPort[i].adress == ipPort.adress)
+        if ((!name.compare(NetworkName[i])) && (clientIpPort[i].address == ipPort.address)
             && (clientIpPort[i].port == ipPort.port))
             return true;
     return false;
@@ -330,14 +330,14 @@ bool ExistNetworkName(std::string name, TypeIpPort ipPort)
 TypeIpPort GetOtherSide(TypeIpPort ipPort)
 {
     for (int i = 0; i < clientListenID.size(); i++)
-        if ((clientListenID[i].adress == ipPort.adress) && (clientListenID[i].port == ipPort.port))
+        if ((clientListenID[i].address == ipPort.address) && (clientListenID[i].port == ipPort.port))
             return clientListenID2[i];
     for (int i = 0; i < clientListenID2.size(); i++)
-        if ((clientListenID2[i].adress == ipPort.adress)
+        if ((clientListenID2[i].address == ipPort.address)
             && (clientListenID2[i].port == ipPort.port))
             return clientListenID[i];
     TypeIpPort tempIpPort;
-    tempIpPort.adress = "x1000";
+    tempIpPort.address = "x1000";
     return tempIpPort;
 }
 
@@ -383,10 +383,10 @@ void AddListenName(myNCB *connection)
 bool AddListenName2(const shadow_myNCB *connection)
 {
     TypeIpPort id1 = GetIpPortFromName(connection->ncb_callName_10);
-    if (id1.adress == "x999")
+    if (id1.address == "x999")
         return false;
     TypeIpPort id2 = GetIpPortFromName(connection->ncb_name_26);
-    if (id2.adress == "x999")
+    if (id2.address == "x999")
         return false;
     //fix it
     int indexid = GetNameListenIndex(connection->ncb_name_26);
@@ -406,10 +406,10 @@ bool AddListenName2(const shadow_myNCB *connection)
 bool IsListenName2(const shadow_myNCB *connection)
 {
     TypeIpPort id1 = GetIpPortFromName(connection->ncb_callName_10);
-    if (id1.adress == "x999")
+    if (id1.address == "x999")
         return false;
     TypeIpPort id2 = GetIpPortFromName(connection->ncb_name_26);
-    if (id2.adress == "x999")
+    if (id2.address == "x999")
         return false;
     //fix it
     int indexid = GetNameListenIndex(connection->ncb_name_26);
@@ -417,12 +417,12 @@ bool IsListenName2(const shadow_myNCB *connection)
         return false;
     if (ListenName[indexid] != connection->ncb_callName_10)
         return false;
-    if ((clientListenID[indexid].adress != id1.adress)
+    if ((clientListenID[indexid].address != id1.address)
         || (clientListenID[indexid].port != id1.port))
         return false;
     if (ListenName2[indexid] != connection->ncb_name_26)
         return false;
-    if ((clientListenID2[indexid].adress != id2.adress)
+    if ((clientListenID2[indexid].address != id2.address)
         || (clientListenID2[indexid].port != id1.port))
         return false;
     return true;
@@ -657,7 +657,7 @@ namespace MyNetworkLib {
         void StopHandler();
 
         void SendToServer(const std::string & message);
-        void SendToClient(const std::string & message, std::string adress, int port);
+        void SendToClient(const std::string & message, std::string address, int port);
 
  public:
          NetworkClass(bool iam_server, std::string host, int port, int serverPort, bool IAmServer);
@@ -786,7 +786,7 @@ namespace MyNetworkLib {
 
     bool NetworkClass::Registered(TypeIpPort ipPort) {
         for (int i = 0; i < registered.size(); i++)
-            if ((registered[i].adress == ipPort.adress) && (registered[i].port == ipPort.port))
+            if ((registered[i].address == ipPort.address) && (registered[i].port == ipPort.port))
                 return true;
         return false;
     }
@@ -1025,7 +1025,7 @@ namespace MyNetworkLib {
 
         if (unpacked_message.message == MESS_CLIENT_SERVER_NAME_ADDED) {
             TypeIpPort locIpPort;
-            locIpPort.adress = sender.address().to_string();
+            locIpPort.address = sender.address().to_string();
             locIpPort.port = unpacked_message.port;
             if (!Registered(locIpPort)) {
                 Register(locIpPort);
@@ -1044,7 +1044,7 @@ namespace MyNetworkLib {
 
         else if (unpacked_message.message == MESS_CLIENT_TESTADDNAME) {
             TypeIpPort locIpPort;
-            locIpPort.adress = sender.address().to_string();
+            locIpPort.address = sender.address().to_string();
             locIpPort.port = unpacked_message.port;
             if ((!GetNameNetwork(unpacked_message.data).compare(""))) {
                 AddNetworkName(unpacked_message.data, locIpPort);
@@ -1101,7 +1101,7 @@ namespace MyNetworkLib {
                 SendToClient(Pack_Message
                              (MESS_SERVER_LISTEN_ACCEPT, unpacked_message.messNCB,
                               unpacked_message.index, clServerPort, unpacked_message.data,
-                              unpacked_message.size), callLocIpPort.adress, callLocIpPort.port);
+                              unpacked_message.size), callLocIpPort.address, callLocIpPort.port);
                 //"NETH200        "
 #ifdef TEST_NETWORK_MESSAGES
                 debug_net_printf("Server: NETI_LISTEN_CONNECTED:%s %s %s\n",
@@ -1111,7 +1111,7 @@ namespace MyNetworkLib {
 #endif                          //TEST_NETWORK_MESSAGES
             }                   /* else if (IsListenName2(&unpacked_message.messNCB)) {
                                    SendToClient(Pack_Message(MESS_SERVER_CALL_ACCEPT, unpacked_message.messNCB, unpacked_message.index, -10), sender.address().to_string(), unpacked_message.port);
-                                   SendToClient(Pack_Message(MESS_SERVER_LISTEN_ACCEPT, unpacked_message.messNCB, unpacked_message.index, -10, clServerPort, unpacked_message.data, unpacked_message.size), callLocIpPort.adress, callLocIpPort.port);
+                                   SendToClient(Pack_Message(MESS_SERVER_LISTEN_ACCEPT, unpacked_message.messNCB, unpacked_message.index, -10, clServerPort, unpacked_message.data, unpacked_message.size), callLocIpPort.address, callLocIpPort.port);
                                    //"NETH200        "
                                    #ifdef TEST_NETWORK_MESSAGES
                                    debug_net_printf("Server: NETI_LISTEN_CONNECTED:%s %s %s\n", unpacked_message.messNCB.ncb_callName_10, unpacked_message.messNCB.ncb_name_26, sender.address().to_string().c_str());
@@ -1124,7 +1124,7 @@ namespace MyNetworkLib {
                              unpacked_message.port);
                 SendToClient(Pack_Message
                              (MESS_SERVER_LISTEN_REJECT, unpacked_message.messNCB,
-                              unpacked_message.index, -10), callLocIpPort.adress,
+                              unpacked_message.index, -10), callLocIpPort.address,
                              callLocIpPort.port);
                 //"NETH200        "
 #ifdef TEST_NETWORK_MESSAGES
@@ -1150,14 +1150,14 @@ namespace MyNetworkLib {
 #endif                          //TEST_NETWORK_MESSAGES
         } else if (unpacked_message.message == MESS_CLIENT_SEND) {
             TypeIpPort locIpPort;
-            locIpPort.adress = sender.address().to_string();
+            locIpPort.address = sender.address().to_string();
             locIpPort.port = unpacked_message.port;
             TypeIpPort otherid = GetOtherSide(locIpPort);
-            if (otherid.adress != "x1000") {
+            if (otherid.address != "x1000") {
                 SendToClient(Pack_Message
                              (MESS_SERVER_SEND, unpacked_message.messNCB, unpacked_message.index,
                               clServerPort, unpacked_message.data, unpacked_message.size),
-                             otherid.adress, otherid.port);
+                             otherid.address, otherid.port);
                 SendToClient(Pack_Message
                              (MESS_SERVER_SEND_OK, unpacked_message.messNCB,
                               unpacked_message.index), sender.address().to_string(),
@@ -1165,7 +1165,7 @@ namespace MyNetworkLib {
             }
 #ifdef TEST_NETWORK_MESSAGES
             debug_net_printf("Server: MESSAGE_SEND:%s %d %s %d\n", /*unpacked_message.data, */
-                             otherid.adress.c_str(), otherid.port,
+                             otherid.address.c_str(), otherid.port,
                              sender.address().to_string().c_str(), unpacked_message.port);
 #endif                          //TEST_NETWORK_MESSAGES
         }
@@ -1264,10 +1264,10 @@ namespace MyNetworkLib {
 
     void NetworkClass::Receiver2() {
         asio::io_context io_context;
-        asio::ip::udp adress_type = asio::ip::udp::v6();
+        asio::ip::udp address_type = asio::ip::udp::v6();
         if (asio::ip::address::from_string(clHost).is_v4())
-            asio::ip::udp adress_type = asio::ip::udp::v4();
-        asio::ip::udp::socket socket(io_context, asio::ip::udp::endpoint(adress_type, clPort));
+            asio::ip::udp address_type = asio::ip::udp::v4();
+        asio::ip::udp::socket socket(io_context, asio::ip::udp::endpoint(address_type, clPort));
         while (HandleReceiver2On) {
             char buffer[65536];
             asio::ip::udp::endpoint sender;
@@ -1330,8 +1330,8 @@ namespace MyNetworkLib {
         SendMessage_UDP(message, clHost, clServerPort);
     };
 
-    void NetworkClass::SendToClient(const std::string & message, std::string adress, int port) {
-        SendMessage_UDP(message, adress, port);
+    void NetworkClass::SendToClient(const std::string & message, std::string address, int port) {
+        SendMessage_UDP(message, address, port);
     };
 
     void NetworkClass::AddName(myNCB * connection, int32_t index) {

@@ -49,7 +49,7 @@
 #define __CFSHL__(x, y) (x<<y)
 
 #pragma pack (1)
-typedef struct                  //lenght 11
+typedef struct                  //length 11
 {
     int8_t connected_0;
     uint8_t arrayColors_1[8];
@@ -57,7 +57,7 @@ typedef struct                  //lenght 11
     int8_t selectedLevel_10;
 } type_BYTE_17DE68x;
 
-typedef struct {                //lenght 18
+typedef struct {                //length 18
     int32_t dword_0;
 } type_17ECA0;
 #pragma pack (16)
@@ -68,7 +68,7 @@ typedef struct {
 } TcolNext;
 
 #pragma pack (1)
-typedef struct                  //lenght 613 // end 17E09D
+typedef struct                  //length 613 // end 17E09D
 {
     TColor *x_DWORD_17DE38x;    // weak
     TcolNext *x_DWORD_17DE3C;   // weak//1
@@ -168,7 +168,7 @@ extern uint8_t *x_BYTE_FAEE0_tablesx_pre;
 
 extern int iScreenWidth_DE560;  // weak //screen X // DE560
 
-extern std::array < uint8_t *, 256 > x_DWORD_DDF50_texture_adresses;    /*= { 0,32 }*/// weak
+extern std::array < uint8_t *, 256 > x_DWORD_DDF50_texture_addresses;    /*= { 0,32 }*/// weak
 
 extern type_E9C38_smalltit Str_E9C38_smalltit[21 * 40];
 
@@ -254,7 +254,7 @@ typedef struct {
 #pragma pack (16)
 
 #pragma pack (1)
-typedef struct {                //lenght 26
+typedef struct {                //length 26
     int32_t dword_2;
     int32_t dword_6;
     int32_t dword_A;
@@ -266,7 +266,7 @@ typedef struct {                //lenght 26
     uint8_t byte_0x1B;
 } type_SPELLS_BEGIN_BUFFER_str_sub;
 
-typedef struct {                //lenght 80
+typedef struct {                //length 80
     int8_t byte_0;
     uint8_t byte_1;
     type_SPELLS_BEGIN_BUFFER_str_sub subspell[3];
@@ -274,7 +274,7 @@ typedef struct {                //lenght 80
 #pragma pack (16)
 
 #pragma pack (1)
-typedef struct {                //lenght 10
+typedef struct {                //length 10
     int32_t dword_0;
     int32_t dword_4;
     int16_t word_8;

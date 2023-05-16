@@ -76,7 +76,7 @@ typedef union {
     uint16_t word;
 } uaxis_2d;
 
-typedef struct {                //lenght 34
+typedef struct {                //length 34
     int16_t type_160_0x0_0;
     int16_t subtype_160_0x2_2;
     int16_t word_160_0x4_4;
@@ -97,7 +97,7 @@ typedef struct {                //lenght 34
 } type_str_160;
 
 typedef struct {
-    int32_t dword_0x5E_94;      //94 //36 lenght
+    int32_t dword_0x5E_94;      //94 //36 length
     int16_t word_0x62_98;       //98 //4 // index subentity
     int32_t dword_0x64_100;     //100 //6
     int16_t word_0x68_104;      //104 //10
@@ -112,7 +112,7 @@ typedef struct {
     uint16_t word_0x80_128;     //128
 } type_str_0x5E_94;
 
-typedef struct {                //lenght 18
+typedef struct {                //length 18
     int16_t word_0;
     int16_t word_2BDE_12658[8];
 } type_str_0x1AC_428;
@@ -282,7 +282,7 @@ typedef struct Type_str_164 {   //size 1136
 }
 
 type_str_164;
-typedef struct _str_0x6E8E {    //lenght a8//THING
+typedef struct _str_0x6E8E {    //length a8//THING
     struct _str_0x6E8E *next_0;
     int32_t maxLife_0x4;        //4 //?bitmap//LIVE
     int32_t life_0x8;           //8 // this is int32_t ?bitmap//MAX LIVE
@@ -293,7 +293,7 @@ typedef struct _str_0x6E8E {    //lenght a8//THING
     //int8_t byte_0xe_14;//14//struct_byte_0xc_12_15.dbyte3_4.byte1
     //int8_t byte_0xf_15;//15//struct_byte_0xc_12_15.dbyte3_4.byte2
     int32_t dword_0x10_16;      //16 // index of array
-    uint16_t rand_0x14_20;      //20 //random seed adress
+    uint16_t rand_0x14_20;      //20 //random seed address
     uint16_t oldMapEntity_0x16_22;      //22
     uint16_t nextEntity_0x18_24;        //24 //next entity index
     uint16_t id_0x1A_26;        //26 // index - owner //ID last index
@@ -327,7 +327,7 @@ typedef struct _str_0x6E8E {    //lenght a8//THING
     int8_t xsubtype_0x42_66;    //66 //subtype subentity
     int8_t byte_0x43_67;        //67
     int8_t byte_0x44_68;        //68
-    uint8_t state_0x45_69;      //69 // index of structure with lenght 14//STATE-
+    uint8_t state_0x45_69;      //69 // index of structure with length 14//STATE-
     int8_t byte_0x46_70;        //70 // index of bitmap // index of ending sequence
     int8_t byte_0x47_71_xx;     //71
     int8_t StageVar1_0x48_72;   //72
@@ -353,7 +353,7 @@ typedef struct _str_0x6E8E {    //lenght a8//THING
     //int16_t word_0x9E_158;//152
     type_str_160 *dword_0xA0_160x;      //160 //special settings
     //uint16_t word_0xA2_162;//162
-    type_str_164 *dword_0xA4_164x;      //100 // adress of xx
+    type_str_164 *dword_0xA4_164x;      //100 // address of xx
     int16_t play_ch;
 } event_t;
 

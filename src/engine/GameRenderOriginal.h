@@ -80,7 +80,7 @@ class GameRenderOriginal:public GameRenderInterface {
     void DrawSprite_41BD3(uint32 a1);
     void DrawParticles_3E360(int a2x);
     void DrawTriangleInProjectionSpace_B6253(x_DWORD * a1, x_DWORD * a2, x_DWORD * a3);
-    int32_t *x_DWORD_DB350_ret(uint32_t adress);
+    int32_t *x_DWORD_DB350_ret(uint32_t address);
     uint16_t sub_3FD60(int a2x);
     void sub_88740(event_t * a1x, int a2, int a3);
     void SetBillboards_3B560(int16_t roll);

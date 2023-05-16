@@ -6,7 +6,7 @@
 //tabbuffer rewrite tostruct
 //remove index functions
 
-int x_DWORD_E3794_sound_buffer3_lenght = 10;    // weak  number of voices
+int x_DWORD_E3794_sound_buffer3_length = 10;    // weak  number of voices
 bool soundAble_E3798 = true;    // weak
 bool soundActive_E3799 = true;  // weak
 bool soundLoaded_E379A = true;  // weak
@@ -519,7 +519,7 @@ void InitSound_8D290()          //26e290
         AilSetPreference_91A80(0, 200);
         AilSetPreference_91A80(1, soundFrequence_E37BC);
         AilSetPreference_91A80(3, 100);
-        AilSetPreference_91A80(4, x_DWORD_E3794_sound_buffer3_lenght + 1);
+        AilSetPreference_91A80(4, x_DWORD_E3794_sound_buffer3_length + 1);
         AilSetPreference_91A80(5, 127);
         AilSetPreference_91A80(6, 655);
         if (x_BYTE_E379C)
@@ -540,7 +540,7 @@ void InitSound_8D290()          //26e290
             AilInstallDigDriverFile_93330(soundEffectsAILSettings.driver_path, &ioParms_181D90);
         if (hDigSoundEffectsDriver_180B48) {
             if (soundAble_E3798) {
-                x_DWORD_180B4C_end_sound_buffer3_endindex = x_DWORD_E3794_sound_buffer3_lenght;
+                x_DWORD_180B4C_end_sound_buffer3_endindex = x_DWORD_E3794_sound_buffer3_length;
                 for (int i = 0; i < x_DWORD_180B4C_end_sound_buffer3_endindex; i++) {
                     SoundBuffer3_180750[i] =
                         AilAllocateSampleHandle_93510(hDigSoundEffectsDriver_180B48);
@@ -4621,7 +4621,7 @@ bool InitMusicBank_8EAD0(int channel)   //26fad0
     FILE *filehandle;
     int datapos;
     int finaldrivernumber = 0;
-    int filelenght;
+    int filelength;
     int channellplus;
     char musicPath[MAX_PATH];
     if (!musicAble_E37FC)
@@ -4633,8 +4633,8 @@ bool InitMusicBank_8EAD0(int channel)   //26fad0
     if (!filehandle)
         return false;
     DataFileIO::Seek(filehandle, 0, 2);
-    filelenght = myftell(filehandle);
-    DataFileIO::Seek(filehandle, filelenght - 4, 0);
+    filelength = myftell(filehandle);
+    DataFileIO::Seek(filehandle, filelength - 4, 0);
     DataFileIO::Read(filehandle, (uint8_t *) & datapos, 4);
     DataFileIO::Seek(filehandle, datapos, 0);
     DataFileIO::Read(filehandle, (uint8_t *) driverarray, 8);

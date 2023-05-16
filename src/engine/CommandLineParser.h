@@ -119,7 +119,7 @@ class CommandLineParser {
         return m_show_debug_messages1;
     };
     bool DoShowDebugPerifery() const {
-        return m_show_debug_perifery;
+        return m_show_debug_periphery;
     };
     bool DoTextOutputToConsole() const {
         return m_text_output_to_console;
@@ -175,7 +175,7 @@ class CommandLineParser {
     bool m_set_level;
     bool m_test_network_chng1;
     bool m_show_debug_messages1;
-    bool m_show_debug_perifery;
+    bool m_show_debug_periphery;
     bool m_text_output_to_console;
      std::string m_memimages_path;
      std::string m_config_file_path;

@@ -1,4 +1,7 @@
 
+## 2023.05.16
+- src: fix adress, perifery, lenght typos
+
 ## 2023.05.14
 - src: rename dword_38519 -> event_head
 - src: rename type_event_0x6E8 -> event_t

@@ -38,7 +38,7 @@ int test_regression_level = 1;
 //first multi is 50(51) 10
 //first hide level is 30(31) 5
 
-//adress 2285ff
+//address 2285ff
 
 int save_debugcounter = 0;
 
@@ -67,7 +67,7 @@ fix memcpy,memset, malloc
 add regressions tests
 find changes x_DWORD_EA3E4[48]->word_0x1A_26
 
-fix x_WORD_F4FE0 lenght 6 - ok
+fix x_WORD_F4FE0 length 6 - ok
 fix sub_4A050_new_event
 fix sub_49090
 fix x_WORD_D93C0_bldgprmbuffer
@@ -1974,7 +1974,7 @@ signed int sub_5C060();
 void sub_5C0A0();
 //signed int sub_5C1B0_set_any_variables2();
 void sub_5C330();
-bool sub_5C380_test_vga_driver_header(uint16_t testlenght);
+bool sub_5C380_test_vga_driver_header(uint16_t testlength);
 signed int sub_5C3D0_file_decompress(uint8_t * a1, uint8_t * a2);
 void NetworkAllocation2_5C430();
 void NetworkDisallocation2_5C450();
@@ -2734,7 +2734,7 @@ int x_DWORD_D4BAC = 80;         // weak
 __int16 x_WORD_D4BB0 = 65532;   // weak
 
 #pragma pack (1)
-typedef struct {                //lenght 14
+typedef struct {                //length 14
     uint32_t dword_0;           //ok
     int16_t word_4;             //ok
     uint32_t address_6;
@@ -3678,7 +3678,7 @@ type_D4C52ar2 x_DWORD_D4C52ar_strF1[27] = {
 };
 
 #pragma pack (1)
-typedef struct {                //lenght 18
+typedef struct {                //length 18
     uint32_t dword_0;
     uint32_t dword_4;
     int16_t word_8;
@@ -4635,7 +4635,7 @@ int8_t x_BYTE_D9F50[2248] = {
 };                              //DA817
 
 //0xc8+0x800+ x_DWORD_D9F50ar
-//load *xadataspellsdat.colorPalette_var28 - lenght 2080
+//load *xadataspellsdat.colorPalette_var28 - length 2080
 
 int8_t x_BYTE_DB038[52] = {
     0x00, 0x00, 0x01, 0x00, 0x04, 0x01, 0x04, 0x01, 0x04, 0x05, 0x04, 0x05, 0x08, 0x09, 0x08, 0x09,
@@ -4648,12 +4648,12 @@ int8_t x_BYTE_DB038[52] = {
 char *off_DB06C[5] = { (char *)"I", (char *)"II", (char *)"III", (char *)"IV", (char *)"V" };   //x_DWORD_DAF50ar[0x11c]//2ac06c
 
 #pragma pack (1)
-typedef struct {                //lenght 4
+typedef struct {                //length 4
     int16_t word_0;
     int16_t word_2;
 } type_sub_BYTE_DB080;
 
-typedef struct {                //lenght 42
+typedef struct {                //length 42
     int8_t word_0;
     //int8_t stub;
     type_sub_BYTE_DB080 str_sub_BYTE_DB080[10];
@@ -4873,7 +4873,7 @@ char x_BYTE_DB734 = 0;          // weak//x_DWORD_DAF50ar[0x7e4]
 char x_BYTE_DB738 = 0;          // weak//x_DWORD_DAF50ar[0x7e8]
 char x_BYTE_DB74C = 1;          // weak//x_DWORD_DAF50[0x7fc]
 
-std::array < uint8_t *, 256 > x_DWORD_DDF50_texture_adresses;   /*= { 0,32 }*/// weak
+std::array < uint8_t *, 256 > x_DWORD_DDF50_texture_addresses;   /*= { 0,32 }*/// weak
 //2aef50
 //int x_DWORD_DDF54 = 32; // weak
 
@@ -5926,7 +5926,7 @@ void sub_101C0()                //1f11c0
                         tempI = i;
                         tempJ = j;
                     }
-                    //adress 1f1267
+                    //address 1f1267
                     *(*xasearchd_2bac30.colorPalette_var28 + l) = (i - tempI);
                     *(*xasearchd_2bac30.colorPalette_var28 + 1 + l) = (j - tempJ);
                     *(*xasearchd_2bac30.colorPalette_var28 + 2 + l) = k;
@@ -6277,7 +6277,7 @@ int sub_10C80(event_t *a1x, unsigned __int8 a2, unsigned __int16 a3)  //1f1c80
         //add_compare(0x1F1C80, CommandLineParams.DoDebugafterload());
     }
 
-    //adress 1f1c84
+    //address 1f1c84
 
     v3 = 0;
     v32 = 1 << a2;
@@ -7467,7 +7467,7 @@ void sub_12780()                //1f3780
     event_t *v4x;     // ecx
     char v5;                    // dh
 
-    //adress 1f3783
+    //address 1f3783
     if (CommandLineParams.DoDebugSequences()) {
         //add_compare(0x1F3783, CommandLineParams.DoDebugafterload());
     }
@@ -13438,7 +13438,7 @@ signed int sub_1B8C0(event_t *a1x)    //1fc8c0
         MovePlayer_57FA0(&x_WORD_EB398ar, a1x->word_0x1C_28, 0, a1x->actSpeed_0x82_130);
         if (a1x->axis_0x4C_76.x >> 8 != x_WORD_EB398ar.x >> 8
             || a1x->axis_0x4C_76.y >> 8 != x_WORD_EB398ar.y >> 8) {
-            //adress 1fc9e4
+            //address 1fc9e4
             if (sub_102D0(a1x, &x_WORD_EB398ar, 1)
                 || sub_1B7A0_tile_compare(&x_WORD_EB398ar) >=
                 a1x->dword_0xA0_160x->word_160_0x10_16) {
@@ -26017,7 +26017,7 @@ void DrawTopStatusBar_2D710(event_t *a1x)     //20e710
     x_DWORD_F01E8(2, 2, (*filearray_2aa18c[filearrayindex_MSPRD00DATTAB].posistruct)[40]);
     //v1 = *(unsigned __int8 *)(*filearray_2aa18c[6] + 244) + 2;
     v1 = (*filearray_2aa18c[filearrayindex_MSPRD00DATTAB].posistruct)[40].width_4 + 2;
-    //adress 20e7db
+    //address 20e7db
     v18 = engine_db.str_index_242ar.dword_4;
     //v20 = a1x->dword_0xA4_164;
     v2x = x_DWORD_EA3E4[a1x->dword_0xA4_164x->word_0x3A_58];
@@ -26074,7 +26074,7 @@ void DrawTopStatusBar_2D710(event_t *a1x)     //20e710
         x_DWORD_F01E8(v1, 2, (*filearray_2aa18c[filearrayindex_MSPRD00DATTAB].posistruct)[54]);
     }
     //v8 = *(unsigned __int8 *)(**filearray_2aa18c[6] + 250) + v1;
-    //adress 20eaa0
+    //address 20eaa0
     v8 = (*filearray_2aa18c[filearrayindex_MSPRD00DATTAB].posistruct)[41].width_4 + v1;
     if (x_DWORD_EA3E4[0] >= v23x) {
         //20eca6
@@ -26132,7 +26132,7 @@ void DrawTopStatusBar_2D710(event_t *a1x)     //20e710
     if (a1x->dword_0xA4_164x->byte_0x196_406 > 0 && engine_db.byteindex_121[1]) {
         x_DWORD_F01E8(v12, 2, (*filearray_2aa18c[filearrayindex_MSPRD00DATTAB].posistruct)[55]);
         a1x->dword_0xA4_164x->byte_0x196_406--;
-    } else {                    //adress 20ed35
+    } else {                    //address 20ed35
         x_DWORD_F01E8(v12, 2, (*filearray_2aa18c[filearrayindex_MSPRD00DATTAB].posistruct)[41]);
     }
     if ((a1x->struct_byte_0xc_12_15.byte[0] & 0x20 || a1x->dword_0xA4_164x->word_0x159_345)
@@ -26150,7 +26150,7 @@ void DrawTopStatusBar_2D710(event_t *a1x)     //20e710
     //VGA_Debug_Blit(640, 480, pdwScreenBuffer_351628);
     v14 = v12 + 58;
     sub_2D190(v14, 10, 64, 10, (a1x->life_0x8 << 6) / a1x->maxLife_0x4, 0x7Bu);
-    //adress 20ee1a
+    //address 20ee1a
     //1b8 1c 40 0a 03 aa
     //0xfa00/4c79=3
     //v18=0x4c79
@@ -26389,7 +26389,7 @@ void DrawSpellIcon_2E260(int16_t posX, int16_t posY, event_t *a3x, char a4)   //
             if (!(SPELLS_BEGIN_BUFFER_str[a3x->model_0x40_64].byte_1 & 4)
                 || (v7 = a3x->word_0x2E_46, v7 <= 0)
                 || v7 >= 32 || !engine_db.byteindex_121[1]) {
-                if (a4)         //adress 20f334
+                if (a4)         //address 20f334
                 {
                     if (a3x->word_0x2E_46)
                         //v8 = (uint8_t**)(**filearray_2aa18c[6] + 12);
@@ -26413,7 +26413,7 @@ void DrawSpellIcon_2E260(int16_t posX, int16_t posY, event_t *a3x, char a4)   //
                                        posistruct)[(a3x->model_0x40_64 + 123)]);
                 //20f3b8
                 //"I" 0x234 a6757c->a5b3b0    0xc
-                //adress 20f37a
+                //address 20f37a
                 DrawText_2BC10((char *)off_DB06C[a3x->byte_0x46_70], (*filearray_2aa18c[filearrayindex_MSPRD00DATTAB].posistruct)[1].width_4 + posX - 8 * strlen((const char *)*(&off_DB06C[a3x->byte_0x46_70])) - 2,   //test and fix
                                posY, (*xadataclrd0dat.colorPalette_var28)[0]);  //x_BYTE_E8900//20f3bd//2b9900
                 if (a3x->maxMana_0x8C_140) {
@@ -27776,7 +27776,7 @@ void AddQuickfair0A_01_30F60(event_t *event)  //211f60
     strIndex = AddE7EE0x_10080(event->dword_0x10_16, event->dword_0x10_16);
     if (strIndex) {
         while (sub_10130(strIndex, &tempX, &tempY) == 1) {
-            //adress 211fd8
+            //address 211fd8
             event->rand_0x14_20 = 9377 * event->rand_0x14_20 + 9439;
             if (2 * ((signed int)(event->rand_0x14_20 % 0x9Du) / 79) - 1 > 0) {
                 event->rand_0x14_20 = 9377 * event->rand_0x14_20 + 9439;
@@ -30037,7 +30037,7 @@ void sub_34540(event_t *a1x)  //215540
         x_BYTE_F01FEx[2 + v33++] = v1x;
         MovePlayer_57FA0(&v25x, v34, 0, 85);
     }
-    v30 = 0;                    //adress 215637
+    v30 = 0;                    //address 215637
     v23x = a1x->axis_0x4C_76;
     while (v30 < v29) {
         v2 = v28 + v30 * ((v27 - v28) / v29);
@@ -30060,7 +30060,7 @@ void sub_34540(event_t *a1x)  //215540
             //v39 = v38;
             v39x.word = v38x.word;
             while (v4 > v32) {
-                //adress 2156d8
+                //address 2156d8
                 //if (debugcounter_215540 >= 0x8cc)
                 if (debugcounter_215540 >= 0xbf) {
                     debugcounter_215540++;
@@ -31985,7 +31985,7 @@ void ApplyTerrainModification_37240(event_t *event)   //218240
         v22 = v3 >> 1;
         event->life_0x8--;
         v25 = v4 >> 1;
-        if (event->life_0x8 <= 0)       //adress 21830a
+        if (event->life_0x8 <= 0)       //address 21830a
         {
             v38x._axis_2d.x = v36 - v25;
             v38x._axis_2d.y = v39 - v22;
@@ -32006,7 +32006,7 @@ void ApplyTerrainModification_37240(event_t *event)   //218240
                 v23++;
                 v44x._axis_2d.y++;
             }
-            v17 = event->state_0x45_69; //adress 218650
+            v17 = event->state_0x45_69; //address 218650
             if (v17 >= 0x30u) {
                 if (v17 <= 0x30u) {
                     x_DWORD_EA3E4[event->parentId_0x28_40]->word_0x2E_46 = 2;
@@ -32047,7 +32047,7 @@ void ApplyTerrainModification_37240(event_t *event)   //218240
                     v40x._axis_2d.y++;
                 }
             }
-            v41x.word = v37x.word;      //adress 218389
+            v41x.word = v37x.word;      //address 218389
             v28 = 0;
             v34 = v26;
             while (v3 > v28) {
@@ -32093,7 +32093,7 @@ void ApplyTerrainModification_37240(event_t *event)   //218240
                 v28++;
                 v41x._axis_2d.y++;
             }
-            //adress 2184e0
+            //address 2184e0
             if (!(event->life_0x8 % 5) || event->life_0x8 == 1) {
                 v13 = v26;
                 v14 = 0;
@@ -32102,7 +32102,7 @@ void ApplyTerrainModification_37240(event_t *event)   //218240
                     v32 = 0;
                     v47x = v42x;
                     while (v4 > v32) {
-                        if (v13[0] != 0xffu) {  //adress 218519
+                        if (v13[0] != 0xffu) {  //address 218519
                             mapAngle_13B4E0[v47x.word] = mapAngle_13B4E0[v47x.word] & 0xF0 | 1;
                             mapTerrainType_10B4E0[v47x.word] = 1;
                         }
@@ -32122,8 +32122,8 @@ void ApplyTerrainModification_37240(event_t *event)   //218240
                         v48x = v43x;
                         //v17x = 0;
                         while (v4 > v24) {
-                            if (v15[0] != 0xffu)        //adress 218593
-                                sub_45DC0(v24, v48x, v15[0]);   //adress
+                            if (v15[0] != 0xffu)        //address 218593
+                                sub_45DC0(v24, v48x, v15[0]);   //address
                             v15 += 2;
                             //v17x = v48x._axis_2d.x + 1;
                             v24++;
@@ -32545,7 +32545,7 @@ void AddTerrainMod0A_2A_37BC0(event_t *a1x)   //218bc0 // groove castle
                         if (*(x_WORD *) (v30 + 2 * v15)) {
                             if (!mapHeightmap_11B4E0[jx.word]
                                 || sub_57450(mapTerrainType_10B4E0[jx.word])) {
-                                //adress 218f4e
+                                //address 218f4e
                                 mapAngle_13B4E0[jx.word] = mapAngle_13B4E0[jx.word] & 0xF8 | 1;
                                 sub_46570(jx, jx);
                             }
@@ -35044,47 +35044,47 @@ void sub_3B4D0_fill_unk_D4350_256(int a1)       //21c4d0
 }
 
 /*
-int8_t* x_DWORD_D9F50ar_ret(uint32_t adress) {
-	if (adress >= 0x4400) return (int8_t*)&x_WORD_DE350[(adress - 0x4400)/2];
-	if (adress >= 0x4000) return (int8_t*)& x_DWORD_DDF50_texture_adresses[(adress - 0x4000)/4];
-	//if (adress >= 0x2000) return (int8_t*)&off_DBF50[(adress - 0x2000)/4];
-	if (adress >= 0x1800) return (int8_t*)&Maths::x_DWORD_DB750[(adress - 0x1800)/4];
-	//if (adress >= 0x1400) return &x_DWORD_D9F50ar[0x800+0x800+(adress - 0x1400)];
-	//if (adress >= 0x1000) return &x_DWORD_D9F50ar[0x800+0x800 + (adress - 0x1000)];
-	//if (adress >= 0x800) return &x_DWORD_D9F50ar[0x800+(adress - 0x800)];
-	return &x_DWORD_D9F50ar[adress];
+int8_t* x_DWORD_D9F50ar_ret(uint32_t address) {
+	if (address >= 0x4400) return (int8_t*)&x_WORD_DE350[(address - 0x4400)/2];
+	if (address >= 0x4000) return (int8_t*)& x_DWORD_DDF50_texture_addresses[(address - 0x4000)/4];
+	//if (address >= 0x2000) return (int8_t*)&off_DBF50[(address - 0x2000)/4];
+	if (address >= 0x1800) return (int8_t*)&Maths::x_DWORD_DB750[(address - 0x1800)/4];
+	//if (address >= 0x1400) return &x_DWORD_D9F50ar[0x800+0x800+(address - 0x1400)];
+	//if (address >= 0x1000) return &x_DWORD_D9F50ar[0x800+0x800 + (address - 0x1000)];
+	//if (address >= 0x800) return &x_DWORD_D9F50ar[0x800+(address - 0x800)];
+	return &x_DWORD_D9F50ar[address];
 }*/
 /*
-int8_t* x_DWORD_DA750ar_ret(uint32_t adress) {
-	if (adress >= 0x3c00) return (int8_t*)&x_WORD_DE350[(adress - 0x3c00)/2];
-	if (adress >= 0x3800) return (int8_t*)&x_DWORD_DDF50_texture_adresses[(adress - 0x3800)/4];
-	//if (adress >= 0x1800) return (int8_t*)&off_DBF50[(adress - 0x1800)/4];
-	if (adress >= 0x1000) return (int8_t*)&Maths::x_DWORD_DB750[(adress - 0x1000)/4];
-	//if (adress >= 0xc00) return &x_DWORD_D9F50ar[0x800+0x800 + (adress - 0xc00)];
-	//if (adress >= 0x800) return &x_DWORD_D9F50ar[0x800+0x800 + (adress - 0x800)];
-	return &x_DWORD_D9F50ar[0x800+adress];
+int8_t* x_DWORD_DA750ar_ret(uint32_t address) {
+	if (address >= 0x3c00) return (int8_t*)&x_WORD_DE350[(address - 0x3c00)/2];
+	if (address >= 0x3800) return (int8_t*)&x_DWORD_DDF50_texture_addresses[(address - 0x3800)/4];
+	//if (address >= 0x1800) return (int8_t*)&off_DBF50[(address - 0x1800)/4];
+	if (address >= 0x1000) return (int8_t*)&Maths::x_DWORD_DB750[(address - 0x1000)/4];
+	//if (address >= 0xc00) return &x_DWORD_D9F50ar[0x800+0x800 + (address - 0xc00)];
+	//if (address >= 0x800) return &x_DWORD_D9F50ar[0x800+0x800 + (address - 0x800)];
+	return &x_DWORD_D9F50ar[0x800+address];
 }
 */
-/*int8_t* x_DWORD_DAF50ar_ret(uint32_t adress) {
-	if (adress >= 0x3400) return (int8_t*)&x_WORD_DE350[(adress - 0x3400) / 2];
-	if (adress >= 0x3000) return (int8_t*)&x_DWORD_DDF50_texture_adresses[(adress - 0x3000) / 4];
-	//if (adress >= 0x1000) return (int8_t*)&off_DBF50[(adress - 0x1000) / 4];
-	if (adress >= 0x800) return (int8_t*)&Maths::x_DWORD_DB750[(adress - 0x800) / 4];
-	//if (adress >= 0x400) return &x_DWORD_D9F50ar[0x800+0x800+(adress - 0x400)];
-	return &x_DWORD_D9F50ar[0x800+0x800+adress];
+/*int8_t* x_DWORD_DAF50ar_ret(uint32_t address) {
+	if (address >= 0x3400) return (int8_t*)&x_WORD_DE350[(address - 0x3400) / 2];
+	if (address >= 0x3000) return (int8_t*)&x_DWORD_DDF50_texture_addresses[(address - 0x3000) / 4];
+	//if (address >= 0x1000) return (int8_t*)&off_DBF50[(address - 0x1000) / 4];
+	if (address >= 0x800) return (int8_t*)&Maths::x_DWORD_DB750[(address - 0x800) / 4];
+	//if (address >= 0x400) return &x_DWORD_D9F50ar[0x800+0x800+(address - 0x400)];
+	return &x_DWORD_D9F50ar[0x800+0x800+address];
 }*/
 /*
-int8_t* x_DWORD_DB750ar_ret(uint32_t adress) {
-	if (adress >= 0x2c00) return (int8_t*)&x_WORD_DE350[(adress - 0x2c00) / 2];
-	if (adress >= 0x2800) return (int8_t*)&x_DWORD_DDF50_texture_adresses[(adress - 0x2800) / 4];
-	//if (adress >= 0x800) return (int8_t*)&off_DBF50[(adress - 0x800) / 4];
-	return (int8_t*)&Maths::x_DWORD_DB750[adress/4];
+int8_t* x_DWORD_DB750ar_ret(uint32_t address) {
+	if (address >= 0x2c00) return (int8_t*)&x_WORD_DE350[(address - 0x2c00) / 2];
+	if (address >= 0x2800) return (int8_t*)&x_DWORD_DDF50_texture_addresses[(address - 0x2800) / 4];
+	//if (address >= 0x800) return (int8_t*)&off_DBF50[(address - 0x800) / 4];
+	return (int8_t*)&Maths::x_DWORD_DB750[address/4];
 }*/
 /*
-int8_t* x_DWORD_DBF50ar_ret(uint32_t adress) {
-	if (adress >= 0x2400) return (int8_t*)&x_WORD_DE350[(adress - 0x2400) / 2];
-	if (adress >= 0x2000) return (int8_t*)&x_DWORD_DDF50[(adress - 0x2000) / 4];
-	return (int8_t*)&off_DBF50[adress/4];
+int8_t* x_DWORD_DBF50ar_ret(uint32_t address) {
+	if (address >= 0x2400) return (int8_t*)&x_WORD_DE350[(address - 0x2400) / 2];
+	if (address >= 0x2000) return (int8_t*)&x_DWORD_DDF50[(address - 0x2000) / 4];
+	return (int8_t*)&off_DBF50[address/4];
 }*/
 
 //----- (0003B560) --------------------------------------------------------
@@ -35761,7 +35761,7 @@ void sub_46570(uaxis_2d a1x, uaxis_2d a2x)      //227570
     v32 = v28;
     v9x.word = a1x.word;
     v30 = v29 + 1;
-    //adress 2275eb
+    //address 2275eb
     while (v32) {
         if (CommandLineParams.DoDebugSequences()) {
             //add_compare(0x227607, CommandLineParams.DoDebugafterload());
@@ -35805,7 +35805,7 @@ void sub_46570(uaxis_2d a1x, uaxis_2d a2x)      //227570
     v17x.word = a1x.word;
     v18 = v28 + 1;              //problem 02, ale ma byt 03
     //v17=0xfefe
-    //adress 227737
+    //address 227737
     if (v28 != -1) {
         do {
             for (j = v31; j; j--) {
@@ -35873,14 +35873,14 @@ void write_pngs2()
     for (int k = 0; k < 0x1F8u; k++) {
         if (str_DWORD_F66F0x[k] != 0) {
             type_particle_str *actimg = *str_DWORD_F66F0x[k];
-            //int lenght = actimg->word_0;
+            //int length = actimg->word_0;
             int width = actimg->width;
             int height = actimg->height;
-            /*int lenght = *(uint16_t*)(actimg + 0);
+            /*int length = *(uint16_t*)(actimg + 0);
                int width = *(uint16_t*)(actimg + 2);
                int height = *(uint16_t*)(actimg + 4); */
 
-            //memcpy((uint8_t*)buffer, actimg + 6, lenght);
+            //memcpy((uint8_t*)buffer, actimg + 6, length);
             if ((width > 0) && (width < 1024) && (width != 0xcdcd) && (height < 768)) {
                 char outname[MAX_PATH];
                 sprintf(outname, "test-%03d.bmp", k);
@@ -35894,11 +35894,11 @@ void write_pngs2()
        if ((uint32_t*)x_DWORD_F66F0[k] != 0)
        {
        uint8_t* actimg = (uint8_t*) * (uint32_t*)x_DWORD_F5F10[k];
-       int lenght = *(uint16_t*)(actimg + 0);
+       int length = *(uint16_t*)(actimg + 0);
        int width = *(uint16_t*)(actimg + 2);
        int height = *(uint16_t*)(actimg + 4);
 
-       //memcpy((uint8_t*)buffer, actimg + 6, lenght);
+       //memcpy((uint8_t*)buffer, actimg + 6, length);
        if ((width > 0) && (width < 1024) && (width != 0xcdcd) && (height < 768))
        {
        sprintf(outname, "c:\\prenos\\remc2\\outimg\\testB-%03d.png", k);
@@ -35966,7 +35966,7 @@ void sub_46830_main_loop( /*int16_t* a1, */ signed int a2, unsigned __int16 a3) 
         sub_48350();            //fix it //229350
         //v4=0; //fix it
         //!!!!test area1
-        //adress 22787a
+        //address 22787a
         /*uint8_t origbyte3, remakebyte3;
            int comp12 = compare_with_snapshot_D41A0((char*)"0160-0022787A", x_D41A0_BYTEARRAY_0, 0x356038, 224790, &origbyte3, &remakebyte3);
          */
@@ -36311,7 +36311,7 @@ void LoadTextureData(__int16 vgaTypeResolution, MapType_t MapType, uint8_t *text
     MapType_t v0;               // al
     //char* v1;
     //int v2; // esi
-    int32_t file2lenght;        // eax
+    int32_t file2length;        // eax
     int32_t file1Lenght;
     //char* filearray1;
     //int v4; // eax
@@ -36372,20 +36372,20 @@ void LoadTextureData(__int16 vgaTypeResolution, MapType_t MapType, uint8_t *text
         file1Lenght = (file1Lenght + 8) & 0xFFF8;
         //v14 = v4;
         uint8_t *x = &textureBuffer[file1Lenght];
-        file2lenght = DataFileIO::ReadFileAndDecompress(tabPath, &x);   //fix it
-        //v5 = file2lenght;
-        if (file2lenght > 0) {
-            //v6 = file2lenght+file1Lenght;
-            //filearray1 = (char*)sub_83CD0_malloc2(file2lenght + file1Lenght);
+        file2length = DataFileIO::ReadFileAndDecompress(tabPath, &x);   //fix it
+        //v5 = file2length;
+        if (file2length > 0) {
+            //v6 = file2length+file1Lenght;
+            //filearray1 = (char*)sub_83CD0_malloc2(file2length + file1Lenght);
             //x_DWORD_D4188 = (uint8_t*)filearray1;
-            x_DWORD_D4188 = (posistruct2_t *) Malloc_83CD0(file2lenght + file1Lenght);
+            x_DWORD_D4188 = (posistruct2_t *) Malloc_83CD0(file2length + file1Lenght);
             if (x_DWORD_D4188) {
-                qmemcpy(x_DWORD_D4188, (void *)textureBuffer, file2lenght + file1Lenght);
+                qmemcpy(x_DWORD_D4188, (void *)textureBuffer, file2length + file1Lenght);
                 x_DWORD_D418C = (posistruct2_t *) ((int8_t *) x_DWORD_D4188 + file1Lenght);
                 //x_DWORD_D418C = &x_DWORD_D4188[file1Lenght / sizeof(posistruct2_t)];
                 x_DWORD_D4190 =
-                    (posistruct2_t *) ((int8_t *) x_DWORD_D4188 + file2lenght + file1Lenght);
-                //x_DWORD_D4190 = &x_DWORD_D4188[(file2lenght + file1Lenght) / sizeof(posistruct2_t)];
+                    (posistruct2_t *) ((int8_t *) x_DWORD_D4188 + file2length + file1Lenght);
+                //x_DWORD_D4190 = &x_DWORD_D4188[(file2length + file1Lenght) / sizeof(posistruct2_t)];
                 if (vgaTypeResolution & 1)
                     sub_98709_create_index_dattab_power(x_DWORD_D418C, x_DWORD_D4190,
                                                         (uint8_t *) x_DWORD_D4188,
@@ -36568,9 +36568,9 @@ void sub_47320_in_game_loop(signed int a1)      //228320
            //savetext
            FILE* filesavetext;
            filesavetext=fopen("testsavetext.data", "wb");
-           fwrite(x_DWORD_DDF50_texture_adresses[0],2621440,1, filesavetext);
+           fwrite(x_DWORD_DDF50_texture_addresses[0],2621440,1, filesavetext);
            fclose(filesavetext);
-           //x_DWORD_DDF50_texture_adresses
+           //x_DWORD_DDF50_texture_addresses
            //savetext
          */
 
@@ -36661,14 +36661,14 @@ void DrawAndEventsInGame_47560( /*uint8_t* a1, int a2, */ uint32_t a3, signed in
         //save in interval
         save_debugcounter++;
     }
-//adress 228583
+//address 228583
     if (CommandLineParams.DoDebugSequences2()) {
         //add_compare(0x228583, CommandLineParams.DoDebugafterload());
     }
     GameEvents_51BB0();         //nothing draw
-    //adress 228588
+    //address 228588
     sub_848A0();                //nothing draw
-    //adress 22858d
+    //address 22858d
     speed = engine_db.speedIndex;
     if (speed == 0) {
         if (!speed)
@@ -36688,7 +36688,7 @@ void DrawAndEventsInGame_47560( /*uint8_t* a1, int a2, */ uint32_t a3, signed in
     sub_575C0();                //nothing draw
     sub_6E150();                //nothing draw
     DrawGameFrame_2BE30();
-    //adress 2285ff
+    //address 2285ff
     //add_compare(0x002285FF, CommandLineParams.DoDebugafterload());
     if (CommandLineParams.DoTestRegression()) {
         add_compare(0x002285FF, CommandLineParams.DoDebugafterload(), -1, false, 20);
@@ -36711,7 +36711,7 @@ void DrawAndEventsInGame_47560( /*uint8_t* a1, int a2, */ uint32_t a3, signed in
     }
     if (engine_db.byteindex_10)
         DrawHelpPopUps_871F0();
-    //adress 22860f
+    //address 22860f
 
     if (CommandLineParams.DoDetectDwordA()) {
         for (int iii = 1; iii < 0x3E9; iii++)
@@ -38234,7 +38234,7 @@ void sub_49090(type_str_2FECE *terrain, type_entity_0x30311 *entity)    //22a090
 void sub_49270_generate_level_features(type_str_2FECE *terrain) //22a270
 {
     SetStagetagForTermod_49830(terrain);
-    //adress 22A27D
+    //address 22A27D
     if (CommandLineParams.DoDebugSequences()) {
         add_compare(0x22A280, CommandLineParams.DoDebugafterload());
     }
@@ -38264,7 +38264,7 @@ void GenerateEvents_49290(type_str_2FECE *terrain, char a2, uint16_t width, uint
                 terrain->entity_0x30311[ix].type_0x30311 = 0;
         }
     }
-    ApplyEvents_498A0();        //adress 22a2de
+    ApplyEvents_498A0();        //address 22a2de
     if (CommandLineParams.DoDebugSequences()) {
         add_compare(0x22A2E3, CommandLineParams.DoDebugafterload());
     }
@@ -38314,7 +38314,7 @@ void GenerateEvents_49290(type_str_2FECE *terrain, char a2, uint16_t width, uint
     if (CommandLineParams.DoDebugSequences()) {
         add_compare(0x22A3D7, CommandLineParams.DoDebugafterload());
     }
-    ApplyEvents_498A0();        //adress 22a3d7
+    ApplyEvents_498A0();        //address 22a3d7
     for (lx = 1; lx < 0x4b0; lx++) {
         if (terrain->entity_0x30311[lx].DisId == -1
             && terrain->entity_0x30311[lx].type_0x30311 == 0x000e
@@ -38342,7 +38342,7 @@ void GenerateEvents_49290(type_str_2FECE *terrain, char a2, uint16_t width, uint
             }
         }
     }
-    ApplyEvents_498A0();        //adress 22a476
+    ApplyEvents_498A0();        //address 22a476
     for (nx = 1; nx < 0x4b0; nx++) {
         if (terrain->entity_0x30311[nx].DisId == -1
             && terrain->entity_0x30311[nx].type_0x30311 == 0x000a
@@ -38353,7 +38353,7 @@ void GenerateEvents_49290(type_str_2FECE *terrain, char a2, uint16_t width, uint
                 terrain->entity_0x30311[nx].type_0x30311 = 0;
         }
     }
-    ApplyEvents_498A0();        //adress 22a4d1
+    ApplyEvents_498A0();        //address 22a4d1
     if (CommandLineParams.DoDebugSequences()) {
         add_compare(0x22A4D6, CommandLineParams.DoDebugafterload());
     }
@@ -38370,7 +38370,7 @@ void GenerateEvents_49290(type_str_2FECE *terrain, char a2, uint16_t width, uint
     if (CommandLineParams.DoDebugSequences()) {
         add_compare(0x22A52C, CommandLineParams.DoDebugafterload());
     }
-    ApplyEvents_498A0();        //adress 22a52c
+    ApplyEvents_498A0();        //address 22a52c
 }
 
 int debugcounter_22a540 = 0;
@@ -38380,7 +38380,7 @@ void PrepareEvents_49540(type_str_2FECE *terrain, type_entity_0x30311 *entity)  
 {
     int16_t z_temp;             // ax
     event_t *event;   // eax
-    uint32_t temp_adress;
+    uint32_t temp_address;
 
     if (CommandLineParams.DoDebugSequences()) {
         debugcounter_22a540++;
@@ -38394,13 +38394,13 @@ void PrepareEvents_49540(type_str_2FECE *terrain, type_entity_0x30311 *entity)  
     case 0x02:
     case 0x0E:
         {
-            x_WORD_EB398ar.x = entity->axis2d_4.x << 8; //adress 22a7b0
+            x_WORD_EB398ar.x = entity->axis2d_4.x << 8; //address 22a7b0
             x_WORD_EB398ar.y = entity->axis2d_4.y << 8;
             z_temp = getTerrainAlt_10C40(&x_WORD_EB398ar);
             x_WORD_EB398ar.z = z_temp;
-            temp_adress = str_x_DWORD_D4C52ar_0x2F22[entity->subtype_0x30311].address_6;
-            if (temp_adress) {
-                event = pre_sub_4A190_axis_3d(temp_adress, &x_WORD_EB398ar);
+            temp_address = str_x_DWORD_D4C52ar_0x2F22[entity->subtype_0x30311].address_6;
+            if (temp_address) {
+                event = pre_sub_4A190_axis_3d(temp_address, &x_WORD_EB398ar);
                 if (event) {
                     event->word_0x2C_44 = entity->par1_14;
                     event->word_0x96_150 = entity->par3_18;
@@ -38423,13 +38423,13 @@ void PrepareEvents_49540(type_str_2FECE *terrain, type_entity_0x30311 *entity)  
                 }
             case 0x2D:
                 {
-                    x_WORD_EB398ar.x = entity->axis2d_4.x << 8; //adress 22a5af
+                    x_WORD_EB398ar.x = entity->axis2d_4.x << 8; //address 22a5af
                     x_WORD_EB398ar.y = entity->axis2d_4.y << 8;
                     z_temp = getTerrainAlt_10C40(&x_WORD_EB398ar);
                     x_WORD_EB398ar.z = z_temp;
-                    temp_adress = str_x_DWORD_D4C52ar_0x1D26[entity->subtype_0x30311].address_6;
-                    if (temp_adress) {
-                        event = pre_sub_4A190_axis_3d(temp_adress, &x_WORD_EB398ar);    //(*(int(**)(int))((char *)&off_D697E + 14 * v4))((int)x_WORD_EB398ar);
+                    temp_address = str_x_DWORD_D4C52ar_0x1D26[entity->subtype_0x30311].address_6;
+                    if (temp_address) {
+                        event = pre_sub_4A190_axis_3d(temp_address, &x_WORD_EB398ar);    //(*(int(**)(int))((char *)&off_D697E + 14 * v4))((int)x_WORD_EB398ar);
                         if (event)
                             sub_49A30(event, entity->par1_14);
                     }
@@ -38439,9 +38439,9 @@ void PrepareEvents_49540(type_str_2FECE *terrain, type_entity_0x30311 *entity)  
             x_WORD_EB398ar.x = entity->axis2d_4.x << 8;
             x_WORD_EB398ar.y = entity->axis2d_4.y << 8;
             x_WORD_EB398ar.z = getTerrainAlt_10C40(&x_WORD_EB398ar);
-            temp_adress = str_x_DWORD_D4C52ar_0x1D26[entity->subtype_0x30311].address_6;
-            if (temp_adress) {
-                event = pre_sub_4A190_axis_3d(temp_adress, &x_WORD_EB398ar);
+            temp_address = str_x_DWORD_D4C52ar_0x1D26[entity->subtype_0x30311].address_6;
+            if (temp_address) {
+                event = pre_sub_4A190_axis_3d(temp_address, &x_WORD_EB398ar);
                 if (event) {
                     switch (entity->subtype_0x30311) {
                     case 0x09:
@@ -38901,7 +38901,7 @@ uint8_t testarray[0x260000];    //for debug
 bool test_pre_sub_4a190_firstrun = true;        //for debug
 
 int debugcounter_4a190 = 0;
-void test_pre_sub_4a190(uint32_t adress)        //for debug
+void test_pre_sub_4a190(uint32_t address)        //for debug
 {
     if (test_pre_sub_4a190_firstrun) {
         //testarray = new uint8_t(0x260000);
@@ -38909,13 +38909,13 @@ void test_pre_sub_4a190(uint32_t adress)        //for debug
         for (int64 i = 0; i < 0x260000; i++)
             testarray[i] = 0;
     }
-    if (testarray[adress] < 0xff) {
-        if (testarray[adress] == 0) {
-            myprintf("%d - new procedure:%08X\n", debugcounter_4a190, adress);
+    if (testarray[address] < 0xff) {
+        if (testarray[address] == 0) {
+            myprintf("%d - new procedure:%08X\n", debugcounter_4a190, address);
         }
         //else
-        //myprintf("%d - new instance:%08X, %d\n", debugcounter_4a190,adress, testarray[adress]);
-        testarray[adress]++;
+        //myprintf("%d - new instance:%08X, %d\n", debugcounter_4a190,address, testarray[address]);
+        testarray[address]++;
         if (debugcounter_4a190 > 0x3c4) {
             debugcounter_4a190++;
             debugcounter_4a190--;
@@ -39912,12 +39912,12 @@ event_t *pre_sub_4A190_axis_3d(uint32_t address, axis_3d *a1_axis3d)  //pre 22b1
     return 0;
 }
 
-void pre_sub_4A190_0x6E8E(uint32_t adress, event_t *a1_6E8E)  //pre 22b190
+void pre_sub_4A190_0x6E8E(uint32_t address, event_t *a1_6E8E)  //pre 22b190
 {
     if (CommandLineParams.DoShowNewProcedures()) {
-        test_pre_sub_4a190(adress);     //for debug
+        test_pre_sub_4a190(address);     //for debug
     }
-    switch (adress) {
+    switch (address) {
     case 0x1f3910:{
             sub_12910(a1_6E8E);
             break;
@@ -43613,7 +43613,7 @@ void sub_4A1E0(int a1, char a2) //22b1e0
         sub_71780();
     }
     sub_49F90();
-    sub_122C0(a1);              //adress 22b257
+    sub_122C0(a1);              //address 22b257
     for (int iy = 1; iy < 0x4b0; iy++) {
 
         /*if (debugcounter_0022B25D >= 0x55)
@@ -43623,11 +43623,11 @@ void sub_4A1E0(int a1, char a2) //22b1e0
            }
            debugcounter_0022B25D++; */
 
-        //adress 22b26e
+        //address 22b26e
         if (CommandLineParams.DoDebugSequences()) {
             //add_compare(0x22b268, CommandLineParams.DoDebugafterload(),0x54);//0x9ac
         }
-        if (D41A0_0.terrain_2FECE.entity_0x30311[iy].type_0x30311 && D41A0_0.terrain_2FECE.entity_0x30311[iy].DisId == a1) {    //adress 22b278
+        if (D41A0_0.terrain_2FECE.entity_0x30311[iy].type_0x30311 && D41A0_0.terrain_2FECE.entity_0x30311[iy].DisId == a1) {    //address 22b278
             sub_4A310(&D41A0_0.terrain_2FECE.entity_0x30311[iy]);
             if (D41A0_0.terrain_2FECE.entity_0x30311[iy].type_0x30311 == 0x05) {
                 if (D41A0_0.terrain_2FECE.entity_0x30311[iy].subtype_0x30311 < 0xC
@@ -48234,13 +48234,13 @@ void GameEvents_51BB0()         //232bb0
         engine_db.byteindex_38400--;
     if (engine_db.byteindex_38401)
         engine_db.byteindex_38401--;
-    //adress 232cd2
+    //address 232cd2
     for (int i = 1; i < 16; i++) {
         engine_db.byteindex_121[i] =
             D41A0_0.array_0x2BDE[D41A0_0.LevelIndex_0xc].dword_0x012_2BE0_11248 / i & 1;
     }
     for (int i = 0; i < D41A0_0.word_0xe; i++) {
-        //adress 233d56
+        //address 233d56
         actEvent = x_DWORD_EA3E4[D41A0_0.array_0x2BDE[i].word_0x00a_2BE4_11240];
         if (engine_db.setting_byte1_22 & 0x20) {
             sub_53A40(&D41A0_0.array_0x6E3E[i]);
@@ -48456,7 +48456,7 @@ void GameEvents_51BB0()         //232bb0
             case 1:
                 for (int k = 0; k < 26; k++) {
                     if (!actEvent->dword_0xA4_164x->str_611.array_0x333_819x.word[k]) {
-                        //adress 23354c
+                        //address 23354c
                         event_t *locEv =
                             pre_sub_4A190_axis_3d(0x2321a0 + 0x20 * k, &actEvent->axis_0x4C_76);
                         if (locEv) {
@@ -49013,7 +49013,7 @@ void sub_53160()                //234160
             D41A0_0.array_0x2BDE[v0index].dword_0x3E6_2BE4_12228.byte_0x1C0_448 = x_BYTE_E131C[v12];
         //v6 = (char *)(v0 + 927);//wizard name
         v6 = (char *)D41A0_0.array_0x2BDE[v0index].array_0x39f_2BFA_12157;
-        //adress 2342e4
+        //address 2342e4
         v7 = (char *)WizardsNames_D93A0[GetTrueWizardNumber_61790(v12)];
         strcpy(v6, v7);
         strcpy(D41A0_0.array_0x2BDE[v0index].array_0x39f_2BFA_12157, v7);
@@ -49888,7 +49888,7 @@ void sub_54A50(int playerIndex2, int playerIndex)       //235a50
                 }
             }
         }
-        if (bool1)              //adress 235cc3
+        if (bool1)              //address 235cc3
         {
             D41A0_0.array_0x2BDE[playerIndex].dword_0x3E6_2BE4_12228.str_611.array_0x333_819x.
                 word[result] = 1;
@@ -50324,7 +50324,7 @@ bool LoadLevel_555D0(uint8_t fileindex, int levelindex) //2365d0
         temp0x21B2 = D41A0_0.str_0x21B2;
         temp0x21B6 = D41A0_0.str_0x21B6;
         readSuccess = sub_55750_TestExistingSaveFile(fileindex, levelindex);
-        //adress  23662a
+        //address  23662a
         if (readSuccess) {
             readSuccess = LoadLevelSMAP_558E0(fileindex);
             if (readSuccess) {
@@ -50714,7 +50714,7 @@ void preconvert()
        for (int i = 0; i < 168; i++)
        {
        sprintf(buffer, "{0x%04X,0x%02X,0x%04X,0x%04X},\n",
-       str_x_DWORD_D4C52ar_0x2F22[i].dword_0, str_x_DWORD_D4C52ar_0x2F22[i].word_4, str_x_DWORD_D4C52ar_0x2F22[i].adress_6,
+       str_x_DWORD_D4C52ar_0x2F22[i].dword_0, str_x_DWORD_D4C52ar_0x2F22[i].word_4, str_x_DWORD_D4C52ar_0x2F22[i].address_6,
        str_x_DWORD_D4C52ar_0x2F22[i].dword_10);
        fwrite(buffer, strlen(buffer), 1, file);
        }
@@ -50723,7 +50723,7 @@ void preconvert()
        fclose(file); */
     /*
        #pragma pack (1)
-       typedef struct {//lenght 22
+       typedef struct {//length 22
        int16_t word_0;
        int16_t word_2;
        int16_t word_4;
@@ -50765,7 +50765,7 @@ void preconvert()
        fwrite(buffer, strlen(buffer), 1, file);
        fclose(file); */
     /*
-       typedef struct {//lenght 30
+       typedef struct {//length 30
        int32_t dword_0;
        int32_t dword_4;
        int16_t word_8;
@@ -50858,7 +50858,7 @@ void preconvert()
        }
        type_SPELLS_BEGIN_BUFFER_str_sub;
 
-       typedef struct {//lenght 80
+       typedef struct {//length 80
        int8_t byte_0;
        uint8_t byte_1;
        type_SPELLS_BEGIN_BUFFER_str_sub subspell[3];
@@ -51239,7 +51239,7 @@ void sub_56210_process_command_line(int argc, char **argv)      //237210
                 x_BYTE_355244_spellsedit = 1;
             } else if (!_stricmp("music2", (char *)actarg)) {
                 x_BYTE_355238_music2 = 1;
-            } else if (!_stricmp("client", (char *)actarg))     //set to all one computer adress
+            } else if (!_stricmp("client", (char *)actarg))     //set to all one computer address
             {
                 if (!Iam_server) {
                     Iam_client = true;
@@ -51252,7 +51252,7 @@ void sub_56210_process_command_line(int argc, char **argv)      //237210
                     if (ServerPort == -1)
                         ServerPort = NetworkPort;
                 }
-            } else if (!_stricmp("server", (char *)actarg))     //set to all one computer adress
+            } else if (!_stricmp("server", (char *)actarg))     //set to all one computer address
             {
                 if (!Iam_client) {
                     Iam_server = true;
@@ -51265,7 +51265,7 @@ void sub_56210_process_command_line(int argc, char **argv)      //237210
                     if (ServerPort == -1)
                         ServerPort = NetworkPort;
                 }
-            } else if (!_stricmp("otherserverport", (char *)actarg))    //set to all one computer adress
+            } else if (!_stricmp("otherserverport", (char *)actarg))    //set to all one computer address
             {
                 ServerPort = atoi(argv[++argnumber]);
                 if (ServerPort < 0)
@@ -51425,7 +51425,7 @@ void sub_56A30_init_game_level(unsigned int a1) //237a30
     }
     Logger->debug("sub_56A30_init_game_level:before sub_6EB90");
     //fixing
-    CreateIndexes_6EB90(&filearray_2aa18c[filearrayindex_BUILD00DATTAB]);       //24fb90 adress 0x23ca2e
+    CreateIndexes_6EB90(&filearray_2aa18c[filearrayindex_BUILD00DATTAB]);       //24fb90 address 0x23ca2e
     //fixing
     Logger->debug("sub_56A30_init_game_level:sub_6EB90 passed");
 
@@ -51462,19 +51462,19 @@ void sub_56A30_init_game_level(unsigned int a1) //237a30
     PrintTextMessage_70910((char *)"Initialise Models\0");
     memset(&x_WORD_EB398ar, 0, 6);
     sub_49F90();
-    //adress 237B55
+    //address 237B55
     if (CommandLineParams.DoDebugSequences()) {
         add_compare(0x237B55, CommandLineParams.DoDebugafterload());
     }
     D41A0_0.dword_0x11e6 = -1;
     sub_71A70_setTmaps(D41A0_0.terrain_2FECE.MapType);
-    //adress 237b75
+    //address 237b75
     if (!(engine_db.setting_byte1_22 & 4)) {
         InitStages_58940();
         InitStageVars_11EE0();
         Init0x3664C_84790();
     }
-    //adress 237BB0
+    //address 237BB0
     if (CommandLineParams.DoDebugSequences()) {
         add_compare(0x237BB0, CommandLineParams.DoDebugafterload());
     }
@@ -51490,17 +51490,17 @@ void sub_56A30_init_game_level(unsigned int a1) //237a30
         // //D41A0_BYTESTR_0.struct_0x3654C[0].str_36550_word4 = 40;
     }
     sub_4A1E0(0, 1);
-    //adress 237bb9
+    //address 237bb9
     if (CommandLineParams.DoDebugSequences()) {
         add_compare(0x237bb9, CommandLineParams.DoDebugafterload());
     }
     soundActive_E3799 = temp_x_BYTE_E3799_sound_card;
     sub_53160();
-    //adress 237bc7
+    //address 237bc7
     if (CommandLineParams.DoDebugSequences()) {
         add_compare(0x237BC7, CommandLineParams.DoDebugafterload());
     }
-    //adress 237beb
+    //address 237beb
     sub_60F00();
     if (CommandLineParams.DoDebugSequences()) {
         add_compare(0x237BF0, CommandLineParams.DoDebugafterload());
@@ -52071,14 +52071,14 @@ void UpdateEntities_57730()     //238730
 
     D41A0_0.rand_0x8 = 9377 * D41A0_0.rand_0x8 + 9439;
     for (ix = x_DWORD_EA3E4[1]; ix < x_DWORD_EA3E4[1000]; ix++) {
-        //adress 238756
+        //address 238756
         if (CommandLineParams.DoDebugSequences2()) {
             //add_compare(0x238756, CommandLineParams.DoDebugafterload());
         }
         if (ix->class_0x3F_63 && ix->struct_byte_0xc_12_15.byte[1] & 4)
             sub_57F20(ix);
     }
-    memset(v22x, 0, 29 * sizeof(event_t *));  //adress 238779
+    memset(v22x, 0, 29 * sizeof(event_t *));  //address 238779
     memset(engine_db.bytearray_38403x, 0, 29 * sizeof(event_t *));
     v2x = 0;
     engine_db.dword_38523 = 0;
@@ -52199,7 +52199,7 @@ void UpdateEntities_57730()     //238730
             }
         }
     }
-    //adress 23899a
+    //address 23899a
     if (!(engine_db.setting_byte3_24 & 1)) {
         sub_12780();
         for (k = 0; k < 29; k++) {
@@ -52217,12 +52217,12 @@ void UpdateEntities_57730()     //238730
         if (CommandLineParams.DoDebugSequences2()) {
             //add_compare(0x2389f6, CommandLineParams.DoDebugafterload());
         }
-        sub_159E0();            //adress 2389f6
+        sub_159E0();            //address 2389f6
         if (isCaveLevel_D41B6)
             sub_58630();
         sub_60F00();
         for (mx = x_DWORD_EA3E4[1]; mx < x_DWORD_EA3E4[1000]; mx++) {
-            //adress 238a3d
+            //address 238a3d
             if (CommandLineParams.DoDebugSequences2()) {
                 if (debug_UpdateEntities_57730_2 >= 0x33) {
                     debug_UpdateEntities_57730_2++;
@@ -52254,7 +52254,7 @@ void UpdateEntities_57730()     //238730
                             //add_compare(0x238A8A, CommandLineParams.DoDebugafterload());
                         }
 
-                        //adress 238a8a zacina na 35cf6e 363bb6 =6c48/168=165=a5
+                        //address 238a8a zacina na 35cf6e 363bb6 =6c48/168=165=a5
                         pre_sub_4A190_0x6E8E(str_D4C48ar[mx->class_0x3F_63].
                                              dword_10[mx->state_0x45_69].address_6, mx);
                         mx->byte_0x3E_62++;
@@ -52932,8 +52932,8 @@ void sub_58F00_game_objectives()        //239f00
                         D41A0_0.stages_0x3654C[v3].str_3654D_byte1 &= 0xFDu;
                     } else if (D41A0_0.struct_0x3659C[v0x].substr_3659C.stage_0x3659F[v3] == 1) {
                         switch (D41A0_0.stages_0x3654C[v3].stages_3654C_byte0) {
-                        case 0:        //adress 239FE8 // minimal count of mana?
-                            if (v17x->dword_0xA4_164x->word_0x3A_58) {  //adress 239Ffc
+                        case 0:        //address 239FE8 // minimal count of mana?
+                            if (v17x->dword_0xA4_164x->word_0x3A_58) {  //address 239Ffc
                                 if (engine_db.str_index_242ar.dword_4 > 0) {   //23a02d
                                     if ((100 *
                                          (v17x->dword_0xA4_164x->dword_0x13C_316 +
@@ -54897,7 +54897,7 @@ void sub_5B7A0_prepare_textures()       //23C7A0
             //v7 = i * x_BYTE_D41B5_texture_size << 8;
             //v2++;
             //v4 = v7 + v6;
-            x_DWORD_DDF50_texture_adresses.at(texture_addresses_index++) =
+            x_DWORD_DDF50_texture_addresses.at(texture_addresses_index++) =
                 (uint8_t *) ((ypos * x_BYTE_D41B5_texture_size << 8) +
                              (xpos * x_BYTE_D41B5_texture_size) + BLOCK32DAT_BEGIN_BUFFER);
             //xpos++;
@@ -54988,7 +54988,7 @@ void Initialize()               //23c8d0
     CreateIndexes_6EB90(&filearray_2aa18c[filearrayindex_POINTERSDATTAB]);      //24fb90
     //sub_6EB90((unsigned int **)&*filearray_2aa18c[0x60]);//24FB90
     //2AA1EC
-    CreateIndexes_6EB90(&filearray_2aa18c[filearrayindex_BUILD00DATTAB]);       //24fb90 adress 0x23ca2e
+    CreateIndexes_6EB90(&filearray_2aa18c[filearrayindex_BUILD00DATTAB]);       //24fb90 address 0x23ca2e
 
     sub_101C0();                //23CA36 - 1f11c0 //sem se to vubec nedostane
     //zkontrolovat inicializaci
@@ -55551,7 +55551,7 @@ void sub_5C330()                //23D330
 // EA3E0: using guessed type int x_DWORD_EA3E0_copyto_x_DWORD_EA3E0[];
 
 //----- (0005C380) --------------------------------------------------------
-bool sub_5C380_test_vga_driver_header(uint16_t /*testlenght */ )        //23D380
+bool sub_5C380_test_vga_driver_header(uint16_t /*testlength */ )        //23D380
 {
     /*
        //uint16_t i; // eax
@@ -58142,7 +58142,7 @@ void sub_5FF50(event_t *a1x)  //240f50
     if (v19 > 0) {
         do {
             if (CommandLineParams.DoDebugSequences()) {
-                //adress 24128D
+                //address 24128D
                 /*if (CommandLineParams.DoDebugafterload())
                    {
                    uint8_t origbyte20 = 0;
@@ -58646,7 +58646,7 @@ void sub_60F00()                //241f00
         v2x->dword_0xA4_164x->dword_0x13C_316 = 0;
     }
     //v3 = (int32_t*)x_D41A0_BYTEARRAY_4;
-    //adress 241f53
+    //address 241f53
     v4x = x_DWORD_EA3E4[1];
     engine_db.str_index_242ar.dword_4 = 1;
     engine_db.str_index_242ar.dword_8 = 0;
@@ -59285,7 +59285,7 @@ void sub_61A00_draw_minimap_entites_b(int a1, int a2, int16_t posX, int16_t posY
     //VGA_Debug_Blit(640, 480, pdwScreenBuffer_351628);
     //for (jy = &D41A0_BYTESTR_0.struct_0x6E8E[1]; jy <= &D41A0_BYTESTR_0.struct_0x6E8E[0x3e8-1]; jy += sizeof(type_str_0x6E8E))
     for (jy = &D41A0_0.struct_0x6E8E[1]; jy <= &D41A0_0.struct_0x6E8E[0x3e8 - 1]; jy++) {
-        //a3 //adress 242cf9 20-ok 80-ok e0-ok e1-ok e2-ok
+        //a3 //address 242cf9 20-ok 80-ok e0-ok e1-ok e2-ok
 
         v31 = 0;
         v89 = 0;
@@ -59563,18 +59563,18 @@ void sub_61A00_draw_minimap_entites_b(int a1, int a2, int16_t posX, int16_t posY
             }
         }
  LABEL_123:
-        if (v31)                //adress 243207
+        if (v31)                //address 243207
         {
             v52 = (int16_t) (jy->axis_0x4C_76.x - posX);
             v53 = (int16_t) (jy->axis_0x4C_76.y - posY);
             v54 = v82 + ((v52 * v73 - v53 * v86) >> 16);
             if (v54 >= 0 && v54 < width) {      //24324e
                 v55 = ((v73 * v53 + v86 * v52) >> 16) + v76;
-                if (v55 >= 0 && v55 < height && v54 >= x_WORD_F4960[1 + 2 * v55] && v54 < x_WORD_F4960[2 * v55]) {      //adress 24329e 0x1e xx 0x17
+                if (v55 >= 0 && v55 < height && v54 >= x_WORD_F4960[1 + 2 * v55] && v54 < x_WORD_F4960[2 * v55]) {      //address 24329e 0x1e xx 0x17
                     v56 = (char *)(v54 + v84 + v55 * screenWidth_18062C);
                     if (!v89) {
                         if (v31 <= 1u) {
-                            v56[0] = v94;       //here //adress 243429
+                            v56[0] = v94;       //here //address 243429
                             //VGA_Debug_Blit(640, 480, pdwScreenBuffer_351628);
                             if (v78 > 1) {
                                 v57 = screenWidth_18062C;
@@ -60772,7 +60772,7 @@ void sub_63C90_draw_minimap_b(int a1, int a2, int16_t posX, int16_t posY, uint16
             *(v15 - 2) = v12;
         }
     } else {
-        v67 = v13 / 2;          //adress 244d1b
+        v67 = v13 / 2;          //address 244d1b
         v17 = &x_WORD_F4960[2 * (v13 / 2)];
         v68 = v17 - 2;
         v64 = 0;
@@ -60802,7 +60802,7 @@ void sub_63C90_draw_minimap_b(int a1, int a2, int16_t posX, int16_t posY, uint16
     v24 = posY - (v23 + v12 * (v21 / v12)) / 2;
     v73 = v24;
     v71 = v60;
-    if (isCaveLevel_D41B6)      //adress 244e53
+    if (isCaveLevel_D41B6)      //address 244e53
     {
         if (a10) {
             for (i = v13; i; v73 += v69) {
@@ -60924,9 +60924,9 @@ void sub_63C90_draw_minimap_b(int a1, int a2, int16_t posX, int16_t posY, uint16
             l--;
             v72 -= v70;
         }
-    } else {                    //adress 245156
+    } else {                    //address 245156
         for (m = v13; m; v73 += v69) {  //0x2580=v71-pdwScreenBuffer_351628
-            v57 = v74[1];       //adress 245185 mem edx 3ac764
+            v57 = v74[1];       //address 245185 mem edx 3ac764
             v52 = v72 + v57 * v58;
             v53 = v73 + v57 * v59;
             v54 = &v71[v57];
@@ -60941,7 +60941,7 @@ void sub_63C90_draw_minimap_b(int a1, int a2, int16_t posX, int16_t posY, uint16
                 LOBYTE(v57) = x_BYTE_F6EE0_tablesx[0x14000 + v56];
                 LOBYTE(v57) = x_BYTE_F6EE0_tablesx[v57];
                 HIBYTE(v57) = v54[0];
-                *v54++ = x_BYTE_F6EE0_tablesx[0x4000 + v57];    //here adress 2451b8
+                *v54++ = x_BYTE_F6EE0_tablesx[0x4000 + v57];    //here address 2451b8
                 v52 += v58;
                 v53 += v59;
                 v55--;
@@ -61286,7 +61286,7 @@ void DrawMinimapMarks_644F0(int a1, int a2, int16_t posX, int16_t posY, uint16_t
                     v33 = v37x[1 + (6 * v31++)];
                     v37x[1 + 2 * v32] = v77 + a2 + v33;
                 }
-                //adress 245be1
+                //address 245be1
                 //v34 = v30;
                 sub_2BD10_draw_line(v37x[0], v37x[1], v37x[6], v37x[7], v30);
                 sub_2BD10_draw_line(v37x[6], v37x[7], v37x[18], v37x[19], v30);
@@ -63788,7 +63788,7 @@ signed int sub_67CB0(event_t *a1x)    //248cb0
     default:
         return 0;
     }
-    while (v26x > x_DWORD_EA3E4[0])     //adress 2481e6
+    while (v26x > x_DWORD_EA3E4[0])     //address 2481e6
     {
         v27 = v26x->model_0x40_64;
         if (v27 < 0x27u)
@@ -63813,7 +63813,7 @@ signed int sub_67CB0(event_t *a1x)    //248cb0
         }
  LABEL_105:
         v26x = v26x->next_0;
-    }                           //adress 2481ee
+    }                           //address 2481ee
     for (i3x = engine_db.dword_38527; i3x > x_DWORD_EA3E4[0]; i3x = i3x->next_0) {
         if (i3x->word_0x94_148 != a1x->id_0x1A_26) {
             if (i3x->byte_0x39_57) {
@@ -63822,9 +63822,9 @@ signed int sub_67CB0(event_t *a1x)    //248cb0
                         debugcounter_249226 = 1 * debugcounter_249226;
                     }
                     debugcounter_249226++;
-                    //adress 249226
+                    //address 249226
                     v32 = sub_68490(a1x, i3x, 0x71u, 0x71u);
-                    //adress 24922c
+                    //address 24922c
                     if (v32 < v25) {
                         v56x = i3x;
                         v25 = v32;
@@ -69261,7 +69261,7 @@ void sub_71780()                //252780
                     if (sub_71E60(x_DWORD_E9C28_str) < 0x400)
                         v6 = 1;
                 } else {
-                    //adress 25283c
+                    //address 25283c
                     InitTmaps(j);
                 }
             }
@@ -70517,7 +70517,7 @@ void sub_7A110_load_hscreen(char a1, char a2)   //25b110
             x_DWORD_17DE38str.x_WORD_17DF0C = 70;
             x_DWORD_17DE38str.x_WORD_17DF0E = 71;
             break;
-        case 6:                //adress 25b533
+        case 6:                //address 25b533
             x_DWORD_17DE38str.x_DWORD_17DE54 = &engine_db.pointer_0xE2_heapbuffer_226[0x4D54A + 301787];       //(uint8_t*)x_DWORD_17DE48c + 301787;//49adb * //44ffef
             x_DWORD_17DE38str.x_DWORD_17DEC4 = (posistruct2_t *) & engine_db.pointer_0xE2_heapbuffer_226[0x4D54A + 316179];    //(uint8_t*)x_DWORD_17DE48c + 316179;//4d313 //453827
             x_DWORD_17DE38str.x_DWORD_17DE58 = &engine_db.pointer_0xE2_heapbuffer_226[0x4D54A + 316179];       //x_DWORD_17DE48c + 316179; * //453827
@@ -70751,7 +70751,7 @@ void sub_7A110_load_hscreen(char a1, char a2)   //25b110
 }
 
 //----- (0007AA70) --------------------------------------------------------
-void sub_7AA70_load_and_decompres_dat_file(const char *path, uint8_t *filebuffer, int position, int lenght)     //25ba70
+void sub_7AA70_load_and_decompres_dat_file(const char *path, uint8_t *filebuffer, int position, int length)     //25ba70
 {
     //FILE* result; // eax
 
@@ -70761,9 +70761,9 @@ void sub_7AA70_load_and_decompres_dat_file(const char *path, uint8_t *filebuffer
         if (x_DWORD_17DE38str.x_DWORD_17DEE0_filedesc != NULL) {
             if (filebuffer) {
                 DataFileIO::Seek(x_DWORD_17DE38str.x_DWORD_17DEE0_filedesc, position, 0);
-                DataFileIO::Read(x_DWORD_17DE38str.x_DWORD_17DEE0_filedesc, filebuffer, lenght);
+                DataFileIO::Read(x_DWORD_17DE38str.x_DWORD_17DEE0_filedesc, filebuffer, length);
                 sub_5C3D0_file_decompress(filebuffer, filebuffer);
-                x_DWORD_17DE38str.x_DWORD_17DEDC = lenght + position;   //endbuffer
+                x_DWORD_17DE38str.x_DWORD_17DEDC = length + position;   //endbuffer
             } else {
                 DataFileIO::Close(x_DWORD_17DE38str.x_DWORD_17DEE0_filedesc);
                 x_DWORD_17DE38str.x_DWORD_17DEE0_filedesc = NULL;
@@ -70901,7 +70901,7 @@ signed int /*__fastcall*/ sub_7C050_get_keyboard_keys1()        //25d050
         v3 = j___clock() - v5;
     } while (v3 <= 5);
     while (1) {
-        result = sub_9A10A_check_keyboard( /*v3 */ );   //adress 25d101
+        result = sub_9A10A_check_keyboard( /*v3 */ );   //address 25d101
         //'a' - 1e61
         //'b' - 3062
         //'UP' - 4800
@@ -72159,7 +72159,7 @@ void sub_84B80()                //265b80
                             - D41A0_0.str_0x3664C[iy].byte_3 / 2;
                         v4x._axis_2d.y -= 2;
                         v4x._axis_2d.x -= 2;
-                        //adress 265c5d
+                        //address 265c5d
                         sub_84EA0(v4x, &D41A0_0.str_0x3664C[iy], 0, v3);
                         v4x._axis_2d.x++;
                         sub_84EA0(v4x, &D41A0_0.str_0x3664C[iy], 1, v3);
@@ -72272,7 +72272,7 @@ void sub_84B80()//265b80
 							- D41A0_0.str_0x3664C[iy].byte_3 / 2;
 						v4x._axis_2d.y -= 2;
 						v4x._axis_2d.x -= 2;
-						//adress 265c5d
+						//address 265c5d
 						sub_84EA0(v4x, &D41A0_0.str_0x3664C[iy], 0, v3);
 						v4x._axis_2d.x++;
 						sub_84EA0(v4x, &D41A0_0.str_0x3664C[iy], 1, v3);
@@ -73502,7 +73502,7 @@ void sub_872A0()                //2682a0
         str_unk_1804B0ar.dword_0x72 = str_unk_1804B0ar.dword_0x6e;
         str_unk_1804B0ar.byte_0x9e |= 0x10;
     }
-    if (str_unk_1804B0ar.word_0x86) {   //adress 268509
+    if (str_unk_1804B0ar.word_0x86) {   //address 268509
         if (str_E2A74[str_unk_1804B0ar.word_0x86].word_0 == 2
             || str_E2A74[str_unk_1804B0ar.word_0x86].word_0 == 8) {
             if (!(str_unk_1804B0ar.byte_0x9f & 0x2)
@@ -74170,7 +74170,7 @@ int sub_88450()                 //269450
                 {
                     v1 = v3 + 1;
                     v4 = str_E2A74[v2x].dword_16 - str_E2A74[v2x].dword_24;
-                    //adress 269497
+                    //address 269497
                 }
                 v3++;
                 //v2 += 0x1e;
@@ -74182,7 +74182,7 @@ int sub_88450()                 //269450
     //if (v1 == 0x5c)
     //v1 = v1;//fix
     /*
-       //adress 2694bc
+       //address 2694bc
        int comp17 = compare_with_sequence((char*)"002694BC", (uint8_t*)unk_1804B0ar, 0x3514b0, debugcounter_sub_88450, 0xb0, &origbyte2z, &remakebyte2z);
        int comp18 = compare_with_sequence_array_E2A74((char*)"002694BC-2", (uint8_t*)array_E2A74, 0x2b3a74, debugcounter_sub_88450, 0xc4e, origbyte2y, remakebyte2y, remakepos2y);
        //int comp16 = compare_with_sequence_array_E2A74((char*)"00269450", (uint8_t*)array_E2A74, 0x2b3a74, debugcounter11, 0x1000, origbyte2y, remakebyte2y, remakepos2y);
@@ -77157,7 +77157,7 @@ signed int sub_8CEDF_install_mouse()    //26dedf
     v4 = UpdateMouseEventData_8CB3A;
     //fix it v5 = __CS__;
     /*
-       adress: 160:26db3a - sub_8CB3A
+       address: 160:26db3a - sub_8CB3A
        mask:7f
        http://stanislavs.org/helppc/int_33-c.html
      */

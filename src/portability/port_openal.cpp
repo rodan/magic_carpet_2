@@ -3,7 +3,7 @@
 //
 // includes reverb effect for added ambiance and the makings of a few positional elements
 //
-// bibliography
+// resources:
 // OpenAL official doc https://www.openal.org/documentation/
 // OpenAL-soft doc     https://github.com/kcat/openal-soft/wiki/Programmer%27s-Guide
 // nice guide          https://indiegamedev.net/2020/04/12/the-complete-guide-to-openal-with-c-part-3-positioning-sounds/
@@ -24,8 +24,6 @@
 #include "Sound.h"
 #include "port_sound_lut.h"
 #include "port_sdl_sound.h"
-
-#ifdef SOUND_OPENAL
 #include "port_openal.h"
 
 #define          OPENAL_C_SZ  OPENAL_CHANNELS   ///< number of chunks that can play at the same time (aka number of voices)
@@ -867,4 +865,3 @@ ALCenum alsound_error_check(const char *msg)
     return AL_NO_ERROR;
 }
 
-#endif

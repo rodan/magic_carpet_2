@@ -5,7 +5,7 @@
 #include "stdint.h"
 
 #pragma pack (1)
-typedef struct {                //lenght 14
+typedef struct {                //length 14
     uint16_t word_0;
     uint16_t word_2;
     uint16_t word_4;

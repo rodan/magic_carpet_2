@@ -22,7 +22,7 @@ char x_BYTE_E1B9C[8] = { '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0' };      
 char x_BYTE_E1BA4[8] = { '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0' };      // idb x_WORD_E1964x[0x240+
 
 #pragma pack (1)
-typedef struct {                //lenght 7
+typedef struct {                //length 7
     Type_SoundEvent_E17CC *pSoundEvent_0;
     uint8_t byte_4;
     uint8_t byte_5;
@@ -236,7 +236,7 @@ type_x_BYTE_E25ED_2BB str_BYTE_E2590[3] = {     //set joy
 };
 
 #pragma pack (1)
-typedef struct {                //lenght 24
+typedef struct {                //length 24
     uint32_t dword_0;
     uint32_t dword_4;
     uint32_t dword_8;
@@ -262,7 +262,7 @@ type_E1BAC_0x3c4 str_E1BAC_0x2ec[9] = {
 };
 
 #pragma pack (1)
-typedef struct {                //lenght 69
+typedef struct {                //length 69
     int32_t dword_0;            //0
     uint8_t stub_4;             //4
     uint8_t stub_5;             //5
@@ -540,7 +540,7 @@ type_E24BCx str_E25DC[10] = {
 };
 
 #pragma pack (1)
-typedef struct {                //lenght 18
+typedef struct {                //length 18
     uint8_t byte_0;
     uint8_t stub[17];
 } type_BYTE_E25ED_0x;
@@ -618,7 +618,7 @@ struct {
 #pragma pack (16)
 
 #pragma pack (1)
-struct                          //lenght 13
+struct                          //length 13
 {
     int32_t x_DWORD_17DE28;     // weak x_DWORD_17DE28str
     int32_t x_DWORD_17DE2C;     // weak x_DWORD_17DE28str+4
@@ -832,7 +832,7 @@ void InitLanguage_76A40()       //257A40
 {
     FILE *configdatfile;
     FILE *langfile;
-    uint32_t filelenght;
+    uint32_t filelength;
     TypeConfigDat configDat;
 
     memset(printbuffer, 0, 80);
@@ -881,12 +881,12 @@ void InitLanguage_76A40()       //257A40
                 langfile = DataFileIO::CreateOrOpenFile(printbuffer, 512);
 
                 if (langfile != NULL) {
-                    filelenght = DataFileIO::FileLengthBytes(langfile) - 4785;
-                    x_DWORD_D41BC_langbuffer = (char *)Malloc_83CD0(filelenght);
+                    filelength = DataFileIO::FileLengthBytes(langfile) - 4785;
+                    x_DWORD_D41BC_langbuffer = (char *)Malloc_83CD0(filelength);
                     if (x_DWORD_D41BC_langbuffer) {
                         DataFileIO::Seek(langfile, 4785, 0);
                         DataFileIO::Read(langfile, (uint8_t *) x_DWORD_D41BC_langbuffer,
-                                         filelenght);
+                                         filelength);
                     }
                     DataFileIO::Close(langfile);
                     sub_5B870_copy_sentence(x_DWORD_D41BC_langbuffer, x_DWORD_E9C4C_langindexbuffer, 471);      //Exit Game
@@ -1157,7 +1157,7 @@ void MainMenu_76FA0( /*int a1, */ int /*a2 */ , uint16_t a3x)   //257fa0
                 CopyScreen(x_DWORD_E9C38_smalltit, pdwScreenBuffer_351628, 640, 480);
 
                                                                                                 /*v19 = */ sub_7C120_draw_bitmap_640(185, 232, xy_DWORD_17DED4_spritestr[66]);
-                                                                                                //adress 25827a
+                                                                                                //address 25827a
             //ax,ebx,a3
             //6038,100,4?
             DrawMenuAnimations_7AB00(); //25bb00
@@ -1493,7 +1493,7 @@ char LanguageSettingDialog_779E0(type_WORD_E1F84 *a1y)  //2589E0
         ResetMouse_7B5A0();     //25c5a0
         x_DWORD_17DE38str.x_WORD_17DEEE_mouse_buttons = 0;
         sub_8CD27_set_cursor(xy_DWORD_17DED4_spritestr[37]);    //26dd27
-        while (mouseClick != 2) //adress 258c30
+        while (mouseClick != 2) //address 258c30
         {
             if (x_DWORD_17DE38str.x_BYTE_17DF10_get_key_scancode == 59) {
                 engine_db.byteindex_10 =
@@ -1503,9 +1503,9 @@ char LanguageSettingDialog_779E0(type_WORD_E1F84 *a1y)  //2589E0
             if (x_WORD_180660_VGA_type_resolution & 1)
                 CopyScreen(x_DWORD_E9C38_smalltit, pdwScreenBuffer_351628, 320, 200);
             else
-                CopyScreen(x_DWORD_E9C38_smalltit, pdwScreenBuffer_351628, 640, 480);   //write default screan 27b144  adress 258c99
-            mouseClick = sub_7E0E0_mouse_events();      //25f0e0 adress 258ca1 - change button, return click
-            sub_2BB40_draw_bitmap(263, 134, langDatTab[1]);     //20cb40 adress 258cba - change flag
+                CopyScreen(x_DWORD_E9C38_smalltit, pdwScreenBuffer_351628, 640, 480);   //write default screan 27b144  address 258c99
+            mouseClick = sub_7E0E0_mouse_events();      //25f0e0 address 258ca1 - change button, return click
+            sub_2BB40_draw_bitmap(263, 134, langDatTab[1]);     //20cb40 address 258cba - change flag
             if (engine_db.byteindex_10 == 1)   //is 1 not zero!
             {
                 if (codeBranch == 2) {
@@ -1518,7 +1518,7 @@ char LanguageSettingDialog_779E0(type_WORD_E1F84 *a1y)  //2589E0
                     }
                     memset(textBoxStr, 0, 2 * sizeof(type_E24BCx));     //26db3a
                     textBoxStr[0] = str_E24BCx[textIndex];
-                    sub_7E840_draw_textbox_with_line(textBoxStr, 83, 100);      //25f840 adress 258d6a - add text?
+                    sub_7E840_draw_textbox_with_line(textBoxStr, 83, 100);      //25f840 address 258d6a - add text?
                 } else if (codeBranch == 3) {
                     actualTime = j___clock();
                     if ((actualTime - oldTime) / 100 > 1)       //when run 100ms
@@ -1534,7 +1534,7 @@ char LanguageSettingDialog_779E0(type_WORD_E1F84 *a1y)  //2589E0
                 sub_90B27_VGA_pal_fadein_fadeout(x_DWORD_17DE38str.x_DWORD_17DE38x, 0x20u, 0);  //271b27
                 frame++;
             }
-            sub_7A060_get_mouse_and_keyboard_events();  //25b060 adress 258ddf
+            sub_7A060_get_mouse_and_keyboard_events();  //25b060 address 258ddf
             if (mouseClick == 1) {
                 if (unknown_libname_3_findnext(&langFileL, langlhandle))        //258193
                 {
@@ -1542,7 +1542,7 @@ char LanguageSettingDialog_779E0(type_WORD_E1F84 *a1y)  //2589E0
                     langlhandle = unknown_libname_2_findfirst(languagePathL, 0, &langFileL);
                 }
                 // L2.TXT
-                selectLang2 = sub_7F960(tabBuffer, tabBufferEnd, langBuffer, langFileL.name, langDatTab);       //adress 258dec
+                selectLang2 = sub_7F960(tabBuffer, tabBufferEnd, langBuffer, langFileL.name, langDatTab);       //address 258dec
                 if (engine_db.SelectedLangIndex == selectLang2) {
                     if (unknown_libname_3_findnext(&langFileL, langlhandle)) {
                         unknown_libname_4_find_close(&langFileL, langlhandle);
@@ -1557,8 +1557,8 @@ char LanguageSettingDialog_779E0(type_WORD_E1F84 *a1y)  //2589E0
             }
         }
     }
-    //adress 258ea1
-    unknown_libname_4_find_close(&langFileL, langlhandle);      //adress 258EA2
+    //address 258ea1
+    unknown_libname_4_find_close(&langFileL, langlhandle);      //address 258EA2
     configFile = DataFileIO::CreateOrOpenFile(configFilePath, 546);
     if (configFile != nullptr) {
         if (engine_db.setting_38402 == 1)
@@ -2607,9 +2607,9 @@ void sub_7DD70()                //25ed70
     //return result;
 }
 
-int pre_sub_7E320(uint32_t adress, type_WORD_E1F84 *a1x)
+int pre_sub_7E320(uint32_t address, type_WORD_E1F84 *a1x)
 {
-    switch (adress) {
+    switch (address) {
     case 0x25f800:{
             return sub_7E800(a1x);      //25f800
         }
@@ -2752,7 +2752,7 @@ signed int sub_7E320_draw_bitmaps_and_play_sounds( /*__int16 a1, int a2*/ )     
         return 0;
     v3x = 0;
     if (str_E23E0[v3x].byte_25) {
-        do                      //adress 25f57c
+        do                      //address 25f57c
         {
             if (str_E23E0[v3x].selected_8 && str_E23E0[v3x].dword_0) {
                 uint8_t v5 = pre_sub_7E320(str_E23E0[v3x].dword_0, &str_E23E0[v3x]);
@@ -2810,7 +2810,7 @@ signed int sub_7E320_draw_bitmaps_and_play_sounds( /*__int16 a1, int a2*/ )     
     v11y = 0;
     if (!str_E2516[v11y].word_2)
         return 0;
-    do                          //adress 25f4e7
+    do                          //address 25f4e7
     {
         if (str_E2516[v11y].byte_17 == str_E23E0[ky].byte_22) {
             memset(v14x, 0, 36);
@@ -3548,7 +3548,7 @@ int NewGameDraw_7EAE0(int16_t *posx, int16_t *posy, __int16 *a3, __int16 *a4, in
             v12x++;
             v13++;
         }
-        //adress 25fc6f
+        //address 25fc6f
         if ((v61x != -1) && x_DWORD_17DB70str.x_WORD_17DB8A != -1
             && v67 != x_DWORD_17DB70str.x_WORD_17DB8A) {
             v15x = 0;
@@ -3828,11 +3828,11 @@ int NewGameDraw_7EAE0(int16_t *posx, int16_t *posy, __int16 *a3, __int16 *a4, in
                         v54 = 280;
                     else
                         v54 = 60;
-                    //adress 2602a0
+                    //address 2602a0
                     DrawText_80C30(130, v54, 380);      //divny text
                 } else if (x_DWORD_17DE28str.x_BYTE_17DE34 <= 2u
                            || x_DWORD_17DE28str.x_BYTE_17DE34 == 3) {
-                    //adress 2602a7
+                    //address 2602a7
                     DrawText_80C30(0, 0, 0);
                 }
             }
@@ -4000,7 +4000,7 @@ int LoadLanguageFile(posistruct2_t **a1x, posistruct2_t **a2x, uint8_t *a3, char
     //unsigned __int8 v9; // bl
     //char v10; // cl
     //char v12; // [esp+0h] [ebp-5Ch]
-    uint16_t langfilelenght;    // [esp+50h] [ebp-Ch]
+    uint16_t langfilelength;    // [esp+50h] [ebp-Ch]
     //FILE* v14; // [esp+54h] [ebp-8h]
     //unsigned __int8 i; // [esp+58h] [ebp-4h]
 
@@ -4019,18 +4019,18 @@ int LoadLanguageFile(posistruct2_t **a1x, posistruct2_t **a2x, uint8_t *a3, char
         //v6 = langfile;
         //v14 = langfile;
         if (langfile != NULL) {
-            langfilelenght = DataFileIO::FileLengthBytes(langfile);
+            langfilelength = DataFileIO::FileLengthBytes(langfile);
             DataFileIO::Read(langfile, a3, 4773);       //2798a7
             DataFileIO::Read(langfile, (a3 + 4773), 12);
             if (x_BYTE_E29E0 || x_DWORD_D41BC_langbuffer)       //[2b39e0]00 || [2a51bc]00
                 FreeMem_83E80((uint8_t *) x_DWORD_D41BC_langbuffer);
-            //v7 = langfilelenght - 4785;
-            x_DWORD_D41BC_langbuffer = (char *)Malloc_83CD0(langfilelenght - 4785);
+            //v7 = langfilelength - 4785;
+            x_DWORD_D41BC_langbuffer = (char *)Malloc_83CD0(langfilelength - 4785);
             //x_DWORD_D41BC_langbuffer = (uint8_t*)v8;
             if (x_DWORD_D41BC_langbuffer) {
                 x_BYTE_E29E0 = 1;
                 DataFileIO::Read(langfile, (uint8_t *) x_DWORD_D41BC_langbuffer,
-                                 langfilelenght - 4785);
+                                 langfilelength - 4785);
             }
             DataFileIO::Close(langfile);
             break;
@@ -6356,7 +6356,7 @@ int DrawScrollDialog2_7B660(int a1, int a2, __int16 a3, type_str_word_26 *a4x, c
             //v15 = v11 + v12 - v14;
             v33x.ymin_12 = a4x->word_34_4 + a4x->y1_28_1 - xy_DWORD_17DED4_spritestr[x_DWORD_17DE38str.x_WORD_17DF0C].height_5; //12 - v35
             v33x.xmin_10 = a4x->x1_26_0 + 15;   //10 - v34
-            v33x.sizex_14 = xy_DWORD_17DED4_spritestr[x_DWORD_17DE38str.x_WORD_17DF0C].width_4; //14 adress 25c832
+            v33x.sizex_14 = xy_DWORD_17DED4_spritestr[x_DWORD_17DE38str.x_WORD_17DF0C].width_4; //14 address 25c832
             v33x.sizey_16 = xy_DWORD_17DED4_spritestr[x_DWORD_17DE38str.x_WORD_17DF0C].height_5;        //16
             if (InRegion_7B200(&v33x, x_DWORD_17DE38str.x_DWORD_17DEE4_mouse_positionx, x_DWORD_17DE38str.x_DWORD_17DEE6_mouse_positiony))      //icon OK
             {
@@ -6473,7 +6473,7 @@ int DrawScrollDialog2_7B660(int a1, int a2, __int16 a3, type_str_word_26 *a4x, c
     v46 = xy_DWORD_17DED4_spritestr[x_DWORD_17DE38str.x_WORD_17DF06].height_5 + 2 + a2;
     if (a5) {
         v31 = getPaletteIndex_5BE80(x_DWORD_17DE38str.x_DWORD_17DE38x, 0x16u, 0x10u, 9u);
-        //"Exit Game" 16a 1c6 28 1 4c//adress 25cc27
+        //"Exit Game" 16a 1c6 28 1 4c//address 25cc27
         sub_7FCB0_draw_text_with_border( /*v30, */ a5, a1 + 10, v30, v46, 1, v31, 0);
     }
  LABEL_31:

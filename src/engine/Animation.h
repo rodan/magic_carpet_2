@@ -9,7 +9,7 @@
 #include "Sound.h"
 
 #pragma pack (1)
-typedef struct {                //lenght 7
+typedef struct {                //length 7
     int16_t startFrame;         //0
     char key_2;                 //2
     int32_t index;              //3

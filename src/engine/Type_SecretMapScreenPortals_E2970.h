@@ -6,7 +6,7 @@
 #include "stdint.h"
 
 #pragma pack (1)
-typedef struct {                //lenght 17
+typedef struct {                //length 17
     int32_t dword_0;
     uint16_t word_4;
     uint16_t levelNumber_6;     //level number

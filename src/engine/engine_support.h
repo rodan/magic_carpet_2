@@ -24,10 +24,10 @@
 #include "../portability/port_sdl_joystick.h"
 #include "../portability/port_openal.h"
 #include "../portability/port_outputs.h"
-#include "../portability/port_show_perifery.h"
+#include "../portability/port_show_periphery.h"
 
 #pragma pack (1)
-typedef struct {                //lenght 3
+typedef struct {                //length 3
     uint8_t red;
     uint8_t green;
     uint8_t blue;
@@ -150,7 +150,7 @@ extern uint8_t *off_D41A8_sky;
 extern uint8_t *x_BYTE_14B4E0_second_heightmap;
 
 #pragma pack (1)
-typedef struct {                //lenght 10
+typedef struct {                //length 10
     int8_t str_0x6E3E_byte0;    //0x6E3E-28222//D41A0_BYTESTR_0.array_0x6E3E[xx].str_0x6E3E_byte0
     int8_t str_0x6E3E_byte1;    //0x6E3F-28223
     int8_t str_0x6E3E_byte2;    //0x6E40-28224
@@ -175,19 +175,19 @@ typedef struct {
 } type_dword_0x649_2BDE;
 
 /*
-typedef struct {//begin 0x649 //lenght 0x1F9
-	type_dword_0x649_2BDE dword_0x649_2BDE;//1609//0x649+0,lenght 0x68(4x0x1a)
+typedef struct {//begin 0x649 //length 0x1F9
+	type_dword_0x649_2BDE dword_0x649_2BDE;//1609//0x649+0,length 0x68(4x0x1a)
 	uint8_t stub1[104];
 	int16_t word_0x719_2BDE[26];// -2xa1 tj 2x 26//1817
 	//1817
 	uint8_t stub4c[52];
 	//int16_t word_0x731_2BDE;//13071
 	int8_t byte_0x781_2BDE[26];//1921
-	type_2255ar array_0x79B_2BDE_13177;//0x649+338,lenght 0x18+2
+	type_2255ar array_0x79B_2BDE_13177;//0x649+338,length 0x18+2
 	int8_t byte_0x7B5_2BDE[26];//1973
 	//uint8_t array_0x7CF_2BDE_13229[52];//1999
 	//uint8_t array_0x7CF_2BDE_13229[24];//1999
-	type_2255ar array_0x7CF_2BDE_13229;//0x649+390,lenght 0x18+2
+	type_2255ar array_0x7CF_2BDE_13229;//0x649+390,length 0x18+2
 	//uint8_t stub4e[26];
 	//24
 	//2
@@ -195,9 +195,9 @@ typedef struct {//begin 0x649 //lenght 0x1F9
 	//int8_t array_0x7E7_2BDE_13253[28];//array_0x7CF_2BDE_13229[24]
 	type_2255ar byte_0x7E9_2BDE;// -1x26//2026
 
-	type_2255ar byte_0x803_2BDE;// -1x26//2051//0x649+442, lenght 0x18+2
+	type_2255ar byte_0x803_2BDE;// -1x26//2051//0x649+442, length 0x18+2
 
-	type_2255ar byte_0x81D_2BDE;// -1x26//2077//0x649+468, lenght 0x18+2
+	type_2255ar byte_0x81D_2BDE;// -1x26//2077//0x649+468, length 0x18+2
 	//uint8_t stub2[1];
 
 	int16_t word_0x837_2BDE;//2103
@@ -211,13 +211,13 @@ typedef struct {//begin 0x649 //lenght 0x1F9
 	uint8_t stub5[3];
 } type_struct_0x649_2BDE_12839;*/
 
-/*typedef struct {//lenght 2124?
+/*typedef struct {//length 2124?
 	type_str_0x6E3E str_0x256_0;
 	uint8_t stub[14];
-	uint32_t str0x256_24;//??lenght
+	uint32_t str0x256_24;//??length
 	uint8_t stubc[1581];
-	//uint8_t str0x256_24[1585];//??lenght
-	type_str_611 str0x256_1609;//??lenght
+	//uint8_t str0x256_24[1585];//??length
+	type_str_611 str0x256_1609;//??length
 
 	int8_t byte_0x45C_1116;
 	int8_t byte_0x45D_1117;
@@ -247,7 +247,7 @@ typedef struct {                // 479 // size 14 tj 0xe
        int16_t word_0x1eb_2BDE_11721; //491 */
 } type_struct_0x1d1_2BDE_11695;
 
-typedef struct {                //lenght 2124=0x84C
+typedef struct {                //length 2124=0x84C
     dw_w_b dw_w_b_0_2BDE_11230;
     //uint8_t byte_0x000_2BDE_11230;//0     //11230 - byte? - ne zacatek struktury
     //uint8_t byte_0x001_2BDF_11231_xx;
@@ -341,10 +341,10 @@ typedef struct {                //lenght 2124=0x84C
     int16_t word_0x848_2BDE;    //2120
     int16_t word_0x84A_2BDE;    //2122
     //uint8_t stub5[17];
-} type_str_0x2BDE;              //11230 // 84c lenght
+} type_str_0x2BDE;              //11230 // 84c length
 
 typedef struct {                //size 5152
-    //type_particle_str_0 un_0;//lenght?
+    //type_particle_str_0 un_0;//length?
     uint16_t word_0;
     uint16_t width;
     uint16_t height;
@@ -379,7 +379,7 @@ typedef struct {                //size 26
     //uint32_t dword_26;
 } type_x_DWORD_E9C28_str;
 
-typedef struct {                //lenght 14
+typedef struct {                //length 14
     int8_t stuba[4];
     int32_t dword_4;
     uint32_t dword_8;
@@ -595,7 +595,7 @@ extern x_BYTE x_BYTE_35523C;//Detectoff//3551CE+6e BYTE
 extern x_BYTE x_BYTE_355220;//Langcheck//3551CE+52 BYTE
 extern x_BYTE x_BYTE_355238;//aMusic2//3551CE+6a BYTE*/
 
-typedef struct {                //lenght 30
+typedef struct {                //length 30
     int16_t word_0;             //str_E2A74[].word_0
     std::array < int16_t, 5 > axis_2;   // 1=textIndex 3=lineX1, 4=lineY1
     //int16_t axis_4[3];//?? str_E2A74[].axis_2[0]
@@ -609,7 +609,7 @@ typedef struct {                //lenght 30
     int8_t byte_29;
 } type_str_E2A74;
 
-typedef struct {                //lenght 30
+typedef struct {                //length 30
     int16_t word_0;             //str_E2A74[].word_0
     int16_t axis_2[5];          //str_E2A74[].axis_2[0]
     //int16_t axis_4[3];//?? str_E2A74[].axis_2[0]
@@ -640,53 +640,53 @@ void End_thread(int backCode);
 void support_begin();
 void support_end();
 
-void loadfromsnapshot(const char *filename, uint8_t * adress, uint32_t adressdos, uint32_t size);
-void loadfromsnapshot2(const char *filename, uint8_t * adress, uint32_t adressdos, uint32_t size);
-uint32_t compare_with_snapshot(const char *filename, uint8_t * adress, uint32_t adressdos,
+void loadfromsnapshot(const char *filename, uint8_t * address, uint32_t addressdos, uint32_t size);
+void loadfromsnapshot2(const char *filename, uint8_t * address, uint32_t addressdos, uint32_t size);
+uint32_t compare_with_snapshot(const char *filename, uint8_t * address, uint32_t addressdos,
                                uint32_t size, uint8_t * origbyte, uint8_t * copybyte);
-uint32_t compare_with_sequence(const char *filename, const uint8_t * adress, uint32_t adressdos,
+uint32_t compare_with_sequence(const char *filename, const uint8_t * address, uint32_t addressdos,
                                long count, long size1, uint32_t size2, uint8_t * origbyte,
                                uint8_t * copybyte, long offset = 0, bool regressions = false);
-uint32_t compare_with_sequence_E7EE0(const char *filename, uint8_t * adress, uint32_t adressdos,
+uint32_t compare_with_sequence_E7EE0(const char *filename, uint8_t * address, uint32_t addressdos,
                                      uint32_t count, uint32_t size1, uint32_t size2,
                                      uint8_t * origbyte, uint8_t * copybyte, long offset = 0);
-uint32_t compare_with_snapshot_D41A0(const char *filename, uint8_t * adress, uint32_t adressdos,
+uint32_t compare_with_snapshot_D41A0(const char *filename, uint8_t * address, uint32_t addressdos,
                                      uint32_t size, uint8_t * origbyte, uint8_t * copybyte);
-uint32_t compare_with_sequence_D41A0(const char *filename, uint8_t * adress, uint32_t adressdos,
+uint32_t compare_with_sequence_D41A0(const char *filename, uint8_t * address, uint32_t addressdos,
                                      uint32_t count, uint32_t size, uint8_t * origbyte,
                                      uint8_t * copybyte, long offset = 0, bool regressions = false);
-uint32_t compare_with_sequence_array_E2A74(const char *filename, uint8_t * adress,
-                                           uint32_t adressdos, uint32_t count, uint32_t size1,
+uint32_t compare_with_sequence_array_E2A74(const char *filename, uint8_t * address,
+                                           uint32_t addressdos, uint32_t count, uint32_t size1,
                                            uint32_t size2, uint8_t * origbyte, uint8_t * copybyte,
                                            long offset = 0, bool regressions = false);
-uint32_t compare_with_sequence_x_DWORD_F2C20ar(const char *filename, uint8_t * adress,
-                                               uint32_t adressdos, uint32_t count, uint32_t size,
+uint32_t compare_with_sequence_x_DWORD_F2C20ar(const char *filename, uint8_t * address,
+                                               uint32_t addressdos, uint32_t count, uint32_t size,
                                                uint8_t * origbyte, uint8_t * copybyte,
                                                int *posdiff);
-uint32_t compare_with_sequence_array_222BD3(const char *filename, uint8_t * adress,
-                                            uint32_t adressdos, uint32_t count, uint32_t size,
+uint32_t compare_with_sequence_array_222BD3(const char *filename, uint8_t * address,
+                                            uint32_t addressdos, uint32_t count, uint32_t size,
                                             uint8_t * origbyte, uint8_t * copybyte, int *posdiff);
-uint32_t compare_with_sequence_D41A0_4(const char *filename, uint8_t * adress, uint32_t adressdos,
+uint32_t compare_with_sequence_D41A0_4(const char *filename, uint8_t * address, uint32_t addressdos,
                                        uint32_t count, uint32_t size, uint8_t * origbyte,
                                        uint8_t * copybyte, long offset = 0);
-uint32_t compare_with_sequence_EA3E4(const char *filename, event_t ** adress,
+uint32_t compare_with_sequence_EA3E4(const char *filename, event_t ** address,
                                      uint32_t count, uint32_t size, uint8_t * origbyte,
                                      uint8_t * copybyte);
-uint32_t compare_0x6E8E(const char *filename, uint8_t * adress, uint32_t count, uint32_t size,
+uint32_t compare_0x6E8E(const char *filename, uint8_t * address, uint32_t count, uint32_t size,
                         uint8_t * origbyte, uint8_t * copybyte, long offset = 0);
-void add_compare(uint32_t adress, bool debugafterload, int stopstep = -1, bool skip =
+void add_compare(uint32_t address, bool debugafterload, int stopstep = -1, bool skip =
                  false, int exitindex = 1000000, int skip2 = 0);
-void add_compare2(uint32_t adress, uint8_t * memadress, uint32_t dosmemadress, uint32_t size,
+void add_compare2(uint32_t address, uint8_t * memaddress, uint32_t dosmemaddress, uint32_t size,
                   bool debugafterload, int stopstep = -1, bool skip = false, int exitindex =
                   1000000);
 void writehex(uint8_t * buffer, uint32_t count);
 
-void mine_texts(const char *filename, uint32_t adressdos, uint32_t count, char *outfilename);
+void mine_texts(const char *filename, uint32_t addressdos, uint32_t count, char *outfilename);
 int writeImage(const char *filename, int width, int height, uint8_t * buffer, char *title);
 void writeImageBMP(const char *imageFileName, int width, int height, uint8_t * image);
 
 /*
-typedef struct {//lenght 8
+typedef struct {//length 8
 	uint8_t byte_0;//array_0x365F4
 	uint8_t byte_1;//array_0x365F5
 	uint8_t byte_2;//array_0x365F6
@@ -702,7 +702,7 @@ typedef struct {
 } type_str_double_word;
 */
 /*
-typedef struct {//lenght 8
+typedef struct {//length 8
 	uint8_t str_0x3647A_byte_0;//array_0x3647a
 	uint8_t str_0x3647A_byte_1;//array_0x3647b
 	int16_t str_0x3647A_word_2;//array_0x3647c
@@ -716,14 +716,14 @@ typedef union {
     event_t *pointer_0x6E8E;
 } un1;
 
-typedef struct {                //lenght 8
+typedef struct {                //length 8
     int8_t index_0x3647A_0;     //array_0x3647a
     int8_t stage_0x3647A_1;     //array_0x3647b
     uaxis_2d str_0x3647A_2;     //array_0x3647c//str_0x3647A_2.word
     un1 str_0x3647C_4;          //array_0x3647e
 } type_str_0x3647Ac;
 
-typedef struct {                //lenght 8
+typedef struct {                //length 8
     //uint8_t byte_0;//array_0x36479
     uint8_t str_0x3647A_byte_0; //array_0x3647a
     uint8_t str_0x3647A_byte_1; //array_0x3647b
@@ -732,7 +732,7 @@ typedef struct {                //lenght 8
     //int16_t str_0x3647A_word_6;//array_0x36480
 } type_str_0x3647Ab;
 /*
-typedef struct {//lenght 20
+typedef struct {//length 20
 	uint8_t byte_0;//array_0x3030E//0x30322
 	uint8_t byte_1;//array_0x3650F//0x30323
 	uint8_t byte_2;//array_0x36510//0x30324
@@ -744,7 +744,7 @@ typedef struct {//lenght 20
 	uint8_t stubb[1];
 } type_str_0x3030E;*/
 
-/*typedef struct {//lenght 20
+/*typedef struct {//length 20
 	uint8_t byte_0;//type_str_0x30310//type_str_0x30324
 	uint8_t str_0x30310_word_1;//type_str_0x30311//type_str_0x30325
 	uint8_t byte_2;//type_str_0x30312//type_str_0x30326
@@ -767,7 +767,7 @@ typedef struct {//lenght 20
 	uint8_t byte_19;//type_str_0x30323//type_str_0x30337
 }
 type_str_0x30310;*/
-typedef struct {                //lenght 20
+typedef struct {                //length 20
     //uint8_t byte_0;//type_str_0x30310//type_str_0x30324
     uint16_t type_0x30311;      //type_str_0x30311//type_str_0x30325//1091
     //uint8_t byte_1;//type_str_0x30312//type_str_0x30326
@@ -793,7 +793,7 @@ typedef struct {                //lenght 20
 } type_entity_0x30311;
 
 /*
-typedef struct {//lenght 20
+typedef struct {//length 20
 	uint8_t byte_0;//array_0x3030E
 	uint8_t byte_1;//array_0x3650F
 	uint8_t byte_2;//array_0x36510
@@ -804,7 +804,7 @@ typedef struct {//lenght 20
 } type_str_0x30325;
 */
 /*
-typedef struct {//begin 0x649 //lenght min 0x1ee
+typedef struct {//begin 0x649 //length min 0x1ee
 	int32_t dword_0x649_2BDE[51];//1609
 	uint8_t stub1[2];
 	int16_t word_0x717_2BDE[26];// -2xa1 tj 2x 26//1815
@@ -832,7 +832,7 @@ typedef struct {//begin 0x649 //lenght min 0x1ee
 */
 
 /*
-typedef struct {//lenght 8
+typedef struct {//length 8
 	int8_t str_0x65ac_byte_0;//0x65ac
 	int8_t str_0x65ac_byte_1;//0x65ad
 	int16_t str_0x65ac_word_2;//0x65ae
@@ -855,12 +855,12 @@ type_str_0x65ac;
 //12224 - byte
 //12286 - byte
 
-typedef struct {                //lenght 9377
+typedef struct {                //length 9377
     uint8_t stub[9377];
 } type_str_0x24DF;
 
 /*
-typedef struct {//lenght 110
+typedef struct {//length 110
 	uint8_t byte_0x360FB;
 	uint8_t byte_0x360E1;
 	uint8_t stuba[25];
@@ -871,7 +871,7 @@ typedef struct {//lenght 110
 }
 type_str_0x360FB;*/
 
-typedef struct {                //lenght 110 //word_0x360D2
+typedef struct {                //length 110 //word_0x360D2
     uint8_t stuba[3];
     int16_t word_0x360D5;
     uint8_t stubb[2];
@@ -915,7 +915,7 @@ typedef struct {
        uint8_t stub[1]; */
 } type_str_0x36442;
 
-typedef struct {                //lenght 0x6604u
+typedef struct {                //length 0x6604u
     uint16_t word_2FECE;
     uint16_t word_2FED0;
     uint8_t byte_0x2FED2;       //x_D41A0_BYTEARRAY_0[196306] // type of level graphics
@@ -950,7 +950,7 @@ typedef struct {                //lenght 0x6604u
     uint8_t stubk[1022];
     type_entity_0x30311 entity_0x30311[1200];   //end(next entity) - 0x360d1
     uint8_t next_0x360D1;
-    type_str_0x360D2 next_0x360D2[8];   //lenght 110  /spells?
+    type_str_0x360D2 next_0x360D2[8];   //length 110  /spells?
     type_str_0x36442 stages_0x36442[8]; //stages(checkpoints)
     type_str_0x3647Ac StageVars_0x3647A[11];    //8x11
 } type_str_2FECE;               //compress level
@@ -959,14 +959,14 @@ typedef union {
     axis_2du axis;
 } shadow_un1;
 
-typedef struct {                //lenght 8
+typedef struct {                //length 8
     int8_t str_0x3647A_byte_0;  //array_0x3647a
     int8_t str_0x3647A_byte_1;  //array_0x3647b
     uaxis_2d str_0x3647A_2;     //array_0x3647c//str_0x3647A_2.word
     shadow_un1 str_0x3647C_4;   //array_0x3647e
 } type_shadow_str_0x3647Ac;
 
-typedef struct {                //lenght 0x6604u
+typedef struct {                //length 0x6604u
     uint16_t word_2FECE;
     uint16_t word_2FED0;
     uint8_t byte_0x2FED2;       //x_D41A0_BYTEARRAY_0[196306] // type of level graphics
@@ -1001,7 +1001,7 @@ typedef struct {                //lenght 0x6604u
     uint8_t stubk[1022];
     type_entity_0x30311 array_0x30311[1200];    //end(next entity) - 0x360d1
     uint8_t next_0x360D1;
-    type_str_0x360D2 next_0x360D2[8];   //lenght 110  /spells?
+    type_str_0x360D2 next_0x360D2[8];   //length 110  /spells?
     type_str_0x36442 str_0x36442[8];    //stages(checkpoints)
     type_shadow_str_0x3647Ac array_0x3647A[11]; //8x11
 } type_shadow_str_2FECE;        //compress level
@@ -1153,7 +1153,7 @@ typedef struct {
 	uint32_t dword;
 }
 type_uni_0x21B6;*/
-typedef struct {                //lenght 39
+typedef struct {                //length 39
     int8_t byte_0;
     int8_t byte_1;
     uint8_t byte_2;
@@ -1163,12 +1163,12 @@ typedef struct {                //lenght 39
     uint8_t array_E[25];
 } type_str_0x3664C;
 
-typedef struct {                //lenght 108
-    uint32_t dword_0x364D2;     //lenght 108
-    uint32_t dword_0x364D6[26]; // lenght 0x68=104 end 0x3653e
+typedef struct {                //length 108
+    uint32_t dword_0x364D2;     //length 108
+    uint32_t dword_0x364D6[26]; // length 0x68=104 end 0x3653e
 } type_str_0x364D2;
 
-typedef struct {                //lenght 7
+typedef struct {                //length 7
     int8_t byte_0;              //25972
     int8_t byte_1;              //25973
     uint8_t stub[5];
@@ -1181,7 +1181,7 @@ typedef struct {
     type_str_0x2196 str_0x2196;
 } GameSettingsStruct_t;
 
-typedef struct {                //lenght 224791
+typedef struct {                //length 224791
     uint8_t stub0[4];
     uint32_t dword_0x4;
     uint32_t rand_0x8;
@@ -1215,10 +1215,10 @@ typedef struct {                //lenght 224791
     uint8_t stub3c[333];
     uint8_t stub3d[1791];
     type_str_0x2BDE array_0x2BDE[8];
-    type_str_0x6E3E array_0x6E3E[8];    //28222 lenght 0xa size 0x8// game events
+    type_str_0x6E3E array_0x6E3E[8];    //28222 length 0xa size 0x8// game events
     event_t struct_0x6E8E[1000];      //28302 a8*3e8
     type_str_2FECE terrain_2FECE;       // a1 = &x_D41A0_BYTEARRAY_0[0x2FECE/*196302*/];//fix - size 0x6604u//compress level
-    type_str_0x364D2 str_0x364D2;       //lenght 108
+    type_str_0x364D2 str_0x364D2;       //length 108
     int16_t word_0x3653E;       //
     int16_t word_0x36540;       //
     int16_t word_0x36542;       //
@@ -1229,7 +1229,7 @@ typedef struct {                //lenght 224791
     type_str_3654C stages_0x3654C[8];   //size 10 count 8
     type_str_3659C struct_0x3659C[8];   //size 11 count 8 C-0 D-1 E-2 F-3
     type_str_0x3647Ac StageVars2_0x365F4[11];   //8x11 //set 0x58 // end 0x3664c
-    type_str_0x3664C str_0x3664C[50];   // lenght 0x79e//39x50 (end-0x36dea)
+    type_str_0x3664C str_0x3664C[50];   // length 0x79e//39x50 (end-0x36dea)
     int8_t byte_0x36DEA_fly_asistant;
     int8_t byte_0x36DEB_xx;
     int16_t word_0x36DEC_mousex;
@@ -1250,13 +1250,13 @@ typedef struct {                //lenght 224791
     uint8_t stubend[11];
 } type_D41A0_BYTESTR_0;         // level data (gets saved to and loaded from SAVE/SLEVxx.dat) was originally forced to 224791 on load/save which is out of bounds
 
-typedef struct {                //lenght a8//THING
+typedef struct {                //length a8//THING
     uint32_t next_0;
     int32_t dword_0x4;          //4 //?bitmap//LIVE
     int32_t dword_0x8;          //8 // this is int32_t ?bitmap//MAX LIVE
     dw_w_b struct_byte_0xc_12_15;       //12
     int32_t dword_0x10_16;      //16 // index of array
-    uint16_t word_0x14_20;      //20 //random seed adress
+    uint16_t word_0x14_20;      //20 //random seed address
     uint16_t word_0x16_22;      //22
     uint16_t word_0x18_24_next_entity;  //24 //next entity index
     uint16_t word_0x1A_26;      //26 // index - owner //ID last index
@@ -1287,7 +1287,7 @@ typedef struct {                //lenght a8//THING
     int8_t byte_0x42_66;        //66 //subtype subentity
     int8_t byte_0x43_67;        //67
     int8_t byte_0x44_68;        //68
-    uint8_t byte_0x45_69;       //69 // index of structure with lenght 14//STATE-
+    uint8_t byte_0x45_69;       //69 // index of structure with length 14//STATE-
     int8_t byte_0x46_70;        //70 // index of bitmap // index of ending sequence
     int8_t byte_0x47_71_xx;     //71
     int8_t byte_0x48_72;        //72
@@ -1310,7 +1310,7 @@ typedef struct {                //lenght a8//THING
     uint16_t word_0x98_152;     //152
     axis_3d word_0x9A_154x;     //154
     uint32_t dword_0xA0_160x;   //160 //special settings
-    uint32_t dword_0xA4_164x;   //100 // adress of xx
+    uint32_t dword_0xA4_164x;   //100 // address of xx
 } type_shadow_str_0x6E8E;
 
 typedef union {
@@ -1327,7 +1327,7 @@ typedef struct {                //size 10 count 8
     un_shadow_str_36552 str_36552_un;   //pointer sometimes
 } type_shadow_str_3654C;
 
-typedef struct {                //lenght 39
+typedef struct {                //length 39
     int8_t byte_0;
     int8_t byte_1;
     uint8_t byte_2;
@@ -1337,7 +1337,7 @@ typedef struct {                //lenght 39
     uint8_t array_E[25];
 } type_shadow_str_0x3664C;
 
-typedef struct {                //lenght 224791
+typedef struct {                //length 224791
     uint8_t stub0[4];
     uint32_t dword_0x4;
     uint32_t dword_0x8;
@@ -1406,7 +1406,7 @@ typedef struct {                //lenght 224791
     uint8_t stubend[11];
 } type_shadow_D41A0_BYTESTR_0;
 
-struct {                        //lenght 0x33
+struct {                        //length 0x33
     int16_t maxTextboxWidth_0x0;        //0 //0
     int16_t maxTextboxHeight_0x2;       //2 //1
     int16_t textBoxWidth_0x4;   //4 //2
@@ -1435,7 +1435,7 @@ struct {                        //lenght 0x33
     int8_t color3_0x32;         //32-65 - color2
 } typedef type_textbox_sub1804B0;
 
-typedef union {                 //lenght 12
+typedef union {                 //length 12
     int32_t dword[3];
     int16_t word[6];
 } type_uni_0x8a;
@@ -1604,7 +1604,7 @@ void set_x_D41A0_BYTEARRAY_0_0x21b7(uint8_t value);
 uint8_t get_x_D41A0_BYTEARRAY_0_0x21b8();
 void set_x_D41A0_BYTEARRAY_0_0x21b8(uint8_t value);
 */
-//axis_3d get_x_D41A0_BYTEARRAY_0_0x2362(int number); //lenght 48 - 6x8
+//axis_3d get_x_D41A0_BYTEARRAY_0_0x2362(int number); //length 48 - 6x8
 //void set_x_D41A0_BYTEARRAY_0_0x2362(int number, axis_3d value);
 /*int16_t get_x_D41A0_BYTEARRAY_0_0x2366(int number);
 void set_x_D41A0_BYTEARRAY_0_0x2366(int number, int16_t value);*/
