@@ -26,6 +26,12 @@
 #include "port_sdl_sound.h"
 #include "port_openal.h"
 
+#include "config.h"
+#ifdef CONFIG_IMGUI
+#include "engine_support.h"
+#include "imgui.h"
+#endif
+
 #define          OPENAL_C_SZ  OPENAL_CHANNELS   ///< number of chunks that can play at the same time (aka number of voices)
 #define         OPENAL_CC_SZ  128       ///< number of chunks the cache can hold
 
@@ -142,6 +148,7 @@ void alsound_delete_source(const int16_t channel_id)
     alsound_error_check("alsound_delete_source alDeleteSources");
     alc[channel_id].state = 0;
     alc[channel_id].size = 0;
+    alc[channel_id].id = -1;
 }
 
 /// \brief stop chunk from playing based on chunk id
@@ -465,8 +472,6 @@ int16_t alsound_create_source(const int16_t chunk_id, al_ssp_t *ssp)
 /// \param position   
 void alsound_update_source(event_t *entity, axis_3d *position)
 {
-    int16_t play_ch;
-    al_chunk_t *p;
     al_ssp_t ssp = { };
     uint16_t ent = 0;
 
@@ -521,9 +526,9 @@ int16_t alsound_play(const int16_t chunk_id, Mix_Chunk *mixchunk, const uint16_t
         if (alcc[i - 1].id == chunk_id) {
             cache_ch = i - 1;
             if ((uint32_t) alcc[i - 1].size != mixchunk->alen) {
-                Logger->info("cache miss!  new {} cached {}  cache_ch {}", mixchunk->alen,
+                Logger->warn("cache miss!  new {} cached {}  cache_ch {}", mixchunk->alen,
                              alcc[i - 1].size, i - 1);
-                // load chunk into invalid cache slot
+                // replace invalid cache slot
                 alsound_cache(cache_ch, chunk_id, mixchunk, flags);
             }
             break;
@@ -562,7 +567,7 @@ int16_t alsound_play(const int16_t chunk_id, Mix_Chunk *mixchunk, const uint16_t
 
     //Logger->info("alsound_play playing   id {}  sz {}  cache_ch {}  play_ch {}", chunk_id, alcc[cache_ch].size, cache_ch, play_ch);
 
-    if ((alnv.chunk_id == chunk_id) || (alnv.chunk_id == mixchunk->alen)) {
+    if ((alnv.chunk_id == chunk_id) || ((uint32_t) alnv.chunk_id == mixchunk->alen)) {
         gain = alnv.gain;
         alnv.chunk_id = -1;     // apply the volume only once
     }
@@ -863,4 +868,113 @@ ALCenum alsound_error_check(const char *msg)
     }
     return AL_NO_ERROR;
 }
+
+
+#ifdef CONFIG_IMGUI
+
+#define MSG_MAX 20
+
+void alsound_imgui(void)
+{
+    int16_t i;
+    uint16_t cnt;
+    event_t *entity;
+    uint8_t idx = 0;
+
+    ImGuiTableFlags flags =
+    ImGuiTableFlags_SizingFixedFit | ImGuiTableFlags_RowBg | ImGuiTableFlags_Borders |
+    ImGuiTableFlags_Resizable;
+
+    ImGui::Begin("positioning");
+    ImGui::Text("    listener (%u, %u, %u)", ale.listener_c.x, ale.listener_c.y, ale.listener_c.z);
+    ImGui::Text("    creatures: ");
+    if (ImGui::BeginTable("creatures", 3, flags)) {
+        ImGui::TableSetupColumn("class / model", ImGuiTableColumnFlags_WidthStretch);
+        ImGui::TableSetupColumn("position", ImGuiTableColumnFlags_WidthStretch);
+        ImGui::TableSetupColumn("play channel", ImGuiTableColumnFlags_WidthStretch);
+        ImGui::TableHeadersRow();
+
+        cnt = 0;
+        do {
+            for (entity = engine_db.bytearray_38403x[idx]; entity > x_DWORD_EA3E4[0]; entity = entity->next_0) {
+                ImGui::TableNextRow();
+                ImGui::TableSetColumnIndex(0);
+                ImGui::Text("%u %u", entity->class_0x3F_63, entity->model_0x40_64);
+                ImGui::TableSetColumnIndex(1);
+                ImGui::Text("%u %u %u", entity->axis_0x4C_76.x, entity->axis_0x4C_76.y, entity->axis_0x4C_76.z);
+                ImGui::TableSetColumnIndex(2);
+                ImGui::Text("%d", entity->play_ch);
+                cnt++;
+            }
+            idx++;
+        } while (idx<29);
+
+        ImGui::EndTable();
+    }
+    ImGui::End();
+
+    ImGui::Begin("sound samples");
+    if ((ale.bank > -1) && (ale.bank < 3)) {
+        if (ImGui::CollapsingHeader("chunk cache status")) {
+            if (ImGui::BeginTable("cache", 4, flags)) {
+                ImGui::TableSetupColumn("id", ImGuiTableColumnFlags_WidthStretch);
+                ImGui::TableSetupColumn("name", ImGuiTableColumnFlags_WidthStretch);
+                ImGui::TableSetupColumn("flags", ImGuiTableColumnFlags_WidthFixed);
+                ImGui::TableSetupColumn("cache channel", ImGuiTableColumnFlags_WidthFixed);
+                ImGui::TableHeadersRow();
+
+                cnt = 0;
+                for (i = OPENAL_CC_SZ; i > 0; i--) {
+                    if (alcc[i - 1].id > 0) {
+                        cnt++;
+                        ImGui::TableNextRow();
+                        ImGui::TableSetColumnIndex(0);
+                        ImGui::Text("%u", alcc[i - 1].id);
+                        ImGui::TableSetColumnIndex(1);
+                        ImGui::Text("%s", alct_name[ale.bank][alcc[i - 1].id]);
+                        ImGui::TableSetColumnIndex(2);
+                        ImGui::Text("%u", alcc[i - 1].flags);
+                        ImGui::TableSetColumnIndex(3);
+                        ImGui::Text("%u", i - 1);
+                    }
+                }
+                ImGui::EndTable();
+            }
+            ImGui::Text("    cache usage: %u/%u", cnt, OPENAL_CC_SZ);
+        } else {
+            ImGui::Text("    cache size: %u", OPENAL_CC_SZ);
+        }
+
+        if (ImGui::CollapsingHeader("currently playing chunks")) {
+            if (ImGui::BeginTable("chunks", 3, flags)) {
+                ImGui::TableSetupColumn("id", ImGuiTableColumnFlags_WidthStretch);
+                ImGui::TableSetupColumn("name", ImGuiTableColumnFlags_WidthStretch);
+                ImGui::TableSetupColumn("play channel", ImGuiTableColumnFlags_WidthFixed);
+                ImGui::TableHeadersRow();
+
+                cnt = 0;
+                for (i = OPENAL_C_SZ; i > 0; i--) {
+                    if (alc[i - 1].state) {
+                        cnt++;
+                        ImGui::TableNextRow();
+                        ImGui::TableSetColumnIndex(0);
+                        ImGui::Text("%u", alc[i - 1].id);
+                        ImGui::TableSetColumnIndex(1);
+                        ImGui::Text("%s", alct_name[ale.bank][alc[i - 1].id]);
+                        ImGui::TableSetColumnIndex(2);
+                        ImGui::Text("%u", i - 1);
+                    }
+                }
+                ImGui::EndTable();
+            }
+            ImGui::Text("    number of voices used: %u/%u", cnt, OPENAL_CHANNELS);
+        } else {
+            ImGui::Text("    number of voices: %u", OPENAL_CHANNELS);
+        }
+    }
+    ImGui::End();
+
+}
+
+#endif
 

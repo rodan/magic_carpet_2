@@ -1022,7 +1022,9 @@ void VGA_Blit(Uint8 *srcBuffer)
     if (SDL_MUSTLOCK(m_gamePalletisedSurface)) {
         SDL_UnlockSurface(m_gamePalletisedSurface);
     }
+
     SubBlit(m_iOrigw, m_iOrigh);
+
     SOUND_UPDATE();
 }
 

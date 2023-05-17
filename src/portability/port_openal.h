@@ -53,4 +53,6 @@ void alsound_update_source(event_t * entity, axis_3d * position);
 void alsound_delete_source(const int16_t ch);
 uint8_t alsound_save_chunk(uint8_t * data, const uint32_t len, char *filename);
 
+void alsound_imgui(void);
+
 #endif

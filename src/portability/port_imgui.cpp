@@ -17,6 +17,8 @@
 SDL_Window* window;
 SDL_Renderer* renderer;
 
+void alsound_imgui(void);
+
 uint8_t port_imgui_init(void)
 {
     // Setup SDL
@@ -33,7 +35,7 @@ uint8_t port_imgui_init(void)
 
     // Create window with SDL_Renderer graphics context
     SDL_WindowFlags window_flags = (SDL_WindowFlags)(SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
-    window = SDL_CreateWindow("Dear ImGui SDL2+SDL_Renderer example", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1280, 720, window_flags);
+    window = SDL_CreateWindow("Magic Carpet 2 recode edition", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1600, 800, window_flags);
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_ACCELERATED);
     if (renderer == NULL)
     {
@@ -50,6 +52,8 @@ uint8_t port_imgui_init(void)
     ImGuiIO& io = ImGui::GetIO(); (void)io;
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
+    io.FontGlobalScale = 2.0;
+    ImGui::StyleColorsClassic();
 
     // Setup Dear ImGui style
     ImGui::StyleColorsDark();
@@ -106,15 +110,21 @@ uint8_t port_imgui_loop(void)
     ImGui::NewFrame();
 
     // 1. Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()! You can browse its code to learn more about Dear ImGui!).
-    ImGui::ShowDemoWindow(NULL);
+    //ImGui::ShowDemoWindow(&show_demo_window);
+
+
+    alsound_imgui();
+
 
     // Rendering
     ImGui::Render();
 
     SDL_RenderSetScale(renderer, io.DisplayFramebufferScale.x, io.DisplayFramebufferScale.y);
     SDL_SetRenderDrawColor(renderer, (Uint8)(clear_color.x * 255), (Uint8)(clear_color.y * 255), (Uint8)(clear_color.z * 255), (Uint8)(clear_color.w * 255));
-    //SDL_RenderClear(renderer);
     ImGui_ImplSDLRenderer_RenderDrawData(ImGui::GetDrawData());
+
+    // these functions are called by port_sdl_vga_mouse.cpp:SubBlit()
+    //SDL_RenderClear(renderer);
     //SDL_RenderPresent(renderer);
 
     return EXIT_SUCCESS;
