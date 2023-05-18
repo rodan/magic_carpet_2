@@ -37939,6 +37939,9 @@ event_t *NewEvent_4A050()       //22b050
         D41A0_0.pointers_0x246[D41A0_0.dword_0x35]->byte_0x43_67 = 10;
         D41A0_0.pointers_0x246[D41A0_0.dword_0x35]->byte_0x39_57 = -6;
         D41A0_0.pointers_0x246[D41A0_0.dword_0x35]->play_ch = -1;
+        D41A0_0.pointers_0x246[D41A0_0.dword_0x35]->play_mark = 0;
+        D41A0_0.pointers_0x246[D41A0_0.dword_0x35]->dist_mark = UINT64_MAX;
+        D41A0_0.pointers_0x246[D41A0_0.dword_0x35]->dist = UINT16_MAX;
         D41A0_0.pointers_0x246[D41A0_0.dword_0x35]->byte_0x3E_62 = D41A0_0.pointers_0x246[D41A0_0.dword_0x35] - D41A0_0.struct_0x6E8E;
         D41A0_0.pointers_0x246[D41A0_0.dword_0x35]->rand_0x14_20 = D41A0_0.pointers_0x246[D41A0_0.dword_0x35] - D41A0_0.struct_0x6E8E + D41A0_0.rand_0x8;       //this is it line
         return D41A0_0.pointers_0x246[D41A0_0.dword_0x35--];
@@ -37965,6 +37968,9 @@ event_t *NewEvent_4A050()       //22b050
         D41A0_0.dword_0x11EA[D41A0_0.dword_0x11e6]->byte_0x43_67 = 10;
         D41A0_0.dword_0x11EA[D41A0_0.dword_0x11e6]->byte_0x39_57 = -6;
         D41A0_0.dword_0x11EA[D41A0_0.dword_0x11e6]->play_ch = -1;
+        D41A0_0.dword_0x11EA[D41A0_0.dword_0x11e6]->play_mark = 0;
+        D41A0_0.dword_0x11EA[D41A0_0.dword_0x11e6]->dist_mark = UINT64_MAX;
+        D41A0_0.dword_0x11EA[D41A0_0.dword_0x11e6]->dist = UINT16_MAX;
         D41A0_0.dword_0x11EA[D41A0_0.dword_0x11e6]->byte_0x3E_62 = D41A0_0.dword_0x11EA[D41A0_0.dword_0x11e6] - D41A0_0.struct_0x6E8E;
         D41A0_0.dword_0x11EA[D41A0_0.dword_0x11e6]->rand_0x14_20 = D41A0_0.dword_0x11EA[D41A0_0.dword_0x11e6] - D41A0_0.struct_0x6E8E + D41A0_0.rand_0x8;       //this is it line
         return D41A0_0.dword_0x11EA[D41A0_0.dword_0x11e6--];
@@ -51207,7 +51213,10 @@ void AddEventToMap_57D70(event_t *entity, axis_3d *position)    //238d70 // regi
         entity->struct_byte_0xc_12_15.byte[0] |= 4u;    //added to map
         //Logger->info("AETM state {}  class {}  model {}  b {} hp {} maxhp {}  ({},{},{})", entity->state_0x45_69, entity->class_0x3F_63, entity->model_0x40_64, entity->byte_0x38_56, entity->life_0x8, entity->maxLife_0x4, entity->axis_0x4C_76.x, entity->axis_0x4C_76.y, entity->axis_0x4C_76.z);
 #ifdef SOUND_OPENAL
-        alsound_update_source(entity, position);
+        // feed the entity location to OpenAL only if it's a creature
+        if (entity->class_0x3F_63 == 5) {
+            alsound_update_source(entity, position);
+        }
 #endif
     }
 }

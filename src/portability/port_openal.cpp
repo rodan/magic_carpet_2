@@ -32,11 +32,14 @@
 #include "imgui.h"
 #endif
 
-#define          OPENAL_C_SZ  OPENAL_CHANNELS   ///< number of chunks that can play at the same time (aka number of voices)
-#define         OPENAL_CC_SZ  128       ///< number of chunks the cache can hold
+#define                OPENAL_C_SZ  OPENAL_CHANNELS   ///< number of chunks that can play at the same time (aka number of voices)
+#define               OPENAL_CC_SZ  128       ///< number of chunks the cache can hold
 
 ///< al_chunk_cache_t flags
-#define    OPENAL_FLG_LOADED  0x1       ///< if chunk was properly loaded via alBufferData()
+#define          OPENAL_FLG_LOADED  0x1       ///< if chunk was properly loaded via alBufferData()
+
+#define   AL_DIST_REFRESH_INTERVAL  1000      ///< after how many ms shoud the distance between creatures and the listener should be refreshed
+#define           AL_DIST_MIN_PLAY  6000      ///< minimal distance to the player needed for creature to play it's sample
 
 // Effect object functions
 static LPALGENEFFECTS alGenEffects;
@@ -77,6 +80,7 @@ struct al_env {
     uint8_t efx_initialized;    ///< '1' if the ALC_EXT_EFX extension is usable
     int8_t bank;                ///< current sound bank
     int8_t reverb_type;         ///< should match the current MapType
+    uint32_t frame_cnt;         ///< frame counter
     axis_3d listener_c;         ///< the listener's coordinates in game space (x, y, z)
     axis_4d listener_o;         ///< the listener's orientation values (yaw, pitch, roll)
 };
@@ -133,6 +137,15 @@ int16_t alsound_find_alc_sample(const int32_t id)
 /// \return  1 if sample is playing and 0 otherwise
 uint8_t alsound_sample_status(const int32_t id)
 {
+#if 0
+    // if recode is asking about samples marked with AL_IGNORE_RECODE
+    // then make sure recode will not issue a play request for that chunk
+    if (ale.bank < 3) {
+        if (alct[ale.bank][id].flags & AL_IGNORE_RECODE) {
+            return 1;
+        }
+    }
+#endif
     if (alsound_find_alc_sample(id) > -1) {
         return 1;
     }
@@ -146,6 +159,11 @@ void alsound_delete_source(const int16_t channel_id)
     //Logger->info("alsound_delete_source {}", channel_id);
     alDeleteSources(1, &alc[channel_id].alSource);
     alsound_error_check("alsound_delete_source alDeleteSources");
+    if (alc[channel_id].entity) {
+        //Logger->info("delete_source {}", channel_id);
+        alc[channel_id].entity->play_ch = -1;
+        alc[channel_id].entity = 0;
+    }
     alc[channel_id].state = 0;
     alc[channel_id].size = 0;
     alc[channel_id].id = -1;
@@ -218,6 +236,7 @@ void alsound_init()
     //alDistanceModel(AL_NONE);
     alDistanceModel(AL_INVERSE_DISTANCE_CLAMPED);
     alsound_error_check("alDistanceModel");
+    ale.frame_cnt = 0;
     ale.initialized = 1;
 
     if (oac.efx_enabled) {
@@ -322,6 +341,7 @@ void alsound_update(void)
         return;
     }
 
+    ale.frame_cnt++;
     alGetError();               // reset global error variable
 
     for (i = OPENAL_C_SZ; i > 0; i--) {
@@ -433,7 +453,7 @@ void alsound_clear_cache(void)
 /// \param chunk_id  sound sample to be played on a continuous loop
 /// \param ssp   optional openal parameters to apply to the source
 /// \return play channel index
-int16_t alsound_create_source(const int16_t chunk_id, al_ssp_t *ssp)
+int16_t alsound_create_source(const int16_t chunk_id, al_ssp_t *ssp, event_t *entity)
 {
     Mix_Chunk mixchunk = { };
     al_ssp_t ssp_l = { };
@@ -459,9 +479,9 @@ int16_t alsound_create_source(const int16_t chunk_id, al_ssp_t *ssp)
         ssp_l.coord.x = ale.listener_c.x;
         ssp_l.coord.y = ale.listener_c.y;
         ssp_l.coord.z = ale.listener_c.z;
-        return alsound_play(chunk_id, &mixchunk, 0xffff, &ssp_l, AL_FORMAT_MONO8_22050);
+        return alsound_play(chunk_id, &mixchunk, entity, &ssp_l, AL_FORMAT_MONO8_22050 | AL_TYPE_POSITIONAL);
     } else {
-        return alsound_play(chunk_id, &mixchunk, 0xffff, ssp, AL_FORMAT_MONO8_22050);
+        return alsound_play(chunk_id, &mixchunk, entity, ssp, AL_FORMAT_MONO8_22050 | AL_TYPE_POSITIONAL);
         Logger->info("alsound_create_source {}  at ({},{},{})", mixchunk.alen, ssp->coord.x,
                      ssp->coord.y, ssp->coord.z);
     }
@@ -473,31 +493,57 @@ int16_t alsound_create_source(const int16_t chunk_id, al_ssp_t *ssp)
 void alsound_update_source(event_t *entity, axis_3d *position)
 {
     al_ssp_t ssp = { };
-    uint16_t ent = 0;
+    float dx, dy, dist;
+    uint64_t now = mygetthousandths();
+    uint8_t create_new_source = 0;
+    uint32_t delay_between_replays;
 
-    if ((entity->class_0x3F_63 == 5) && (entity->model_0x40_64 == 19)) {
-        // fireflies
-        ent = 45;
-        //Logger->info("firefly  speed {}  hp {}  hp_max {}  id {}", entity->actSpeed_0x82_130, entity->life_0x8, entity->maxLife_0x4, entity->id_0x1A_26);
+    // spread out the scheduled time when the distance needs to be refreshed
+    if (entity->dist_mark == UINT64_MAX) {
+        entity->dist_mark = now + entity->id_0x1A_26;
     }
 
-    if (ent) {
-        if (entity->play_ch == -1) {
-            Logger->info("new firefly! {},{},{}", position->x, position->y, position->z);
+    // once every AL_DIST_REFRESH_INTERVAL re-calculate the distance to the listener
+    if (now > entity->dist_mark) {
+        dx = ale.listener_c.x - entity->axis_0x4C_76.x;
+        dy = ale.listener_c.y - entity->axis_0x4C_76.y;
+        dist = sqrt((dx * dx) + (dy * dy));
+        entity->dist = dist;
+        entity->dist_mark = now + AL_DIST_REFRESH_INTERVAL;
+    }
+
+    // once a while some of the creatures create sounds
+    if ((now > entity->play_mark) && (alcrt[entity->model_0x40_64].chunk_id != -1)) {
+        create_new_source = 1;
+        if (alcrt[entity->model_0x40_64].flags & AL_REPLAY_FREQ1) {
+            // not very often
+            entity->play_mark = now + 1000 + (random() & (32768 - 1));
+        } else if (alcrt[entity->model_0x40_64].flags & AL_REPLAY_FREQ2) {
+            // as often as possible
+            entity->play_mark = now + 1000;
+        } else {
+            entity->play_mark = now + 5000 + (random() & (4098 - 1));
+        }
+    }
+
+    if ((entity->dist < AL_DIST_MIN_PLAY) && (alcrt[entity->model_0x40_64].chunk_id != -1)) {
+        if ((entity->play_ch == -1) && create_new_source) {
+            //Logger->info("new creature! {},{},{}", position->x, position->y, position->z);
             ssp.gain = 1.0;
-            ssp.reference_distance = 512.0;
+            ssp.reference_distance = 256.0;
             ssp.max_distance = 65535.0;
             ssp.rolloff_factor = 1.0;
             ssp.coord.x = position->x;
             ssp.coord.y = position->y;
             ssp.coord.z = position->z;
-            entity->play_ch = alsound_create_source(ent, &ssp);
-        } else {
+            entity->play_ch = alsound_create_source(alcrt[entity->model_0x40_64].chunk_id, &ssp, entity);
+        } else if (entity->play_ch != -1) {
             alSource3f(alc[entity->play_ch].alSource, AL_POSITION, position->x, position->y,
                        position->z);
-            alsound_error_check("alSource3f AL_POSITION");
+            alsound_error_check("alSource3f update_source AL_POSITION");
         }
     }
+
 }
 
 /// \brief primary entrypoint for chunks that need to be played
@@ -506,7 +552,7 @@ void alsound_update_source(event_t *entity, axis_3d *position)
 /// \param loops 0 for no looping, 0xffff for infinite loop
 /// \param ssp   optional openal parameters to apply to the source. not used by the recode
 /// \return play channel index
-int16_t alsound_play(const int16_t chunk_id, Mix_Chunk *mixchunk, const uint16_t loops,
+int16_t alsound_play(const int16_t chunk_id, Mix_Chunk *mixchunk, event_t *entity,
                      al_ssp_t *ssp, const uint16_t flags)
 {
     int16_t i;
@@ -520,6 +566,13 @@ int16_t alsound_play(const int16_t chunk_id, Mix_Chunk *mixchunk, const uint16_t
     }
 
     //Logger->info("alsound_play requested id {}  sz {}  fmt {}", chunk_id, mixchunk->alen, flags);
+
+    // get rid of this request if the chunk is marked with AL_TYPE_POSITIONAL and AL_IGNORE_RECODE
+    if (ale.bank < 3) {
+        if ((alct[ale.bank][chunk_id].flags & AL_IGNORE_RECODE) && !(flags & AL_TYPE_POSITIONAL)) {
+            return -1;
+        }
+    }
 
     // check if chunk has already been cached
     for (i = OPENAL_CC_SZ; i > 0; i--) {
@@ -597,7 +650,7 @@ int16_t alsound_play(const int16_t chunk_id, Mix_Chunk *mixchunk, const uint16_t
         alsound_error_check("alSourcef AL_ROLLOFF_FACTOR");
         alSource3f(alc[play_ch].alSource, AL_POSITION, ale.listener_c.x, ale.listener_c.y,
                    ale.listener_c.z);
-        alsound_error_check("alSource3f AL_POSITION");
+        alsound_error_check("alSource3f listener AL_POSITION");
         //Logger->info("alsound_play source @({},{},{})", ale.listener_c.x, ale.listener_c.y, ale.listener_c.z);
     } else {
         alSourcef(alc[play_ch].alSource, AL_GAIN, ssp->gain);
@@ -609,15 +662,15 @@ int16_t alsound_play(const int16_t chunk_id, Mix_Chunk *mixchunk, const uint16_t
         alSourcef(alc[play_ch].alSource, AL_ROLLOFF_FACTOR, ssp->rolloff_factor);
         alsound_error_check("alSourcef AL_ROLLOFF_FACTOR");
         alSource3f(alc[play_ch].alSource, AL_POSITION, ssp->coord.x, ssp->coord.y, ssp->coord.z);
-        alsound_error_check("alSource3f AL_POSITION");
+        alsound_error_check("alSource3f alSource AL_POSITION");
         //Logger->info("alsound_play source @({},{},{})", ssp->coord.x, ssp->coord.y, ssp->coord.z);
     }
 
-    if (loops == 0xffff) {
-        alSourcei(alc[play_ch].alSource, AL_LOOPING, AL_TRUE);
-    } else {
+//    if (loops == 0xffff) {
+//        alSourcei(alc[play_ch].alSource, AL_LOOPING, AL_TRUE);
+//    } else {
         alSourcei(alc[play_ch].alSource, AL_LOOPING, AL_FALSE);
-    }
+//    }
     alsound_error_check("alSourcei AL_LOOPING");
 
     alSourcei(alc[play_ch].alSource, AL_BUFFER, alcc[cache_ch].bufferName);
@@ -675,6 +728,8 @@ int16_t alsound_play(const int16_t chunk_id, Mix_Chunk *mixchunk, const uint16_t
 
     alGetSourcei(alc[play_ch].alSource, AL_SOURCE_STATE, &alc[play_ch].state);
     alsound_error_check("alGetSourcei init");
+
+    alc[play_ch].entity = entity;
 
     return play_ch;
 }
@@ -872,8 +927,6 @@ ALCenum alsound_error_check(const char *msg)
 
 #ifdef CONFIG_IMGUI
 
-#define MSG_MAX 20
-
 void alsound_imgui(void)
 {
     int16_t i;
@@ -899,9 +952,9 @@ void alsound_imgui(void)
             for (entity = engine_db.bytearray_38403x[idx]; entity > x_DWORD_EA3E4[0]; entity = entity->next_0) {
                 ImGui::TableNextRow();
                 ImGui::TableSetColumnIndex(0);
-                ImGui::Text("%u %u", entity->class_0x3F_63, entity->model_0x40_64);
+                ImGui::Text("%u %u %u", entity->class_0x3F_63, entity->model_0x40_64, entity->id_0x1A_26);
                 ImGui::TableSetColumnIndex(1);
-                ImGui::Text("%u %u %u", entity->axis_0x4C_76.x, entity->axis_0x4C_76.y, entity->axis_0x4C_76.z);
+                ImGui::Text("%u %u %u  %u", entity->axis_0x4C_76.x, entity->axis_0x4C_76.y, entity->axis_0x4C_76.z, entity->dist);
                 ImGui::TableSetColumnIndex(2);
                 ImGui::Text("%d", entity->play_ch);
                 cnt++;

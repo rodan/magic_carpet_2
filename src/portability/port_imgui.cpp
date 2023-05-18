@@ -14,31 +14,28 @@
 
 #include "port_imgui.h"
 
-SDL_Window* window;
-SDL_Renderer* renderer;
+SDL_Window *window;
+SDL_Renderer *renderer;
 
 void alsound_imgui(void);
 
 uint8_t port_imgui_init(void)
 {
     // Setup SDL
-    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_GAMECONTROLLER) != 0)
-    {
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_GAMECONTROLLER) != 0) {
         printf("Error: %s\n", SDL_GetError());
         return -1;
     }
-
     // From 2.0.18: Enable native IME.
 #ifdef SDL_HINT_IME_SHOW_UI
     SDL_SetHint(SDL_HINT_IME_SHOW_UI, "1");
 #endif
 
     // Create window with SDL_Renderer graphics context
-    SDL_WindowFlags window_flags = (SDL_WindowFlags)(SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
-    window = SDL_CreateWindow("Magic Carpet 2 recode edition", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1600, 800, window_flags);
+    SDL_WindowFlags window_flags = (SDL_WindowFlags) (SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
+    window = SDL_CreateWindow("Magic Carpet 2 recode edition", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 3000, 2000, window_flags);
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_ACCELERATED);
-    if (renderer == NULL)
-    {
+    if (renderer == NULL) {
         SDL_Log("Error creating SDL_Renderer!");
         return 0;
     }
@@ -49,9 +46,10 @@ uint8_t port_imgui_init(void)
     // Setup Dear ImGui context
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
-    ImGuiIO& io = ImGui::GetIO(); (void)io;
-    io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
-    io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
+    ImGuiIO & io = ImGui::GetIO();
+    //(void)io;
+    io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;       // Enable Keyboard Controls
+    io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;        // Enable Gamepad Controls
     io.FontGlobalScale = 2.0;
     ImGui::StyleColorsClassic();
 
@@ -79,7 +77,6 @@ uint8_t port_imgui_init(void)
     //ImFont* font = io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\ArialUni.ttf", 18.0f, NULL, io.Fonts->GetGlyphRangesJapanese());
     //IM_ASSERT(font != NULL);
 
-
     return EXIT_SUCCESS;
 }
 
@@ -88,20 +85,19 @@ void port_imgui_process_event(SDL_Event *event)
     ImGui_ImplSDL2_ProcessEvent(event);
 }
 
-SDL_Window* port_imgui_get_window_ptr(void)
+SDL_Window *port_imgui_get_window_ptr(void)
 {
     return window;
 }
 
-SDL_Renderer* port_imgui_get_renderer_ptr(void)
+SDL_Renderer *port_imgui_get_renderer_ptr(void)
 {
     return renderer;
 }
 
 uint8_t port_imgui_loop(void)
 {
-    ImGuiIO& io = ImGui::GetIO(); (void)io;
-    bool show_demo_window = true;
+    ImGuiIO & io = ImGui::GetIO();
     ImVec4 clear_color = ImVec4(0.0f, 0.0f, 0.0f, 1.00f);
 
     // Start the Dear ImGui frame
@@ -112,15 +108,14 @@ uint8_t port_imgui_loop(void)
     // 1. Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()! You can browse its code to learn more about Dear ImGui!).
     //ImGui::ShowDemoWindow(&show_demo_window);
 
-
     alsound_imgui();
-
 
     // Rendering
     ImGui::Render();
 
     SDL_RenderSetScale(renderer, io.DisplayFramebufferScale.x, io.DisplayFramebufferScale.y);
-    SDL_SetRenderDrawColor(renderer, (Uint8)(clear_color.x * 255), (Uint8)(clear_color.y * 255), (Uint8)(clear_color.z * 255), (Uint8)(clear_color.w * 255));
+    SDL_SetRenderDrawColor(renderer, (Uint8) (clear_color.x * 255), (Uint8) (clear_color.y * 255), (Uint8) (clear_color.z * 255),
+                           (Uint8) (clear_color.w * 255));
     ImGui_ImplSDLRenderer_RenderDrawData(ImGui::GetDrawData());
 
     // these functions are called by port_sdl_vga_mouse.cpp:SubBlit()
@@ -139,5 +134,3 @@ void port_imgui_cleanup(void)
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
 }
-
-

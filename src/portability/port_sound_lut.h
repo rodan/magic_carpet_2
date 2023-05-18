@@ -56,7 +56,7 @@ al_ct_t alct[3][70] = {
      {0, 0},                    // id_43 NULL.WAV
      {0, 0},                    // id_44 NULL.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_45 FIRE.WAV
-     {AL_FORMAT_MONO8_22050, 0},        // id_46 GOAT.WAV
+     {AL_FORMAT_MONO8_22050 | AL_IGNORE_RECODE, 0}, // id_46 GOAT.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_47 DOORC2.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_48 MWORM3.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_49 TORNADO.WAV
@@ -128,7 +128,7 @@ al_ct_t alct[3][70] = {
      {AL_FORMAT_MONO8_22050, 0},        // id_43 FIREFLY1.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_44 FIREFLY2.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_45 FIRE.WAV
-     {AL_FORMAT_MONO8_22050, 0},        // id_46 GOAT.WAV
+     {AL_FORMAT_MONO8_22050 | AL_IGNORE_RECODE, 0}, // id_46 GOAT.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_47 DOORC2.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_48 MWORM3.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_49 TORNADO.WAV
@@ -446,5 +446,79 @@ char alct_name[3][70][9] = {
         "drip5"
     }
 };
+
+struct al_creature_table {
+    uint8_t flags;              // sound-related options
+    int16_t chunk_id;           // chunk identifier to play
+};
+typedef struct al_creature_table al_crt_t;
+
+al_crt_t alcrt[30] = {
+    {0, -1}, // 0
+    {AL_REPLAY_FREQ1, 46}, // 1 goat
+    {0, -1}, // 2
+    {0, -1}, // 3
+    {0, -1}, // 4
+    {0, -1}, // 5
+    {0, -1}, // 6
+    {0, -1}, // 7
+    {0, -1}, // 8
+    {0, -1}, // 9
+    {0, -1}, // 10
+    {0, -1}, // 11
+    {0, -1}, // 12
+    {0, -1}, // 13
+    {0, -1}, // 14
+    {0, -1}, // 15
+    {0, -1}, // 16
+    {0, -1}, // 17
+    {0, -1}, // 18
+    {AL_REPLAY_FREQ2, 45}, // 19 firefly
+    {0, -1}, // 20
+    {0, -1}, // 21
+    {0, -1}, // 22
+    {0, -1}, // 23
+    {0, -1}, // 24
+    {0, -1}, // 25
+    {0, -1}, // 26
+    {0, -1}, // 27
+    {0, -1}, // 28
+    {0, -1} // 29
+};
+
+char creature_name[30][12] = {
+    "dragon",       // 0
+    "goat",         // 1
+    "bee",          // 2
+    "worm",         // 3
+    "archer",       // 4
+    "",             // 5
+    "",             // 6
+    "",             // 7
+    "",             // 8
+    "skeleton",     // 9
+    "",             // 10
+    "",             // 11
+    "builder",      // 12
+    "townie",       // 13
+    "trader",       // 14
+    "",             // 15
+    "wyvern",       // 16
+    "manticore",    // 17
+    "sentinel",     // 18
+    "firefly",      // 19
+    "spider",       // 20
+    "devil",        // 21
+    "manaworm",     // 22
+    "moondweller",  // 23
+    "troglodyte",   // 24
+    "cymmerian",    // 25
+    "zombies",      // 26
+    "hydra",        // 27
+    "leviathan",    // 28
+    "",             // 29
+};
+
+
 
 #endif

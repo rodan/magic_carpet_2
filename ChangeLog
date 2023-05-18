@@ -1,4 +1,10 @@
 
+## 2023.05.18
+- port_openal: calculate distance between listener and every notable creature, use timer to mark when the creature will moan next
+
+## 2023.05.17
+- config.h: add optional ImGui interface
+
 ## 2023.05.16
 - src: fix adress, perifery, lenght typos
 
