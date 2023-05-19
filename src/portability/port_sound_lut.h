@@ -18,7 +18,7 @@ al_ct_t alct[3][70] = {
      {AL_FORMAT_MONO8_22050, 0},        // id_5 FIRE.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_6 ALLY.WAV
      {0, 0},                    // id_7 NULL.WAV
-     {AL_FORMAT_MONO8_22050, 0},        // id_8 DRAGROAR.WAV
+     {AL_FORMAT_MONO8_22050 | AL_IGNORE_RECODE, 0},        // id_8 DRAGROAR.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_9 FIREBAL1.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_10 QUAKE4.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_11 FOOLMANA.WAV
@@ -90,7 +90,7 @@ al_ct_t alct[3][70] = {
      {AL_FORMAT_MONO8_22050, 0},        // id_5 FIRE.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_6 ALLY.WAV
      {0, 0},                    // id_7 NULL.WAV
-     {AL_FORMAT_MONO8_22050, 0},        // id_8 DRAGROAR.WAV
+     {AL_FORMAT_MONO8_22050 | AL_IGNORE_RECODE, 0},        // id_8 DRAGROAR.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_9 FIREBAL1.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_10 QUAKE4.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_11 FOOLMANA.WAV
@@ -454,10 +454,10 @@ struct al_creature_table {
 typedef struct al_creature_table al_crt_t;
 
 al_crt_t alcrt[30] = {
-    {0, -1}, // 0
+    {0, 8}, // 0 dragons
     {AL_REPLAY_FREQ1, 46}, // 1 goat
     {0, -1}, // 2
-    {0, -1}, // 3
+    {0, 8}, // 3 worms
     {0, -1}, // 4
     {0, -1}, // 5
     {0, -1}, // 6
@@ -486,37 +486,37 @@ al_crt_t alcrt[30] = {
     {0, -1} // 29
 };
 
-char creature_name[30][12] = {
-    "dragon",       // 0
-    "goat",         // 1
-    "bee",          // 2
-    "worm",         // 3
-    "archer",       // 4
-    "",             // 5
-    "",             // 6
-    "",             // 7
-    "",             // 8
-    "skeleton",     // 9
-    "",             // 10
-    "",             // 11
-    "builder",      // 12
-    "townie",       // 13
-    "trader",       // 14
-    "",             // 15
-    "wyvern",       // 16
-    "manticore",    // 17
-    "sentinel",     // 18
-    "firefly",      // 19
-    "spider",       // 20
-    "devil",        // 21
-    "manaworm",     // 22
-    "moondweller",  // 23
-    "troglodyte",   // 24
-    "cymmerian",    // 25
-    "zombies",      // 26
-    "hydra",        // 27
-    "leviathan",    // 28
-    "",             // 29
+char creature_name[30][16] = {
+    "dragon",        // 0
+    "goat",          // 1
+    "bee",           // 2
+    "worm",          // 3
+    "archer",        // 4
+    "unknown",       // 5
+    "unknown",       // 6
+    "unknown",       // 7
+    "unknown",       // 8
+    "skeleton",      // 9
+    "unknown",       // 10
+    "unknown",       // 11
+    "builder",       // 12
+    "townie",        // 13
+    "trader",        // 14
+    "castle archer", // 15
+    "wyvern",        // 16
+    "manticore",     // 17
+    "sentinel",      // 18
+    "firefly",       // 19
+    "spider",        // 20
+    "devil",         // 21
+    "mana worm",     // 22
+    "moon dweller",  // 23
+    "troglodyte",    // 24
+    "cymmerian",     // 25
+    "zombies",       // 26
+    "hydra",         // 27
+    "leviathan",     // 28
+    "unknown",       // 29
 };
 
 

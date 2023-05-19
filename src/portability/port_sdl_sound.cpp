@@ -382,6 +382,8 @@ void SOUND_start_sample(HSAMPLE S)
     gamechunkHSAMPLE[S->index_sample] = S;
 
     alsound_play(S->id, &gamechunk[S->index_sample], nullptr, nullptr, format);
+
+    //alsound_update();
 #elif defined (SOUND_SDLMIXER)
     if (hqsound) {
         gamechunk[S->index_sample].abuf = /*sample->abuf;// */ (uint8_t *) S->start_44mhz;

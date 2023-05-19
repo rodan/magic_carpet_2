@@ -32,14 +32,14 @@
 #include "imgui.h"
 #endif
 
-#define                OPENAL_C_SZ  OPENAL_CHANNELS   ///< number of chunks that can play at the same time (aka number of voices)
-#define               OPENAL_CC_SZ  128       ///< number of chunks the cache can hold
+#define                OPENAL_C_SZ  OPENAL_CHANNELS     ///< number of chunks that can play at the same time (aka number of voices)
+#define               OPENAL_CC_SZ  128 ///< number of chunks the cache can hold
 
 ///< al_chunk_cache_t flags
-#define          OPENAL_FLG_LOADED  0x1       ///< if chunk was properly loaded via alBufferData()
+#define          OPENAL_FLG_LOADED  0x1 ///< if chunk was properly loaded via alBufferData()
 
-#define   AL_DIST_REFRESH_INTERVAL  1000      ///< after how many ms shoud the distance between creatures and the listener should be refreshed
-#define           AL_DIST_MIN_PLAY  6000      ///< minimal distance to the player needed for creature to play it's sample
+#define   AL_DIST_REFRESH_INTERVAL  1000        ///< after how many ms shoud the distance between creatures and the listener should be refreshed
+#define           AL_DIST_MIN_PLAY  8000        ///< minimal distance to the player needed for creature to play it's sample
 
 // Effect object functions
 static LPALGENEFFECTS alGenEffects;
@@ -255,28 +255,17 @@ void alsound_init()
             alGetEffectf = (LPALGETEFFECTF) alGetProcAddress("alGetEffectf");
             alGetEffectfv = (LPALGETEFFECTFV) alGetProcAddress("alGetEffectfv");
 
-            alGenAuxiliaryEffectSlots =
-                (LPALGENAUXILIARYEFFECTSLOTS) alGetProcAddress("alGenAuxiliaryEffectSlots");
-            alDeleteAuxiliaryEffectSlots =
-                (LPALDELETEAUXILIARYEFFECTSLOTS) alGetProcAddress("alDeleteAuxiliaryEffectSlots");
-            alIsAuxiliaryEffectSlot =
-                (LPALISAUXILIARYEFFECTSLOT) alGetProcAddress("alIsAuxiliaryEffectSlot");
-            alAuxiliaryEffectSloti =
-                (LPALAUXILIARYEFFECTSLOTI) alGetProcAddress("alAuxiliaryEffectSloti");
-            alAuxiliaryEffectSlotiv =
-                (LPALAUXILIARYEFFECTSLOTIV) alGetProcAddress("alAuxiliaryEffectSlotiv");
-            alAuxiliaryEffectSlotf =
-                (LPALAUXILIARYEFFECTSLOTF) alGetProcAddress("alAuxiliaryEffectSlotf");
-            alAuxiliaryEffectSlotfv =
-                (LPALAUXILIARYEFFECTSLOTFV) alGetProcAddress("alAuxiliaryEffectSlotfv");
-            alGetAuxiliaryEffectSloti =
-                (LPALGETAUXILIARYEFFECTSLOTI) alGetProcAddress("alGetAuxiliaryEffectSloti");
-            alGetAuxiliaryEffectSlotiv =
-                (LPALGETAUXILIARYEFFECTSLOTIV) alGetProcAddress("alGetAuxiliaryEffectSlotiv");
-            alGetAuxiliaryEffectSlotf =
-                (LPALGETAUXILIARYEFFECTSLOTF) alGetProcAddress("alGetAuxiliaryEffectSlotf");
-            alGetAuxiliaryEffectSlotfv =
-                (LPALGETAUXILIARYEFFECTSLOTFV) alGetProcAddress("alGetAuxiliaryEffectSlotfv");
+            alGenAuxiliaryEffectSlots = (LPALGENAUXILIARYEFFECTSLOTS) alGetProcAddress("alGenAuxiliaryEffectSlots");
+            alDeleteAuxiliaryEffectSlots = (LPALDELETEAUXILIARYEFFECTSLOTS) alGetProcAddress("alDeleteAuxiliaryEffectSlots");
+            alIsAuxiliaryEffectSlot = (LPALISAUXILIARYEFFECTSLOT) alGetProcAddress("alIsAuxiliaryEffectSlot");
+            alAuxiliaryEffectSloti = (LPALAUXILIARYEFFECTSLOTI) alGetProcAddress("alAuxiliaryEffectSloti");
+            alAuxiliaryEffectSlotiv = (LPALAUXILIARYEFFECTSLOTIV) alGetProcAddress("alAuxiliaryEffectSlotiv");
+            alAuxiliaryEffectSlotf = (LPALAUXILIARYEFFECTSLOTF) alGetProcAddress("alAuxiliaryEffectSlotf");
+            alAuxiliaryEffectSlotfv = (LPALAUXILIARYEFFECTSLOTFV) alGetProcAddress("alAuxiliaryEffectSlotfv");
+            alGetAuxiliaryEffectSloti = (LPALGETAUXILIARYEFFECTSLOTI) alGetProcAddress("alGetAuxiliaryEffectSloti");
+            alGetAuxiliaryEffectSlotiv = (LPALGETAUXILIARYEFFECTSLOTIV) alGetProcAddress("alGetAuxiliaryEffectSlotiv");
+            alGetAuxiliaryEffectSlotf = (LPALGETAUXILIARYEFFECTSLOTF) alGetProcAddress("alGetAuxiliaryEffectSlotf");
+            alGetAuxiliaryEffectSlotfv = (LPALGETAUXILIARYEFFECTSLOTFV) alGetProcAddress("alGetAuxiliaryEffectSlotfv");
 
             al_effect = alsound_load_effect(&reverb);
             if (!al_effect) {
@@ -292,6 +281,8 @@ void alsound_init()
             }
         }
     }
+
+    srand(time(NULL));
 }
 
 /// \brief set environmental variables
@@ -336,6 +327,8 @@ void alsound_update(void)
     ALCenum ret;
     float angle;
     int16_t yaw_corrected;
+    event_t *entity;
+    uint8_t idx = 0;
 
     if (!ale.initialized) {
         return;
@@ -349,8 +342,7 @@ void alsound_update(void)
             alGetSourcei(alc[i - 1].alSource, AL_SOURCE_STATE, &alc[i - 1].state);
             ret = alGetError();
             if (ret != AL_NO_ERROR) {
-                Logger->error("error during alGetSourcei: {} for i {}", alsound_get_error_str(ret),
-                              i - 1);
+                Logger->error("error during alGetSourcei: {} for i {}", alsound_get_error_str(ret), i - 1);
             }
         } else if (alc[i - 1].state != 0) {
             alsound_delete_source(i - 1);
@@ -376,14 +368,24 @@ void alsound_update(void)
     // ignoring velocity for now
     alListener3f(AL_VELOCITY, 0, 0, 0);
     alsound_error_check("alListener3f AL_VELOCITY");
+
+    // get all creature positions
+    idx = 0;
+    do {
+        for (entity = engine_db.bytearray_38403x[idx]; entity > x_DWORD_EA3E4[0]; entity = entity->next_0) {
+            if (entity->class_0x3F_63 == 5) {
+                alsound_update_source(entity);
+            }
+        }
+        idx++;
+    } while (idx < 29);
 }
 
 /// \brief cache chunk into the chunk cache array
 /// \param cache_ch  empty index to be used
 /// \param chunk_id  identifier
 /// \param mixchunk  SDL2_mixer compatible struct holding chunk data
-void alsound_cache(const int16_t cache_ch, const int16_t chunk_id, const Mix_Chunk *mixchunk,
-                   const uint16_t flags)
+void alsound_cache(const int16_t cache_ch, const int16_t chunk_id, const Mix_Chunk *mixchunk, const uint16_t flags)
 {
     ALCenum ret;
 
@@ -394,11 +396,9 @@ void alsound_cache(const int16_t cache_ch, const int16_t chunk_id, const Mix_Chu
     alGenBuffers(1, &alcc[cache_ch].bufferName);
     alsound_error_check("alGenBuffers");
     if (flags & AL_FORMAT_STEREO8_22050) {
-        alBufferData(alcc[cache_ch].bufferName, AL_FORMAT_STEREO8, mixchunk->abuf, mixchunk->alen,
-                     22050);
+        alBufferData(alcc[cache_ch].bufferName, AL_FORMAT_STEREO8, mixchunk->abuf, mixchunk->alen, 22050);
     } else {
-        alBufferData(alcc[cache_ch].bufferName, AL_FORMAT_MONO8, mixchunk->abuf, mixchunk->alen,
-                     22050);
+        alBufferData(alcc[cache_ch].bufferName, AL_FORMAT_MONO8, mixchunk->abuf, mixchunk->alen, 22050);
     }
     alsound_error_check("alBufferData");
     ret = alGetError();
@@ -459,21 +459,26 @@ int16_t alsound_create_source(const int16_t chunk_id, al_ssp_t *ssp, event_t *en
     al_ssp_t ssp_l = { };
     uint8_t *chunk_data = NULL;
     int32_t chunk_len;
+    uint8_t *chunk_data_cleaned;
 
     get_sample_ptr(chunk_id, &chunk_data, &chunk_len);
+
+    chunk_data_cleaned = (uint8_t *) calloc(chunk_len, sizeof(uint8_t));
+    memcpy(chunk_data_cleaned, chunk_data, chunk_len - 6);
 
     if (chunk_len < 1000) {
         Logger->error("alsound_create_source received invalid data");
         return -1;
     }
 
-    mixchunk.abuf = chunk_data;
+    //mixchunk.abuf = chunk_data;
+    mixchunk.abuf = chunk_data_cleaned;
     mixchunk.alen = chunk_len;
     mixchunk.volume = 127;
 
     if (ssp == NULL) {
         ssp_l.gain = 1.0;
-        ssp_l.reference_distance = 128.0;
+        ssp_l.reference_distance = 2048.0;
         ssp_l.max_distance = 65535.0;
         ssp_l.rolloff_factor = 1.0;
         ssp_l.coord.x = ale.listener_c.x;
@@ -482,21 +487,21 @@ int16_t alsound_create_source(const int16_t chunk_id, al_ssp_t *ssp, event_t *en
         return alsound_play(chunk_id, &mixchunk, entity, &ssp_l, AL_FORMAT_MONO8_22050 | AL_TYPE_POSITIONAL);
     } else {
         return alsound_play(chunk_id, &mixchunk, entity, ssp, AL_FORMAT_MONO8_22050 | AL_TYPE_POSITIONAL);
-        Logger->info("alsound_create_source {}  at ({},{},{})", mixchunk.alen, ssp->coord.x,
-                     ssp->coord.y, ssp->coord.z);
+        Logger->info("alsound_create_source {}  at ({},{},{})", mixchunk.alen, ssp->coord.x, ssp->coord.y, ssp->coord.z);
     }
+
+    free(chunk_data_cleaned);
 }
 
 /// \brief update entity openal source position
 /// \param entity  
 /// \param position   
-void alsound_update_source(event_t *entity, axis_3d *position)
+void alsound_update_source(event_t *entity)
 {
     al_ssp_t ssp = { };
     float dx, dy, dist;
     uint64_t now = mygetthousandths();
     uint8_t create_new_source = 0;
-    uint32_t delay_between_replays;
 
     // spread out the scheduled time when the distance needs to be refreshed
     if (entity->dist_mark == UINT64_MAX) {
@@ -517,30 +522,31 @@ void alsound_update_source(event_t *entity, axis_3d *position)
         create_new_source = 1;
         if (alcrt[entity->model_0x40_64].flags & AL_REPLAY_FREQ1) {
             // not very often
-            entity->play_mark = now + 1000 + (random() & (32768 - 1));
+            entity->play_mark = now + 1000 + (random() % 32768);
         } else if (alcrt[entity->model_0x40_64].flags & AL_REPLAY_FREQ2) {
             // as often as possible
-            entity->play_mark = now + 1000;
+            entity->play_mark = now;
         } else {
-            entity->play_mark = now + 5000 + (random() & (4098 - 1));
+            entity->play_mark = now + 5000 + (random() % 4098);
+            Logger->info("sch     {} @{} in {} ms", entity->id_0x1A_26, entity->play_mark, entity->play_mark - now);
         }
     }
 
     if ((entity->dist < AL_DIST_MIN_PLAY) && (alcrt[entity->model_0x40_64].chunk_id != -1)) {
         if ((entity->play_ch == -1) && create_new_source) {
-            //Logger->info("new creature! {},{},{}", position->x, position->y, position->z);
             ssp.gain = 1.0;
-            ssp.reference_distance = 256.0;
+            ssp.reference_distance = 4096.0;
             ssp.max_distance = 65535.0;
             ssp.rolloff_factor = 1.0;
-            ssp.coord.x = position->x;
-            ssp.coord.y = position->y;
-            ssp.coord.z = position->z;
+            ssp.coord.x = entity->axis_0x4C_76.x;
+            ssp.coord.y = entity->axis_0x4C_76.y;
+            ssp.coord.z = entity->axis_0x4C_76.z;
+            Logger->info("play    {} @{}", entity->id_0x1A_26, now);
             entity->play_ch = alsound_create_source(alcrt[entity->model_0x40_64].chunk_id, &ssp, entity);
-        } else if (entity->play_ch != -1) {
-            alSource3f(alc[entity->play_ch].alSource, AL_POSITION, position->x, position->y,
-                       position->z);
-            alsound_error_check("alSource3f update_source AL_POSITION");
+            //} else if (entity->play_ch != -1) {
+            //Logger->info("update  {} @{}", entity->id_0x1A_26, now);
+            //alSource3f(alc[entity->play_ch].alSource, AL_POSITION, entity->axis_0x4C_76.x, entity->axis_0x4C_76.y, entity->axis_0x4C_76.z);
+            //alsound_error_check("alSource3f update_source AL_POSITION");
         }
     }
 
@@ -552,8 +558,7 @@ void alsound_update_source(event_t *entity, axis_3d *position)
 /// \param loops 0 for no looping, 0xffff for infinite loop
 /// \param ssp   optional openal parameters to apply to the source. not used by the recode
 /// \return play channel index
-int16_t alsound_play(const int16_t chunk_id, Mix_Chunk *mixchunk, event_t *entity,
-                     al_ssp_t *ssp, const uint16_t flags)
+int16_t alsound_play(const int16_t chunk_id, Mix_Chunk *mixchunk, event_t *entity, al_ssp_t *ssp, const uint16_t flags)
 {
     int16_t i;
     int16_t cache_ch = -1;
@@ -567,7 +572,6 @@ int16_t alsound_play(const int16_t chunk_id, Mix_Chunk *mixchunk, event_t *entit
 
     //Logger->info("alsound_play requested id {}  sz {}  fmt {}", chunk_id, mixchunk->alen, flags);
 
-    // get rid of this request if the chunk is marked with AL_TYPE_POSITIONAL and AL_IGNORE_RECODE
     if (ale.bank < 3) {
         if ((alct[ale.bank][chunk_id].flags & AL_IGNORE_RECODE) && !(flags & AL_TYPE_POSITIONAL)) {
             return -1;
@@ -579,8 +583,7 @@ int16_t alsound_play(const int16_t chunk_id, Mix_Chunk *mixchunk, event_t *entit
         if (alcc[i - 1].id == chunk_id) {
             cache_ch = i - 1;
             if ((uint32_t) alcc[i - 1].size != mixchunk->alen) {
-                Logger->warn("cache miss!  new {} cached {}  cache_ch {}", mixchunk->alen,
-                             alcc[i - 1].size, i - 1);
+                Logger->warn("cache miss!  new {} cached {}  cache_ch {}", mixchunk->alen, alcc[i - 1].size, i - 1);
                 // replace invalid cache slot
                 alsound_cache(cache_ch, chunk_id, mixchunk, flags);
             }
@@ -648,20 +651,24 @@ int16_t alsound_play(const int16_t chunk_id, Mix_Chunk *mixchunk, event_t *entit
         alsound_error_check("alSourcef AL_MAX_DISTANCE");
         alSourcef(alc[play_ch].alSource, AL_ROLLOFF_FACTOR, 1.0);
         alsound_error_check("alSourcef AL_ROLLOFF_FACTOR");
-        alSource3f(alc[play_ch].alSource, AL_POSITION, ale.listener_c.x, ale.listener_c.y,
-                   ale.listener_c.z);
+        alSource3f(alc[play_ch].alSource, AL_POSITION, ale.listener_c.x, ale.listener_c.y, ale.listener_c.z);
         alsound_error_check("alSource3f listener AL_POSITION");
         //Logger->info("alsound_play source @({},{},{})", ale.listener_c.x, ale.listener_c.y, ale.listener_c.z);
     } else {
-        alSourcef(alc[play_ch].alSource, AL_GAIN, ssp->gain);
+        //alSourcef(alc[play_ch].alSource, AL_GAIN, ssp->gain);
+        alSourcef(alc[play_ch].alSource, AL_GAIN, 1.0);
         alsound_error_check("alSourcef AL_GAIN");
-        alSourcef(alc[play_ch].alSource, AL_REFERENCE_DISTANCE, ssp->reference_distance);
+        //alSourcef(alc[play_ch].alSource, AL_REFERENCE_DISTANCE, ssp->reference_distance);
+        alSourcef(alc[play_ch].alSource, AL_REFERENCE_DISTANCE, 512);
         alsound_error_check("alSourcef AL_REFERENCE_DISTANCE");
-        alSourcef(alc[play_ch].alSource, AL_MAX_DISTANCE, ssp->max_distance);
+        //alSourcef(alc[play_ch].alSource, AL_MAX_DISTANCE, ssp->max_distance);
+        alSourcef(alc[play_ch].alSource, AL_MAX_DISTANCE, 65535);
         alsound_error_check("alSourcef AL_MAX_DISTANCE");
-        alSourcef(alc[play_ch].alSource, AL_ROLLOFF_FACTOR, ssp->rolloff_factor);
+        //alSourcef(alc[play_ch].alSource, AL_ROLLOFF_FACTOR, ssp->rolloff_factor);
+        alSourcef(alc[play_ch].alSource, AL_ROLLOFF_FACTOR, 1.0);
         alsound_error_check("alSourcef AL_ROLLOFF_FACTOR");
-        alSource3f(alc[play_ch].alSource, AL_POSITION, ssp->coord.x, ssp->coord.y, ssp->coord.z);
+        //alSource3f(alc[play_ch].alSource, AL_POSITION, ssp->coord.x, ssp->coord.y, ssp->coord.z);
+        alSource3f(alc[play_ch].alSource, AL_POSITION, ale.listener_c.x, ale.listener_c.y, ale.listener_c.z);
         alsound_error_check("alSource3f alSource AL_POSITION");
         //Logger->info("alsound_play source @({},{},{})", ssp->coord.x, ssp->coord.y, ssp->coord.z);
     }
@@ -669,7 +676,7 @@ int16_t alsound_play(const int16_t chunk_id, Mix_Chunk *mixchunk, event_t *entit
 //    if (loops == 0xffff) {
 //        alSourcei(alc[play_ch].alSource, AL_LOOPING, AL_TRUE);
 //    } else {
-        alSourcei(alc[play_ch].alSource, AL_LOOPING, AL_FALSE);
+    alSourcei(alc[play_ch].alSource, AL_LOOPING, AL_FALSE);
 //    }
     alsound_error_check("alSourcei AL_LOOPING");
 
@@ -715,8 +722,7 @@ int16_t alsound_play(const int16_t chunk_id, Mix_Chunk *mixchunk, event_t *entit
             ale.reverb_type = ale.bank;
         }
 
-        alSource3i(alc[play_ch].alSource, AL_AUXILIARY_SEND_FILTER, (ALint) al_slot, 0,
-                   AL_FILTER_NULL);
+        alSource3i(alc[play_ch].alSource, AL_AUXILIARY_SEND_FILTER, (ALint) al_slot, 0, AL_FILTER_NULL);
         alsound_error_check("alSource3i AL_AUXILIARY_SEND_FILTER");
     }
 
@@ -924,7 +930,6 @@ ALCenum alsound_error_check(const char *msg)
     return AL_NO_ERROR;
 }
 
-
 #ifdef CONFIG_IMGUI
 
 void alsound_imgui(void)
@@ -934,9 +939,7 @@ void alsound_imgui(void)
     event_t *entity;
     uint8_t idx = 0;
 
-    ImGuiTableFlags flags =
-    ImGuiTableFlags_SizingFixedFit | ImGuiTableFlags_RowBg | ImGuiTableFlags_Borders |
-    ImGuiTableFlags_Resizable;
+    ImGuiTableFlags flags = ImGuiTableFlags_SizingFixedFit | ImGuiTableFlags_RowBg | ImGuiTableFlags_Borders | ImGuiTableFlags_Resizable;
 
     ImGui::Begin("positioning");
     ImGui::Text("    listener (%u, %u, %u)", ale.listener_c.x, ale.listener_c.y, ale.listener_c.z);
@@ -956,11 +959,11 @@ void alsound_imgui(void)
                 ImGui::TableSetColumnIndex(1);
                 ImGui::Text("%u %u %u  %u", entity->axis_0x4C_76.x, entity->axis_0x4C_76.y, entity->axis_0x4C_76.z, entity->dist);
                 ImGui::TableSetColumnIndex(2);
-                ImGui::Text("%d", entity->play_ch);
+                ImGui::Text("%d %lu", entity->play_ch, entity->play_mark);
                 cnt++;
             }
             idx++;
-        } while (idx<29);
+        } while (idx < 29);
 
         ImGui::EndTable();
     }
@@ -1030,4 +1033,3 @@ void alsound_imgui(void)
 }
 
 #endif
-
