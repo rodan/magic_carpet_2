@@ -1915,7 +1915,7 @@ bool ReadAndDecompressSound(FILE *file, uint8_t soundIndex2)    //2654f0
 
     LoadSoundDataFromBuffer_844A0(numOfLoadedSounds_E37A4);
 
-#if 1
+#if 0
     // save sound chunks to disk
     char fname[64];
     uint8_t *data;

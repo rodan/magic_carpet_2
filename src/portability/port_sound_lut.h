@@ -22,12 +22,12 @@ al_ct_t alct[3][70] = {
      {AL_FORMAT_MONO8_22050, 0},        // id_9 FIREBAL1.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_10 QUAKE4.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_11 FOOLMANA.WAV
-     {AL_FORMAT_MONO8_22050, 0},        // id_12 BEE1.WAV
+     {AL_FORMAT_MONO8_22050 | AL_IGNORE_RECODE, 0},        // id_12 BEE1.WAV
      {0, 0},                    // id_13 NULL.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_14 SELECT.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_15 FIREBAL2.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_16 DIE.WAV
-     {AL_FORMAT_MONO8_22050, 0},        // id_17 HYDRA.WAV
+     {AL_FORMAT_MONO8_22050 | AL_IGNORE_RECODE, 0},        // id_17 HYDRA.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_18 GETSPELL.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_19 SPEEDUP.WAV
      {0, 0},                    // id_20 NULL.WAV
@@ -42,23 +42,23 @@ al_ct_t alct[3][70] = {
      {AL_FORMAT_MONO8_22050, 0},        // id_29 CANTUSE.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_30 METEOREX.WAV
      {AL_FORMAT_STEREO8_22050 | AL_TYPE_ENV, 0},        // id_31 MARKET.WAV
-     {AL_FORMAT_MONO8_22050, 0},        // id_32 SPIDER.WAV
+     {AL_FORMAT_MONO8_22050 | AL_IGNORE_RECODE, 0},        // id_32 SPIDER.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_33 ARROW1.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_34 ARROW2.WAV
      {0, 0},                    // id_35 NULL.WAV
      {0, 0},                    // id_36 NULL.WAV
-     {AL_FORMAT_MONO8_22050, 0},        // id_37 CYMERIAN.WAV
+     {AL_FORMAT_MONO8_22050 | AL_IGNORE_RECODE, 0},        // id_37 CYMERIAN.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_38 DEEPONE.WAV
-     {AL_FORMAT_MONO8_22050, 0},        // id_39 WYVERN.WAV
+     {AL_FORMAT_MONO8_22050 | AL_IGNORE_RECODE, 0},        // id_39 WYVERN.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_40 MANASHOT.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_41 SWITCH.WAV
-     {AL_FORMAT_MONO8_22050, 0},        // id_42 DEVIL.WAV
+     {AL_FORMAT_MONO8_22050 | AL_IGNORE_RECODE, 0},        // id_42 DEVIL.WAV
      {0, 0},                    // id_43 NULL.WAV
      {0, 0},                    // id_44 NULL.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_45 FIRE.WAV
      {AL_FORMAT_MONO8_22050 | AL_IGNORE_RECODE, 0}, // id_46 GOAT.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_47 DOORC2.WAV
-     {AL_FORMAT_MONO8_22050, 0},        // id_48 MWORM3.WAV
+     {AL_FORMAT_MONO8_22050 | AL_IGNORE_RECODE, 0},        // id_48 MWORM3.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_49 TORNADO.WAV
      {0, 0},                    // id_50 NULL.WAV
      {0, 0},                    // id_51 NULL.WAV
@@ -68,11 +68,11 @@ al_ct_t alct[3][70] = {
      {AL_FORMAT_MONO8_22050, 0},        // id_55 HIT2.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_56 HIT3.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_57 HIT4.WAV
-     {AL_FORMAT_MONO8_22050, 0},        // id_58 MADDOG.WAV
+     {AL_FORMAT_MONO8_22050 | AL_IGNORE_RECODE, 0},        // id_58 MADDOG.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_59 MDWELLER.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_60 MORPH.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_61 SUCCESS2.WAV
-     {AL_FORMAT_MONO8_22050, 0},        // id_62 ZOMBIE.WAV
+     {AL_FORMAT_MONO8_22050 | AL_IGNORE_RECODE, 0},        // id_62 ZOMBIE.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_63 SPELLUP.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_64 GWELL.WAV
      {0, 0},                    // id_65 -
@@ -99,7 +99,7 @@ al_ct_t alct[3][70] = {
      {AL_FORMAT_MONO8_22050, 0},        // id_14 SELECT.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_15 FIREBAL2.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_16 DIE.WAV
-     {AL_FORMAT_MONO8_22050, 0},        // id_17 HYDRA.WAV
+     {AL_FORMAT_MONO8_22050 | AL_IGNORE_RECODE, 0},        // id_17 HYDRA.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_18 GETSPELL.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_19 SPEEDUP.WAV
      {0, 0},                    // id_20 NULL.WAV
@@ -114,23 +114,23 @@ al_ct_t alct[3][70] = {
      {AL_FORMAT_MONO8_22050, 0},        // id_29 CANTUSE.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_30 METEOREX.WAV
      {AL_FORMAT_STEREO8_22050 | AL_TYPE_ENV, 0},        // id_31 MARKET.WAV
-     {AL_FORMAT_MONO8_22050, 0},        // id_32 SPIDER.WAV
+     {AL_FORMAT_MONO8_22050 | AL_IGNORE_RECODE, 0},        // id_32 SPIDER.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_33 ARROW1.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_34 ARROW2.WAV
      {0, 0},                    // id_35 NULL.WAV
      {0, 0},                    // id_36 NULL.WAV
-     {AL_FORMAT_MONO8_22050, 0},        // id_37 CYMERIAN.WAV
+     {AL_FORMAT_MONO8_22050 | AL_IGNORE_RECODE, 0},        // id_37 CYMERIAN.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_38 DEEPONE.WAV
-     {AL_FORMAT_MONO8_22050, 0},        // id_39 WYVERN.WAV
+     {AL_FORMAT_MONO8_22050 | AL_IGNORE_RECODE, 0},        // id_39 WYVERN.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_40 MANASHOT.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_41 SWITCH.WAV
-     {AL_FORMAT_MONO8_22050, 0},        // id_42 DEVIL.WAV
+     {AL_FORMAT_MONO8_22050 | AL_IGNORE_RECODE, 0},        // id_42 DEVIL.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_43 FIREFLY1.WAV
-     {AL_FORMAT_MONO8_22050, 0},        // id_44 FIREFLY2.WAV
+     {AL_FORMAT_MONO8_22050 | AL_IGNORE_RECODE, 0},        // id_44 FIREFLY2.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_45 FIRE.WAV
      {AL_FORMAT_MONO8_22050 | AL_IGNORE_RECODE, 0}, // id_46 GOAT.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_47 DOORC2.WAV
-     {AL_FORMAT_MONO8_22050, 0},        // id_48 MWORM3.WAV
+     {AL_FORMAT_MONO8_22050 | AL_IGNORE_RECODE, 0},        // id_48 MWORM3.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_49 TORNADO.WAV
      {0, 0},                    // id_50 NULL.WAV
      {0, 0},                    // id_51 NULL.WAV
@@ -140,11 +140,11 @@ al_ct_t alct[3][70] = {
      {AL_FORMAT_MONO8_22050, 0},        // id_55 HIT2.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_56 HIT3.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_57 HIT4.WAV
-     {AL_FORMAT_MONO8_22050, 0},        // id_58 MADDOG.WAV
+     {AL_FORMAT_MONO8_22050 | AL_IGNORE_RECODE, 0},        // id_58 MADDOG.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_59 MDWELLER.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_60 MORPH.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_61 SUCCESS2.WAV
-     {AL_FORMAT_MONO8_22050, 0},        // id_62 ZOMBIE.WAV
+     {AL_FORMAT_MONO8_22050 | AL_IGNORE_RECODE, 0},        // id_62 ZOMBIE.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_63 SPELLUP.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_64 GWELL.WAV
      {0, 0},                    // id_65 -
@@ -162,7 +162,7 @@ al_ct_t alct[3][70] = {
      {AL_FORMAT_MONO8_22050, 0},        // id_5 FIRE.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_6 ALLY.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_7 CAVEMAN.WAV
-     {AL_FORMAT_MONO8_22050, 0},        // id_8 DRAGROAR.WAV
+     {AL_FORMAT_MONO8_22050 | AL_IGNORE_RECODE, 0},        // id_8 DRAGROAR.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_9 FIREBAL1.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_10 QUAKE4.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_11 FOOLMANA.WAV
@@ -186,23 +186,23 @@ al_ct_t alct[3][70] = {
      {AL_FORMAT_MONO8_22050, 0},        // id_29 CANTUSE.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_30 METEOREX.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_31 MARKET.WAV
-     {AL_FORMAT_MONO8_22050, 0},        // id_32 SPIDER.WAV
+     {AL_FORMAT_MONO8_22050 | AL_IGNORE_RECODE, 0},        // id_32 SPIDER.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_33 ARROW1.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_34 ARROW2.WAV
      {0, 0},                    // id_35 NULL.WAV
      {0, 0},                    // id_36 NULL.WAV
-     {AL_FORMAT_MONO8_22050, 0},        // id_37 CYMERIAN.WAV
+     {AL_FORMAT_MONO8_22050 | AL_IGNORE_RECODE, 0},        // id_37 CYMERIAN.WAV
      {0, 0},                    // id_38 NULL.WAV
-     {AL_FORMAT_MONO8_22050, 0},        // id_39 WYVERN.WAV
+     {AL_FORMAT_MONO8_22050 | AL_IGNORE_RECODE, 0}, // id_39 WYVERN.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_40 MANASHOT.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_41 SWITCH.WAV
-     {AL_FORMAT_MONO8_22050, 0},        // id_42 DEVIL.WAV
+     {AL_FORMAT_MONO8_22050 | AL_IGNORE_RECODE, 0},        // id_42 DEVIL.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_43 FIREFLY1.WAV
-     {AL_FORMAT_MONO8_22050, 0},        // id_44 FIREFLY2.WAV
+     {AL_FORMAT_MONO8_22050 | AL_IGNORE_RECODE, 0},        // id_44 FIREFLY2.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_45 FIRE.WAV
      {0, 0},                    // id_46 NULL.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_47 DOORC2.WAV
-     {AL_FORMAT_MONO8_22050, 0},        // id_48 MWORM3.WAV
+     {AL_FORMAT_MONO8_22050 | AL_IGNORE_RECODE, 0},        // id_48 MWORM3.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_49 TORNADO.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_50 GLOOP1.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_51 GLOOP2.WAV
@@ -212,11 +212,11 @@ al_ct_t alct[3][70] = {
      {AL_FORMAT_MONO8_22050, 0},        // id_55 HIT2.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_56 HIT3.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_57 HIT4.WAV
-     {AL_FORMAT_MONO8_22050, 0},        // id_58 MADDOG.WAV
+     {AL_FORMAT_MONO8_22050 | AL_IGNORE_RECODE, 0},        // id_58 MADDOG.WAV
      {0, 0},                    // id_59 NULL.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_60 MORPH.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_61 SUCCESS2.WAV
-     {AL_FORMAT_MONO8_22050, 0},        // id_62 ZOMBIE.WAV
+     {AL_FORMAT_MONO8_22050 | AL_IGNORE_RECODE, 0},        // id_62 ZOMBIE.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_63 SPELLUP.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_64 GWELL.WAV
      {AL_FORMAT_STEREO8_22050 | AL_TYPE_ENV, 0},        // id_65 DRIP1.WAV
@@ -453,10 +453,10 @@ struct al_creature_table {
 };
 typedef struct al_creature_table al_crt_t;
 
-al_crt_t alcrt[30] = {
+al_crt_t alcrt[29] = {
     {0, 8}, // 0 dragons
     {AL_REPLAY_RARELY | AL_WHISPER, 46}, // 1 goat
-    {0, -1}, // 2
+    {0, 12}, // 2 bee
     {0, 8}, // 3 worms
     {0, -1}, // 4
     {0, -1}, // 5
@@ -469,24 +469,23 @@ al_crt_t alcrt[30] = {
     {0, -1}, // 12
     {0, -1}, // 13
     {0, -1}, // 14
-    {0, -1}, // 15
-    {0, -1}, // 16
-    {0, -1}, // 17
+    {0, -1}, // 15 castle archer  - it's sound sample is in sync with him shooting, so don't schedule
+    {AL_POWERFUL_SHOUT, 39}, // 16 wyvern
+    {AL_POWERFUL_SHOUT, 58}, // 17 manticore
     {0, -1}, // 18
-    {AL_REPLAY_FREQUENTLY, 45}, // 19 firefly
-    {0, -1}, // 20
-    {0, -1}, // 21
-    {0, -1}, // 22
-    {0, -1}, // 23
-    {0, -1}, // 24
-    {0, -1}, // 25
-    {0, -1}, // 26
-    {0, -1}, // 27
+    {AL_WHISPER, 44}, // 19 firefly
+    {0, 32}, // 20 spider
+    {0, 42}, // 21 devil
+    {0, 48}, // 22 mana worm
+    {0, -1}, // 23 moon dweller
+    {0, -1}, // 24 troglodyte
+    {0, 37}, // 25 cymmerian
+    {AL_WHISPER, 62}, // 26 zombie
+    {AL_POWERFUL_SHOUT, 17}, // 27 hydra
     {0, -1}, // 28
-    {0, -1} // 29
 };
 
-char creature_name[30][16] = {
+char creature_name[29][16] = {
     "dragon",        // 0
     "goat",          // 1
     "bee",           // 2
@@ -513,10 +512,9 @@ char creature_name[30][16] = {
     "moon dweller",  // 23
     "troglodyte",    // 24
     "cymmerian",     // 25
-    "zombies",       // 26
+    "zombie",       // 26
     "hydra",         // 27
     "leviathan",     // 28
-    "unknown",       // 29
 };
 
 

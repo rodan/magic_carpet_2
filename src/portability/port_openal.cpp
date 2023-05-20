@@ -176,6 +176,7 @@ void alsound_end_sample(const int32_t chunk_id)
     int16_t ret;
     ret = alsound_find_alc_sample(chunk_id);
     if (ret > -1) {
+        //Logger->info("alsound_end_sample id {}  ch {}", chunk_id, ret);
         alsound_delete_source(ret);
     }
 }
@@ -183,19 +184,25 @@ void alsound_end_sample(const int32_t chunk_id)
 /// \brief change the volume of a chunk that is currently playing
 /// \param chunk_id  identifier
 /// \param volume    0-127
-void alsound_set_sample_volume(const int32_t id, const int32_t volume)
+void alsound_set_sample_volume(const int32_t chunk_id, const int32_t volume)
 {
     int16_t ret;
     float gain = (float)volume / 127.0;
 
-    ret = alsound_find_alc_sample(id);
+    if (ale.bank < 3) {
+        if (alct[ale.bank][chunk_id].flags & AL_IGNORE_RECODE) {
+            return;
+        }
+    }
+
+    ret = alsound_find_alc_sample(chunk_id);
     if (ret > -1) {
         alSourcef(alc[ret].alSource, AL_GAIN, gain);
         alsound_error_check("set_sample_volume alSourcef");
-        //Logger->info("alsound_set_sample_volume {} {}", id, gain);
+        //Logger->info("alsound_set_sample_volume {} {}", chunk_id, gain);
     }
 
-    alnv.chunk_id = id;
+    alnv.chunk_id = chunk_id;
     alnv.gain = gain;
 }
 
@@ -390,7 +397,7 @@ void alsound_cache(const int16_t cache_ch, const int16_t chunk_id, const Mix_Chu
     ALCenum ret;
 
     // save chunk to disk for debug
-    alsound_save_chunk(mixchunk->abuf, mixchunk->alen, NULL);
+    //alsound_save_chunk(mixchunk->abuf, mixchunk->alen, NULL);
 
     alGetError();               // reset global error variable
     alGenBuffers(1, &alcc[cache_ch].bufferName);
@@ -539,7 +546,7 @@ void alsound_update_source(event_t *entity)
             ssp.coord.x = entity->axis_0x4C_76.x;
             ssp.coord.y = entity->axis_0x4C_76.y;
             ssp.coord.z = entity->axis_0x4C_76.z;
-            //Logger->info("play    {} @{}", entity->id_0x1A_26, now);
+            Logger->info("play    {} id {} @{}", creature_name[entity->model_0x40_64], entity->id_0x1A_26, now);
             entity->play_ch = alsound_create_source(alcrt[entity->model_0x40_64].chunk_id, &ssp, entity);
         } else if (entity->play_ch != -1) {
             //Logger->info("update  {} @{}", entity->id_0x1A_26, now);
@@ -948,7 +955,7 @@ void alsound_imgui(void)
             for (entity = engine_db.bytearray_38403x[idx]; entity > x_DWORD_EA3E4[0]; entity = entity->next_0) {
                 ImGui::TableNextRow();
                 ImGui::TableSetColumnIndex(0);
-                ImGui::Text("%u %u %u", entity->class_0x3F_63, entity->model_0x40_64, entity->id_0x1A_26);
+                ImGui::Text("%u (%s) %u", entity->model_0x40_64, creature_name[entity->model_0x40_64], entity->id_0x1A_26);
                 ImGui::TableSetColumnIndex(1);
                 ImGui::Text("%u %u %u  %u", entity->axis_0x4C_76.x, entity->axis_0x4C_76.y, entity->axis_0x4C_76.z, entity->dist);
                 ImGui::TableSetColumnIndex(2);
