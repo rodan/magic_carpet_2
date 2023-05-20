@@ -390,7 +390,7 @@ void alsound_cache(const int16_t cache_ch, const int16_t chunk_id, const Mix_Chu
     ALCenum ret;
 
     // save chunk to disk for debug
-    //alsound_save_chunk(mixchunk->abuf, mixchunk->alen, NULL);
+    alsound_save_chunk(mixchunk->abuf, mixchunk->alen, NULL);
 
     alGetError();               // reset global error variable
     alGenBuffers(1, &alcc[cache_ch].bufferName);
@@ -404,7 +404,7 @@ void alsound_cache(const int16_t cache_ch, const int16_t chunk_id, const Mix_Chu
     ret = alGetError();
 
     if (ret == AL_NO_ERROR) {
-        //Logger->info("alsound_cache        id {}  sz {}  cache_ch {}  flags {}", chunk_id, mixchunk->alen, cache_ch, flags);
+        Logger->info("alsound_cache        id {}  sz {}  cache_ch {}  flags {}", chunk_id, mixchunk->alen, cache_ch, flags);
         alcc[cache_ch].size = mixchunk->alen;
         alcc[cache_ch].id = chunk_id;
         alcc[cache_ch].flags |= OPENAL_FLG_LOADED;
@@ -459,20 +459,15 @@ int16_t alsound_create_source(const int16_t chunk_id, al_ssp_t *ssp, event_t *en
     al_ssp_t ssp_l = { };
     uint8_t *chunk_data = NULL;
     int32_t chunk_len;
-    uint8_t *chunk_data_cleaned;
 
     get_sample_ptr(chunk_id, &chunk_data, &chunk_len);
-
-    chunk_data_cleaned = (uint8_t *) calloc(chunk_len, sizeof(uint8_t));
-    memcpy(chunk_data_cleaned, chunk_data, chunk_len - 6);
 
     if (chunk_len < 1000) {
         Logger->error("alsound_create_source received invalid data");
         return -1;
     }
 
-    //mixchunk.abuf = chunk_data;
-    mixchunk.abuf = chunk_data_cleaned;
+    mixchunk.abuf = chunk_data;
     mixchunk.alen = chunk_len;
     mixchunk.volume = 127;
 
@@ -489,8 +484,6 @@ int16_t alsound_create_source(const int16_t chunk_id, al_ssp_t *ssp, event_t *en
         return alsound_play(chunk_id, &mixchunk, entity, ssp, AL_FORMAT_MONO8_22050 | AL_TYPE_POSITIONAL);
         Logger->info("alsound_create_source {}  at ({},{},{})", mixchunk.alen, ssp->coord.x, ssp->coord.y, ssp->coord.z);
     }
-
-    free(chunk_data_cleaned);
 }
 
 /// \brief update entity openal source position
@@ -570,7 +563,7 @@ int16_t alsound_play(const int16_t chunk_id, Mix_Chunk *mixchunk, event_t *entit
         return -1;
     }
 
-    //Logger->info("alsound_play requested id {}  sz {}  fmt {}", chunk_id, mixchunk->alen, flags);
+    Logger->info("alsound_play requested id {}  sz {}  fmt {}", chunk_id, mixchunk->alen, flags);
 
     if (ale.bank < 3) {
         if ((alct[ale.bank][chunk_id].flags & AL_IGNORE_RECODE) && !(flags & AL_TYPE_POSITIONAL)) {
