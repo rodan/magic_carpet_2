@@ -69,7 +69,7 @@ al_ct_t alct[3][70] = {
      {AL_FORMAT_MONO8_22050, 0},        // id_56 HIT3.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_57 HIT4.WAV
      {AL_FORMAT_MONO8_22050 | AL_IGNORE_RECODE, 0},        // id_58 MADDOG.WAV
-     {AL_FORMAT_MONO8_22050, 0},        // id_59 MDWELLER.WAV
+     {AL_FORMAT_MONO8_22050 | AL_IGNORE_RECODE, 0},        // id_59 MDWELLER.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_60 MORPH.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_61 SUCCESS2.WAV
      {AL_FORMAT_MONO8_22050 | AL_IGNORE_RECODE, 0},        // id_62 ZOMBIE.WAV
@@ -141,7 +141,7 @@ al_ct_t alct[3][70] = {
      {AL_FORMAT_MONO8_22050, 0},        // id_56 HIT3.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_57 HIT4.WAV
      {AL_FORMAT_MONO8_22050 | AL_IGNORE_RECODE, 0},        // id_58 MADDOG.WAV
-     {AL_FORMAT_MONO8_22050, 0},        // id_59 MDWELLER.WAV
+     {AL_FORMAT_MONO8_22050 | AL_IGNORE_RECODE, 0},        // id_59 MDWELLER.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_60 MORPH.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_61 SUCCESS2.WAV
      {AL_FORMAT_MONO8_22050 | AL_IGNORE_RECODE, 0},        // id_62 ZOMBIE.WAV
@@ -212,7 +212,7 @@ al_ct_t alct[3][70] = {
      {AL_FORMAT_MONO8_22050, 0},        // id_55 HIT2.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_56 HIT3.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_57 HIT4.WAV
-     {AL_FORMAT_MONO8_22050 | AL_IGNORE_RECODE, 0},        // id_58 MADDOG.WAV
+     {AL_FORMAT_MONO8_22050, 0},        // id_58 MADDOG.WAV ? when is this used in a cave?
      {0, 0},                    // id_59 NULL.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_60 MORPH.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_61 SUCCESS2.WAV
@@ -477,7 +477,7 @@ al_crt_t alcrt[29] = {
     {0, 32}, // 20 spider
     {0, 42}, // 21 devil
     {0, 48}, // 22 mana worm
-    {0, -1}, // 23 moon dweller
+    {0, 59}, // 23 moon dweller
     {0, -1}, // 24 troglodyte
     {0, 37}, // 25 cymmerian
     {AL_WHISPER, 62}, // 26 zombie
