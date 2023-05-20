@@ -122,7 +122,6 @@ bool readini()
     std::string readstr = reader.GetString("sound", "oggmusicFolder", "");
     strcpy(oggmusicFolder, (char *)readstr.c_str());
 
-    oac.positioning_enabled = reader.GetBoolean("sound", "openal_positioning", false);
     oac.efx_enabled = reader.GetBoolean("sound", "openal_effects", false);
 
     std::string readstr3 = reader.GetString("graphics", "bigGraphicsFolder", "");

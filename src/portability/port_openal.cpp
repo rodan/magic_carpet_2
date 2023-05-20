@@ -311,15 +311,9 @@ void alsound_set_env(const int32_t value, const uint8_t flag)
 /// \param orient orientation
 void alsound_set_location(axis_3d *coord, axis_4d *orient)
 {
-    if (oac.positioning_enabled) {
-        ale.listener_c.x = coord->x;
-        ale.listener_c.y = coord->y;
-        ale.listener_c.z = coord->z;
-    } else {
-        ale.listener_c.x = 0;
-        ale.listener_c.y = 0;
-        ale.listener_c.z = 0;
-    }
+    ale.listener_c.x = coord->x;
+    ale.listener_c.y = coord->y;
+    ale.listener_c.z = coord->z;
 
     ale.listener_o.yaw = orient->yaw;
     //ale.listener_r.pitch = orient->pitch;

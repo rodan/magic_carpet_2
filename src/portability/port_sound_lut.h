@@ -472,7 +472,7 @@ al_crt_t alcrt[29] = {
     {0, -1}, // 15 castle archer  - it's sound sample is in sync with him shooting, so don't schedule
     {AL_POWERFUL_SHOUT, 39}, // 16 wyvern
     {AL_POWERFUL_SHOUT, 58}, // 17 manticore
-    {0, -1}, // 18
+    {0, -1}, // 18 sentinel - this creature is quiet afaict
     {AL_WHISPER, 44}, // 19 firefly
     {0, 32}, // 20 spider
     {0, 42}, // 21 devil

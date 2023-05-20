@@ -95,7 +95,6 @@ typedef struct gamepad_config gamepad_config_t;
 extern gamepad_config_t gpc;
 
 struct openal_config {
-    bool positioning_enabled;
     bool efx_enabled;
 };
 typedef struct openal_config openal_config_t;
