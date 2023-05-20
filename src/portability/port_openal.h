@@ -20,8 +20,10 @@
 #define        AL_TYPE_POSITIONAL  0x08
 #define          AL_IGNORE_RECODE  0x10
 
-#define           AL_REPLAY_FREQ1  0x01 // don't play very often
-#define           AL_REPLAY_FREQ2  0x02 // play very often
+#define          AL_REPLAY_RARELY  0x01 // long intervals of silence
+#define      AL_REPLAY_FREQUENTLY  0x02 // short intervals of silence
+#define         AL_POWERFUL_SHOUT  0x04 // controls the reference distance
+#define                AL_WHISPER  0x08 // controls the reference distance
 
 struct al_chunk {
     int16_t id;                 ///< chunk identifier

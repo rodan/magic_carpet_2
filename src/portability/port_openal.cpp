@@ -39,7 +39,7 @@
 #define          OPENAL_FLG_LOADED  0x1 ///< if chunk was properly loaded via alBufferData()
 
 #define   AL_DIST_REFRESH_INTERVAL  1000        ///< after how many ms shoud the distance between creatures and the listener should be refreshed
-#define           AL_DIST_MIN_PLAY  8000        ///< minimal distance to the player needed for creature to play it's sample
+#define           AL_DIST_MIN_PLAY  10000       ///< minimal distance to the player needed for creature to play it's sample
 
 // Effect object functions
 static LPALGENEFFECTS alGenEffects;
@@ -404,7 +404,7 @@ void alsound_cache(const int16_t cache_ch, const int16_t chunk_id, const Mix_Chu
     ret = alGetError();
 
     if (ret == AL_NO_ERROR) {
-        Logger->info("alsound_cache        id {}  sz {}  cache_ch {}  flags {}", chunk_id, mixchunk->alen, cache_ch, flags);
+        //Logger->info("alsound_cache        id {}  sz {}  cache_ch {}  flags {}", chunk_id, mixchunk->alen, cache_ch, flags);
         alcc[cache_ch].size = mixchunk->alen;
         alcc[cache_ch].id = chunk_id;
         alcc[cache_ch].flags |= OPENAL_FLG_LOADED;
@@ -482,7 +482,7 @@ int16_t alsound_create_source(const int16_t chunk_id, al_ssp_t *ssp, event_t *en
         return alsound_play(chunk_id, &mixchunk, entity, &ssp_l, AL_FORMAT_MONO8_22050 | AL_TYPE_POSITIONAL);
     } else {
         return alsound_play(chunk_id, &mixchunk, entity, ssp, AL_FORMAT_MONO8_22050 | AL_TYPE_POSITIONAL);
-        Logger->info("alsound_create_source {}  at ({},{},{})", mixchunk.alen, ssp->coord.x, ssp->coord.y, ssp->coord.z);
+        //Logger->info("alsound_create_source {}  at ({},{},{})", mixchunk.alen, ssp->coord.x, ssp->coord.y, ssp->coord.z);
     }
 }
 
@@ -513,32 +513,37 @@ void alsound_update_source(event_t *entity)
     // once a while some of the creatures create sounds
     if ((now > entity->play_mark) && (alcrt[entity->model_0x40_64].chunk_id != -1)) {
         create_new_source = 1;
-        if (alcrt[entity->model_0x40_64].flags & AL_REPLAY_FREQ1) {
-            // not very often
-            entity->play_mark = now + 1000 + (random() % 32768);
-        } else if (alcrt[entity->model_0x40_64].flags & AL_REPLAY_FREQ2) {
-            // as often as possible
+        if (alcrt[entity->model_0x40_64].flags & AL_REPLAY_RARELY) {
+            entity->play_mark = now + 5000 + (random() % 32768);
+        } else if (alcrt[entity->model_0x40_64].flags & AL_REPLAY_FREQUENTLY) {
             entity->play_mark = now;
         } else {
             entity->play_mark = now + 5000 + (random() % 4098);
-            Logger->info("sch     {} @{} in {} ms", entity->id_0x1A_26, entity->play_mark, entity->play_mark - now);
         }
+        //Logger->info("sch     {} @{} in {} ms", entity->id_0x1A_26, entity->play_mark, entity->play_mark - now);
     }
 
     if ((entity->dist < AL_DIST_MIN_PLAY) && (alcrt[entity->model_0x40_64].chunk_id != -1)) {
         if ((entity->play_ch == -1) && create_new_source) {
-            ssp.gain = 1.0;
-            ssp.reference_distance = 4096.0;
+            ssp.gain = 0.8;
+            ssp.reference_distance = 2048.0;
+            if (alcrt[entity->model_0x40_64].flags & AL_POWERFUL_SHOUT) {
+                ssp.gain = 1.0;
+                ssp.reference_distance = 4096.0;
+            } else if (alcrt[entity->model_0x40_64].flags & AL_WHISPER) {
+                ssp.gain = 0.7;
+                ssp.reference_distance = 1024.0;
+            }
             ssp.max_distance = 65535.0;
             ssp.rolloff_factor = 1.0;
             ssp.coord.x = entity->axis_0x4C_76.x;
             ssp.coord.y = entity->axis_0x4C_76.y;
             ssp.coord.z = entity->axis_0x4C_76.z;
-            Logger->info("play    {} @{}", entity->id_0x1A_26, now);
+            //Logger->info("play    {} @{}", entity->id_0x1A_26, now);
             entity->play_ch = alsound_create_source(alcrt[entity->model_0x40_64].chunk_id, &ssp, entity);
-            //} else if (entity->play_ch != -1) {
+        } else if (entity->play_ch != -1) {
             //Logger->info("update  {} @{}", entity->id_0x1A_26, now);
-            //alSource3f(alc[entity->play_ch].alSource, AL_POSITION, entity->axis_0x4C_76.x, entity->axis_0x4C_76.y, entity->axis_0x4C_76.z);
+            alSource3f(alc[entity->play_ch].alSource, AL_POSITION, entity->axis_0x4C_76.x, entity->axis_0x4C_76.y, entity->axis_0x4C_76.z);
             //alsound_error_check("alSource3f update_source AL_POSITION");
         }
     }
@@ -556,14 +561,14 @@ int16_t alsound_play(const int16_t chunk_id, Mix_Chunk *mixchunk, event_t *entit
     int16_t i;
     int16_t cache_ch = -1;
     int16_t play_ch = -1;
-    float gain = 0.5;           // testing: all sounds produced by recode are at lowered levels
+    float gain = 0.8;           // testing: all sounds produced by recode are at lowered levels
     //float gain = 1.0;
 
     if (!ale.initialized) {
         return -1;
     }
 
-    Logger->info("alsound_play requested id {}  sz {}  fmt {}", chunk_id, mixchunk->alen, flags);
+    //Logger->info("alsound_play requested id {}  sz {}  fmt {}", chunk_id, mixchunk->alen, flags);
 
     if (ale.bank < 3) {
         if ((alct[ale.bank][chunk_id].flags & AL_IGNORE_RECODE) && !(flags & AL_TYPE_POSITIONAL)) {
@@ -648,20 +653,15 @@ int16_t alsound_play(const int16_t chunk_id, Mix_Chunk *mixchunk, event_t *entit
         alsound_error_check("alSource3f listener AL_POSITION");
         //Logger->info("alsound_play source @({},{},{})", ale.listener_c.x, ale.listener_c.y, ale.listener_c.z);
     } else {
-        //alSourcef(alc[play_ch].alSource, AL_GAIN, ssp->gain);
-        alSourcef(alc[play_ch].alSource, AL_GAIN, 1.0);
+        alSourcef(alc[play_ch].alSource, AL_GAIN, ssp->gain);
         alsound_error_check("alSourcef AL_GAIN");
-        //alSourcef(alc[play_ch].alSource, AL_REFERENCE_DISTANCE, ssp->reference_distance);
-        alSourcef(alc[play_ch].alSource, AL_REFERENCE_DISTANCE, 512);
+        alSourcef(alc[play_ch].alSource, AL_REFERENCE_DISTANCE, ssp->reference_distance);
         alsound_error_check("alSourcef AL_REFERENCE_DISTANCE");
-        //alSourcef(alc[play_ch].alSource, AL_MAX_DISTANCE, ssp->max_distance);
-        alSourcef(alc[play_ch].alSource, AL_MAX_DISTANCE, 65535);
+        alSourcef(alc[play_ch].alSource, AL_MAX_DISTANCE, ssp->max_distance);
         alsound_error_check("alSourcef AL_MAX_DISTANCE");
-        //alSourcef(alc[play_ch].alSource, AL_ROLLOFF_FACTOR, ssp->rolloff_factor);
-        alSourcef(alc[play_ch].alSource, AL_ROLLOFF_FACTOR, 1.0);
+        alSourcef(alc[play_ch].alSource, AL_ROLLOFF_FACTOR, ssp->rolloff_factor);
         alsound_error_check("alSourcef AL_ROLLOFF_FACTOR");
-        //alSource3f(alc[play_ch].alSource, AL_POSITION, ssp->coord.x, ssp->coord.y, ssp->coord.z);
-        alSource3f(alc[play_ch].alSource, AL_POSITION, ale.listener_c.x, ale.listener_c.y, ale.listener_c.z);
+        alSource3f(alc[play_ch].alSource, AL_POSITION, ssp->coord.x, ssp->coord.y, ssp->coord.z);
         alsound_error_check("alSource3f alSource AL_POSITION");
         //Logger->info("alsound_play source @({},{},{})", ssp->coord.x, ssp->coord.y, ssp->coord.z);
     }

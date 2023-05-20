@@ -455,7 +455,7 @@ typedef struct al_creature_table al_crt_t;
 
 al_crt_t alcrt[30] = {
     {0, 8}, // 0 dragons
-    {AL_REPLAY_FREQ1, 46}, // 1 goat
+    {AL_REPLAY_RARELY | AL_WHISPER, 46}, // 1 goat
     {0, -1}, // 2
     {0, 8}, // 3 worms
     {0, -1}, // 4
@@ -473,7 +473,7 @@ al_crt_t alcrt[30] = {
     {0, -1}, // 16
     {0, -1}, // 17
     {0, -1}, // 18
-    {AL_REPLAY_FREQ2, 45}, // 19 firefly
+    {AL_REPLAY_FREQUENTLY, 45}, // 19 firefly
     {0, -1}, // 20
     {0, -1}, // 21
     {0, -1}, // 22
