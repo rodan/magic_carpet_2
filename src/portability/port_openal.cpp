@@ -137,15 +137,6 @@ int16_t alsound_find_alc_sample(const int32_t id)
 /// \return  1 if sample is playing and 0 otherwise
 uint8_t alsound_sample_status(const int32_t id)
 {
-#if 0
-    // if recode is asking about samples marked with AL_IGNORE_RECODE
-    // then make sure recode will not issue a play request for that chunk
-    if (ale.bank < 3) {
-        if (alct[ale.bank][id].flags & AL_IGNORE_RECODE) {
-            return 1;
-        }
-    }
-#endif
     if (alsound_find_alc_sample(id) > -1) {
         return 1;
     }
@@ -572,7 +563,8 @@ int16_t alsound_play(const int16_t chunk_id, Mix_Chunk *mixchunk, event_t *entit
     //Logger->info("alsound_play requested id {}  sz {}  fmt {}", chunk_id, mixchunk->alen, flags);
 
     if (ale.bank < 3) {
-        if ((alct[ale.bank][chunk_id].flags & AL_IGNORE_RECODE) && !(flags & AL_TYPE_POSITIONAL)) {
+        if ((alct[ale.bank][chunk_id].flags & AL_IGNORE_RECODE) && !(flags & AL_TYPE_POSITIONAL) && 
+        !((ale.listener_c.x == 0) && (ale.listener_c.y == 0) && (ale.listener_c.z == 0))) {
             return -1;
         }
     }
