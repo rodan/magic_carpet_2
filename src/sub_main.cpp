@@ -25743,13 +25743,14 @@ void sub_2DFD0(int16_t posX, int16_t posY, posistruct_t a3, unsigned __int8 a4) 
         v9 = &pdwScreenBuffer_351628[posX + screenWidth_18062C * posY];
         v10 = a3.data;
         v17 = &pdwScreenBuffer_351628[posX + screenWidth_18062C * posY];
+#if 0 // pointer offset fuckery going on here which later crashes during dereferencing
         if (a3.height_5) {
             do {
                 while (1) {
                     while (1) {
                         if (++(*v10))
                             break;
-                        v9 = &screenWidth_18062C[v17];
+                        v9 = &screenWidth_18062C[v17]; // this pointer offset is asking for trouble!  FIXME
                         v17 += screenWidth_18062C;
                         if (!--v18)
                             return;
@@ -25763,14 +25764,17 @@ void sub_2DFD0(int16_t posX, int16_t posY, posistruct_t a3, unsigned __int8 a4) 
                 v11 = a4;
                 v12 = (char)screenWidth_18062C;
                 v15 = (char)screenWidth_18062C;
+#if 0 // keep this disabled until v9's address is corrected
                 do {
-                    BYTE1(v11) = *v9;
+                    BYTE1(v11) = *v9; // segfaults here when opening the spellbook FIXME
                     *v9++ = x_BYTE_F6EE0_tablesx[0x4000 + v11];
                     --v12;
                 } while (v12);
+#endif
                 v10 += v15;
             } while (v18);
         }
+#endif
     }
 }
 

@@ -4249,7 +4249,7 @@ void GameRenderHD::DrawSprite_41BD3(uint32 a1)
                             v165 = (x_DWORD *) (&x_DWORD_E9C38_smalltit[45920]);
                             for (i = v159; i; i--) {
                                 v133 = v165[1];
-                                if (v133 > 0) {
+                                if ((v133 > 0) && (*v165 > 0)) {
                                     //address 2237d3
 
                                     v169x = &m_str_F0E20x[*v165];

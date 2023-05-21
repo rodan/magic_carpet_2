@@ -161,7 +161,7 @@ al_ct_t alct[3][70] = {
      {AL_FORMAT_MONO8_22050, 0},        // id_4 GAINMANA.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_5 FIRE.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_6 ALLY.WAV
-     {AL_FORMAT_MONO8_22050, 0},        // id_7 CAVEMAN.WAV
+     {AL_FORMAT_MONO8_22050 | AL_IGNORE_RECODE, 0},        // id_7 CAVEMAN.WAV
      {AL_FORMAT_MONO8_22050 | AL_IGNORE_RECODE, 0},        // id_8 DRAGROAR.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_9 FIREBAL1.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_10 QUAKE4.WAV
@@ -212,7 +212,7 @@ al_ct_t alct[3][70] = {
      {AL_FORMAT_MONO8_22050, 0},        // id_55 HIT2.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_56 HIT3.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_57 HIT4.WAV
-     {AL_FORMAT_MONO8_22050, 0},        // id_58 MADDOG.WAV ? when is this used in a cave?
+     {AL_FORMAT_MONO8_22050 | AL_IGNORE_RECODE, 0},        // id_58 MADDOG.WAV
      {0, 0},                    // id_59 NULL.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_60 MORPH.WAV
      {AL_FORMAT_MONO8_22050, 0},        // id_61 SUCCESS2.WAV
@@ -458,17 +458,17 @@ al_crt_t alcrt[29] = {
     {AL_REPLAY_RARELY | AL_WHISPER, 46}, // 1 goat
     {0, 12}, // 2 bee
     {0, 8}, // 3 worms
-    {0, -1}, // 4
-    {0, -1}, // 5
-    {0, -1}, // 6
-    {0, -1}, // 7
-    {0, -1}, // 8
-    {0, -1}, // 9
-    {0, -1}, // 10
-    {0, -1}, // 11
-    {0, -1}, // 12
-    {0, -1}, // 13
-    {0, -1}, // 14
+    {0, -1}, // 4 archer - creature is silent
+    {0, -1}, // 5 -
+    {0, -1}, // 6 -
+    {0, -1}, // 7 -
+    {0, -1}, // 8 -
+    {0, -1}, // 9 skeleton
+    {0, -1}, // 10 vissuluth - creature is normally silent
+    {0, -1}, // 11 -
+    {0, -1}, // 12 builder
+    {0, -1}, // 13 townie
+    {0, -1}, // 14 trader
     {0, -1}, // 15 castle archer  - it's sound sample is in sync with him shooting, so don't schedule
     {AL_POWERFUL_SHOUT, 39}, // 16 wyvern
     {AL_POWERFUL_SHOUT, 58}, // 17 manticore
@@ -478,11 +478,11 @@ al_crt_t alcrt[29] = {
     {0, 42}, // 21 devil
     {0, 48}, // 22 mana worm
     {0, 59}, // 23 moon dweller
-    {0, -1}, // 24 troglodyte
+    {0, 7}, // 24 troglodyte
     {0, 37}, // 25 cymmerian
     {AL_WHISPER, 62}, // 26 zombie
     {AL_POWERFUL_SHOUT, 17}, // 27 hydra
-    {0, -1}, // 28
+    {0, -1}, // 28 leviathan - it has a syncronized attack/sound pattern, so don't schedule
 };
 
 char creature_name[29][16] = {
@@ -496,7 +496,7 @@ char creature_name[29][16] = {
     "unknown",       // 7
     "unknown",       // 8
     "skeleton",      // 9
-    "unknown",       // 10
+    "vissuluth",     // 10
     "unknown",       // 11
     "builder",       // 12
     "townie",        // 13
