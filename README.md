@@ -12,6 +12,9 @@ this is a linux-targeted repository and changes include:
  - added joystick/controller support
  - added haptic support
  - rewritten OpenAL support from scratch, now with positional audio
+ - fixes for various crashes
+
+see the ChangeLog for a more detailed list.
 
 ## building on linux
 

@@ -1,6 +1,6 @@
 
 ## 2023.05.21
-- port_openal: dragons, goats, worms, wyverns, manticores, fireflies, spiders, devils, mana worms, moon dwellers, troglodites, cymmerians, zombies, hyras have 3D sound positioning. yay!
+- port_openal: dragons, goats, worms, wyverns, manticores, fireflies, spiders, devils, mana worms, moon dwellers, troglodites, cymmerians, zombies, hydras have 3D sound positioning. yay!
 - GameRenderHD: fix crash related to pointer dereferencing
 - sub_main: fix crash related to opening spellbook in chapter 25
 
