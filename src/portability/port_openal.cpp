@@ -88,6 +88,7 @@ typedef struct al_chunk_cache al_chunk_cache_t; ///< element of the cached chunk
 struct al_env {
     uint8_t initialized;        ///< '1' if the OpenAL-soft library was properly initialized
     uint8_t efx_initialized;    ///< '1' if the ALC_EXT_EFX extension is usable
+    uint8_t scheduling_enabled; ///< state of the chunk scheduling
     int8_t bank;                ///< current sound bank
     int8_t reverb_type;         ///< should match the current MapType
     uint32_t frame_cnt;         ///< frame counter
@@ -377,7 +378,7 @@ void alsound_update(void)
     idx = 0;
     do {
         for (entity = engine_db.bytearray_38403x[idx]; entity > x_DWORD_EA3E4[0]; entity = entity->next_0) {
-            if ((entity->class_0x3F_63 == 5) && (alcrt[entity->model_0x40_64].chunk_id != -1)) {
+            if ((entity->class_0x3F_63 == 5) && (alcrt[entity->model_0x40_64].chunk_id != -1) && (ale.scheduling_enabled)) {
                 alsound_update_source(entity);
             }
         }
@@ -452,6 +453,7 @@ void alsound_clear_cache(void)
     memset(alc, 0, sizeof(alc));
     memset(alcc, 0, sizeof(alcc));
     memset(al_con, 0, sizeof(al_con));
+    ale.scheduling_enabled = 0;
 }
 
 /// \brief place a sound source at the current coordinates
@@ -845,6 +847,12 @@ static ALuint alsound_load_effect(const EFXEAXREVERBPROPERTIES *reverb)
     }
 
     return effect;
+}
+
+/// \brief enable scheduling of chunks and thus playing positional audio 
+void alsound_enable_scheduling(void)
+{
+    ale.scheduling_enabled = 1;
 }
 
 /// \brief close down OpenAL, to be used only on program exit

@@ -1,4 +1,8 @@
 
+## 2023.05.22
+- port_openal: implement maximum chunk concurrency (configure via AL_CHUNK_CONCURRENCY_MAX)
+- port_openal: disable chunk scheduling when exiting flying mode
+
 ## 2023.05.21
 - port_openal: dragons, goats, worms, wyverns, manticores, fireflies, spiders, devils, mana worms, moon dwellers, troglodites, cymmerians, zombies, hydras have 3D sound positioning. yay!
 - GameRenderHD: fix crash related to pointer dereferencing

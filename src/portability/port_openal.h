@@ -50,6 +50,7 @@ uint16_t alsound_get_chunk_flags(const int16_t chunk_id);
 int16_t alsound_create_source(const int16_t chunk_id, al_ssp_t *ssp, event_t *entity);
 void alsound_update_source(event_t *entity);
 void alsound_delete_source(const int16_t ch);
+void alsound_enable_scheduling(void);
 uint8_t alsound_save_chunk(uint8_t *data, const uint32_t len, char *filename);
 
 void alsound_imgui(void);

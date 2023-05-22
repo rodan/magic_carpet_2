@@ -104,6 +104,7 @@ gamepad_state_t gps = { };
 haptic_state_t hs = { };
 
 int8_t haptic_load_effects(void);
+void alsound_enable_scheduling(void); // provide the function signature without including the entire port_openal.h
 
 /// \brief initialization of the SDL joystick subsystem
 void gamepad_sdl_init(void)
@@ -666,6 +667,9 @@ void set_scene(const uint8_t scene_id)
         gps.max_x = gameResWidth;
         gps.max_y = gameResHeight;
         gps.nav_mode = 0;
+#ifdef SOUND_OPENAL
+        alsound_enable_scheduling();
+#endif
         break;
     case SCENE_FLIGHT_MENU:
         gps.max_x = gameResWidth;
