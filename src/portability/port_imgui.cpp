@@ -8,6 +8,10 @@
 #include <stdio.h>
 #include <SDL.h>
 
+#include "config.h"
+
+#ifdef CONFIG_IMGUI
+
 #if !SDL_VERSION_ATLEAST(2,0,17)
 #error This backend requires SDL 2.0.17+ because of SDL_RenderGeometry() function
 #endif
@@ -134,3 +138,5 @@ void port_imgui_cleanup(void)
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
 }
+
+#endif

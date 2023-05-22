@@ -1672,7 +1672,7 @@ void sub_90478_VGA_Blit320(uint8_t maxFps)      //271478
 
 #ifndef debug_hide_graphics
 #if _DEBUG
-    VGA_CalculateAndPrintFps(0, 0, timeDelta.count());
+    //VGA_CalculateAndPrintFps(0, 0, timeDelta.count());
 #endif
     VGA_Blit(pdwScreenBuffer_351628);
 #endif
@@ -1708,7 +1708,7 @@ void sub_75200_VGA_Blit640(uint16_t height, uint8_t maxFps)     //256200
 
     std::chrono::duration < double, std::milli > timeDelta = CalculateTimeDelta();
 #if _DEBUG
-    VGA_CalculateAndPrintFps(0, 0, timeDelta.count());
+    //VGA_CalculateAndPrintFps(0, 0, timeDelta.count());
 #endif
     VGA_Blit(pdwScreenBuffer_351628);
 
