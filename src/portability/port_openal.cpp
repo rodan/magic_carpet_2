@@ -33,13 +33,14 @@
 #endif
 
 #define                OPENAL_C_SZ  OPENAL_CHANNELS     ///< number of chunks that can play at the same time (aka number of voices)
-#define               OPENAL_CC_SZ  128 ///< number of chunks the cache can hold
+#define               OPENAL_CC_SZ  128     ///< number of chunks the cache can hold
 
 ///< al_chunk_cache_t flags
-#define          OPENAL_FLG_LOADED  0x1 ///< if chunk was properly loaded via alBufferData()
+#define          OPENAL_FLG_LOADED  0x1     ///< if chunk was properly loaded via alBufferData()
 
-#define   AL_DIST_REFRESH_INTERVAL  1000        ///< after how many ms shoud the distance between creatures and the listener should be refreshed
-#define           AL_DIST_MIN_PLAY  10000       ///< minimal distance to the player needed for creature to play it's sample
+#define   AL_DIST_REFRESH_INTERVAL  200     ///< after how many ms shoud the distance between creatures and the listener should be refreshed
+#define           AL_DIST_MIN_PLAY  10000   ///< minimal distance to the player needed for creature to play it's sample
+#define   AL_CHUNK_CONCURRENCY_MAX  5       ///< up to how many concurrent plays of a sample should exist in any given moment
 
 // Effect object functions
 static LPALGENEFFECTS alGenEffects;
@@ -66,6 +67,15 @@ static LPALGETAUXILIARYEFFECTSLOTI alGetAuxiliaryEffectSloti;
 static LPALGETAUXILIARYEFFECTSLOTIV alGetAuxiliaryEffectSlotiv;
 static LPALGETAUXILIARYEFFECTSLOTF alGetAuxiliaryEffectSlotf;
 static LPALGETAUXILIARYEFFECTSLOTFV alGetAuxiliaryEffectSlotfv;
+
+struct al_chunk {
+    int16_t id;                 ///< chunk identifier
+    ALint state;                ///< 0, AL_PLAYING or something in between
+    ALuint alSource;            ///< openal source identifier
+    ALsizei size;               ///< chunk size
+    event_t *entity;            ///< what entity has created the sound source
+};
+typedef struct al_chunk al_chunk_t;     ///< element of the currently playing chunks array
 
 struct al_chunk_cache {
     int16_t id;                 ///< chunk identifier
@@ -95,8 +105,9 @@ typedef struct al_next_vol al_next_vol_t;
 ALCcontext *context;
 ALuint al_slot;                 ///< effect slot
 ALuint al_effect;
-al_chunk_cache_t alcc[OPENAL_CC_SZ] = { };      ///< cached chunks array
 al_chunk_t alc[OPENAL_C_SZ] = { };      ///< currently playing chunks array
+al_chunk_cache_t alcc[OPENAL_CC_SZ] = { };      ///< cached chunks array
+int8_t al_con[OPENAL_CC_SZ] = { }; ///< concurrency array (how many times is a particular chunk played currently)
 al_env_t ale = { };             ///< the random collection of global variables
 
 openal_config_t oac;            ///< subsystem configuration read from config.ini
@@ -155,6 +166,7 @@ void alsound_delete_source(const int16_t channel_id)
         alc[channel_id].entity->play_ch = -1;
         alc[channel_id].entity = 0;
     }
+    al_con[alc[channel_id].id]--;
     alc[channel_id].state = 0;
     alc[channel_id].size = 0;
     alc[channel_id].id = -1;
@@ -365,7 +377,7 @@ void alsound_update(void)
     idx = 0;
     do {
         for (entity = engine_db.bytearray_38403x[idx]; entity > x_DWORD_EA3E4[0]; entity = entity->next_0) {
-            if (entity->class_0x3F_63 == 5) {
+            if ((entity->class_0x3F_63 == 5) && (alcrt[entity->model_0x40_64].chunk_id != -1)) {
                 alsound_update_source(entity);
             }
         }
@@ -415,7 +427,7 @@ void alsound_clear_cache(void)
         return;
     }
 
-    //Logger->info("alsound_clear_cache");
+    Logger->info("alsound_clear_cache");
     for (i = OPENAL_C_SZ; i > 0; i--) {
         if (alc[i - 1].state == AL_PLAYING) {
             alSourceStop(alc[i - 1].alSource);
@@ -439,6 +451,7 @@ void alsound_clear_cache(void)
 
     memset(alc, 0, sizeof(alc));
     memset(alcc, 0, sizeof(alcc));
+    memset(al_con, 0, sizeof(al_con));
 }
 
 /// \brief place a sound source at the current coordinates
@@ -561,6 +574,12 @@ int16_t alsound_play(const int16_t chunk_id, Mix_Chunk *mixchunk, event_t *entit
     }
 
     //Logger->info("alsound_play requested id {}  sz {}  fmt {}", chunk_id, mixchunk->alen, flags);
+
+    // check if sample is already playing too many times atm
+    if (al_con[chunk_id] > AL_CHUNK_CONCURRENCY_MAX - 1) {
+        //Logger->info("alsound_play ignored id {}", chunk_id);
+        return -1;
+    }
 
     if (ale.bank < 3) {
         if ((alct[ale.bank][chunk_id].flags & AL_IGNORE_RECODE) && !(flags & AL_TYPE_POSITIONAL) && 
@@ -722,6 +741,7 @@ int16_t alsound_play(const int16_t chunk_id, Mix_Chunk *mixchunk, event_t *entit
     alsound_error_check("alGetSourcei init");
 
     alc[play_ch].entity = entity;
+    al_con[chunk_id]++;
 
     return play_ch;
 }
@@ -1013,6 +1033,25 @@ void alsound_imgui(void)
         } else {
             ImGui::Text("    number of voices: %u", OPENAL_CHANNELS);
         }
+
+        if (ImGui::CollapsingHeader("chunk concurrency")) {
+            if (ImGui::BeginTable("chunks", 2, flags)) {
+                ImGui::TableSetupColumn("id", ImGuiTableColumnFlags_WidthStretch);
+                ImGui::TableSetupColumn("count", ImGuiTableColumnFlags_WidthStretch);
+                ImGui::TableHeadersRow();
+
+                for (i = OPENAL_CC_SZ; i > 0; i--) {
+                    if (al_con[i - 1]) {
+                        ImGui::TableNextRow();
+                        ImGui::TableSetColumnIndex(0);
+                        ImGui::Text("%u %s", i, alct_name[ale.bank][i - 1]);
+                        ImGui::TableSetColumnIndex(1);
+                        ImGui::Text("%d", al_con[i - 1]);
+                    }
+                }
+                ImGui::EndTable();
+            }
+        } 
     }
     ImGui::End();
 

@@ -22,17 +22,8 @@
 
 #define          AL_REPLAY_RARELY  0x01 // long intervals of silence
 #define      AL_REPLAY_FREQUENTLY  0x02 // short intervals of silence
-#define         AL_POWERFUL_SHOUT  0x04 // controls the reference distance
-#define                AL_WHISPER  0x08 // controls the reference distance
-
-struct al_chunk {
-    int16_t id;                 ///< chunk identifier
-    ALint state;                ///< 0, AL_PLAYING or something in between
-    ALuint alSource;            ///< openal source identifier
-    ALsizei size;               ///< chunk size
-    event_t *entity;            ///< what entity has created the sound source
-};
-typedef struct al_chunk al_chunk_t;     ///< element of the currently playing chunks array
+#define         AL_POWERFUL_SHOUT  0x04 // controls the reference distance and gain
+#define                AL_WHISPER  0x08 // controls the reference distance and gain
 
 struct al_sound_source_parameters {
     float gain;

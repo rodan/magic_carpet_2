@@ -8,7 +8,7 @@ struct al_chunk_table {
 };
 typedef struct al_chunk_table al_ct_t;
 
-al_ct_t alct[3][70] = {
+const al_ct_t alct[3][70] = {
     {                           // day
      {0, 0},                    // id_0 -
      {AL_FORMAT_STEREO8_22050 | AL_TYPE_ENV, 0},        // id_1 OCEAN.WAV
@@ -228,7 +228,7 @@ al_ct_t alct[3][70] = {
 };
 
 
-char alct_name[3][70][9] = {
+const char alct_name[3][70][9] = {
     { // day
         "null",
         "ocean",
@@ -453,7 +453,7 @@ struct al_creature_table {
 };
 typedef struct al_creature_table al_crt_t;
 
-al_crt_t alcrt[29] = {
+const al_crt_t alcrt[29] = {
     {0, 8}, // 0 dragons
     {AL_REPLAY_RARELY | AL_WHISPER, 46}, // 1 goat
     {0, 12}, // 2 bee
@@ -485,7 +485,7 @@ al_crt_t alcrt[29] = {
     {0, -1}, // 28 leviathan - it has a syncronized attack/sound pattern, so don't schedule
 };
 
-char creature_name[29][16] = {
+const char creature_name[29][16] = {
     "dragon",        // 0
     "goat",          // 1
     "bee",           // 2
