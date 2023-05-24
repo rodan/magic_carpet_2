@@ -82,7 +82,7 @@ void test_midi_play(uint8_t * /*data */ , uint8_t *header, int32_t track_number)
 
 void SOUND_start_sequence(int32_t sequence_num)
 {
-    //Logger->info("SOUND_start_sequence {}", sequence_num);
+    Logger->info("SOUND_start_sequence {}", sequence_num);
     if (unitTests)
         return;
     //3 - menu
@@ -140,6 +140,7 @@ void SOUND_set_sequence_volume(int32_t volume, int32_t milliseconds)
 {
     if (unitTests)
         return;
+    Logger->info("SOUND_set_sequence_volume  vol {}  ms {}", volume, milliseconds);
 #ifdef SOUND_SDLMIXER
 #ifndef __linux__
     if ((milliseconds > 0) && (volume == 0)) {
@@ -179,7 +180,7 @@ void SOUND_init_MIDI_sequence(uint8_t * /*datax */ , type_E3808_music_header *he
 
     //we can translate datax from xmi to mid and play(with bad quality or slow midi emulators), at now but we use ogg samples
     //unsigned char* TranscodeXmiToMid(const unsigned char* pXmiData,       size_t iXmiLength, size_t* pMidLength);
-    size_t iXmiLength = testsize2;
+    size_t iXmiLength = testsize2; // FIXME this size is completely bogus - between 0.8 and 1.2TB!!!
     size_t pMidLength;
     dirsstruct helpdirsstruct;
 
@@ -229,10 +230,11 @@ void SOUND_init_MIDI_sequence(uint8_t * /*datax */ , type_E3808_music_header *he
             TranscodeXmiToMid( /*(const uint8_t*)*(uint32_t*)( */ acttrack /* + 18) */ , iXmiLength,
                               &pMidLength);
         SDL_RWops *rwmidi = SDL_RWFromMem(outmidi, pMidLength);
-
+        Logger->info("SOUND_init_MIDI_sequence  xmi {}  mid {}", iXmiLength, pMidLength);
+        alsound_save_chunk(outmidi, pMidLength, NULL);
         //Timidity_Init();
 #ifdef SOUND_SDLMIXER
-        //GAME_music[track_number] = Mix_LoadMUSType_RW(rwmidi, MUS_MID, SDL_TRUE); // FIXME
+        GAME_music[track_number] = Mix_LoadMUSType_RW(rwmidi, MUS_MID, SDL_TRUE); // FIXME
 #endif                          //SOUND_SDLMIXER
         //music2 = Mix_LoadMUSType_RW(rwmidi, MIX_MUSIC_TIMIDITY, SDL_TRUE);
 
@@ -475,7 +477,7 @@ bool init_sound()
     }
 
     //Mix_SetSoundFonts("c:\\prenos\\Magic2\\sf2\\TOM-SF2.sf2");
-    Mix_SetSoundFonts("touhou.sf2");
+    //Mix_SetSoundFonts("touhou.sf2");
     //load_sound_files();
     /*if(mp3music)
        load_music_files(); */

@@ -4645,7 +4645,7 @@ bool LoadMusicTrack(FILE *filehandle, uint8_t drivernumber)     //26fd00
     shadow_type_E3808_music_header *shadow_str_E3808_music_header =
         (shadow_type_E3808_music_header *) Malloc_83CD0(sizeof(shadow_type_E3808_music_header));
     if (!shadow_str_E3808_music_header) {
-        FreeMem_83E80((uint8_t *) shadow_str_E3808_music_header);
+        FreeMem_83E80((uint8_t *) shadow_str_E3808_music_header); // if shadow_str_E3808_music_header is NULL then there's nothing to free
         return false;
     }
     //64xbit fix

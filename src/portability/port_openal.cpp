@@ -428,7 +428,7 @@ void alsound_clear_cache(void)
         return;
     }
 
-    Logger->info("alsound_clear_cache");
+    //Logger->info("alsound_clear_cache");
     for (i = OPENAL_C_SZ; i > 0; i--) {
         if (alc[i - 1].state == AL_PLAYING) {
             alSourceStop(alc[i - 1].alSource);
@@ -546,7 +546,7 @@ void alsound_update_source(event_t *entity)
             ssp.coord.x = entity->axis_0x4C_76.x;
             ssp.coord.y = entity->axis_0x4C_76.y;
             ssp.coord.z = entity->axis_0x4C_76.z;
-            Logger->info("play    {} id {} @{}", creature_name[entity->model_0x40_64], entity->id_0x1A_26, now);
+            //Logger->info("play    {} id {} @{}", creature_name[entity->model_0x40_64], entity->id_0x1A_26, now);
             entity->play_ch = alsound_create_source(alcrt[entity->model_0x40_64].chunk_id, &ssp, entity);
         } else if (entity->play_ch != -1) {
             //Logger->info("update  {} @{}", entity->id_0x1A_26, now);
