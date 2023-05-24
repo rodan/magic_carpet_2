@@ -122,7 +122,8 @@ bool readini()
     std::string readstr = reader.GetString("sound", "oggmusicFolder", "");
     strcpy(oggmusicFolder, (char *)readstr.c_str());
 
-    oac.efx_enabled = reader.GetBoolean("sound", "openal_effects", false);
+    oac.efx_enabled = reader.GetBoolean("sound", "openal_efx", false);
+    oac.same_chunk_concurrency = reader.GetInteger("sound", "openal_same_chunk_concurrency", 5);
 
     std::string readstr3 = reader.GetString("graphics", "bigGraphicsFolder", "");
     strcpy(bigGraphicsFolder, (char *)readstr3.c_str());

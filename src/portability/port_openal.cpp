@@ -40,7 +40,6 @@
 
 #define   AL_DIST_REFRESH_INTERVAL  200     ///< after how many ms shoud the distance between creatures and the listener should be refreshed
 #define           AL_DIST_MIN_PLAY  10000   ///< minimal distance to the player needed for creature to play it's sample
-#define   AL_CHUNK_CONCURRENCY_MAX  5       ///< up to how many concurrent plays of a sample should exist in any given moment
 
 // Effect object functions
 static LPALGENEFFECTS alGenEffects;
@@ -578,7 +577,7 @@ int16_t alsound_play(const int16_t chunk_id, Mix_Chunk *mixchunk, event_t *entit
     //Logger->info("alsound_play requested id {}  sz {}  fmt {}", chunk_id, mixchunk->alen, flags);
 
     // check if sample is already playing too many times atm
-    if (al_con[chunk_id] > AL_CHUNK_CONCURRENCY_MAX - 1) {
+    if (al_con[chunk_id] > oac.same_chunk_concurrency - 1) {
         //Logger->info("alsound_play ignored id {}", chunk_id);
         return -1;
     }
