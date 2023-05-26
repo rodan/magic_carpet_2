@@ -5,6 +5,8 @@
 #include <filesystem>
 #include <cstdlib>
 
+#include "sub_main.h"
+
 int config_skip_screen;
 int texturepixels = 32;
 int maxGameFps = 30;
@@ -122,6 +124,15 @@ bool readini()
     std::string readstr = reader.GetString("sound", "oggmusicFolder", "");
     strcpy(oggmusicFolder, (char *)readstr.c_str());
 
+    std::string speech_folder_str = reader.GetString("sound", "speech_folder", "");
+    strcpy(speech_folder, (char *)speech_folder_str.c_str());
+    oac.speech_volume = reader.GetInteger("sound", "openal_speech_volume", 102);
+
+    if ((oac.speech_volume == 0) || (speech_folder_str.length() < 3)) {
+        disable_speech();
+    }
+
+    oac.env_volume = reader.GetInteger("sound", "openal_environment_volume", 52);
     oac.efx_enabled = reader.GetBoolean("sound", "openal_efx", false);
     oac.same_chunk_concurrency = reader.GetInteger("sound", "openal_same_chunk_concurrency", 5);
 

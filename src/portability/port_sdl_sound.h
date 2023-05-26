@@ -177,6 +177,7 @@ extern bool hqsound;
 extern bool oggmusic;
 extern char oggmusicFolder[512];
 extern bool oggmusicalternative;
+extern char speech_folder[512];
 extern bool fixspeedsound;
 
 bool init_sound();
@@ -215,6 +216,8 @@ void SOUND_set_sample_volume(HSAMPLE S, int32_t volume);
 void SOUND_set_sequence_volume(int32_t volume, int32_t milliseconds);
 void SOUND_set_master_volume(int32_t volume);
 void SOUND_UPDATE();
+
+void SOUND_start_speech(const uint8_t track, const uint16_t offset, const uint16_t len);
 //void test_midi_play(uint8_t* data, uint8_t* header, int32_t track_number);
 
 #endif                          //PORT_SDL_SOUND

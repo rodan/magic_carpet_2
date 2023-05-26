@@ -17,6 +17,7 @@ bool hqsound = false;
 bool oggmusic = false;
 bool oggmusicalternative = false;
 char oggmusicFolder[512];
+char speech_folder[512];
 
 bool fixspeedsound = false;
 
@@ -37,6 +38,8 @@ Mix_Music *GAME_music[20] =
 
 Mix_Chunk gamechunk[32];        //OPENAL_CHANNELS];
 HSAMPLE gamechunkHSAMPLE[32];   //OPENAL_CHANNELS];
+
+extern char x_BYTE_E2A28_speech;
 
 uint8_t sound_buffer[4][20000];
 /*
@@ -82,7 +85,6 @@ void test_midi_play(uint8_t * /*data */ , uint8_t *header, int32_t track_number)
 
 void SOUND_start_sequence(int32_t sequence_num)
 {
-    Logger->info("SOUND_start_sequence {}", sequence_num);
     if (unitTests)
         return;
     //3 - menu
@@ -140,7 +142,7 @@ void SOUND_set_sequence_volume(int32_t volume, int32_t milliseconds)
 {
     if (unitTests)
         return;
-    Logger->info("SOUND_set_sequence_volume  vol {}  ms {}", volume, milliseconds);
+    //Logger->info("SOUND_set_sequence_volume  vol {}  ms {}", volume, milliseconds);
 #ifdef SOUND_SDLMIXER
 #ifndef __linux__
     if ((milliseconds > 0) && (volume == 0)) {
@@ -187,6 +189,7 @@ void SOUND_init_MIDI_sequence(uint8_t * /*datax */ , type_E3808_music_header *he
     if (oggmusic) {
 
         std::string oggmusicPath = GetSubDirectoryPath(oggmusicFolder);
+        // FIXME 1024bytes added to the stack
         char alternativeMusicPath[512] = "";
         char selectedTrackPath[512] = "";
         //if (track_number > 1)track_number = 0;
@@ -230,8 +233,8 @@ void SOUND_init_MIDI_sequence(uint8_t * /*datax */ , type_E3808_music_header *he
             TranscodeXmiToMid( /*(const uint8_t*)*(uint32_t*)( */ acttrack /* + 18) */ , iXmiLength,
                               &pMidLength);
         SDL_RWops *rwmidi = SDL_RWFromMem(outmidi, pMidLength);
-        Logger->info("SOUND_init_MIDI_sequence  xmi {}  mid {}", iXmiLength, pMidLength);
-        alsound_save_chunk(outmidi, pMidLength, NULL);
+        //Logger->info("SOUND_init_MIDI_sequence  xmi {}  mid {}", iXmiLength, pMidLength);
+        //alsound_save_chunk(outmidi, pMidLength, NULL);
         //Timidity_Init();
 #ifdef SOUND_SDLMIXER
         GAME_music[track_number] = Mix_LoadMUSType_RW(rwmidi, MUS_MID, SDL_TRUE); // FIXME
@@ -239,6 +242,91 @@ void SOUND_init_MIDI_sequence(uint8_t * /*datax */ , type_E3808_music_header *he
         //music2 = Mix_LoadMUSType_RW(rwmidi, MIX_MUSIC_TIMIDITY, SDL_TRUE);
 
     }
+}
+
+void SOUND_start_speech(const uint8_t track, const uint16_t offset, const uint16_t len)
+{
+    uint16_t track_str_len;
+    char *track_filename = NULL;
+    uint8_t *track_data = NULL;
+    uint32_t track_data_len;
+    uint32_t track_offset;
+    uint32_t i;
+    int16_t *data;
+    int16_t sample;
+    int fd;
+    Mix_Chunk chunk = {};
+
+    //Logger->info("SOUND_start_speech  track {}  offset {}  len {}", track, offset, len);
+
+    std::string speech_path = GetSubDirectoryPath(speech_folder);
+    track_str_len = speech_path.length() + 13;
+
+    track_filename = (char *) calloc(track_str_len, sizeof(char));
+    if (!track_filename) {
+        return;
+    }
+
+    snprintf(track_filename, track_str_len, "%s/track%02d.cdr", speech_path.c_str(), track);
+    //Logger->info("track: {}", track_filename);
+
+    track_data_len = len * 2360;
+    track_offset = offset * 2360;
+    track_data = (uint8_t *) calloc(track_data_len, sizeof(uint8_t));
+    if (!track_data) {
+        goto cleanup_nofreedata;
+    }
+
+    if ((fd = open(track_filename, O_RDONLY)) < 0) {
+        Logger->warn("unable to open speech file {}", track_filename);
+        goto cleanup;
+    }
+
+    if (lseek(fd, track_offset, SEEK_SET) != track_offset) {
+        Logger->warn("wrong offset {} in speech file {}", track_offset, track_filename);
+        goto cleanup;
+    }
+
+    if (read(fd, track_data, track_data_len) != track_data_len) {
+        Logger->warn("can't read speech file {}", track_filename);
+        goto cleanup;
+    }
+
+#if 0
+    data = (int16_t *) track_data;
+    for (i=0; i<track_data_len/2; i++) {
+        sample = ((*data & 0x00ff) << 8) | ((*data & 0xff00) >> 8);
+        *data = sample;
+        data++;
+        //Logger->info("data {}", data[i]);
+    }
+#endif
+
+    chunk.allocated = 1;
+    chunk.alen = track_data_len;
+    chunk.abuf = track_data;
+    chunk.volume = 127;
+
+    alsound_save_chunk(track_data, track_data_len, NULL);
+
+#ifdef SOUND_OPENAL
+    uint16_t format;
+
+    format = alsound_get_chunk_flags(OPENAL_CC_SZ - 1);
+    alsound_play(OPENAL_CC_SZ - 1, &chunk, nullptr, nullptr, format | AL_TYPE_SPEECH);
+    free(track_data);
+
+#elif defined (SOUND_SDLMIXER)
+
+    Mix_PlayChannel(-1, &chunk, 0);
+
+#endif
+
+cleanup: 
+    //free(track_data);
+cleanup_nofreedata:
+    free(track_filename);
+    close(fd);
 }
 
 void clean_up_sound()
@@ -257,7 +345,7 @@ void clean_up_sound()
 
 void playmusic2(int32_t track_number)
 {
-    Logger->info("playmusic2 {}", track_number);
+    //Logger->info("playmusic2 {}", track_number);
     if (unitTests)
         return;
 #ifdef SOUND_SDLMIXER
@@ -408,6 +496,8 @@ void SOUND_start_sample(HSAMPLE S)
 
     gamechunk[S->index_sample].volume = S->volume_16;
     gamechunkHSAMPLE[S->index_sample] = S;
+
+    //alsound_save_chunk(gamechunk[S->index_sample].abuf, gamechunk[S->index_sample].alen, NULL);
 
     Mix_PlayChannel(S->index_sample, &gamechunk[S->index_sample], 0);
 #endif

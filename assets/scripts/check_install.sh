@@ -2,20 +2,20 @@
 
 
 usage() {
-	echo 'Usage (check mode)'
-	echo "      $0 -d [dest_dir]"
-	echo ''
-	echo '      (install mode)'
-	echo "      $0 -s [src_dir] -d [dest_dir]"
-	echo ''
-	echo '          src_dir  has to be the dir where GOG installed Magic Carpet 2'
-	echo '          dst_dir  has to be the dir where remc2 will search for the game assets'
-	echo ''
-	echo '  the install mode needs the "p7zip" and "bchunk" packages to be installed'
+    echo 'Usage (check mode)'
+    echo "      $0 -d [dest_dir]"
+    echo ''
+    echo '      (install mode)'
+    echo "      $0 -s [src_dir] -d [dest_dir]"
+    echo ''
+    echo '          src_dir  has to be the dir where GOG installed Magic Carpet 2'
+    echo '          dst_dir  has to be the dir where remc2 will search for the game assets'
+    echo ''
+    echo '  the install mode needs the "p7zip" and "bchunk" packages to be installed'
 }
 
 check_CD_Files() {
-	cat << EOF | sha256sum --quiet --check 
+    cat << EOF | sha256sum --quiet --check 
 a8d2aa84b8ffc7d5f7313c244ca45d632d748e19370c4744788818ab1b4b4b67  ./SOUND/MPU401.MDI
 d258ed5119eaf3c1499ddd49536efab238d228ef5ff60a49c0caf710f613d19a  ./SOUND/ESFM.MDI
 03d90c1c0e5c029b9016e593fce2ce3d4ceb6f67d016d291821031f0406388f8  ./SOUND/AILDRVR.LST
@@ -171,14 +171,13 @@ EOF
 }
 
 check_GAME() {
-	cat << EOF | sha256sum --quiet --check 
+    cat << EOF | sha256sum --quiet --check 
 84af85f568e2b909a5a881a3beb7b0d4dfdbe7d3b7a89d572a49a35ff7413074  ./NETHERW/CDATA/TMAPS0-0.DAT
 4aef0bfa2317402a6b29e1ef324b01c316280e10f0a0a58ea4cbacd5d4d58841  ./NETHERW/CDATA/TMAPS0-0.TAB
 b091204ec21c0cf99716f3ae5c426a37113e57dda48a0d4d2eef98167e6ed0ff  ./NETHERW/CDATA/TMAPS1-0.DAT
 22afd08167ae415138548f99901ea037bdc2b48f56c6f3b2dbcfe9743d73c8f0  ./NETHERW/CDATA/TMAPS1-0.TAB
 55b2ed64aaee111f9c6ff9d174bc14f35999a24a81400d76bcf2cdaac01f8ca6  ./NETHERW/CDATA/TMAPS2-0.DAT
 21dc8d7819eea57bd2ef937800503a2a28ee025a44fc63ce883e11523aea88a2  ./NETHERW/CDATA/TMAPS2-0.TAB
-621293836cafba765c105b23559d2564fbca2932bc13ebfebe9a63b7f393c3cd  ./NETHERW/CDATA/VERSION.DAT
 3b7fae5d7c350486a4f62ad4b2e9fa2e4e52023a216b8a7f043ce02439b50222  ./NETHERW/CLEVELS/LEVELS.DAT
 179a65f04d4aa7bc147cfd56ffb63a0da400dfd85542eb0fbda10265d6bc1bea  ./NETHERW/CLEVELS/LEVELS.TAB
 6c5f2faacf426b5c0fd127bd5d0e8b3b11a59b7ec22bb3b0017d7cfe6ae0a4aa  ./NETHERW/SOUND/ADLIB.MDI
@@ -212,23 +211,23 @@ EOF
 }
 
 mv_files() {
-	entry="${1}"
-	[ -z "${entry}" ] && return
-	chmod 644 "${entry}"
-	newentry=$(echo "${entry}" | tr '[:lower:]' '[:upper:]')
-	if [ "${entry}" != "${newentry}" ] && [ -n "${newentry}" ]; then
-		mv -- "${entry}" "${newentry}"
-	fi
+    entry="${1}"
+    [ -z "${entry}" ] && return
+    chmod 644 "${entry}"
+    newentry=$(echo "${entry}" | tr '[:lower:]' '[:upper:]')
+    if [ "${entry}" != "${newentry}" ] && [ -n "${newentry}" ]; then
+        mv -- "${entry}" "${newentry}"
+    fi
 }
 
 mv_dirs() {
-	entry="${1}"
-	[ -z "${entry}" ] && return
-	chmod 755 "${entry}"
-	newentry=$(echo "${entry}" | tr '[:lower:]' '[:upper:]')
-	if [ "${entry}" != "${newentry}" ] && [ -n "${newentry}" ]; then
-		mv -- "${entry}" "${newentry}"
-	fi
+    entry="${1}"
+    [ -z "${entry}" ] && return
+    chmod 755 "${entry}"
+    newentry=$(echo "${entry}" | tr '[:lower:]' '[:upper:]')
+    if [ "${entry}" != "${newentry}" ] && [ -n "${newentry}" ]; then
+        mv -- "${entry}" "${newentry}"
+    fi
 }
 
 GOOD=$'\e[32;01m'
@@ -238,162 +237,225 @@ NORMAL=$'\e[0m'
 ENDCOL=$'\e[A\e['$(( COLS - 8 ))'C'
 
 ebegin() {
-	echo -e " ${GOOD}*${NORMAL} $*"
+    echo -e " ${GOOD}*${NORMAL} $*"
 }
 
 eend() {
-	local retval="${1:-0}" efunc="${2:-eerror}" msg
-	shift 2
+    local retval="${1:-0}" efunc="${2:-eerror}" msg
+    shift 2
 
-	if [[ ${retval} == "0" ]] ; then
-		msg="${BRACKET}[ ${GOOD}ok${BRACKET} ]${NORMAL}"
-	else
-		msg="${BRACKET}[ ${BAD}!!${BRACKET} ]${NORMAL} $*"
-	fi
-	echo -e "${ENDCOL} ${msg}"
+    if [[ ${retval} == "0" ]] ; then
+        msg="${BRACKET}[ ${GOOD}ok${BRACKET} ]${NORMAL}"
+    else
+        msg="${BRACKET}[ ${BAD}!!${BRACKET} ]${NORMAL} $*"
+    fi
+    echo -e "${ENDCOL} ${msg}"
 }
 
 check_inst() {
-	prefix="${1}"
-	err=false
+    prefix="${1}"
+    err=false
 
-	[ -e "${prefix}/CD_Files" ] || {
-		echo "${BAD}error${NORMAL}: 'CD_Files' directory not found in '${prefix}'"
-		err=true
-	}
+    [ -e "${prefix}/CD_Files" ] || {
+        echo "${BAD}error${NORMAL}: 'CD_Files' directory not found in '${prefix}'"
+        err=true
+    }
 
-	[ -e "${prefix}/GAME" ] || {
-		echo "${BAD}error${NORMAL}: 'GAME' directory not found in '${prefix}'"
-		err=true
-	}
+    [ -e "${prefix}/GAME" ] || {
+        echo "${BAD}error${NORMAL}: 'GAME' directory not found in '${prefix}'"
+        err=true
+    }
 
-	${err} && {
-		usage
-		exit 1
-	}
+    ${err} && {
+        usage
+        exit 1
+    }
 
-	ebegin "     CD_Files directory"
-	pushd "${prefix}/CD_Files/" > /dev/null || exit 1 
+    ebegin "     CD_Files directory"
+    pushd "${prefix}/CD_Files/" > /dev/null || exit 1 
 
-	find ./ -type d | tac | while read -r line; do
-		mv_dirs "${line}"
-	done
-	find ./ -type f | tac | while read -r line; do
-		mv_files "${line}"
-	done
+    find ./ -type d | tac | while read -r line; do
+        mv_dirs "${line}"
+    done
+    find ./ -type f | tac | while read -r line; do
+        mv_files "${line}"
+    done
 
-	if check_CD_Files; then
-		eend
-	else
-		echo ''
-		eend 1 failed
-	fi
+    if check_CD_Files; then
+        eend
+    else
+        echo ''
+        eend 1 failed
+    fi
 
-	popd > /dev/null || exit 1
+    popd > /dev/null || exit 1
 
-	ebegin "     GAME directory"
-	pushd "${prefix}/GAME/" > /dev/null || exit 1 
+    ebegin "     GAME directory"
+    pushd "${prefix}/GAME/" > /dev/null || exit 1 
 
-	find ./ -type d | tac | while read -r line; do
-		mv_dirs "${line}"
-	done
-	find ./ -type f | tac | while read -r line; do
-		mv_files "${line}"
-	done
+    find ./ -type d | tac | while read -r line; do
+        mv_dirs "${line}"
+    done
+    find ./ -type f | tac | while read -r line; do
+        mv_files "${line}"
+    done
 
-	if check_GAME; then
-		eend
-	else
-		eend 1 failed
-	fi
+    if check_GAME; then
+        eend
+    else
+        eend 1 failed
+    fi
 
-	popd > /dev/null || exit 1
+    popd > /dev/null || exit 1
 }
 
 unset src
 unset dst
 
 [ $# == 0 ] && {
-	usage
-	exit 1
+    usage
+    exit 1
 }
 
 while (( "$#" )); do
-	if [ "$1" = "-s" ]; then
-		shift;
-		src="$1"
-		shift;
-	elif [ "$1" = "-d" ]; then
-		shift;
-		dst="$1"
-		shift
-	elif [ "$1" = "-h" ]; then
-		shift;
-		usage
-	else
-		if [ -e "$1" ]; then
-			dst="$1"
-		else
-			echo "${BAD}error${NORMAL}: invalid destination directory"
-			usage
-			exit 1
-		fi
-		break;
-	fi
+    if [ "$1" = "-s" ]; then
+        shift;
+        src="$1"
+        shift;
+    elif [ "$1" = "-d" ]; then
+        shift;
+        dst="$1"
+        shift
+    elif [ "$1" = "-h" ]; then
+        shift;
+        usage
+    else
+        if [ -e "$1" ]; then
+            dst="$1"
+        else
+            echo "${BAD}error${NORMAL}: invalid destination directory"
+            usage
+            exit 1
+        fi
+        break;
+    fi
 done
 
 [ -n "${src}" ] && [ ! -e "${src}" ] && {
-	echo "${BAD}error${NORMAL}: invalid source directory"
-	usage
-	exit 1
+    echo "${BAD}error${NORMAL}: invalid source directory"
+    usage
+    exit 1
 }
 
-[ -n "${src}" ] && [ -e "${src}" ] &&  [ -n "${dst}" ] && {
-	# copy over from src to dst
+# src is a directory
+[ -n "${src}" ] && [ -d "${src}" ] &&  [ -n "${dst}" ] && {
+    # copy over from src to dst
 
-	err=false
-	# check is needed binaries exist
-	7z -h > /dev/null || {
-		echo "${BAD}error${NORMAL}: the 'p7zip' package needs to be installed"
-		err=true
-	}
+    err=false
+    # check is needed binaries exist
+    7z -h > /dev/null || {
+        echo "${BAD}error${NORMAL}: the 'p7zip' package needs to be installed"
+        err=true
+    }
 
-	bchunk -h >/dev/null 2>&1 || {
-		echo "${BAD}error${NORMAL}: the 'bchunk' package needs to be installed"
-		err=true
-	}
+    bchunk -h >/dev/null 2>&1 || {
+        echo "${BAD}error${NORMAL}: the 'bchunk' package needs to be installed"
+        err=true
+    }
 
-	${err} && exit 1
+    ${err} && exit 1
 
-	# ok copy files
-	mkdir -p "${dst}" || {
-		echo "${BAD}error${NORMAL}: cannot create destination directory"
-		exit 1
-	}
-	cp -r "${src}/GAME" "${dst}"
-	mkdir -p "${dst}/CD_Files"
-	if [ -e "${src}/game.gog" ] && [ -e "${src}/game.ins" ]; then
-		pushd "${dst}/CD_Files" > /dev/null || exit 1
-		bchunk "${src}/game.gog" "${src}/game.ins" cd_content > /dev/null
-		7z x -y -bso0 cd_content01.iso
-		rm -f cd_content*
-		popd > /dev/null || exit 1
-	else
-		echo "${BAD}error${NORMAL}: game.gog, game.ins are missing from '${src}'"
-		exit 1
-	fi
+    # ok copy files
+    mkdir -p "${dst}" || {
+        echo "${BAD}error${NORMAL}: cannot create destination directory"
+        exit 1
+    }
+    cp -r "${src}/GAME" "${dst}"
+    mkdir -p "${dst}/CD_Files"
+    mkdir -p "${dst}/speech"
+    if [ -e "${src}/game.gog" ] && [ -e "${src}/game.ins" ]; then
+        pushd "${dst}/CD_Files" > /dev/null || exit 1
+        bchunk "${src}/game.gog" "${src}/game.ins" track > /dev/null
+        7z x -y -bso0 track01.iso
+        rm -f track01.iso
+        mv -f track*.cdr ../speech/
+        popd > /dev/null || exit 1 
+    else
+        echo "${BAD}error${NORMAL}: game.gog, game.ins are missing from '${src}'"
+        exit 1
+    fi
 
-	check_inst "${dst}"
-	exit $?
+    check_inst "${dst}"
+    exit $?
 }
+
+# src is a cdrom drive
+[ -n "${src}" ] &&  [ -n "${dst}" ] && echo "${src}" | grep -q '^/dev' && {
+
+    err=false
+    # check is needed binaries exist
+    7z -h > /dev/null || {
+        echo "${BAD}error${NORMAL}: the 'p7zip' package needs to be installed"
+        err=true
+    }
+
+    bchunk -h >/dev/null 2>&1 || {
+        echo "${BAD}error${NORMAL}: the 'bchunk' package needs to be installed"
+        err=true
+    }
+
+    cdrdao disk-info --device "${src}" >/dev/null 2>&1 || {
+        echo "${BAD}error${NORMAL}: the 'cdrdao' package needs to be installed"
+        err=true
+    }
+
+    ${err} && exit 1
+
+    # ok copy files
+    mkdir -p "${dst}" || {
+        echo "${BAD}error${NORMAL}: cannot create destination directory"
+        exit 1
+    }
+    mkdir -p "${dst}/CD_Files"
+    mkdir -p "${dst}/GAME/NETHERW/CDATA"
+    mkdir -p "${dst}/GAME/NETHERW/CLEVELS"
+    mkdir -p "${dst}/GAME/NETHERW/LANGUAGE"
+    mkdir -p "${dst}/GAME/NETHERW/SAVE"
+    mkdir -p "${dst}/GAME/NETHERW/SHOTS"
+    mkdir -p "${dst}/GAME/NETHERW/SOUND"
+    mkdir -p "${dst}/speech"
+
+    pushd "${dst}" > /dev/null || exit 1
+    cdrdao read-cd --device "${src}" --read-raw --datafile image.bin image.toc
+    toc2cue image.toc image.cue
+    popd > /dev/null || exit 1
+
+    pushd "${dst}/CD_Files" > /dev/null || exit 1
+    bchunk ../image.bin ../image.cue track
+    7z x -y -bso0 track01.iso
+    rm -f track01.iso
+    mv -f track*.cdr ../speech/
+    popd > /dev/null || exit 1 
+
+    rm -f image.bin image.cue image.toc
+
+    cp -f "${dst}/CD_Files/DATA/TMAPS"* "${dst}/GAME/NETHERW/CDATA/"
+    cp -f "${dst}/CD_Files/LEVELS/"* "${dst}/GAME/NETHERW/CLEVELS/"
+    cp -f "${dst}/CD_Files/SOUND/"* "${dst}/GAME/NETHERW/SOUND/"
+    rm -f "${dst}/GAME/NETHERW/SOUND/*.DAT"
+
+    check_inst "${dst}"
+    exit $?
+}
+
 
 [ -n "${dst}" ] && [ ! -e "${dst}" ] && {
-	echo "${BAD}error${NORMAL}: destination directory '${dst}' can't be accessed "
-	exit 1
+    echo "${BAD}error${NORMAL}: destination directory '${dst}' can't be accessed "
+    exit 1
 }
 
 [ -n "${dst}" ] && [ -e "${dst}" ] && {
-	check_inst "${dst}"
-	exit $?
+    check_inst "${dst}"
+    exit $?
 }
 

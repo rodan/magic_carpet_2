@@ -32,9 +32,6 @@
 #include "imgui.h"
 #endif
 
-#define                OPENAL_C_SZ  OPENAL_CHANNELS     ///< number of chunks that can play at the same time (aka number of voices)
-#define               OPENAL_CC_SZ  128     ///< number of chunks the cache can hold
-
 ///< al_chunk_cache_t flags
 #define          OPENAL_FLG_LOADED  0x1     ///< if chunk was properly loaded via alBufferData()
 
@@ -401,6 +398,8 @@ void alsound_cache(const int16_t cache_ch, const int16_t chunk_id, const Mix_Chu
     alsound_error_check("alGenBuffers");
     if (flags & AL_FORMAT_STEREO8_22050) {
         alBufferData(alcc[cache_ch].bufferName, AL_FORMAT_STEREO8, mixchunk->abuf, mixchunk->alen, 22050);
+    } else if (flags & AL_FORMAT_STEREO16_44100) {
+        alBufferData(alcc[cache_ch].bufferName, AL_FORMAT_STEREO16, mixchunk->abuf, mixchunk->alen, 44100);
     } else {
         alBufferData(alcc[cache_ch].bufferName, AL_FORMAT_MONO8, mixchunk->abuf, mixchunk->alen, 22050);
     }
@@ -593,8 +592,8 @@ int16_t alsound_play(const int16_t chunk_id, Mix_Chunk *mixchunk, event_t *entit
     for (i = OPENAL_CC_SZ; i > 0; i--) {
         if (alcc[i - 1].id == chunk_id) {
             cache_ch = i - 1;
-            if ((uint32_t) alcc[i - 1].size != mixchunk->alen) {
-                Logger->warn("cache miss!  new {} cached {}  cache_ch {}", mixchunk->alen, alcc[i - 1].size, i - 1);
+            if (((uint32_t) alcc[i - 1].size != mixchunk->alen) || (chunk_id == OPENAL_CC_SZ - 1)) {
+                //Logger->warn("cache miss!  new {} cached {}  cache_ch {}", mixchunk->alen, alcc[i - 1].size, i - 1);
                 // replace invalid cache slot
                 alsound_cache(cache_ch, chunk_id, mixchunk, flags);
             }
@@ -640,7 +639,9 @@ int16_t alsound_play(const int16_t chunk_id, Mix_Chunk *mixchunk, event_t *entit
     }
 
     if (flags & AL_TYPE_ENV) {
-        gain = 0.4;
+        gain = (float) oac.env_volume / 127.0;
+    } else if (flags & AL_TYPE_SPEECH) {
+        gain = (float) oac.speech_volume / 127.0;
     }
 
     alGetError();               // reset global error variable
@@ -763,6 +764,10 @@ uint16_t alsound_get_chunk_flags(const int16_t chunk_id)
     } else {
         // sound in day/night/cave locations
         ret = alct[ale.bank][chunk_id].flags;
+    }
+
+    if (chunk_id == OPENAL_CC_SZ - 1) {
+        ret = AL_FORMAT_STEREO16_44100;
     }
 
     return ret;

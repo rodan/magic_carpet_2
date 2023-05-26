@@ -4629,14 +4629,14 @@ char *off_DB06C[5] = { (char *)"I", (char *)"II", (char *)"III", (char *)"IV", (
 
 #pragma pack (1)
 typedef struct {                //length 4
-    int16_t word_0;
-    int16_t word_2;
-} type_sub_BYTE_DB080;
+    int16_t offset;
+    int16_t length;
+} track_chunk_t;
 
-typedef struct {                //length 42
-    int8_t word_0;
+typedef struct {                //length 41
+    int8_t track;
     //int8_t stub;
-    type_sub_BYTE_DB080 str_sub_BYTE_DB080[10];
+    track_chunk_t chunk[10];
 } type_BYTE_DB080;
 #pragma pack (16)
 
@@ -5046,7 +5046,7 @@ char x_BYTE_E29F0 = 0;          // weak
 char x_BYTE_E29F1 = 0;          // weak
 char x_BYTE_E2A20 = 0;          // weak
 uint8_t *x_WORD_E2A24 = 0;      // weak
-char x_BYTE_E2A28_speek = 0;    // weak
+char x_BYTE_E2A28_speech = 1;    // weak
 
 //int x_DWORD_E36C4 = 0; // weak//50
 //little fix
@@ -12226,8 +12226,8 @@ void sub_1A280()                //1fb280
         engine_db.dwordindex_192 |= 0x02;       //sound
     if (musicAble_E37FC)
         engine_db.dwordindex_192 |= 0x04;       //music
-    if (x_BYTE_E2A28_speek)
-        engine_db.dwordindex_192 |= 0x08;       //speek
+    if (x_BYTE_E2A28_speech)
+        engine_db.dwordindex_192 |= 0x08;       //speech
     engine_db.dwordindex_192 |= 0xF0u;  //fly,bright,speed,screen size
     if (D41A0_0.str_0x21AA.creflections_0x21AA)
         engine_db.dwordindex_192 |= 0x100;      //reflections
@@ -12253,7 +12253,7 @@ void sub_1A280()                //1fb280
     if (musicActive_E37FD)
         engine_db.dwordindex_188 |= 0x04;       //music
     if (engine_db.setting_byte3_24 & 0x40)
-        engine_db.dwordindex_188 |= 0x08;       //speek
+        engine_db.dwordindex_188 |= 0x08;       //speech
     if (D41A0_0.byte_0x36DEA_fly_asistant)
         engine_db.dwordindex_188 |= 0x10u;      //fly
     engine_db.dwordindex_188 |= 0x20;   //bright
@@ -12719,7 +12719,7 @@ void sub_1A970_change_game_settings(char a1, int a2, int a3)    //1fb970
         }
         return;
     case 4:
-        if (!x_BYTE_E2A28_speek)
+        if (!x_BYTE_E2A28_speech)
             return;
         //v16 = engine_db.setting_byte3_24;
         if (engine_db.setting_byte3_24 & 0x40)
@@ -13013,6 +13013,14 @@ void sub_1A970_change_game_settings(char a1, int a2, int a3)    //1fb970
     default:
         return;
     }
+}
+
+void disable_speech(void)
+{
+    x_BYTE_E2A28_speech = 0;
+    engine_db.setting_byte3_24 &= ~0x40;
+    engine_db.dwordindex_188 &= ~0x08;
+    engine_db.dwordindex_192 &= ~0x08;
 }
 
 // D41A0: using guessed type int x_D41A0_BYTEARRAY_0;
@@ -26797,7 +26805,7 @@ void DrawVolumeSettings_303D0() //2113d0
 }
 
 //----- (00030630) --------------------------------------------------------
-void sub_30630()                //211630
+void sub_30630()                //211630   display textbox with updated objective
 {
     char v0;                    // dl
     int result;                 // eax
@@ -26834,6 +26842,7 @@ void sub_30630()                //211630
             }
         }
         if (result) {
+            // display current objective
             v5 = (char *)x_DWORD_E9C4C_langindexbuffer[result];
             /*"Fly towards my beacon." */
 
@@ -35394,11 +35403,11 @@ void /*__fastcall*/ sub_46DD0_init_sound_and_music( /*int a1, int a2, char* a3 *
             sub_6FDA0();
         }
         //v5 = x_BYTE_E3798_sound_active2;
-        if (!soundAble_E3798 && !musicAble_E37FC && x_BYTE_E2A28_speek) {
+        if (!soundAble_E3798 && !musicAble_E37FC && x_BYTE_E2A28_speech) {
             sub_86860_speak_Sound(x_WORD_1803EC);
             sub_86BD0_freemem1();
             //v6 = engine_db.setting_byte3_24 & 0xBF;
-            x_BYTE_E2A28_speek = soundAble_E3798;
+            x_BYTE_E2A28_speech = soundAble_E3798;
             (engine_db.setting_byte3_24) &= 0xBF;
         }
     }
@@ -38021,7 +38030,6 @@ event_t *pre_sub_4A190_axis_3d(uint32_t address, axis_3d *a1_axis3d)    //pre 22
     if (CommandLineParams.DoShowNewProcedures()) {
         test_pre_sub_4a190(address);    //for debug
     }
-    //Logger->info("spawn {} @({},{},{})", address, a1_axis3d->x, a1_axis3d->y, a1_axis3d->z);
     switch (address) {
         /*case 0x22b810: {
            return sub_4A810_get_0x35plus();
@@ -50132,7 +50140,7 @@ void sub_56210_process_command_line(int argc, char **argv)      //237210
         engine_db.setting_byte3_24 |= 8u;
     if (x_BYTE_355244_spellsedit)
         engine_db.setting_byte3_24 |= 0x10u;
-    if (!x_BYTE_35522C_nocd && x_BYTE_E2A28_speek)
+    if (!x_BYTE_35522C_nocd && x_BYTE_E2A28_speech)
         engine_db.setting_byte3_24 |= 0x40u;
     if (x_BYTE_355240_load_set_level)
         engine_db.setting_byte3_24 |= 0x80u;
@@ -51215,7 +51223,6 @@ void AddEventToMap_57D70(event_t *entity, axis_3d *position)    //238d70 // regi
         mapEntityIndex_15B4E0[mapIndex] = entity - D41A0_0.struct_0x6E8E;       //set new entity as actual source
         entity->axis_0x4C_76 = *position;       //set new position
         entity->struct_byte_0xc_12_15.byte[0] |= 4u;    //added to map
-        //Logger->info("AETM state {}  class {}  model {}  b {} hp {} maxhp {}  ({},{},{})", entity->state_0x45_69, entity->class_0x3F_63, entity->model_0x40_64, entity->byte_0x38_56, entity->life_0x8, entity->maxLife_0x4, entity->axis_0x4C_76.x, entity->axis_0x4C_76.y, entity->axis_0x4C_76.z);
     }
 }
 
@@ -71035,7 +71042,7 @@ char sub_86780(unsigned __int16 a1, int /*a2 */ , int /*a3 */ ) //267780 see:htt
 {
     /* char* v4; // esi
 
-       if (!x_BYTE_E2A28_speek)
+       if (!x_BYTE_E2A28_speech)
        return 0;
        if (!x_DWORD_E2A6C || !x_DWORD_E2A70)
        return 0;
@@ -71047,6 +71054,7 @@ char sub_86780(unsigned __int16 a1, int /*a2 */ , int /*a3 */ ) //267780 see:htt
        v4[13] = 0;
        *(x_DWORD*)(v4 + 14) = a2;
        *(x_DWORD*)(v4 + 18) = a3; */
+    
     x_DWORD_17FF38 = 0;
     x_DWORD_17FF10 = 47;
     x_DWORD_17FF14 = 0;
@@ -71079,7 +71087,7 @@ char sub_86860_speak_Sound(unsigned __int16 a1) //267860 see:https://github.com/
     /*int v2; // esi
        //__int16 v3; // ax
 
-       if (!x_BYTE_E2A28_speek)
+       if (!x_BYTE_E2A28_speech)
        return 0;
        if (!x_DWORD_E2A6C || !x_DWORD_E2A70)
        return 0;
@@ -71090,6 +71098,7 @@ char sub_86860_speak_Sound(unsigned __int16 a1) //267860 see:https://github.com/
        *(x_BYTE*)(v2 + 2) = -123;
        *(x_WORD*)(v2 + 3) = 0;
        //x_WORD_17FF4A = v3; */
+
     x_DWORD_17FF38 = 0;
     x_DWORD_17FF10 = 47;
     x_DWORD_17FF14 = 0;
@@ -71126,7 +71135,7 @@ char sub_86930(unsigned __int16 a1)     //267930 see:https://github.com/videogam
     //int v2; // esi
     //__int16 v3; // ax
 
-    if (!x_BYTE_E2A28_speek)
+    if (!x_BYTE_E2A28_speech)
         return 0;
     /*if (!x_DWORD_E2A6C || !x_DWORD_E2A70)
        return 0;
@@ -71244,7 +71253,7 @@ void sub_86A00_some_allocs()    //267a00
                     x_DWORD_180214[v13] = v15 - v14;
                 }
                 sub_86460(x_WORD_1803EC);
-                x_BYTE_E2A28_speek = 1;
+                x_BYTE_E2A28_speech = 1;
             } else {
                 sub_86BD0_freemem1();
             }
@@ -71277,7 +71286,7 @@ void sub_86BD0_freemem1()       //267bd0
 //              result = sub_85F00_free_memory(x_DWORD_E2A6C);//264CDC - 266070
     /*if (x_DWORD_E2A70)
        result = sub_85F00_free_memory(x_DWORD_E2A70); */
-    x_BYTE_E2A28_speek = 0;
+    //x_BYTE_E2A28_speech = 0;
     //x_DWORD_E2A6C = 0;
     //x_DWORD_E2A70 = 0;
     //return result;
@@ -71294,27 +71303,29 @@ void sub_86EA0( /*int a1, int a2, int a3 */ uint32_t user)      //267ea0
 }
 
 //----- (00086EB0) --------------------------------------------------------
-void sub_86EB0(unsigned __int8 a1, unsigned __int8 a2, char a3) //267eb0
+void sub_86EB0(unsigned __int8 a1, unsigned __int8 a2, char /*a3*/) //267eb0
 {
     //int v3; // eax
     unsigned __int8 v4;         // dl
     //int v5; // eax
     __int16 v6;                 // bx
     __int16 v7;                 // ax
+    uint32_t offset;
 
     //v3 = 42 * a1;
     //v4 = x_BYTE_DB080[v3];
-    v4 = str_BYTE_DB080[a1].word_0;
+    v4 = str_BYTE_DB080[a1].track;
     /*v5 = 4 * a2 + v3;
        v6 = *(__int16*)((char*)&x_BYTE_DB080[2] + v5);
        v7 = *(__int16*)((char*)&x_BYTE_DB080[4] + v5); */
-    v6 = str_BYTE_DB080[a1].str_sub_BYTE_DB080[a2].word_0;
-    v7 = str_BYTE_DB080[a1].str_sub_BYTE_DB080[a2].word_2;
+    v6 = str_BYTE_DB080[a1].chunk[a2].offset;
+    v7 = str_BYTE_DB080[a1].chunk[a2].length;
     if (v4 && v7) {
-        if (a3)
-            sub_86F70_sound_proc12(v4, v6, v7);
-        else
-            sub_86FF0(v4, v6, v7);
+        SOUND_start_speech(v4, v6, v7);
+        //if (a3)
+        //    sub_86F70_sound_proc12(v4, v6, v7);
+        //else
+        //    sub_86FF0(v4, v6, v7);
     }
 }
 
@@ -71334,9 +71345,9 @@ void sub_86F20(char a1)         //267f20
     /*v3 = *(int16_t*)&x_BYTE_DB080[2 + v1 * 2];
        v4 = *(int16_t*)&x_BYTE_DB080[4 + v1 * 2]; */
     v1 = ((a1 != 0) + 25);
-    v2 = str_BYTE_DB080[v1].word_0;
-    v3 = str_BYTE_DB080[v1].str_sub_BYTE_DB080[0].word_0;
-    v4 = str_BYTE_DB080[v1].str_sub_BYTE_DB080[0].word_2;
+    v2 = str_BYTE_DB080[v1].track;
+    v3 = str_BYTE_DB080[v1].chunk[0].offset;
+    v4 = str_BYTE_DB080[v1].chunk[0].length;
     if (v2) {
         if (v4)
             sub_86F70_sound_proc12(v2, v3, v4);
@@ -71349,7 +71360,7 @@ void sub_86F20(char a1)         //267f20
 //----- (00086F70) --------------------------------------------------------
 void sub_86F70_sound_proc12(unsigned __int8 a1, __int16 a2, __int16 a3) //267f70
 {
-    if (x_BYTE_E2A28_speek && (musicAble_E37FC || soundAble_E3798)) {
+    if (x_BYTE_E2A28_speech && (musicAble_E37FC || soundAble_E3798)) {
         //x_DWORD_180078 = sub_92600_AIL_register_timer(sub_86EA0);
         //sub_92930_AIL_set_timer_frequency(x_DWORD_180078, 0x32u);
         //sub_92BA0_AIL_start_timer(x_DWORD_180078);
@@ -71366,7 +71377,7 @@ void sub_86F70_sound_proc12(unsigned __int8 a1, __int16 a2, __int16 a3) //267f70
 //----- (00086FF0) --------------------------------------------------------
 void sub_86FF0(unsigned __int8 a1, __int16 a2, __int16 a3)      //267ff0
 {
-    if (x_BYTE_E2A28_speek && (musicAble_E37FC || soundAble_E3798)) {
+    if (x_BYTE_E2A28_speech && (musicAble_E37FC || soundAble_E3798)) {
         x_WORD_1803E8 = a1;
         sub_86860_speak_Sound(x_WORD_1803EC);
         if ((unsigned __int16)x_WORD_1803E8 >= (signed int)(unsigned __int8)x_BYTE_1804A1

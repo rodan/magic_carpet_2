@@ -57,6 +57,17 @@ In order to run the game you need to own a copy of Magic Carpet 2. We provide a 
   bash check_install.sh -s "${HOME}/.wine/drive_c/games/Magic Carpet 2/" -d "build/inst/bin/"
   ```
 
+In case you already have the original game on CD, please follow these steps:
+  1. place CD into drive and verify that it can be read
+  2. run the following script, providing the correct device as source:
+
+  ```
+  bash check_install.sh -s /dev/cdrom -d [destination directory]
+  # for example :
+  bash check_install.sh -s /dev/sr0 -d "build/inst/bin/"
+  ```
+
+
   Please note that if you have used any other method to get the assets, at least run a check to make sure that remc2 has access to every file it needs:
 
   ```

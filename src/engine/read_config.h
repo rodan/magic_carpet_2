@@ -96,6 +96,8 @@ extern gamepad_config_t gpc;
 
 struct openal_config {
     bool efx_enabled;
+    uint16_t speech_volume;
+    uint16_t env_volume;
     uint16_t same_chunk_concurrency;
 };
 typedef struct openal_config openal_config_t;

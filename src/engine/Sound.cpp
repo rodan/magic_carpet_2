@@ -3006,7 +3006,6 @@ void InitSample_A38E0(HSAMPLE S)        //2848e0
 
 /// \brief prepare the chunk buffer for the openal subsystem 
 /// for chunks that cannot be localized (environment samples) a stereo sample is generated
-/// do not mix this function with InitHqsound. there is nothing 'hq' about stretching a sound signal 8x via linear interpolation.
 /// \param S sample to operate on
 void init_openal_sample(HSAMPLE S)
 {

@@ -450,7 +450,7 @@ typedef struct engine_db_t {
     //uint8_t byteindex_189;//engine_db.byteindex_189
     //uint8_t byteindex_190;//engine_db.byteindex_190
 
-    //1(0x1)-help//2(0x2)-sound//3(0x4)-music//4(0x8)-speek//5(0x10)-fly//6(0x20)-bright//7(0x40)speed//8(0x80)screen
+    //1(0x1)-help//2(0x2)-sound//3(0x4)-music//4(0x8)-speech//5(0x10)-fly//6(0x20)-bright//7(0x40)speed//8(0x80)screen
     //9(0x100)-reflection//10(0x200)-sky//11(0x400)-shadows//12(0x800)-light/13(0x1000)-icons//14(0x2000)-transparency//15(0x4000)-flat     //16(0x8000)-resolution
     //17(0x10000)-names
 
@@ -458,7 +458,7 @@ typedef struct engine_db_t {
     //uint8_t byteindex_193;//0xc1//engine_db.byteindex_193
     //uint8_t byteindex_194;//0xc2//engine_db.byteindex_194
 
-    //1(0x1)-help//2(0x2)-sound//3(0x4)-music//4(0x8)-speek//5(0x10)-fly//6(0x20)-bright//7(0x40)speed//8(0x80)screen
+    //1(0x1)-help//2(0x2)-sound//3(0x4)-music//4(0x8)-speech//5(0x10)-fly//6(0x20)-bright//7(0x40)speed//8(0x80)screen
     //9(0x100)-reflection//10(0x200)-sky//11(0x400)-shadows//12(0x800)-light/13(0x1000)-icons//14(0x2000)-transparency//15(0x4000)-flat     //16(0x8000)-resolution
     //17(0x10000)-names
 
