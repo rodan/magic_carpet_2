@@ -1,7 +1,7 @@
 #include "../engine/engine_support.h"
 #include "port_sdl_joystick.h"
 #include "port_time.h"
-#include "config.h"
+#include "../config.h"
 
 #ifdef CONFIG_IMGUI
 

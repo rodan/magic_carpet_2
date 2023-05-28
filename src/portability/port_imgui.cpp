@@ -2,15 +2,14 @@
 #include <stdlib.h>
 #include <stdint.h>
 
+#include "../config.h"
+
+#ifdef CONFIG_IMGUI
 #include "imgui.h"
 #include "imgui_impl_sdl2.h"
 #include "imgui_impl_sdlrenderer.h"
 #include <stdio.h>
 #include <SDL.h>
-
-#include "config.h"
-
-#ifdef CONFIG_IMGUI
 
 #if !SDL_VERSION_ATLEAST(2,0,17)
 #error This backend requires SDL 2.0.17+ because of SDL_RenderGeometry() function

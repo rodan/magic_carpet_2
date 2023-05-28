@@ -13,20 +13,21 @@
 //    2023 - Petre Rodan (complete rewrite)
 //
 
+#include <stdlib.h>
 #include "AL/al.h"
 #include "AL/alc.h"
 #include "AL/alext.h"
 #include "AL/efx.h"
 #include "AL/efx-presets.h"
-#include "ail_sound.h"
-#include "global_types.h"
-#include "read_config.h"
-#include "Sound.h"
+#include "../engine/ail_sound.h"
+#include "../engine/global_types.h"
+#include "../engine/read_config.h"
+#include "../engine/Sound.h"
 #include "port_sound_lut.h"
 #include "port_sdl_sound.h"
 #include "port_openal.h"
 
-#include "config.h"
+#include "../config.h"
 #ifdef CONFIG_IMGUI
 #include "engine_support.h"
 #include "imgui.h"
@@ -519,11 +520,11 @@ void alsound_update_source(event_t *entity)
     if ((now > entity->play_mark) && (alcrt[entity->model_0x40_64].chunk_id != -1)) {
         create_new_source = 1;
         if (alcrt[entity->model_0x40_64].flags & AL_REPLAY_RARELY) {
-            entity->play_mark = now + 5000 + (random() % 32768);
+            entity->play_mark = now + 5000 + (rand() % 32768);
         } else if (alcrt[entity->model_0x40_64].flags & AL_REPLAY_FREQUENTLY) {
             entity->play_mark = now;
         } else {
-            entity->play_mark = now + 5000 + (random() % 4098);
+            entity->play_mark = now + 5000 + (rand() % 4098);
         }
         //Logger->info("sch     {} @{} in {} ms", entity->id_0x1A_26, entity->play_mark, entity->play_mark - now);
     }

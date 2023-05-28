@@ -5,7 +5,7 @@
 #include <filesystem>
 #include <cstdlib>
 
-#include "sub_main.h"
+#include "../sub_main.h"
 
 int config_skip_screen;
 int texturepixels = 32;

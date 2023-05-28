@@ -9,27 +9,13 @@ endif ()
 ################################################################################
 # Source groups
 ################################################################################
-if (WIN32)
-    set(HEADER_FILES
-        "stdafx.h"
-        "targetver.h"
-    )
-else ()
-    set(HEADER_FILES
-    )
-endif ()
+set(HEADER_FILES
+)
 source_group("Header Files" FILES ${HEADER_FILES})
 
-if (WIN32)
-    set(SOURCE_FILES
-        "remc2.cpp"
-        "stdafx.cpp"
-    )
-else()
-    set(SOURCE_FILES
-        "remc2.cpp"
-    )
-endif()
+set(SOURCE_FILES
+    "remc2.cpp"
+)
 source_group("Source Files" FILES ${SOURCE_FILES})
 
 set(SOURCE_FILES_ENGINE
@@ -216,10 +202,6 @@ install(
     ${CMAKE_SOURCE_DIR}/assets/biggraphics.tar.xz
     DESTINATION bin
 )
-
-if (WIN32)
-    add_precompiled_header(${PROJECT_NAME} "stdafx.h" "stdafx.cpp")
-endif (WIN32)
 
 set(ROOT_NAMESPACE remc2)
 

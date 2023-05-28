@@ -2,8 +2,6 @@
 
 //#include "engine/defs.h"
 
-//#include "stdafx.h"
-
 //#include <dir.h>
 
 //#include <vld.h>//only for debug

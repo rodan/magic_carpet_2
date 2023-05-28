@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fcntl.h>
 #include "../engine/engine_support.h"
 #include "port_openal.h"
 #include "port_sdl_sound.h"
@@ -307,7 +308,7 @@ void SOUND_start_speech(const uint8_t track, const uint16_t offset, const uint16
     chunk.abuf = track_data;
     chunk.volume = 127;
 
-    alsound_save_chunk(track_data, track_data_len, NULL);
+    //alsound_save_chunk(track_data, track_data_len, NULL);
 
 #ifdef SOUND_OPENAL
     uint16_t format;
