@@ -885,6 +885,7 @@ void alsound_close(void)
     alcCloseDevice(device);
 }
 
+#ifdef _POSIX_C_SOURCE
 /// \brief save chunk data to a file for debug purposes
 /// \param data  chunk's uint16 wav data
 /// \param len   chunk length in bytes
@@ -911,6 +912,7 @@ uint8_t alsound_save_chunk(uint8_t *data, const uint32_t len, char *filename)
     close(fd);
     return EXIT_SUCCESS;
 }
+#endif
 
 /// \brief print human-readable OpenAL error codes
 /// \param error  OpenAL error code
