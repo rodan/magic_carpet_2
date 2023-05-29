@@ -188,7 +188,7 @@ void alsound_end_sample(const int32_t chunk_id)
 void alsound_set_sample_volume(const int32_t chunk_id, const int32_t volume)
 {
     int16_t ret;
-    float gain = (float)volume / 127.0;
+    float gain = (float)volume / 127.0f;
 
     if (ale.bank < 3) {
         if (alct[ale.bank][chunk_id].flags & AL_IGNORE_RECODE) {
@@ -290,7 +290,7 @@ void alsound_init()
         }
     }
 
-    srand(time(NULL));
+    srand((unsigned int)time(NULL));
 }
 
 /// \brief set environmental variables
@@ -362,7 +362,7 @@ void alsound_update(void)
         yaw_corrected -= 2048;
     }
 
-    angle = 2.0 * M_PI * yaw_corrected / 2048.0;
+    angle = 2.0f * M_PI * yaw_corrected / 2048.0f;
     ALfloat orientation[] = { cos(angle), sin(angle), 0.0f, 0.0f, 0.0f, 1.0f };
     alListenerfv(AL_ORIENTATION, orientation);
     alsound_error_check("alListenerfv AL_ORIENTATION");
@@ -466,7 +466,11 @@ int16_t alsound_create_source(const int16_t chunk_id, al_ssp_t *ssp, event_t *en
     uint8_t *chunk_data = NULL;
     int32_t chunk_len;
 
-    get_sample_ptr(chunk_id, &chunk_data, &chunk_len);
+    if (chunk_id < 0) {
+        return -1;
+    }
+
+    get_sample_ptr((uint8_t) chunk_id, &chunk_data, &chunk_len);
 
     if (chunk_len < 1000) {
         Logger->error("alsound_create_source received invalid data");
@@ -498,7 +502,7 @@ int16_t alsound_create_source(const int16_t chunk_id, al_ssp_t *ssp, event_t *en
 void alsound_update_source(event_t *entity)
 {
     al_ssp_t ssp = { };
-    float dx, dy, dist;
+    double dx, dy, dist;
     uint64_t now = mygetthousandths();
     uint8_t create_new_source = 0;
 
@@ -512,7 +516,7 @@ void alsound_update_source(event_t *entity)
         dx = ale.listener_c.x - entity->axis_0x4C_76.x;
         dy = ale.listener_c.y - entity->axis_0x4C_76.y;
         dist = sqrt((dx * dx) + (dy * dy));
-        entity->dist = dist;
+        entity->dist = (uint32_t) dist;
         entity->dist_mark = now + AL_DIST_REFRESH_INTERVAL;
     }
 
@@ -531,13 +535,13 @@ void alsound_update_source(event_t *entity)
 
     if ((entity->dist < AL_DIST_MIN_PLAY) && (alcrt[entity->model_0x40_64].chunk_id != -1)) {
         if ((entity->play_ch == -1) && create_new_source) {
-            ssp.gain = 0.8;
+            ssp.gain = 0.8f;
             ssp.reference_distance = 2048.0;
             if (alcrt[entity->model_0x40_64].flags & AL_POWERFUL_SHOUT) {
-                ssp.gain = 1.0;
+                ssp.gain = 1.0f;
                 ssp.reference_distance = 4096.0;
             } else if (alcrt[entity->model_0x40_64].flags & AL_WHISPER) {
-                ssp.gain = 0.7;
+                ssp.gain = 0.7f;
                 ssp.reference_distance = 1024.0;
             }
             ssp.max_distance = 65535.0;
@@ -640,9 +644,9 @@ int16_t alsound_play(const int16_t chunk_id, Mix_Chunk *mixchunk, event_t *entit
     }
 
     if (flags & AL_TYPE_ENV) {
-        gain = (float) oac.env_volume / 127.0;
+        gain = (float) oac.env_volume / 127.0f;
     } else if (flags & AL_TYPE_SPEECH) {
-        gain = (float) oac.speech_volume / 127.0;
+        gain = (float) oac.speech_volume / 127.0f;
     }
 
     alGetError();               // reset global error variable
@@ -756,7 +760,7 @@ uint16_t alsound_get_chunk_flags(const int16_t chunk_id)
 {
     int16_t ret;
 
-    if ((ale.bank > AL_BANK_MENU) || (chunk_id > 69) || (chunk_id < 1)) {
+    if ((ale.bank > AL_BANK_MAP_CAVE) || (chunk_id > 69) || (chunk_id < 1)) {
         // not covered
         ret = 0;
     } else if (ale.bank == AL_BANK_MENU) {

@@ -247,14 +247,11 @@ void SOUND_init_MIDI_sequence(uint8_t * /*datax */ , type_E3808_music_header *he
 
 void SOUND_start_speech(const uint8_t track, const uint16_t offset, const uint16_t len)
 {
-    uint16_t track_str_len;
+    size_t track_str_len;
     char *track_filename = NULL;
     uint8_t *track_data = NULL;
     uint32_t track_data_len;
     uint32_t track_offset;
-    uint32_t i;
-    int16_t *data;
-    int16_t sample;
     int fd;
     Mix_Chunk chunk = {};
 
@@ -315,9 +312,9 @@ void SOUND_start_speech(const uint8_t track, const uint16_t offset, const uint16
 
 cleanup: 
     //free(track_data);
+    close(fd);
 cleanup_nofreedata:
     free(track_filename);
-    close(fd);
 }
 
 void clean_up_sound()
