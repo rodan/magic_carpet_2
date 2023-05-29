@@ -288,20 +288,10 @@ void SOUND_start_speech(const uint8_t track, const uint16_t offset, const uint16
         goto cleanup;
     }
 
-    if (read(fd, track_data, track_data_len) != track_data_len) {
+    if (read(fd, track_data, track_data_len) == -1) {
         Logger->warn("can't read speech file {}", track_filename);
         goto cleanup;
     }
-
-#if 0
-    data = (int16_t *) track_data;
-    for (i=0; i<track_data_len/2; i++) {
-        sample = ((*data & 0x00ff) << 8) | ((*data & 0xff00) >> 8);
-        *data = sample;
-        data++;
-        //Logger->info("data {}", data[i]);
-    }
-#endif
 
     chunk.allocated = 1;
     chunk.alen = track_data_len;
