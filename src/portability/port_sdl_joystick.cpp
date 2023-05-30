@@ -510,59 +510,55 @@ void gamepad_event_mgr(gamepad_event_t *gpe)
 
     // temporary place for testing haptic effects
     if (gpe->btn_pressed) {
-        if (gpe->btn_pressed & (uint64_t)(1 << gpc.button_fire_R)) {
+        if (gpe->btn_pressed & ((uint64_t) 1 << gpc.button_fire_R)) {
             button_state |= 0x8;
         }
-        if (gpe->btn_pressed & (uint64_t)(1 << gpc.button_fire_L)) {
+        if (gpe->btn_pressed & ((uint64_t) 1 << gpc.button_fire_L)) {
             button_state |= 0x2;
-            //haptic_rumble_triggers_effect(0, 32000, 1000);
         }
-        if (gpe->btn_pressed & (uint64_t)(1 << gpc.button_spell)) {
+        if (gpe->btn_pressed & ((uint64_t) 1 << gpc.button_spell)) {
             setPress(true, GP_KEY_EMU_SPELL);
-            //haptic_rumble_triggers_effect(32000, 0, 1000);
         }
-        if (gpe->btn_pressed & (uint64_t)(1 << gpc.button_minimap)) {
+        if (gpe->btn_pressed & ((uint64_t) 1 << gpc.button_minimap)) {
             setPress(true, GP_KEY_EMU_MINIMAP);
-            //haptic_run_effect(hs.quake);
-            //haptic_rumble_effect(0.5, 2000);
         }
-        if (gpe->btn_pressed & (uint64_t)(1 << gpc.button_pause_menu)) {
+        if (gpe->btn_pressed & ((uint64_t) 1 << gpc.button_pause_menu)) {
             setPress(true, GP_KEY_EMU_PAUSE);
         }
-        if (gpe->btn_pressed & (uint64_t)(1 << gpc.button_fwd)) {
+        if (gpe->btn_pressed & ((uint64_t) 1 << gpc.button_fwd)) {
             setPress(true, GP_KEY_EMU_UP);
         }
-        if (gpe->btn_pressed & (uint64_t)(1 << gpc.button_back)) {
+        if (gpe->btn_pressed & ((uint64_t) 1 << gpc.button_back)) {
             setPress(true, GP_KEY_EMU_DOWN);
         }
-        if (gpe->btn_pressed & (uint64_t)(1 << gpc.button_esc)) {
+        if (gpe->btn_pressed & ((uint64_t) 1 << gpc.button_esc)) {
             setPress(true, GP_KEY_EMU_ESC);
         }
     }
 
     if (gpe->btn_released) {
-        if (gpe->btn_released & (uint64_t)(1 << gpc.button_fire_R)) {
+        if (gpe->btn_released & ((uint64_t) 1 << gpc.button_fire_R)) {
             button_state |= 0x10;
         }
-        if (gpe->btn_released & (uint64_t)(1 << gpc.button_fire_L)) {
+        if (gpe->btn_released & ((uint64_t) 1 << gpc.button_fire_L)) {
             button_state |= 0x4;
         }
-        if (gpe->btn_released & (uint64_t)(1 << gpc.button_spell)) {
+        if (gpe->btn_released & ((uint64_t) 1 << gpc.button_spell)) {
             setPress(false, GP_KEY_EMU_SPELL);
         }
-        if (gpe->btn_released & (uint64_t)(1 << gpc.button_minimap)) {
+        if (gpe->btn_released & ((uint64_t) 1 << gpc.button_minimap)) {
             setPress(false, GP_KEY_EMU_MINIMAP);
         }
-        if (gpe->btn_released & (uint64_t)(1 << gpc.button_pause_menu)) {
+        if (gpe->btn_released & ((uint64_t) 1 << gpc.button_pause_menu)) {
             setPress(false, GP_KEY_EMU_PAUSE);
         }
-        if (gpe->btn_released & (uint64_t)(1 << gpc.button_fwd)) {
+        if (gpe->btn_released & ((uint64_t) 1 << gpc.button_fwd)) {
             setPress(false, GP_KEY_EMU_UP);
         }
-        if (gpe->btn_released & (uint64_t)(1 << gpc.button_back)) {
+        if (gpe->btn_released & ((uint64_t) 1 << gpc.button_back)) {
             setPress(false, GP_KEY_EMU_DOWN);
         }
-        if (gpe->btn_released & (uint64_t)(1 << gpc.button_esc)) {
+        if (gpe->btn_released & ((uint64_t) 1 << gpc.button_esc)) {
             setPress(false, GP_KEY_EMU_ESC);
         }
     }
@@ -763,5 +759,5 @@ void haptic_rumble_triggers_effect(const uint16_t strength_l, const uint16_t str
     if ((!hs.enabled) || (!hs.rumble_trig)) {
         return;
     }
-    //SDL_JoystickRumbleTriggers(m_gameController, strength_l, strength_r, length);
+    SDL_JoystickRumbleTriggers(m_gameController, strength_l, strength_r, length);
 }

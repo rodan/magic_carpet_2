@@ -524,11 +524,19 @@ void alsound_update_source(event_t *entity)
     if ((now > entity->play_mark) && (alcrt[entity->model_0x40_64].chunk_id != -1)) {
         create_new_source = 1;
         if (alcrt[entity->model_0x40_64].flags & AL_REPLAY_RARELY) {
+#ifdef _POSIX_C_SOURCE
+            entity->play_mark = now + 5000 + (random() % 32768);
+#else
             entity->play_mark = now + 5000 + (rand() % 32768);
+#endif
         } else if (alcrt[entity->model_0x40_64].flags & AL_REPLAY_FREQUENTLY) {
             entity->play_mark = now;
         } else {
+#ifdef _POSIX_C_SOURCE
+            entity->play_mark = now + 5000 + (random() % 4098);
+#else
             entity->play_mark = now + 5000 + (rand() % 4098);
+#endif
         }
         //Logger->info("sch     {} @{} in {} ms", entity->id_0x1A_26, entity->play_mark, entity->play_mark - now);
     }
@@ -760,13 +768,13 @@ uint16_t alsound_get_chunk_flags(const int16_t chunk_id)
 {
     int16_t ret;
 
-    if ((ale.bank > AL_BANK_MAP_CAVE) || (chunk_id > 69) || (chunk_id < 1)) {
+    if ((ale.bank > AL_BANK_MENU) || (chunk_id > 69) || (chunk_id < 1)) {
         // not covered
         ret = 0;
     } else if (ale.bank == AL_BANK_MENU) {
         // sound during intro, boulder menu
         ret = AL_FORMAT_MONO8_22050;
-    } else {
+    } else if (ale.bank < AL_BANK_MENU) {
         // sound in day/night/cave locations
         ret = alct[ale.bank][chunk_id].flags;
     }
@@ -897,6 +905,8 @@ uint8_t alsound_save_chunk(uint8_t *data, const uint32_t len, char *filename)
 {
     char fname[] = "/tmp/remc_XXXXXX";
     int fd;
+
+    umask(077);
 
     if (filename == NULL) {
         fd = mkstemp(fname);

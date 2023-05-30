@@ -60,29 +60,6 @@ uint8_t sound_buffer[4][20000];
  2
 
 */
-void test_midi_play(uint8_t * /*data */ , uint8_t *header, int32_t track_number)
-{
-    uint8_t *acttrack = &header[32 + track_number * 32];
-    //int testsize = *(uint32_t*)(&header[32 + (track_number + 1) * 32] + 18) - *(uint32_t*)(acttrack + 18);
-    int testsize2 = *(uint32_t *) (acttrack + 26);
-
-    //unsigned char* TranscodeXmiToMid(const unsigned char* pXmiData,       size_t iXmiLength, size_t* pMidLength);
-    size_t iXmiLength = testsize2;
-    size_t pMidLength;
-    uint8_t *outmidi =
-        TranscodeXmiToMid((const uint8_t *)*(uint32_t *) (acttrack + 18), iXmiLength, &pMidLength);
-    SDL_RWops *rwmidi = SDL_RWFromMem(outmidi, pMidLength);
-
-    //Timidity_Init();
-    if (track_number > 20) {
-        exit(0);
-    }
-#ifdef SOUND_SDLMIXER
-    GAME_music[track_number] = Mix_LoadMUSType_RW(rwmidi, MUS_MID, SDL_TRUE);
-#endif                          //SOUND_SDLMIXER
-    //music2 = Mix_LoadMUSType_RW(rwmidi, MIX_MUSIC_TIMIDITY, SDL_TRUE);
-    playmusic2(track_number);
-}
 
 void SOUND_start_sequence(int32_t sequence_num)
 {
@@ -277,7 +254,7 @@ void SOUND_start_speech(const uint8_t track, const uint16_t offset, const uint16
 
     if ((fd = open(track_filename, O_RDONLY)) < 0) {
         Logger->warn("unable to open speech file {}", track_filename);
-        goto cleanup;
+        goto cleanup_nofreedata;
     }
 
     if (lseek(fd, track_offset, SEEK_SET) != track_offset) {
@@ -307,11 +284,11 @@ void SOUND_start_speech(const uint8_t track, const uint16_t offset, const uint16
 #elif defined (SOUND_SDLMIXER)
 
     Mix_PlayChannel(-1, &chunk, 0);
+    // due to chunk.allocated == 1, track_data will be freed by sdlmixer once the chunk has been played
 
 #endif
 
 cleanup: 
-    //free(track_data);
     close(fd);
 cleanup_nofreedata:
     free(track_filename);

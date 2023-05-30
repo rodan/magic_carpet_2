@@ -3027,8 +3027,8 @@ void init_openal_sample(HSAMPLE S)
 
         for (int i = 0; i < S->len_4_5[0]; i++) {
             actval = ((uint8_t *) S->start_2_3[0])[i];
-            (*(int16_t *) & ((uint8_t *) S->wavbuff)[0 + i * 2]) = actval;
-            (*(int16_t *) & ((uint8_t *) S->wavbuff)[1 + i * 2]) = actval;
+            (*(int8_t *) & ((uint8_t *) S->wavbuff)[0 + i * 2]) = actval;
+            (*(int8_t *) & ((uint8_t *) S->wavbuff)[1 + i * 2]) = actval;
         }
     }
 
