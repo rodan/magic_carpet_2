@@ -5,6 +5,9 @@ About OpenAL
     It's development started 4 years after the Magic Carpet's release, however I am certain that if the release dates would have been reversed then Bullfrog would have implemented this API in all their games.
 In MC2 the structures were ready to support left/right volume panning and there is an effort to decrease the volume for distant creatures. Fortunately they did not waste too much code trying to implement an in-house 3D positional sound system and were quite happy to simply provide arround 200 PCM sound samples that will end up being triggered during gameplay and rendered as mono sounds with just variable gain.
 
+runtime dependencies
+
+    linux needs the openal package installed. windows needs a driver called 'OpenAL x.y Windows Installer (zip)' available here: https://www.openal.org/downloads/
 
 OpenAL port
 
@@ -15,7 +18,7 @@ OpenAL port
 
     Every PCM sound sample that can be heard is thus an OpenAL 'sound source'. the player is what the API calls a 'listener'. the listener's position and direction are updated every frame and we have seen that some sound sources get their position updated with the same frequency. once a sound is triggered by the scheduler or by the recode, a sound source is created and thus a play channel is used. it seems like most soundcards support up to about 30 concurrent sources (sometimes called 'voices'). in order to be able to hear a more diverse range of sounds, a limit of how many times one sample can be played concurrently is implemented and can be customized via config.ini:openal_same_chunk_concurrency. experimentation with this setting is welcome.
 
-    OpenAL's alternative to Creative EAX is called EFX. it can provide nice reverb effects for better game immersion. it can be controlled via the config.ini:openal_efx option.
+    OpenAL's alternative to Creative EAX is called EFX. it can provide nice reverb effects for better game immersion. it can be enabled or disabled via the config.ini:openal_efx option.
 
 
 speech audio tracks
@@ -30,3 +33,4 @@ speech audio tracks
 
     enabling speech is as simple as providing a relative directory as config.ini:speech_folder.
     it's volume level is controllerd by config.ini:openal_speech_volume (must be provided as an integer between 0 and 127). 0 completely disables the speech subsystem.
+
