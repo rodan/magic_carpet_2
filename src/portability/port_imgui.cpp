@@ -20,7 +20,7 @@
 SDL_Window *window;
 SDL_Renderer *renderer;
 
-void alsound_imgui(void);
+void alsound_imgui(bool *p_open);
 
 uint8_t port_imgui_init(void)
 {
@@ -100,6 +100,7 @@ SDL_Renderer *port_imgui_get_renderer_ptr(void)
 
 uint8_t port_imgui_loop(void)
 {
+    static bool show_alsound_window = 1;
     ImGuiIO & io = ImGui::GetIO();
     ImVec4 clear_color = ImVec4(0.0f, 0.0f, 0.0f, 1.00f);
 
@@ -108,10 +109,17 @@ uint8_t port_imgui_loop(void)
     ImGui_ImplSDL2_NewFrame();
     ImGui::NewFrame();
 
+    if (ImGui::TreeNode("subsystems")) {
+        ImGui::Selectable("OpenAL", &show_alsound_window);
+        ImGui::TreePop();
+    }
+
     // 1. Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()! You can browse its code to learn more about Dear ImGui!).
     //ImGui::ShowDemoWindow(&show_demo_window);
 
-    alsound_imgui();
+    if (show_alsound_window) {
+        alsound_imgui(&show_alsound_window);
+    }
 
     // Rendering
     ImGui::Render();

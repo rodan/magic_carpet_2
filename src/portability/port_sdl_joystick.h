@@ -39,4 +39,6 @@ void haptic_rumble_effect(const float strength, const uint32_t length);
 void haptic_rumble_triggers_effect(const uint16_t strength_l, const uint16_t strength_r,
                                    const uint32_t length);
 
+void controller_imgui(bool *p_open);
+
 #endif                          //PORT_SDL_JOYSTICK

@@ -967,7 +967,7 @@ ALCenum alsound_error_check(const char *msg)
 
 #ifdef CONFIG_IMGUI
 
-void alsound_imgui(void)
+void alsound_imgui(bool *p_open)
 {
     int16_t i;
     uint16_t cnt;
@@ -976,7 +976,11 @@ void alsound_imgui(void)
 
     ImGuiTableFlags flags = ImGuiTableFlags_SizingFixedFit | ImGuiTableFlags_RowBg | ImGuiTableFlags_Borders | ImGuiTableFlags_Resizable;
 
-    ImGui::Begin("positioning");
+    if (!ImGui::Begin("positioning", p_open, NULL)) {
+        // Early out if the window is collapsed, as an optimization.
+        ImGui::End();
+        return;
+    }
     ImGui::Text("    listener (%u, %u, %u)", ale.listener_c.x, ale.listener_c.y, ale.listener_c.z);
     ImGui::Text("    creatures: ");
     if (ImGui::BeginTable("creatures", 3, flags)) {

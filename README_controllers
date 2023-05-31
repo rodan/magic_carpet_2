@@ -34,7 +34,12 @@ button_fire_L = 0 ; fire left-hand spell, also left mouse button equivalent
 button_fwd = 0 ; joystick button-press code used for forward movement
 button_back = 0 ; joystick button-press code used for backward movement
 button_esc = 0 ; escape key equivalent
-axis_dead_zone = 2048 ; increase if _mouse_ is unresponsive
+axis_yaw_dead_zone = 3000 ; stick used for flight
+axis_pitch_dead_zone = 3000 ; stick used for flight
+axis_long_nav_dead_zone = 6000 ; stick used for menu navigation
+axis_trans_nav_dead_zone = 6000 ; stick used for menu navigation
+axis_long_dead_zone = 12000 ; stick converted to hat-like buttons
+axis_trans_dead_zone = 12000 ; stick converted to hat-like buttons
 trigger_dead_zone = 2048 ; trigger button-related dead zone
 haptic_enabled = 0 ; set to 1 to try initialization of the controller's haptic engine
 haptic_max_gain = 75 ; set GAIN value, if feature is supported. it limits the amplitude of all the effects between 0-100
@@ -54,7 +59,6 @@ button_minimap = 1 ; half-screen minimap - (A) button
 button_spell = 3 ; spellbook - (X) button
 button_esc = 4 ; escape key equivalent - (Y) button
 button_fire_L = 2 ; a secondary MLB equivalent for menu interaction - (B) button
-axis_dead_zone = 3000 ; joysticks are quite noisy and can get bumped accidentally so definitely at least 3000
 trigger_dead_zone = 3000 ; trigger button-related dead zone
 ; select either hat or joystick control below:
 ;   menu navigation using the hat
@@ -93,8 +97,6 @@ button_fire_L = 1 ; fire left-hand spell, also left mouse button equivalent
 button_fwd = 6 ; joystick button-press code used for forward movement
 button_back = 7 ; joystick button-press code used for backward movement
 button_minimap = 9 ; half-screen minimap
-axis_dead_zone = 2048 ; increase if _mouse_ is unresponsive
-
 
 Logitech Extreme 3D PRO (the joystick shares flight and navigation modes, the 4-th axis can be used for fwd-back movement)
 
@@ -113,6 +115,5 @@ button_fire_R = 2 ; fire right-hand spell, also right mouse button equivalent
 button_fire_L = 1 ; fire left-hand spell, also left mouse button equivalent
 button_fwd = 5 ; joystick button-press code used for forward movement
 button_back = 3 ; joystick button-press code used for backward movement
-axis_dead_zone = 2048 ; increase if _mouse_ is unresponsive
 
 
