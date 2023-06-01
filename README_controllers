@@ -5,7 +5,11 @@
 three different joysticks (each with two axes), two hats and six buttons can be configured using the keywords shown below.
   based on user preference and device limitations, the menu navigation can share axes/hat with the camera angle (axis_yaw/pitch) or the movement controls (axis_long/trans, hat_mov).
   the integer value expected is either '1'+ for enabled items or '0' for disabled ones.
- 
+
+  during flight the joystick's middle-band sensitivity can be tweaked via the inflection_x and inflection_y config.ini parameters, or a completely linear behaviour is applied if these parameters are undefined or set to 0.
+  the easiest way to visualize how this parameters affect the conversion between the joystick's input vs the output yaw and pitch is to open the assets/config_controller.ods in libreoffice and change the values show in red. the graphs will update automatically and they will follow the logic that is within the game.
+  inflection_x defines how wide the middle-band is. it's value is an integer best kept between 70-99. see it as a percentage based on the full range of values provided by the joystick.
+  inflection_y defines the function's ouput inflection point at the edges of the middle-band.
 
 possible keywords:
 [gamepad]
@@ -43,7 +47,8 @@ axis_trans_dead_zone = 12000 ; stick converted to hat-like buttons
 trigger_dead_zone = 2048 ; trigger button-related dead zone
 haptic_enabled = 0 ; set to 1 to try initialization of the controller's haptic engine
 haptic_max_gain = 75 ; set GAIN value, if feature is supported. it limits the amplitude of all the effects between 0-100
-
+inflection_x = 80; percentage 70-99, 0 for linear behaviour, see config_gamepad.ods
+inflection_y = 50; percentage 50-80, 0 for linear behaviour, see config_gamepad.ods
 
     Sample setups
 

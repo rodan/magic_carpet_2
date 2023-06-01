@@ -264,6 +264,8 @@ bool readini()
     gpc.button_pause_menu = reader.GetInteger("gamepad", "button_pause_menu", 0);
     gpc.button_esc = reader.GetInteger("gamepad", "button_esc", 0);
     gpc.button_menu_select = reader.GetInteger("gamepad", "button_menu_select", 0);
+    gpc.inflection_x = reader.GetInteger("gamepad", "inflection_x", 0);
+    gpc.inflection_y = reader.GetInteger("gamepad", "inflection_y", 0);
 
     gpc.axis_yaw_dead_zone = reader.GetInteger("gamepad", "axis_yaw_dead_zone", 3000);
     gpc.axis_pitch_dead_zone = reader.GetInteger("gamepad", "axis_pitch_dead_zone", 3000);

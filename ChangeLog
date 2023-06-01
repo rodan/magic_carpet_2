@@ -1,4 +1,19 @@
 
+## 2023.06.01
+- port_sdl_joystick: add optional middle-band sensitivity
+
+## 2023.05.31
+- port_sdl_joystick: better separation between primary directions and combined ones
+
+## 2023.05.30
+- asset/scripts: add coverity-related scripts
+
+## 2023.05.29
+- all: compatibility changes needed by the mickeysoft compiler
+
+## 2023.05.26
+- port_sdl_sound: add playing of speech tracks
+
 ## 2023.05.22
 - port_openal: implement maximum chunk concurrency (configure via AL_CHUNK_CONCURRENCY_MAX)
 - port_openal: disable chunk scheduling when exiting flying mode

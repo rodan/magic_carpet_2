@@ -63,6 +63,14 @@ struct gamepad_state {
     uint8_t nav_mode;           ///< true during menu navigation
     uint8_t last_trig_fire_R;   ///< detection of movement based on the right trigger button's axis value
     uint8_t last_trig_fire_L;   ///< detection of movement based on the left trigger button's axis value
+    int32_t ip_xi_neg;          ///< inflection point, x axis, input, negative side
+    int32_t ip_xi_pos;          ///< inflection point, x axis, input, positive side
+    int32_t ip_yi_neg;          ///< inflection point, y axis, input, negative side
+    int32_t ip_yi_pos;          ///< inflection point, y axis, input, positive side
+    int32_t ip_xo_neg;          ///< inflection point, x axis, output, negative side
+    int32_t ip_xo_pos;          ///< inflection point, x axis, output, positive side
+    int32_t ip_yo_neg;          ///< inflection point, y axis, output, negative side
+    int32_t ip_yo_pos;          ///< inflection point, y axis, output, positive side
 };
 typedef struct gamepad_state gamepad_state_t;
 
@@ -185,16 +193,35 @@ uint16_t gamepad_axis_flight_conv(const vec2d_t *stick, pointer_sys_t *point)
     uint16_t ret = 0;
     int16_t axis_yaw = stick->x;
     int16_t axis_pitch = stick->y;
+    float slope, offset, output;
 
     if ((axis_yaw < gpc.axis_yaw_dead_zone) && (axis_yaw > -gpc.axis_yaw_dead_zone)) {
         point->x = gps.rest_x;
     } else {
         // use two different linear interpolation equations since the
-        // resting coordinate is not always the center of the display
-        if (axis_yaw > 0) {
-            point->x = (((gps.max_x - gps.rest_x) * axis_yaw) >> 15) + gps.rest_x;
+        // resting coordinate ain't ever the center of the display
+        if (gpc.inflection_x && gpc.inflection_y) {
+            if (axis_yaw < gps.ip_xi_neg) {
+                slope = (float) gps.ip_xo_neg / ((float) gps.ip_xi_neg - -32767.0f);
+                offset = (float) gps.ip_xo_neg - (float) gps.ip_xi_neg * slope;
+                output = slope * axis_yaw + offset;
+                point->x = (int16_t) output;
+            } else if (axis_yaw < 0) {
+                point->x = (gps.rest_x - gps.ip_xo_neg) * axis_yaw / (0 - gps.ip_xi_neg) + gps.rest_x;
+            } else if (axis_yaw < gps.ip_xi_pos) {
+                point->x = (gps.ip_xo_pos - gps.rest_x) * axis_yaw / gps.ip_xi_pos + gps.rest_x;
+            } else {
+                slope = ((float) gps.max_x - (float) gps.ip_xo_pos) / (32768.0f - (float) gps.ip_xi_pos);
+                offset = (float) gps.max_x - 32768.0f * slope;
+                output = slope * axis_yaw + offset;
+                point->x = (int16_t) output;
+            }
         } else {
-            point->x = ((gps.rest_x * axis_yaw) >> 15) + gps.rest_x;
+            if (axis_yaw < 0) {
+                point->x = ((gps.rest_x * axis_yaw) >> 15) + gps.rest_x;
+            } else {
+                point->x = (((gps.max_x - gps.rest_x) * axis_yaw) >> 15) + gps.rest_x;
+            }
         }
         ret = GP_FLIGHT_UPDATE;
     }
@@ -204,12 +231,34 @@ uint16_t gamepad_axis_flight_conv(const vec2d_t *stick, pointer_sys_t *point)
     } else {
         // use two different linear interpolation equations since the
         // resting coordinate is not always the center of the display
-        if (axis_pitch > 0) {
-            point->y = (((gps.max_y - gps.rest_y) * axis_pitch) >> 15) + gps.rest_y;
+        if (gpc.inflection_x && gpc.inflection_y) {
+            if (axis_pitch < gps.ip_yi_neg) {
+                slope = (float) gps.ip_yo_neg / ((float) gps.ip_yi_neg - -32767.0f);
+                offset = (float) gps.ip_yo_neg - (float) gps.ip_yi_neg * slope;
+                output = slope * axis_pitch + offset;
+                point->y = (int16_t) output;
+            } else if (axis_pitch < 0) {
+                point->y = (gps.rest_y - gps.ip_yo_neg) * axis_pitch / (0 - gps.ip_yi_neg) + gps.rest_y;
+            } else if (axis_pitch < gps.ip_yi_pos) {
+                point->y = (gps.ip_yo_pos - gps.rest_y) * axis_pitch / gps.ip_yi_pos + gps.rest_y;
+            } else {
+                slope = ((float) gps.max_y - (float) gps.ip_yo_pos) / (32768.0f - (float) gps.ip_yi_pos);
+                offset = (float) gps.max_y - 32768.0f * slope;
+                output = slope * axis_pitch + offset;
+                point->y = (int16_t) output;
+            }
         } else {
-            point->y = ((gps.rest_y * axis_pitch) >> 15) + gps.rest_y;
+            if (axis_pitch > 0) {
+                point->y = (((gps.max_y - gps.rest_y) * axis_pitch) >> 15) + gps.rest_y;
+            } else {
+                point->y = ((gps.rest_y * axis_pitch) >> 15) + gps.rest_y;
+            }
         }
         ret = GP_FLIGHT_UPDATE;
+    }
+
+    if (ret) {
+        //Logger->info("input {} {}  output {} {}", stick->x, stick->y, point->x, point->y);
     }
 
     return ret;
@@ -648,6 +697,23 @@ void gamepad_poll_data(gamepad_event_t *gpe)
     gamepad_event_mgr(gpe);
 }
 
+void calc_inflection(void)
+{
+    gps.ip_xi_neg = (-32767 * gpc.inflection_x + 50) / 100;
+    gps.ip_xi_pos = (32768 * gpc.inflection_x + 50) / 100;
+    gps.ip_xo_neg = (gps.rest_x * gpc.inflection_y + 50) / 100;
+    gps.ip_xo_pos = gps.max_x - ((gps.max_x - gps.rest_x) * gpc.inflection_y + 50) / 100;
+
+    gps.ip_yi_neg = gps.ip_xi_neg;
+    gps.ip_yi_pos = gps.ip_xi_pos;
+    gps.ip_yo_neg = (gps.rest_y * gpc.inflection_y + 50) / 100;
+    gps.ip_yo_pos = gps.max_y - ((gps.max_y - gps.rest_y) * gpc.inflection_y + 50) / 100;
+
+    //Logger->info("max_x {} max_y{}  rest_x {} rest_y {}",gps.max_x, gps.max_y, gps.rest_x, gps.rest_y);
+    //Logger->info("ip_xi_neg {} ip_xi_pos {} ip_xo_neg {} ip_xo_pos {}", gps.ip_xi_neg, gps.ip_xi_pos, gps.ip_xo_neg, gps.ip_xo_pos);
+    //Logger->info("ip_yi_neg {} ip_yi_pos {} ip_yo_neg {} ip_yo_pos {}", gps.ip_yi_neg, gps.ip_yi_pos, gps.ip_yo_neg, gps.ip_yo_pos);
+}
+
 /// \brief reconfigure gamepad maximum coverage and operating mode based on recode scene
 /// \param scene_id one of SCENE_PREAMBLE_MENU, SCENE_FLIGHT, SCENE_FLIGHT_MENU
 void set_scene(const uint8_t scene_id)
@@ -678,6 +744,9 @@ void set_scene(const uint8_t scene_id)
         break;
     }
     Logger->trace("set scene {}, nav_mode {}", scene_id, gps.nav_mode);
+    if (gpc.inflection_x && gpc.inflection_y) {
+        calc_inflection();
+    }
 }
 
 /// \brief set the x,y simulated mouse pointer coordinates of the joystick rest position
@@ -691,6 +760,9 @@ void joystick_set_env(const int32_t x, const int32_t y)
     gps.rest_y = y;
     gps.x = x;
     gps.y = y;
+    if (gpc.inflection_x && gpc.inflection_y) {
+        calc_inflection();
+    }
 }
 
 /// \brief unfinished load effects to be sent to the haptic subsystem
