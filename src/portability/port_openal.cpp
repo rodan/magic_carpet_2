@@ -599,6 +599,9 @@ int16_t alsound_play(const int16_t chunk_id, Mix_Chunk *mixchunk, event_t *entit
         !((ale.listener_c.x == 0) && (ale.listener_c.y == 0) && (ale.listener_c.z == 0))) {
             return -1;
         }
+        if (alct[ale.bank][chunk_id].ff_fx > -1) {
+            haptic_run_effect(alct[ale.bank][chunk_id].ff_fx);
+        }
     }
 
     // check if chunk has already been cached

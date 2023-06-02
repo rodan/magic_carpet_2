@@ -47,24 +47,38 @@ axis_trans_dead_zone = 12000 ; stick converted to hat-like buttons
 trigger_dead_zone = 2048 ; trigger button-related dead zone
 haptic_enabled = 0 ; set to 1 to try initialization of the controller's haptic engine
 haptic_max_gain = 75 ; set GAIN value, if feature is supported. it limits the amplitude of all the effects between 0-100
-inflection_x = 80; percentage 70-99, 0 for linear behaviour, see config_gamepad.ods
-inflection_y = 50; percentage 50-80, 0 for linear behaviour, see config_gamepad.ods
+inflection_x = 0; percentage 70-99, 0 for linear behaviour, see config_gamepad.ods
+inflection_y = 0; percentage 50-80, 0 for linear behaviour, see config_gamepad.ods
+
 
     Sample setups
 
 XBOX controllers:
 
 [gamepad]
+; buttons:
+; (Xbox A) = 1
+; (Xbox B) = 2
+; (Xbox X) = 3
+; (Xbox Y) = 4
+; (Xbox LBtn) = 5
+; (Xbox RBtn) = 6
+; (Xbox Back) = 7
+; (Xbox Start) = 8
+controller_id = 0 ; Change this to 1 or higher if you find your controller buttons are not working
 axis_yaw = 4 ; roll and yaw - horizontal axis on the right joystick
 axis_pitch = 5 ; pitch - vertical axis on the right joystick
 axis_long = 2 ; longitudinal movement - vertical axis on the left joystick
 axis_long_inv = true ; needs inversion
 axis_trans = 1 ; transversal movement - horizontal axis on the left joystick
-button_minimap = 1 ; half-screen minimap - (A) button
-button_spell = 3 ; spellbook - (X) button
-button_esc = 4 ; escape key equivalent - (Y) button
-button_fire_L = 2 ; a secondary MLB equivalent for menu interaction - (B) button
-trigger_dead_zone = 3000 ; trigger button-related dead zone
+button_minimap = 3 ; half-screen minimap
+button_spell = 1 ; spellbook
+button_menu_select = 1 ; a secondary MLB equivalent for menu interaction
+button_pause_menu = 7 ; Pause Options Panel
+button_esc = 8 ; escape key equivalent
+; button_fire_L = 2 ; a secondary action button
+axis_dead_zone = 3000 ; increase if _mouse_ is unresponsive
+trigger_dead_zone = 3000 ; increase if _mouse_ is unresponsive
 ; select either hat or joystick control below:
 ;   menu navigation using the hat
 ;hat_nav = 1 ; menu navigation on the hat
@@ -82,7 +96,9 @@ axis_nav_ew_inv = false
 axis_fire_R = 6 ; fire right-hand spell - right trigger
 axis_fire_L = 3 ; fire left-hand spell - left trigger
 haptic_enabled = 1 ; set to 1 to try initialization of the controller's haptic engine
-haptic_max_gain = 90 ; set GAIN value, if feature is supported. it limits the amplitude of all the effects between 0-100
+haptic_max_gain = 75 ; set GAIN value, if feature is supported. it limits the amplitude of all the effects between 0 - 100
+inflection_x = 80; percentage 70 - 99, 0 for linear behaviour
+inflection_y = 50; percentage 50 - 80, 0 for linear behaviour
 
 
 Logitech Attack 3 (the joystick shares flight and navigation modes, the 3-rd axis can be used for fwd-back movement)

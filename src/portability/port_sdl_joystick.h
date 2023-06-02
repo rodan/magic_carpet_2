@@ -2,6 +2,7 @@
 #ifndef PORT_SDL_JOYSTICK_H
 #define PORT_SDL_JOYSTICK_H
 
+///< possible scenes
 #define  SCENE_PREAMBLE_MENU  0x1
 #define         SCENE_FLIGHT  0x2
 #define    SCENE_FLIGHT_MENU  0x3
@@ -11,6 +12,12 @@
 ///< gamepad_event_t flags
 #define      GP_BTN_RELEASED  0x40
 #define       GP_BTN_PRESSED  0x80
+
+///< haptic effect array index
+#define     GP_HAPTIC_METEOR  0x0
+#define      GP_HAPTIC_QUAKE  0x1
+#define    GP_HAPTIC_TORNADO  0x2
+#define GP_HAPTIC_EFFECT_CNT  0x2  ///< update this one to last effect count!
 
 struct gamepad_event {
     int16_t axis_yaw;

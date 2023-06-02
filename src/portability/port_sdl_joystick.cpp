@@ -105,7 +105,7 @@ struct haptic_state {
     uint8_t rumble;             ///< rumble is initialized
     uint8_t rumble_trig;        ///< rumble trigger is present
     uint32_t cap;               ///< controller capabilities
-    int quake;                  ///< quake effect identifier
+    int effect[GP_HAPTIC_EFFECT_CNT];  ///< haptic effects
 };
 typedef struct haptic_state haptic_state_t;
 
@@ -759,7 +759,7 @@ void set_scene(const uint8_t scene_id)
 /// \param y coordinate
 void joystick_set_env(const int32_t x, const int32_t y)
 {
-    Logger->trace("pointer rest at {},{} scene {}, window size {},{}", x, y, gps.scene_id,
+    Logger->info("pointer rest at {},{} scene {}, window size {},{}", x, y, gps.scene_id,
                   gps.max_x, gps.max_y);
     gps.rest_x = x;
     gps.rest_y = y;
@@ -787,18 +787,41 @@ int8_t haptic_load_effects(void)
         Logger->info("SDL_HapticNumEffects() error {}", SDL_GetError());
     }
 
+    // meteor effect
+    SDL_memset(&effect, 0, sizeof(SDL_HapticEffect));
+    effect.type = SDL_HAPTIC_SINE;
+    effect.periodic.direction.type = SDL_HAPTIC_POLAR; // polar coordinates
+    effect.periodic.direction.dir[0] = rand() % 36000; // force direction
+    effect.periodic.period = 1000;      // time in ms
+    effect.periodic.magnitude = 32000;  // out of 32767 strength
+    effect.periodic.length = 300;       // time in ms
+    effect.periodic.attack_length = 100;// interval until max strength
+    effect.periodic.fade_length = 100;  // fade away interval
+    hs.effect[GP_HAPTIC_METEOR] = SDL_HapticNewEffect(m_haptic, &effect);
+
     // quake effect
+    SDL_memset(&effect, 0, sizeof(SDL_HapticEffect));
+    effect.type = SDL_HAPTIC_SINE;
+    effect.periodic.direction.type = SDL_HAPTIC_POLAR;  // polar coordinates
+    effect.periodic.direction.dir[0] = rand() % 36000;  // force direction
+    effect.periodic.period = 1000;       // time in ms
+    effect.periodic.magnitude = 5000;    // carpet is floating, so suspension is great
+    effect.periodic.length = 3000;       // time in ms
+    effect.periodic.attack_length = 1000;// interval until max strength
+    effect.periodic.fade_length = 1000;  // fade away interval
+    hs.effect[GP_HAPTIC_QUAKE] = SDL_HapticNewEffect(m_haptic, &effect);
+
+    // tornado effect
     SDL_memset(&effect, 0, sizeof(SDL_HapticEffect));   // 0 is safe default
     effect.type = SDL_HAPTIC_SINE;
     effect.periodic.direction.type = SDL_HAPTIC_POLAR;  // polar coordinates
-    effect.periodic.direction.dir[0] = 18000;   // force comes from south
-    effect.periodic.period = 1000;      // time in ms
-    effect.periodic.magnitude = 10000;  // out of 32767 strength
-    effect.periodic.length = 3000;      // time in ms
-    effect.periodic.attack_length = 1000;       // takes 1 second to get max strength
-    effect.periodic.fade_length = 1000; // takes 1 second to fade away
-
-    hs.quake = SDL_HapticNewEffect(m_haptic, &effect);
+    effect.periodic.direction.dir[0] = rand() % 36000;  // force direction
+    effect.periodic.period = 1000;       // time in ms
+    effect.periodic.magnitude = 20000;   // out of 32767 strength
+    effect.periodic.length = 3200;       // time in ms
+    effect.periodic.attack_length = 2000;// interval until max strength
+    effect.periodic.fade_length = 1000;  // fade away interval
+    hs.effect[GP_HAPTIC_TORNADO] = SDL_HapticNewEffect(m_haptic, &effect);
 
     return EXIT_SUCCESS;
 }
@@ -810,7 +833,7 @@ void haptic_run_effect(const int effect_id)
     if (!hs.enabled || ((hs.cap & SDL_HAPTIC_SINE) == 0)) {
         return;
     }
-    Logger->info("run_effect {}", effect_id);
+    //Logger->info("run_effect {}", effect_id);
     SDL_HapticRunEffect(m_haptic, effect_id, 1);
 }
 
