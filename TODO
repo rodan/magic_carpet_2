@@ -1,3 +1,3 @@
  [ ] cmake-based windows build
- [ ] merge controller changes
+ [ ] update all sdl2 libs for windoz build
  [ ] add forcefeedback effects

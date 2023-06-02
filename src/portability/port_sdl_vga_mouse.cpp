@@ -845,32 +845,28 @@ int events()
     while (SDL_PollEvent(&event)) {
         switch (event.type) {
         case SDL_JOYAXISMOTION:
-            if (event.jaxis.which == 0) {
+            if (event.jaxis.which == gpc.controller_id) {
                 // motion on controller 0
-                //gps.initialized = 1;
                 // actual axis data is being read via gamepad_poll_data()
                 // to counteract jerkiness due to missing event triggers
                 Logger->trace("axis {} event detected", event.jaxis.axis + 1);
             }
             break;
         case SDL_JOYHATMOTION:
-            if (event.jhat.which == 0) {
-                //gps.initialized = 1;
-                // actual axis data is being read via gamepad_poll_data()
+            if (event.jhat.which == gpc.controller_id) {
+                // actual hat data is being read via gamepad_poll_data()
                 Logger->trace("hat {} event detected", event.jhat.hat + 1);
             }
             break;
         case SDL_JOYBUTTONDOWN:
-            if (event.jbutton.which == 0) {
-                //gps.initialized = 1;
+            if (event.jbutton.which == gpc.controller_id) {
                 gpe.btn_pressed = 1 << (event.jbutton.button + 1);
                 Logger->trace("key {} press detected", event.jbutton.button + 1);
                 gpe.flag |= GP_BTN_PRESSED;
             }
             break;
         case SDL_JOYBUTTONUP:
-            if (event.jbutton.which == 0) {
-                //gps.initialized = 1;
+            if (event.jbutton.which == gpc.controller_id) {
                 gpe.btn_released = 1 << (event.jbutton.button + 1);
                 Logger->trace("key {} release detected", event.jbutton.button + 1);
                 gpe.flag |= GP_BTN_RELEASED;

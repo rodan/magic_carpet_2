@@ -13,9 +13,9 @@
 #include <stdio.h>
 
 #ifdef _MSC_VER
-#include "SDL.h"
+    #include "SDL.h"
 #else
-#include "SDL2/SDL.h"
+    #include "SDL2/SDL.h"
 #endif
 
 #include "../engine/sub_main_mouse.h"
@@ -46,7 +46,8 @@ SDL_Haptic *m_haptic = NULL;
 #define     GP_KEY_EMU_MINIMAP  0x280d
 #define         GP_KEY_EMU_ESC  0x291b
 #define       GP_KEY_EMU_SPELL  0xe0e0
-#define		  GP_KEY_EMU_PAUSE  0x1370
+#define       GP_KEY_EMU_PAUSE  0x1370
+#define       GP_KEY_EMU_SPACE  0x2C20
 
 ///< structure that defines the current gamepad state ad it's simulated output
 struct gamepad_state {
@@ -255,10 +256,6 @@ uint16_t gamepad_axis_flight_conv(const vec2d_t *stick, pointer_sys_t *point)
             }
         }
         ret = GP_FLIGHT_UPDATE;
-    }
-
-    if (ret) {
-        //Logger->info("input {} {}  output {} {}", stick->x, stick->y, point->x, point->y);
     }
 
     return ret;
@@ -524,7 +521,7 @@ void gamepad_event_mgr(gamepad_event_t *gpe)
         gamepad_hat_mov_conv(&hat);
     }
 
-    if ((gpc.axis_long_conf & GAMEPAD_ITEM_ENABLED) || (gpc.axis_trans_conf & GAMEPAD_ITEM_ENABLED)) {
+    if (((gpc.axis_long_conf & GAMEPAD_ITEM_ENABLED) || (gpc.axis_trans_conf & GAMEPAD_ITEM_ENABLED)) && (gps.scene_id != SCENE_SPELL_MENU)) {
         // if movement is done via two axes
         stick.x = gpe->axis_long;
         stick.x_conf = gpc.axis_long_conf;
@@ -557,7 +554,6 @@ void gamepad_event_mgr(gamepad_event_t *gpe)
         }
     }
 
-    // temporary place for testing haptic effects
     if (gpe->btn_pressed) {
         if (gpe->btn_pressed & ((uint64_t) 1 << gpc.button_fire_R)) {
             button_state |= 0x8;
@@ -565,7 +561,10 @@ void gamepad_event_mgr(gamepad_event_t *gpe)
         if (gpe->btn_pressed & ((uint64_t) 1 << gpc.button_fire_L)) {
             button_state |= 0x2;
         }
-        if (gpe->btn_pressed & ((uint64_t) 1 << gpc.button_spell)) {
+        if (gps.scene_id != SCENE_FLIGHT && (gpe->btn_pressed & (1 << gpc.button_menu_select))) {
+            button_state |= 0x2;
+        }
+        if (gps.scene_id != SCENE_FLIGHT_MENU && (gpe->btn_pressed & (1 << gpc.button_spell))) {
             setPress(true, GP_KEY_EMU_SPELL);
         }
         if (gpe->btn_pressed & ((uint64_t) 1 << gpc.button_minimap)) {
@@ -583,6 +582,9 @@ void gamepad_event_mgr(gamepad_event_t *gpe)
         if (gpe->btn_pressed & ((uint64_t) 1 << gpc.button_esc)) {
             setPress(true, GP_KEY_EMU_ESC);
         }
+        if (gps.scene_id == SCENE_DEAD) {
+            setPress(true, GP_KEY_EMU_SPACE);
+        }
     }
 
     if (gpe->btn_released) {
@@ -590,6 +592,9 @@ void gamepad_event_mgr(gamepad_event_t *gpe)
             button_state |= 0x10;
         }
         if (gpe->btn_released & ((uint64_t) 1 << gpc.button_fire_L)) {
+            button_state |= 0x4;
+        }
+        if (gps.scene_id != SCENE_FLIGHT && (gpe->btn_released & (1 << gpc.button_menu_select))) {
             button_state |= 0x4;
         }
         if (gpe->btn_released & ((uint64_t) 1 << gpc.button_spell)) {
@@ -609,6 +614,9 @@ void gamepad_event_mgr(gamepad_event_t *gpe)
         }
         if (gpe->btn_released & ((uint64_t) 1 << gpc.button_esc)) {
             setPress(false, GP_KEY_EMU_ESC);
+        }
+        if (gps.scene_id == SCENE_DEAD) {
+            setPress(false, GP_KEY_EMU_SPACE);
         }
     }
 
@@ -708,10 +716,6 @@ void calc_inflection(void)
     gps.ip_yi_pos = gps.ip_xi_pos;
     gps.ip_yo_neg = (gps.rest_y * gpc.inflection_y + 50) / 100;
     gps.ip_yo_pos = gps.max_y - ((gps.max_y - gps.rest_y) * gpc.inflection_y + 50) / 100;
-
-    //Logger->info("max_x {} max_y{}  rest_x {} rest_y {}",gps.max_x, gps.max_y, gps.rest_x, gps.rest_y);
-    //Logger->info("ip_xi_neg {} ip_xi_pos {} ip_xo_neg {} ip_xo_pos {}", gps.ip_xi_neg, gps.ip_xi_pos, gps.ip_xo_neg, gps.ip_xo_pos);
-    //Logger->info("ip_yi_neg {} ip_yi_pos {} ip_yo_neg {} ip_yo_pos {}", gps.ip_yi_neg, gps.ip_yi_pos, gps.ip_yo_neg, gps.ip_yo_pos);
 }
 
 /// \brief reconfigure gamepad maximum coverage and operating mode based on recode scene
@@ -734,6 +738,7 @@ void set_scene(const uint8_t scene_id)
 #endif
         break;
     case SCENE_FLIGHT_MENU:
+    case SCENE_SPELL_MENU:
         gps.max_x = gameResWidth;
         gps.max_y = gameResHeight;
         gps.nav_mode = 1;
@@ -833,3 +838,4 @@ void haptic_rumble_triggers_effect(const uint16_t strength_l, const uint16_t str
     }
     SDL_JoystickRumbleTriggers(m_gameController, strength_l, strength_r, length);
 }
+

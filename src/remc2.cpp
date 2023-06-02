@@ -27,9 +27,6 @@ int main(int argc, char **argv)
 #endif
     CommandLineParams.Init(argc, argv);
 
-    //while (ret != -1) {
-    //    ret = port_imgui_loop();
-    //}
     support_begin();
     int retval = sub_main(argc, argv, envp);
     support_end();

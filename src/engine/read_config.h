@@ -52,6 +52,7 @@ extern bool assignToSpecificCores;
 #define   GAMEPAD_AXIS_INVERTED  0x2
 
 struct gamepad_config {
+    uint16_t controller_id;
     uint16_t axis_yaw;
     uint16_t axis_pitch;
     uint16_t axis_long;

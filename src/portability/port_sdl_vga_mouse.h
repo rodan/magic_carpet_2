@@ -18,10 +18,6 @@
 #include "port_sdl_sound.h"
 #include "port_filesystem.h"
 
-#define  SCENE_PREAMBLE_MENU  0x1
-#define         SCENE_FLIGHT  0x2
-#define    SCENE_FLIGHT_MENU  0x3
-
 typedef struct {
     int32_t x;
     int32_t y;

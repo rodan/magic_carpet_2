@@ -255,6 +255,7 @@ bool readini()
         gpc.axis_fire_L_conf = GAMEPAD_ITEM_ENABLED;
     }
 
+    gpc.controller_id = reader.GetInteger("gamepad", "controller_id", 0);
     gpc.button_fire_L = reader.GetInteger("gamepad", "button_fire_L", 0);
     gpc.button_fire_R = reader.GetInteger("gamepad", "button_fire_R", 0);
     gpc.button_spell = reader.GetInteger("gamepad", "button_spell", 0);

@@ -963,8 +963,8 @@ void Intros_76D10(char a1)      //257d10
     case 0:
 #ifndef debug_hide_graphics
         ShowWelcomeScreen_83850();      //frog logo and wait
-#endif
         PlayInfoFmv(1, 1, str_E17CC_0, introPath);      //257160 intro .. 2b27cc
+#endif
         /*v1 = */ sub_2EB40();
         x_BYTE_D41C1 = 0;
         x_BYTE_D41C0 = 0;
