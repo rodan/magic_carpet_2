@@ -94,6 +94,7 @@ struct gamepad_config {
     uint8_t inflection_x; ///< middle-band wideness (percentage 70-99)
     uint8_t inflection_y; ///< f(x) at the edges of the middle-band (percentage 10-90)
 };
+
 typedef struct gamepad_config gamepad_config_t;
 extern gamepad_config_t gpc;
 

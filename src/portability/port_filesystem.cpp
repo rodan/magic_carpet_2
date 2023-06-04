@@ -123,9 +123,9 @@ std::string get_exe_path()
 
 long my_findfirst(char *path, _finddata_t *c_file)
 {
-    Logger->debug("my_findfirst:fixed:{}", path);
+    Logger->info("my_findfirst:fixed:{}", path);
     long result = _findfirst(path, c_file);
-    Logger->debug("my_findfirst:end:{}", result);
+    Logger->info("my_findfirst:end:{}", result);
     return result;
 }
 

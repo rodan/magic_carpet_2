@@ -759,8 +759,7 @@ void set_scene(const uint8_t scene_id)
 /// \param y coordinate
 void joystick_set_env(const int32_t x, const int32_t y)
 {
-    Logger->info("pointer rest at {},{} scene {}, window size {},{}", x, y, gps.scene_id,
-                  gps.max_x, gps.max_y);
+    //Logger->info("pointer rest at {},{} scene {}, window size {},{}", x, y, gps.scene_id, gps.max_x, gps.max_y);
     gps.rest_x = x;
     gps.rest_y = y;
     gps.x = x;

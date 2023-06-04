@@ -54482,7 +54482,6 @@ void sub_5C800(event_t *a1x, char a2)   //23d800
     if (D41A0_0.LevelIndex_0xc == a1x->dword_0xA4_164x->word_0x38_56) {
         //result = (short)x_D41A0_BYTEARRAY_4;
         engine_db.byteindex_180 = a2;
-        set_scene(SCENE_DEAD);
     }
     //return result;
 }
@@ -55491,6 +55490,7 @@ void AddPlayer03_00_5E010(event_t *a1x) //23f010
         a1x->state_0x45_69 = 2;
         a1x->word_0x2C_44 = 0;
         PrepareEventSound_6E450(a1x - D41A0_0.struct_0x6E8E, -1, 16);
+        set_scene(SCENE_DEAD);
     }
 }
 

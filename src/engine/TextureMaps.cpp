@@ -435,7 +435,7 @@ void InitTmaps(unsigned __int16 a1)     //251f50
                             && (oldheight < 512)) {
                             int actnumber = 0;
                             if (BIG_SPRITES_BUFFERx[i].actdatax != NULL) {
-                                free(BIG_SPRITES_BUFFERx[i].actdatax);
+                                free(BIG_SPRITES_BUFFERx[i].actdatax); // FIXME crash here
                                 BIG_SPRITES_BUFFERx[i].actdatax = NULL;
                             }
                             for (int mm = 0; mm < max_sprites_frames; mm++)

@@ -1,4 +1,7 @@
 
+## 2023.06.02
+- port_sdl_joystick: add a few haptic effects and tie them to sound samples
+
 ## 2023.06.01
 - port_sdl_joystick: add optional middle-band sensitivity
 
