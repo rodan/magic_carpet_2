@@ -11642,6 +11642,7 @@ void sub_18F80(event_t *a1x)    //1f9f80
                 unk_18058Cstr.x_DWORD_18059C &= 0xFE;
             }
         } else if (unk_18058Cstr.x_DWORD_18059C & 1 || unk_18058Cstr.x_DWORD_18059C & 4 && v3x->word_0x2E_46 > 0) {
+            // left hand spell casting. all is fine.
             SelectSpell_191B0(6, 16);
             unk_18058Cstr.x_DWORD_18059C &= 0xFE;
         }
@@ -11658,6 +11659,7 @@ void sub_18F80(event_t *a1x)    //1f9f80
                 unk_18058Cstr.x_DWORD_18059C &= 0xFD;
             }
         } else if (unk_18058Cstr.x_DWORD_18059C & 2 || unk_18058Cstr.x_DWORD_18059C & 8 && a1x->dword_0xA4_164x->word_0x26_38[4] > 0) {
+            // FIXME right hand spell casting. fast fire never works due to the last element of the conditional
             /*LOBYTE(v4) = */ SelectSpell_191B0(6, 32);
             unk_18058Cstr.x_DWORD_18059C &= 0xFD;
         }
