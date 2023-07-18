@@ -979,7 +979,7 @@ void alsound_imgui(bool *p_open)
 
     ImGuiTableFlags flags = ImGuiTableFlags_SizingFixedFit | ImGuiTableFlags_RowBg | ImGuiTableFlags_Borders | ImGuiTableFlags_Resizable;
 
-    if (!ImGui::Begin("positioning", p_open, NULL)) {
+    if (!ImGui::Begin("positioning", p_open, 0)) {
         // Early out if the window is collapsed, as an optimization.
         ImGui::End();
         return;

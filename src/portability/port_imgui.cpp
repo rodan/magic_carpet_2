@@ -36,7 +36,7 @@ uint8_t port_imgui_init(void)
 
     // Create window with SDL_Renderer graphics context
     SDL_WindowFlags window_flags = (SDL_WindowFlags) (SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
-    window = SDL_CreateWindow("Magic Carpet 2 recode edition", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 3000, 2000, window_flags);
+    window = SDL_CreateWindow("Magic Carpet 2 recode edition", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1600, 1080, window_flags);
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_ACCELERATED);
     if (renderer == NULL) {
         SDL_Log("Error creating SDL_Renderer!");
@@ -53,7 +53,7 @@ uint8_t port_imgui_init(void)
     //(void)io;
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;       // Enable Keyboard Controls
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;        // Enable Gamepad Controls
-    io.FontGlobalScale = 2.0;
+    //io.FontGlobalScale = 2.0;
     ImGui::StyleColorsClassic();
 
     // Setup Dear ImGui style
