@@ -1,4 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS
+#include <cstdint>
 #include "port_net.h"
 #include <thread>
 
