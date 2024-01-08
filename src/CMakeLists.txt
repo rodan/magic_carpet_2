@@ -200,11 +200,6 @@ install(
     ${CMAKE_SOURCE_DIR}/assets/config_xbox.ini
     DESTINATION ./
 )
-install(
-    FILES
-    ${CMAKE_SOURCE_DIR}/assets/remc2_HD.tar.bz2
-    DESTINATION ./
-)
 
 set(ROOT_NAMESPACE remc2)
 
