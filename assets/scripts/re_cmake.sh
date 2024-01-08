@@ -14,5 +14,5 @@ rm -f CMakeCache.txt
 #cmake -DCMAKE_BUILD_TYPE=${BUILDTYPE} -DCMAKE_INSTALL_PREFIX=./inst -DCMAKE_CXX_FLAGS="-finstrument-functions" ${HOME}/_work/linux/magic-carpet-2-hd/
 cmake -Wno-dev -DCMAKE_BUILD_TYPE=${BUILDTYPE} -DCMAKE_INSTALL_PREFIX=./inst -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON ../
 
-make DEBUG=1
+make -j16 DEBUG=1
 

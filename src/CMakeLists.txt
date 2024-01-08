@@ -91,7 +91,6 @@ set(SOURCE_FILES_ENGINE
 )
 source_group("Source Files\\engine" FILES ${SOURCE_FILES_ENGINE})
 
-
 set(SOURCE_FILES__libs__inih
     "../lib/inih/ini.c"
     "../lib/inih/ini.h"
@@ -167,6 +166,7 @@ set(ALL_FILES
     ${SOURCE_FILES}
     ${SOURCE_FILES_ENGINE}
     ${SOURCE_FILES__libs__inih}
+    ${SOURCE_FILES__libs__findfirst}
     ${SOURCE_FILES__portability}
     ${SOURCE_FILES__networklib}
     ${SOURCE_FILES__lib__imgui}
@@ -176,7 +176,6 @@ set(ALL_FILES
 ################################################################################
 # targets
 ################################################################################
-add_library(findfirst ${SOURCE_FILES__libs__findfirst})
 add_executable(${PROJECT_NAME} ${ALL_FILES})
 
 install(
@@ -221,11 +220,10 @@ if (UNIX)
     #)
     #target_compile_options(${PROJECT_NAME} PRIVATE
     #)
-    target_link_libraries(${PROJECT_NAME} PUBLIC 
+    target_link_libraries(${PROJECT_NAME} PUBLIC
         SDL2::Main
         SDL2::Mixer
         ${PNG_LIBRARY}
-        findfirst
         Boost::system
         spdlog
         fmt
