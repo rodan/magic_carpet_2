@@ -22,9 +22,9 @@ cp_engine_conf() {
         cp /usr/share/mcarpet2/config.ini "${HOME}/.config/mcarpet2/"
     }
 
-    echo '# ignore this config file, it is temporary' > config.ini
-    echo -e '# edit $HOME/.config/mcarpet2/config.ini instead.\n\n\n' >> config.ini
-    cat "${engine_conf}" >> config.ini
+    echo '# ignore this config file, it is temporary' > "${install_dir}/config.ini"
+    echo -e '# edit $HOME/.config/mcarpet2/config.ini instead.\n\n\n' >> "${install_dir}/config.ini"
+    cat "${engine_conf}" >> "${install_dir}/config.ini"
 }
 
 [ ! -e "${conf}" ] && {
@@ -33,6 +33,11 @@ cp_engine_conf() {
 }
 
 . "${conf}"
+
+cd "${install_dir}" || {
+    echo '${install_dir} is an invalid install directory, exiting'
+    exit_err
+}
 
 cp_engine_conf
 
@@ -69,5 +74,5 @@ ${check_assets} && {
     }
 }
 
-cd "${install_dir}" || exit 1
 ./remc2
+rm -f config.ini
