@@ -5310,15 +5310,16 @@ get_HD_assets() {
 }
 
 config_install_dir() {
+    dir=$(realpath "${1}")
     mkdir -p ~/.config/mcarpet2
     if [ -e "${conf}" ]; then
         if grep -q install_dir "${conf}"; then
-            sed -i "s|.*install_dir.*|install_dir='${1}'|" "${conf}"
+            sed -i "s|.*install_dir.*|install_dir='${dir}'|" "${conf}"
         else
-            echo "install_dir='${1}'" >> "${conf}"
+            echo "install_dir='${dir}'" >> "${conf}"
         fi
     else
-        echo "install_dir='${1}'" > "${conf}"
+        echo "install_dir='${dir}'" > "${conf}"
     fi
 }
 

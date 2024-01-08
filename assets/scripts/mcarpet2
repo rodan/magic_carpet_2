@@ -6,6 +6,7 @@
 
 # config that contains a known good install dir location
 conf="${HOME}/.config/mcarpet2/game.cfg"
+engine_conf="${HOME}/.config/mcarpet2/config.ini"
 
 exit_err() {
     echo 'please follow the instructions by running'
@@ -16,12 +17,24 @@ exit_err() {
     exit 1
 }
 
+cp_engine_conf() {
+    [ ! -e "${engine_conf}" ] && {
+        cp /usr/share/mcarpet2/config.ini "${HOME}/.config/mcarpet2/"
+    }
+
+    echo '# ignore this config file, it is temporary' > config.ini
+    echo -e '# edit $HOME/.config/mcarpet2/config.ini instead.\n\n\n' >> config.ini
+    cat "${engine_conf}" >> config.ini
+}
+
 [ ! -e "${conf}" ] && {
     echo "${conf} file not found, exiting"
     exit_err
 }
 
 . "${conf}"
+
+cp_engine_conf
 
 [ ! -e "${install_dir}/config.ini" ] && {
     echo "${install_dir}/config.ini not found, exiting"
@@ -39,13 +52,17 @@ ${check_assets} && {
     mcarpet2_install.sh -d "${install_dir}"
     ret=$?
 
+    [ "${ret}" != "0" ] && {
+        exit_err
+    }
+
     [ -e "${install_dir}/biggraphics" ] && [ "${ret}" = "0" ] && {
         grep -q 'useEnhancedGraphics = false' "${install_dir}/config.ini" && {
             echo ''
             echo ''
             echo 'since you have the HD assets, you can set'
             echo 'useEnhancedGraphics = true'
-            echo "inside the config.ini file located in ${install_dir}"
+            echo "inside ${HOME}/.config/mcarpet2/config.ini"
             echo ''
             echo ''
         }
