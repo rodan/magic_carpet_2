@@ -182,25 +182,28 @@ add_executable(${PROJECT_NAME} ${ALL_FILES})
 install(
     TARGETS ${PROJECT_NAME}
     CONFIGURATIONS Debug;Release;RelWithDebInfo
-    RUNTIME DESTINATION bin
-    LIBRARY DESTINATION lib
-    ARCHIVE DESTINATION lib/static
-)
-install(
-    FILES 
-    ${CMAKE_SOURCE_DIR}/assets/fonts/16x16-font.bmp
-    ${CMAKE_SOURCE_DIR}/assets/fonts/8x8-font.bmp
-    DESTINATION bin/font
-)
-install(
-    FILES 
-    ${CMAKE_SOURCE_DIR}/assets/config.ini
-    DESTINATION bin
+    RUNTIME DESTINATION ./
+#    LIBRARY DESTINATION lib
+#    ARCHIVE DESTINATION lib/static
 )
 install(
     FILES
-    ${CMAKE_SOURCE_DIR}/assets/biggraphics.tar.xz
-    DESTINATION bin
+    ${CMAKE_SOURCE_DIR}/assets/fonts/16x16-font.bmp
+    ${CMAKE_SOURCE_DIR}/assets/fonts/8x8-font.bmp
+    DESTINATION font
+)
+install(
+    FILES
+    ${CMAKE_SOURCE_DIR}/assets/config.ini
+    ${CMAKE_SOURCE_DIR}/assets/config_3d_pro.ini
+    ${CMAKE_SOURCE_DIR}/assets/config_attack_3.ini
+    ${CMAKE_SOURCE_DIR}/assets/config_xbox.ini
+    DESTINATION ./
+)
+install(
+    FILES
+    ${CMAKE_SOURCE_DIR}/assets/remc2_HD.tar.bz2
+    DESTINATION ./
 )
 
 set(ROOT_NAMESPACE remc2)
