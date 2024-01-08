@@ -1,0 +1,47 @@
+#!/bin/bash
+
+[ "$EUID" = "0" ] && {
+    echo 'error: run this with low privileges, not as root'
+}
+
+# config that contains a known good install dir location
+conf="${HOME}/.config/mcarpet2/game.cfg"
+
+exit_err() {
+    echo 'please follow the instructions by running'
+    echo ''
+    echo 'bash /usr/share/mcarpet2/mcarpet2_install.sh'
+    echo ''
+    echo 'to properly install the game assets.'
+    exit 1
+}
+
+[ ! -e "${conf}" ] && {
+    echo "${conf} file not found, exiting"
+    exit_err
+}
+
+. "${conf}"
+
+[ ! -e "${install_dir}/config.ini" ] && {
+    echo "${install_dir}/config.ini not found, exiting"
+    exit_err
+}
+
+# verify the checksum of the game assets
+# otherwise if a file is slightly off the engine will simply segfault
+# making debug a nightmare
+bash /usr/share/mcarpet2/mcarpet2_install.sh -d "${install_dir}"
+ret=$?
+
+[ -e "${install_dir}/biggraphics" ] && [ "${ret}" = "0" ] && {
+    grep -q 'useEnhancedGraphics = false' "${install_dir}/config.ini" && {
+        echo 'since you have the HD assets, you can set'
+        echo 'useEnhancedGraphics = true'
+        echo "in ${install_dir}/config.ini"
+    }
+}
+
+cd "${install_dir}"
+./remc2
+
