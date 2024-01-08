@@ -126,8 +126,8 @@ source_group("Source Files\\lib\\imgui" FILES ${SOURCE_FILES__lib__imgui})
 set(SOURCE_FILES__lib__imgui__backends
     "../lib/imgui/backends/imgui_impl_sdl2.cpp"
     "../lib/imgui/backends/imgui_impl_sdl2.h"
-    "../lib/imgui/backends/imgui_impl_sdlrenderer.cpp"
-    "../lib/imgui/backends/imgui_impl_sdlrenderer.h"
+    "../lib/imgui/backends/imgui_impl_sdlrenderer2.cpp"
+    "../lib/imgui/backends/imgui_impl_sdlrenderer2.h"
 )
 source_group("Source Files\\lib\\imgui\\backends" FILES ${SOURCE_FILES__lib__imgui__backends})
 
