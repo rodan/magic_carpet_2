@@ -7,7 +7,7 @@
 #ifdef CONFIG_IMGUI
 #include "imgui.h"
 #include "imgui_impl_sdl2.h"
-#include "imgui_impl_sdlrenderer.h"
+#include "imgui_impl_sdlrenderer2.h"
 #include <stdio.h>
 #include <SDL.h>
 
@@ -62,7 +62,7 @@ uint8_t port_imgui_init(void)
 
     // Setup Platform/Renderer backends
     ImGui_ImplSDL2_InitForSDLRenderer(window, renderer);
-    ImGui_ImplSDLRenderer_Init(renderer);
+    ImGui_ImplSDLRenderer2_Init(renderer);
 
     // Load Fonts
     // - If no fonts are loaded, dear imgui will use the default font. You can also load multiple fonts and use ImGui::PushFont()/PopFont() to select them.
@@ -105,7 +105,7 @@ uint8_t port_imgui_loop(void)
     ImVec4 clear_color = ImVec4(0.0f, 0.0f, 0.0f, 1.00f);
 
     // Start the Dear ImGui frame
-    ImGui_ImplSDLRenderer_NewFrame();
+    ImGui_ImplSDLRenderer2_NewFrame();
     ImGui_ImplSDL2_NewFrame();
     ImGui::NewFrame();
 
@@ -127,7 +127,7 @@ uint8_t port_imgui_loop(void)
     SDL_RenderSetScale(renderer, io.DisplayFramebufferScale.x, io.DisplayFramebufferScale.y);
     SDL_SetRenderDrawColor(renderer, (Uint8) (clear_color.x * 255), (Uint8) (clear_color.y * 255), (Uint8) (clear_color.z * 255),
                            (Uint8) (clear_color.w * 255));
-    ImGui_ImplSDLRenderer_RenderDrawData(ImGui::GetDrawData());
+    ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData());
 
     // these functions are called by port_sdl_vga_mouse.cpp:SubBlit()
     //SDL_RenderClear(renderer);
@@ -138,7 +138,7 @@ uint8_t port_imgui_loop(void)
 
 void port_imgui_cleanup(void)
 {
-    ImGui_ImplSDLRenderer_Shutdown();
+    ImGui_ImplSDLRenderer2_Shutdown();
     ImGui_ImplSDL2_Shutdown();
     ImGui::DestroyContext();
 
