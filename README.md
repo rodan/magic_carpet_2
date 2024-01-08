@@ -19,6 +19,17 @@ see the ChangeLog for a more detailed list.
 
 ## building on linux
 
+### Gentoo mode
+
+if you use Gentoo, this game is part of my [overlay](https://github.com/rodan/overlay).
+so compilation is as simple as
+
+```
+emerge mcarpet2
+```
+
+### manual mode
+
   1. Pull the development branch using GitHub. When pulling the branch either do a recursive clone of the repository or ensure that after the pull you run: `git submodule init` and `git submodule update`
   2. Make sure that you have `CMake`, `make` and a recent `GCC` installed
   3. Make sure that you have the following dependencies as development packages (the exact names depend on your distro)
@@ -53,9 +64,9 @@ In order to run the game you need to own a copy of Magic Carpet 2. We provide a 
   3. In order to retrieve the original game's assets run the following script located in the root of the repository:
 
   ```
-  bash check_install.sh -s [directory where GOG installed MC2] -d [destination directory]
+  mcarpet2_install.sh -s [directory where GOG installed MC2] -d [destination directory]
   # for example :
-  bash check_install.sh -s "${HOME}/.wine/drive_c/games/Magic Carpet 2/" -d "build/inst/bin/"
+  mcarpet2_install.sh -s "${HOME}/.wine/drive_c/games/Magic Carpet 2/" -d "build/inst/bin/"
   ```
 
 In case you already have the original game on CD, please follow these steps:
@@ -63,18 +74,18 @@ In case you already have the original game on CD, please follow these steps:
   2. run the following script, providing the correct device as source:
 
   ```
-  bash check_install.sh -s /dev/cdrom -d [destination directory]
+  mcarpet2_install.sh -s /dev/cdrom -d [destination directory]
   # for example :
-  bash check_install.sh -s /dev/sr0 -d "build/inst/bin/"
+  mcarpet2_install.sh -s /dev/sr0 -d "build/inst/bin/"
   ```
 
 
   Please note that if you have used any other method to get the assets, at least run a check to make sure that remc2 has access to every file it needs:
 
   ```
-  bash check_install.sh -d [destination directory]
+  mcarpet2_install.sh -d [destination directory]
   # for example:
-  bash check_install.sh -d "build/inst/bin/"
+  mcarpet2_install.sh -d "build/inst/bin/"
    [ ok ] CD_Files directory
    [ ok ] GAME directory
   ```
@@ -85,11 +96,10 @@ In case you already have the original game on CD, please follow these steps:
      1. `$XDG_DATA_HOME/remc2/`
      2. `$HOME/.local/share/remc2`
      3. next to the `remc2` binary
-  5. Run the `remc2` executable in install directory
+  5. Run the `remc2` executable in install directory via the provided wrapper
 
   ```
-  cd magic-carpet-2-hd/build/inst/bin
-  ./remc2
+  mcarpet2
   ```
 
 ## runtime configuration

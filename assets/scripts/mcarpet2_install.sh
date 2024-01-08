@@ -21,7 +21,7 @@ usage() {
     echo ''
     echo "      $0 -s [src_dir] -d [dest_dir]"
     echo ''
-    echo '          src_dir: GOG install dir or mounted Magic Carpet 2 CD'
+    echo '          src_dir: GOG install dir or the device holding the Magic Carpet 2 CD'
     echo '          dst_dir: has to be the dir where remc2 will search for the game assets'
     echo ''
     echo '   - install HD assets'
@@ -5303,9 +5303,9 @@ cp_usr_share() {
 get_HD_assets() {
     prefix="${1}"
     pushd "${prefix}" > /dev/null || return 1
-    #wget -q 'https://subdimension.ro/distfiles/remc2_HD.tar.bz2' -P /tmp
+    wget -q 'https://subdimension.ro/distfiles/remc2_HD.tar.bz2' -P /tmp
     tar -xf /tmp/remc2_HD.tar.bz2
-    #rm -f /tmp/remc2_HD.tar.bz2
+    rm -f /tmp/remc2_HD.tar.bz2
     popd > /dev/null || return 1
 }
 
