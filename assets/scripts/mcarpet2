@@ -10,7 +10,7 @@ conf="${HOME}/.config/mcarpet2/game.cfg"
 exit_err() {
     echo 'please follow the instructions by running'
     echo ''
-    echo 'bash /usr/share/mcarpet2/mcarpet2_install.sh'
+    echo 'mcarpet2_install.sh'
     echo ''
     echo 'to properly install the game assets.'
     exit 1
@@ -28,20 +28,29 @@ exit_err() {
     exit_err
 }
 
-# verify the checksum of the game assets
-# otherwise if a file is slightly off the engine will simply segfault
-# making debug a nightmare
-bash /usr/share/mcarpet2/mcarpet2_install.sh -d "${install_dir}"
-ret=$?
+check_assets=true
 
-[ -e "${install_dir}/biggraphics" ] && [ "${ret}" = "0" ] && {
-    grep -q 'useEnhancedGraphics = false' "${install_dir}/config.ini" && {
-        echo 'since you have the HD assets, you can set'
-        echo 'useEnhancedGraphics = true'
-        echo "in ${install_dir}/config.ini"
+[ "${1}" = "--skip-checks" ] && check_assets=false
+
+${check_assets} && {
+    # verify the checksum of the game assets
+    # otherwise if a file is slightly off the engine will simply segfault
+    # making debug a nightmare
+    mcarpet2_install.sh -d "${install_dir}"
+    ret=$?
+
+    [ -e "${install_dir}/biggraphics" ] && [ "${ret}" = "0" ] && {
+        grep -q 'useEnhancedGraphics = false' "${install_dir}/config.ini" && {
+            echo ''
+            echo ''
+            echo 'since you have the HD assets, you can set'
+            echo 'useEnhancedGraphics = true'
+            echo "inside the config.ini file located in ${install_dir}"
+            echo ''
+            echo ''
+        }
     }
 }
 
-cd "${install_dir}"
+cd "${install_dir}" || exit 1
 ./remc2
-
