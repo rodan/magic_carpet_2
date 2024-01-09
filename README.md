@@ -66,7 +66,7 @@ In order to run the game you need to own a copy of Magic Carpet 2. We provide a 
   ```
   mcarpet2_install.sh -s [directory where GOG installed MC2] -d [destination directory]
   # for example :
-  mcarpet2_install.sh -s "${HOME}/.wine/drive_c/games/Magic Carpet 2/" -d "build/inst/bin/"
+  mcarpet2_install.sh -s "${HOME}/.wine/drive_c/games/Magic Carpet 2/" -d ${HOME}/games/mcarpet2/
   ```
 
 In case you already have the original game on CD, please follow these steps:
@@ -76,31 +76,41 @@ In case you already have the original game on CD, please follow these steps:
   ```
   mcarpet2_install.sh -s /dev/cdrom -d [destination directory]
   # for example :
-  mcarpet2_install.sh -s /dev/sr0 -d "build/inst/bin/"
+  mcarpet2_install.sh -s /dev/sr0 -d ${HOME}/games/mcarpet2/
   ```
-
 
   Please note that if you have used any other method to get the assets, at least run a check to make sure that remc2 has access to every file it needs:
 
   ```
   mcarpet2_install.sh -d [destination directory]
   # for example:
-  mcarpet2_install.sh -d "build/inst/bin/"
+  mcarpet2_install.sh -d ${HOME}/games/mcarpet2/
    [ ok ] CD_Files directory
    [ ok ] GAME directory
+   [ ok ] recode engine
   ```
 
   this script will fix the permissions, make everything uppercase, check all file hashes and complain if any file is missing.
   it's also recommended that before the first run you remove the file GAME/NETHERW/CONFIG.DAT if it exists.
+
   4. NOTE: The game will search in the following locations (and in this particular order) for the game assets. For the flatpak only the first two locations can be used.
      1. `$XDG_DATA_HOME/remc2/`
      2. `$HOME/.local/share/remc2`
      3. next to the `remc2` binary
-  5. Run the `remc2` executable in install directory via the provided wrapper
+
+  5. try out the game engine via the provided wrapper
 
   ```
   mcarpet2
   ```
+
+  6. get the optional HD textures and synth-generated soundtrack with
+
+  ```
+  mcarpet2_install.sh -x -d [destination directory]
+  ```
+
+  7. Tweak the options in ```~/.config/mcarpet2/config.ini```
 
 ## runtime configuration
 
@@ -110,9 +120,9 @@ The game will search for this file in the following locations and this particula
 2. `$HOME/.config/remc2`
 3. next to the `remc2` binary
 
-## testimonies
+## testimonials
 
-![screenshot](./testimony.png)
+![screenshot](./testimonial.png)
 
 you are in the presence of greatness.
 
