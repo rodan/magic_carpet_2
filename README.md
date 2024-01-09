@@ -110,6 +110,12 @@ The game will search for this file in the following locations and this particula
 2. `$HOME/.config/remc2`
 3. next to the `remc2` binary
 
+## testimonies
+
+![screenshot](./testimony.png)
+
+you are in the presence of greatness.
+
 ## License ##
 ### Original Source Code is Copyright 1995 Bullfrog Productions ###
 
