@@ -18,7 +18,7 @@ see the ChangeLog for a more detailed list.
 
 ## building
 
-### Gentoo mode
+### Gentoo Linux
 
 if you use Gentoo, this game is part of my [overlay](https://github.com/rodan/overlay).
 so compilation is as simple as
@@ -29,9 +29,17 @@ emerge mcarpet2
 
 ### manual compilation mode
 
-  1. Pull the development branch using GitHub. When pulling the branch either do a recursive clone of the repository or ensure that after the pull you run: `git submodule init` and `git submodule update`
-  2. Make sure that you have `CMake`, `make` and a recent `GCC` installed
+  1. Get the entire repository recursively
+```
+git clone --recurse-submodules https://github.com/rodan/magic_carpet_2.git
+```
+for already cloned repos
+```
+cd magic_carpet_2 && git submodule update --init --recursive
+```
+  2. On Linux recent `make` and `gcc` are needed. On FreeBSD the stock make and clang will get used.
   3. Make sure that you have the following dependencies as development packages (the exact names depend on your distro)
+  - cmake
   - SDL2
   - SDL2_mixer
   - SDL2_image
