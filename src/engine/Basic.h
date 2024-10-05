@@ -3,7 +3,7 @@
 #ifndef MAIN_BASIC
 #define MAIN_BASIC
 
-#if (!defined(WIN32) && !defined(__linux__)) || defined(COMPILE_FOR_64BIT)
+#if (!defined(WIN32) && !defined(__linux__) && !defined(__FreeBSD__)) || defined(COMPILE_FOR_64BIT)
 #define TEST_x64                //only for x64 testing
 #endif
 

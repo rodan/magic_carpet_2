@@ -17,7 +17,7 @@ after NetworkCancel_748F7 not changed
 
 */
 
-#ifdef __linux__
+#if defined(__linux__) || defined(__FreeBSD__)
 #include <strings.h>
 #include <cstdlib>
 #include <cstring>
@@ -39215,7 +39215,8 @@ void pre_sub_4A190_0x6E8E(uint32_t address, event_t *a1_6E8E)   //pre 22b190
             break;
         }
     case 0x1f6d40:{
-#ifdef __linux__                // FIXME: types
+#if defined(__linux__) || defined(__FreeBSD__)
+// FIXME: types
             std::cout << "FIXME: types @ function " << __FUNCTION__ << ", line " << __LINE__ << std::endl;
 #else
             sub_15D40((short)a1_6E8E, 0, 0);
@@ -39309,7 +39310,8 @@ void pre_sub_4A190_0x6E8E(uint32_t address, event_t *a1_6E8E)   //pre 22b190
             break;
         }
     case 0x1fa1b0:{
-#ifdef __linux__                // FIXME: types
+#if defined(__linux__) || defined(__FreeBSD__)
+// FIXME: types
             std::cout << "FIXME: types @ function " << __FUNCTION__ << ", line " << __LINE__ << std::endl;
 #else
             SelectSpell_191B0((short)a1_6E8E, 0);
@@ -39335,7 +39337,8 @@ void pre_sub_4A190_0x6E8E(uint32_t address, event_t *a1_6E8E)   //pre 22b190
             break;
         }
     case 0x1faca0:{
-#ifdef __linux__                // FIXME: types
+#if defined(__linux__) || defined(__FreeBSD__)
+// FIXME: types
             std::cout << "FIXME: types @ function " << __FUNCTION__ << ", line " << __LINE__ << std::endl;
 #else
             ChangeSoundLevel_19CA0((uint8_t) a1_6E8E);
@@ -39406,7 +39409,8 @@ void pre_sub_4A190_0x6E8E(uint32_t address, event_t *a1_6E8E)   //pre 22b190
             break;
         }
     case 0x1fb970:{
-#ifdef __linux__                // FIXME: types
+#if defined(__linux__) || defined(__FreeBSD__)
+// FIXME: types
             std::cout << "FIXME: types @ function " << __FUNCTION__ << ", line " << __LINE__ << std::endl;
 #else
             sub_1A970_change_game_settings((char)a1_6E8E, 0, 0);
@@ -40744,7 +40748,8 @@ void pre_sub_4A190_0x6E8E(uint32_t address, event_t *a1_6E8E)   //pre 22b190
             break;
         }
     case 0x20cc80:{
-#ifdef __linux__                // FIXME: types
+#if defined(__linux__) || defined(__FreeBSD__)
+// FIXME: types
             std::cout << "FIXME: types @ function " << __FUNCTION__ << ", line " << __LINE__ << std::endl;
 #else
             DrawLine_2BC80((uint16_t) a1_6E8E, 0, 0, 0, 0);
@@ -41010,7 +41015,8 @@ void pre_sub_4A190_0x6E8E(uint32_t address, event_t *a1_6E8E)   //pre 22b190
         }
 
     case 0x215b00:{
-#ifdef __linux__                // FIXME: types
+#if defined(__linux__) || defined(__FreeBSD__)
+// FIXME: types
             std::cout << "FIXME: types @ function " << __FUNCTION__ << ", line " << __LINE__ << std::endl;
 #else
             sub_34B00((char)a1_6E8E, 0, 0, 0);
@@ -41264,7 +41270,8 @@ void pre_sub_4A190_0x6E8E(uint32_t address, event_t *a1_6E8E)   //pre 22b190
             break;
         }
     case 0x233d70:{
-#ifdef __linux__                // FIXME: types
+#if defined(__linux__) || defined(__FreeBSD__)
+// FIXME: types
             std::cout << "FIXME: types @ function " << __FUNCTION__ << ", line " << __LINE__ << std::endl;
 #else
             sub_52D70((unsigned short)a1_6E8E, 0);
@@ -41286,7 +41293,8 @@ void pre_sub_4A190_0x6E8E(uint32_t address, event_t *a1_6E8E)   //pre 22b190
             break;
         }
     case 0x2343b0:{
-#ifdef __linux__                // FIXME: types
+#if defined(__linux__) || defined(__FreeBSD__)
+// FIXME: types
             std::cout << "FIXME: types @ function " << __FUNCTION__ << ", line " << __LINE__ << std::endl;
 #else
             sub_533B0_decompress_levels((short)a1_6E8E, 0);
@@ -41431,7 +41439,8 @@ void pre_sub_4A190_0x6E8E(uint32_t address, event_t *a1_6E8E)   //pre 22b190
             break;
         }
     case 0x241400:{
-#ifdef __linux__                // FIXME: types
+#if defined(__linux__) || defined(__FreeBSD__)
+// FIXME: types
             std::cout << "FIXME: types @ function " << __FUNCTION__ << ", line " << __LINE__ << std::endl;
 #else
             sub_60400((short)a1_6E8E, 0, 0);
@@ -42289,7 +42298,8 @@ void pre_sub_4A190_0x6E8E(uint32_t address, event_t *a1_6E8E)   //pre 22b190
             break;
         }
     case 0x24e420:{
-#ifdef __linux__                // FIXME: types
+#if defined(__linux__) || defined(__FreeBSD__)
+// FIXME: types
             std::cout << "FIXME: types @ function " << __FUNCTION__ << ", line " << __LINE__ << std::endl;
 #else
             SelectSpellCategory_6D420((short)a1_6E8E, 0);
@@ -42324,7 +42334,8 @@ void pre_sub_4A190_0x6E8E(uint32_t address, event_t *a1_6E8E)   //pre 22b190
         }
 
     case 0x24e8b0:{
-#ifdef __linux__                // FIXME: types
+#if defined(__linux__) || defined(__FreeBSD__)
+// FIXME: types
             std::cout << "FIXME: types @ function " << __FUNCTION__ << ", line " << __LINE__ << std::endl;
 #else
             sub_6D8B0((unsigned short)a1_6E8E, 0, 0);
@@ -42341,7 +42352,8 @@ void pre_sub_4A190_0x6E8E(uint32_t address, event_t *a1_6E8E)   //pre 22b190
             break;
         }
     case 0x24eb50:{
-#ifdef __linux__                // FIXME: types
+#if defined(__linux__) || defined(__FreeBSD__)
+// FIXME: types
             std::cout << "FIXME: types @ function " << __FUNCTION__ << ", line " << __LINE__ << std::endl;
 #else
             sub_6DB50((char)a1_6E8E, 0);
@@ -42355,7 +42367,8 @@ void pre_sub_4A190_0x6E8E(uint32_t address, event_t *a1_6E8E)   //pre 22b190
         }
 
     case 0x24ec40:{
-#ifdef __linux__                // FIXME: types
+#if defined(__linux__) || defined(__FreeBSD__)
+// FIXME: types
             std::cout << "FIXME: types @ function " << __FUNCTION__ << ", line " << __LINE__ << std::endl;
 #else
             sub_6DC40_improve_ability((unsigned char)a1_6E8E);
@@ -42368,7 +42381,8 @@ void pre_sub_4A190_0x6E8E(uint32_t address, event_t *a1_6E8E)   //pre 22b190
             break;
         }
     case 0x24f020:{
-#ifdef __linux__                // FIXME: types
+#if defined(__linux__) || defined(__FreeBSD__)
+// FIXME: types
             std::cout << "FIXME: types @ function " << __FUNCTION__ << ", line " << __LINE__ << std::endl;
 #else
             sub_6E020((unsigned short)a1_6E8E);
@@ -42390,7 +42404,8 @@ void pre_sub_4A190_0x6E8E(uint32_t address, event_t *a1_6E8E)   //pre 22b190
             break;
         }
     case 0x24f450:{
-#ifdef __linux__                // FIXME: types
+#if defined(__linux__) || defined(__FreeBSD__)
+// FIXME: types
             std::cout << "FIXME: types @ function " << __FUNCTION__ << ", line " << __LINE__ << std::endl;
 #else
             PrepareEventSound_6E450((short)a1_6E8E, 0, 0);
@@ -42436,7 +42451,8 @@ void pre_sub_4A190_0x6E8E(uint32_t address, event_t *a1_6E8E)   //pre 22b190
             break;
         }
     case 0x24fde0:{
-#ifdef __linux__                // FIXME: types
+#if defined(__linux__) || defined(__FreeBSD__)
+// FIXME: types
             std::cout << "FIXME: types @ function " << __FUNCTION__ << ", line " << __LINE__ << std::endl;
 #else
             SetMousePosition_6EDE0((short)a1_6E8E, 0);
@@ -42445,7 +42461,8 @@ void pre_sub_4A190_0x6E8E(uint32_t address, event_t *a1_6E8E)   //pre 22b190
             break;
         }
     case 0x24ff10:{
-#ifdef __linux__                // FIXME: types
+#if defined(__linux__) || defined(__FreeBSD__)
+// FIXME: types
             std::cout << "FIXME: types @ function " << __FUNCTION__ << ", line " << __LINE__ << std::endl;
 #else
             sub_6EF10_set_mouse_minmax((short)a1_6E8E, 0, 0, 0);
@@ -48339,7 +48356,11 @@ bool sub_53EF0_fileexist(const char *path, const char *path2)   //234ef0//fix a2
 //----- (00053F60) --------------------------------------------------------
 bool sub_53F60(const char *a1)  //234f60
 {
-    return myaccess(a1, 0) != NULL;     //234F69 - 279CF2
+    if (myaccess(a1, 0) == 1)
+        return 1;
+    else
+        return 0;
+        //234F69 - 279CF2
 }
 
 // 98CF2: using guessed type x_DWORD access(x_DWORD, x_DWORD);

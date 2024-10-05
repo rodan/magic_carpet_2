@@ -223,13 +223,15 @@ if (UNIX)
     target_link_libraries(${PROJECT_NAME} PUBLIC
         SDL2::Main
         SDL2::Mixer
-        ${PNG_LIBRARY}
         Boost::system
-        spdlog
-        fmt
+        ${SPDLOG_LIBRARIES}
+        ${ZLIB_LIBRARIES}
+        ${PNG_LIBRARIES}
         openal
+        m
     )
     target_link_directories(${PROJECT_NAME} PUBLIC
+        /usr/local/lib
     )
     target_compile_definitions(${PROJECT_NAME} PUBLIC
         "$<$<CONFIG:DEBUG>:_DEBUG>"

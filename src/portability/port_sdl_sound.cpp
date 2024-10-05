@@ -4,7 +4,7 @@
 #include "port_openal.h"
 #include "port_sdl_sound.h"
 
-#ifdef __linux__
+#if defined(__linux__) || defined(__FreeBSD__)
 #include <limits>
 #define MAX_PATH PATH_MAX
 #endif
@@ -122,7 +122,7 @@ void SOUND_set_sequence_volume(int32_t volume, int32_t milliseconds)
         return;
     //Logger->info("SOUND_set_sequence_volume  vol {}  ms {}", volume, milliseconds);
 #ifdef SOUND_SDLMIXER
-#ifndef __linux__
+#if defined(__linux__) || defined(__FreeBSD__)
     if ((milliseconds > 0) && (volume == 0)) {
         if (GAME_music[last_sequence_num]) {
             double position = Mix_GetMusicPosition(GAME_music[last_sequence_num]);

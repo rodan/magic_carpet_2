@@ -38,7 +38,7 @@ std::string findIniFile()
     if (CommandLineParams.GetConfigFilePath().length() > 0) {
         inifile_locations.push_back(CommandLineParams.GetConfigFilePath());
     } else {
-#ifdef __linux__
+#if defined(__linux__) || defined(__FreeBSD__)
         auto env_home_dir = std::getenv("HOME");
         auto env_xdg_config_home_dir = std::getenv("XDG_CONFIG_HOME");
         std::filesystem::path home_dir;

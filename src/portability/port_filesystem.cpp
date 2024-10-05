@@ -282,22 +282,22 @@ FILE *myopent(char *path, char *type)
 
 dirsstruct getListDir(char *dirname)
 {
-    struct dirent *de;          // Pointer for directory entry 
+    struct dirent *de;          // Pointer for directory entry
     dirsstruct directories;
     directories.number = 0;
-    // opendir() returns a pointer of DIR type.  
+    // opendir() returns a pointer of DIR type.
     DIR *dr = opendir(dirname);
-    if (dr == NULL)             // opendir returns NULL if couldn't open directory 
+    if (dr == NULL)             // opendir returns NULL if couldn't open directory
     {
         Logger->error("Could not open current directory1 {}", dirname);
         return directories;
     }
-    // Refer http://pubs.opengroup.org/onlinepubs/7990989775/xsh/readdir.html 
-    // for readdir() 
+    // Refer http://pubs.opengroup.org/onlinepubs/7990989775/xsh/readdir.html
+    // for readdir()
     while ((de = readdir(dr)) != NULL) {
         if (de->d_name[0] != '.')
             sprintf(directories.dir[directories.number++], "%s", de->d_name);
-        //printf("%s\n", de->d_name);           
+        //printf("%s\n", de->d_name);
     }
     closedir(dr);
     return directories;
@@ -313,31 +313,31 @@ void FixDir(char *outdirname, char *indirname)
 
 dirsstruct getListDirFix(char* indirname)
 {
-	struct dirent *de;  // Pointer for directory entry 
-	dirsstruct directories;
-	directories.number = 0;
-	// opendir() returns a pointer of DIR type.  
-	char path2[512] = "\0";
-	char pathexe[512] = "\0";
-	get_exe_path(pathexe);
-	sprintf(path2,"%s/%s", pathexe,indirname);
+    struct dirent *de;  // Pointer for directory entry
+    dirsstruct directories;
+    directories.number = 0;
+    // opendir() returns a pointer of DIR type.
+    char path2[512] = "\0";
+    char pathexe[512] = "\0";
+    get_exe_path(pathexe);
+    sprintf(path2,"%s/%s", pathexe,indirname);
 
-	DIR *dr = opendir(path2);
-	if (dr == NULL)  // opendir returns NULL if couldn't open directory 
-	{
-		printf("Could not open current directory2 %s\n", path2);
-		return directories;
-	}
-	// Refer http://pubs.opengroup.org/onlinepubs/7990989775/xsh/readdir.html 
-	// for readdir() 
-	while ((de = readdir(dr)) != NULL)
-	{
-		if (de->d_name[0] != '.')
-			sprintf(directories.dir[directories.number++], "%s", de->d_name);
-		//printf("%s\n", de->d_name);		
-	}
-	closedir(dr);
-	return directories;
+    DIR *dr = opendir(path2);
+    if (dr == NULL)  // opendir returns NULL if couldn't open directory
+    {
+        printf("Could not open current directory2 %s\n", path2);
+        return directories;
+    }
+    // Refer http://pubs.opengroup.org/onlinepubs/7990989775/xsh/readdir.html
+    // for readdir()
+    while ((de = readdir(dr)) != NULL)
+    {
+        if (de->d_name[0] != '.')
+            sprintf(directories.dir[directories.number++], "%s", de->d_name);
+        //printf("%s\n", de->d_name);
+    }
+    closedir(dr);
+    return directories;
 }
 */
 int dos_getdrive(int *a)
@@ -482,7 +482,7 @@ void ReadGraphicsfile(const char *path, uint8_t *buffer, long size)
 std::string getExistingDataPath(std::filesystem::path path)
 {
     std::vector < std::string > file_locations;
-#ifdef __linux__
+#if defined(__linux__) || defined(__FreeBSD__)
     auto env_home_dir = std::getenv("HOME");
     auto env_xdg_data_home_dir = std::getenv("XDG_DATA_HOME");
     std::filesystem::path home_dir;
@@ -498,6 +498,12 @@ std::string getExistingDataPath(std::filesystem::path path)
     if (std::filesystem::exists(home_dir)) {
         file_locations.emplace_back(home_dir / ".local" / "share" / "remc2" / path);
     }
+    if (std::filesystem::exists("/opt/remc2")) {
+        file_locations.emplace_back("/opt/remc2" / path);
+    }
+    if (std::filesystem::exists("/usr/local/remc2")) {
+        file_locations.emplace_back("/usr/local/remc2" / path);
+    }
 #else                           //__linux__
     auto home_drive = std::getenv("HOMEDRIVE");
     auto home_path = std::getenv("HOMEPATH");
@@ -511,8 +517,8 @@ std::string getExistingDataPath(std::filesystem::path path)
     std::string file_found;
 
     // first location at which the file can be found is chosen
- for (const std::string & file_location:file_locations) {
-#ifdef __linux__
+    for (const std::string & file_location:file_locations) {
+#if defined(__linux__) || defined(__FreeBSD__)
         std::string caseInsensitivePath = casepath(file_location);
         if (std::filesystem::exists(caseInsensitivePath)) {
             file_found = std::string(caseInsensitivePath);
@@ -520,72 +526,64 @@ std::string getExistingDataPath(std::filesystem::path path)
         }
 #else                           //__linux__
         if (std::filesystem::exists(file_location)) {
-                                                     file_found = file_location; break;}
+            file_found = file_location;
+            break;
+        }
 #endif                          //__linux__
-                                                     }
-                                                     if (CommandLineParams.DoShowDebugMessages1())
-                                                     std::
-                                                     cout << "Data file found: " << file_found <<
-                                                     "\n"; return file_found;}
+    }
+    if (CommandLineParams.DoShowDebugMessages1())
+        std::cout << "Data file found: " << file_found << "\n";
+    return file_found;
+}
 
-                                                     std::
-                                                     string GetSubDirectoryPath(const char
-                                                                                *subDirectory) {
-                                                     std::string path =
-                                                     getExistingDataPath(subDirectory);
-                                                     return path.c_str();}
+std::string GetSubDirectoryPath(const char
+                                *subDirectory)
+{
+    std::string path = getExistingDataPath(subDirectory);
+    return path.c_str();
+}
 
-                                                     std::
-                                                     string GetSubDirectoryPath(const char
-                                                                                *gamepath,
-                                                                                const char
-                                                                                *subDirectory) {
-                                                     std::string path =
-                                                     getExistingDataPath(std::filesystem::
-                                                                         path(gamepath) /
-                                                                         std::filesystem::
-                                                                         path(subDirectory)
-                                                     ); return path.c_str();}
+std::string GetSubDirectoryPath(const char
+                                *gamepath, const char
+                                *subDirectory)
+{
+    std::string path = getExistingDataPath(std::filesystem::path(gamepath) / std::filesystem::path(subDirectory)
+        );
+    return path.c_str();
+}
 
-                                                     std::
-                                                     string GetSubDirectoryFilePath(const char
-                                                                                    *subDirectory,
-                                                                                    const char
-                                                                                    *fileName) {
-                                                     std::string subDirPath =
-                                                     GetSubDirectoryPath(subDirectory);
-                                                     return subDirPath + "/" +
-                                                     std::string(fileName);}
+std::string GetSubDirectoryFilePath(const char
+                                    *subDirectory, const char
+                                    *fileName)
+{
+    std::string subDirPath = GetSubDirectoryPath(subDirectory);
+    return subDirPath + "/" + std::string(fileName);
+}
 
-                                                     std::
-                                                     string GetSubDirectoryFile(const char
-                                                                                *gamepath,
-                                                                                const char
-                                                                                *subDirectory,
-                                                                                const char
-                                                                                *fileName) {
-                                                     std::string subDirPath =
-                                                     GetSubDirectoryPath(gamepath, subDirectory);
-                                                     return subDirPath + "/" +
-                                                     std::string(fileName);}
+std::string GetSubDirectoryFile(const char
+                                *gamepath, const char
+                                *subDirectory, const char
+                                *fileName)
+{
+    std::string subDirPath = GetSubDirectoryPath(gamepath, subDirectory);
+    return subDirPath + "/" + std::string(fileName);
+}
 
-                                                     std::
-                                                     string GetSaveGameFile(const char *gamepath,
-                                                                            int16_t index) {
-                                                     std::string subDirPath =
-                                                     GetSubDirectoryPath(gamepath, "SAVE");
-                                                     char buffer[MAX_PATH];
-                                                     sprintf(buffer, "%s/SAVE%d.GAM",
-                                                             subDirPath.c_str(), index);
-                                                     return std::string(buffer);}
+std::string GetSaveGameFile(const char *gamepath, int16_t index)
+{
+    std::string subDirPath = GetSubDirectoryPath(gamepath, "SAVE");
+    char buffer[MAX_PATH];
+    sprintf(buffer, "%s/SAVE%d.GAM", subDirPath.c_str(), index);
+    return std::string(buffer);
+}
 
-                                                     int GetDirectory(char *directory,
-                                                                      const char *filePath) {
-                                                     string str = string(filePath);
-                                                     size_t found = str.find_last_of("/\\");
-                                                     if (found) {
-                                                     directory =
-                                                     strcpy(directory,
-                                                            str.substr(0, found).c_str());
-                                                     return 0;}
-                                                     return -1;}
+int GetDirectory(char *directory, const char *filePath)
+{
+    string str = string(filePath);
+    size_t found = str.find_last_of("/\\");
+    if (found) {
+        directory = strcpy(directory, str.substr(0, found).c_str());
+        return 0;
+    }
+    return -1;
+}

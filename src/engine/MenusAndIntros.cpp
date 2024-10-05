@@ -1,7 +1,7 @@
 #include "MenusAndIntros.h"
 #include "CommandLineParser.h"
 
-#ifdef __linux__
+#if defined(__linux__) || defined(__FreeBSD__)
 void _strupr(char *s)
 {
     char *p = s;

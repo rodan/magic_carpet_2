@@ -1,11 +1,10 @@
 # Magic Carpet 2
 Based off the Reverse engineering of game Magic Carpet 2 from assembler to c/c++ language by Tomas Versly <br />
 Forked from Tomas Vesely's repo here: https://github.com/turican0/remc2 <br/><br/>
-Tomas has done amazing work, not only reverse engineering this code but updating it to use more modern memory allocation and use the SDL library for input and sound. He has even increased the sprite resolutions.
 
 ## about this fork
 
-this is a linux-targeted repository and changes include:
+this is a Linux and FreeBSD targeted repository and changes include:
 
  - major cleanup of the repository
  - added check/install script
@@ -17,7 +16,7 @@ this is a linux-targeted repository and changes include:
 
 see the ChangeLog for a more detailed list.
 
-## building on linux
+## building
 
 ### Gentoo mode
 
@@ -28,7 +27,7 @@ so compilation is as simple as
 emerge mcarpet2
 ```
 
-### manual mode
+### manual compilation mode
 
   1. Pull the development branch using GitHub. When pulling the branch either do a recursive clone of the repository or ensure that after the pull you run: `git submodule init` and `git submodule update`
   2. Make sure that you have `CMake`, `make` and a recent `GCC` installed
@@ -41,16 +40,19 @@ emerge mcarpet2
   - boost
   - OpenAL
   - spdlog
+  - zlib
+  - libfmt
   4. Build the code
 
-  ```bash
-  ~ export BUILDTYPE=Debug # or Release
-  ~ mkdir -p build
-  ~ cd build
-  ~ cmake -DCMAKE_BUILD_TYPE=${BUILDTYPE} -DCMAKE_INSTALL_PREFIX=./inst [SOURCE_DIR]
-  ~ make
-  ~ make install
-  ```
+```bash
+cd magic_carpet_2
+export BUILDTYPE=Debug # or Release
+mkdir -p build
+cd build
+cmake -DCMAKE_BUILD_TYPE=${BUILDTYPE} -DCMAKE_INSTALL_PREFIX=./inst ../
+make
+make install
+```
 
   5. Magic Carpet 2 is now built. you can find it in `build/inst/bin`
      - You can also run the code with sanitizers (leak, address, undefined behaviour, pointers) by passing `-DUSE_SANITIZERS=True` to CMake

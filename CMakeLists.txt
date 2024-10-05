@@ -19,13 +19,16 @@ if (GITHUB_CI_COMPATIBILITY_PATH)
     set(CMAKE_LIBRARY_PATH "${GITHUB_CI_COMPATIBILITY_PATH}")
 endif ()
 
+find_package(PkgConfig REQUIRED)
 find_package(SDL2 REQUIRED)
 find_package(SDL2_mixer REQUIRED)
 find_package(SDL2_ttf REQUIRED)
 find_package(SDL2_image REQUIRED)
 find_package(PNG REQUIRED)
 find_package(Boost REQUIRED system)
-
+pkg_check_modules(SPDLOG REQUIRED spdlog)
+pkg_check_modules(PNG REQUIRED libpng)
+pkg_check_modules(ZLIB REQUIRED zlib)
 
 ################################################################################
 # Global configuration types
@@ -53,13 +56,16 @@ if(MSVC)
     set(CMAKE_CXX_FLAGS_XBOX_RELEASE "")
 else()
     set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS})
-    #add_compile_options(-fpermissive)
+    add_compile_options(-fpermissive)
     add_compile_options(-Wno-narrowing)
     #add_compile_options(-Wall)
     #add_compile_options(-Wextra)
     #add_compile_options(-pedantic)
     add_compile_options(-Wno-unknown-pragmas)
+    add_compile_options(${SPDLOG_CFLAGS_OTHER})
+    add_compile_options(-I${PNG_INCLUDE_DIRS})
     add_compile_options(-w)
+
     if (USE_SANITIZERS)
         add_compile_options(-fsanitize=address)
         add_compile_options(-fsanitize=pointer-compare)
@@ -91,7 +97,6 @@ else()
     set(CMAKE_EXE_LINKER_FLAGS ${CMAKE_EXE_LINKER_FLAGS})
     set(CMAKE_SHARED_LINKER_FLAGS ${CMAKE_SHARED_LINKER_FLAGS})
 endif()
-
 
 ################################################################################
 # Use solution folders feature

@@ -2232,7 +2232,7 @@ __int64 sub_9F3D0(HMDIDRIVER hMdiDriver, int /*a2 */ , unsigned __int16 a3, unsi
         v10 = sub_9F220(str_E3E54.par2);
         v11 = 0;
         AilCallDriver_91F70(hMdiDriver->drvr_0, 1286, &v8, &v8);
-        if (v8.AX != NULL) {
+        if (v8.AX != 0) {
             WORD2(v12) = 0;
             LODWORD(v12) = 0;
         } else {
