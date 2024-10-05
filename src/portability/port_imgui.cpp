@@ -127,7 +127,7 @@ uint8_t port_imgui_loop(void)
     SDL_RenderSetScale(renderer, io.DisplayFramebufferScale.x, io.DisplayFramebufferScale.y);
     SDL_SetRenderDrawColor(renderer, (Uint8) (clear_color.x * 255), (Uint8) (clear_color.y * 255), (Uint8) (clear_color.z * 255),
                            (Uint8) (clear_color.w * 255));
-    ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData());
+    ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData(), renderer);
 
     // these functions are called by port_sdl_vga_mouse.cpp:SubBlit()
     //SDL_RenderClear(renderer);

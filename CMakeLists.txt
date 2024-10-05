@@ -63,7 +63,6 @@ else()
     #add_compile_options(-pedantic)
     add_compile_options(-Wno-unknown-pragmas)
     add_compile_options(${SPDLOG_CFLAGS_OTHER})
-    add_compile_options(-I${PNG_INCLUDE_DIRS})
     add_compile_options(-w)
 
     if (USE_SANITIZERS)

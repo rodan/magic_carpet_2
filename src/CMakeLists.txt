@@ -220,6 +220,7 @@ if (UNIX)
         "${CMAKE_SOURCE_DIR}/lib/findfirst"
         "${CMAKE_SOURCE_DIR}/lib/imgui"
         "${CMAKE_SOURCE_DIR}/lib/imgui/backends"
+        ${PNG_INCLUDE_DIRS}
     )
     #target_compile_definitions(${PROJECT_NAME} PRIVATE
     #)
