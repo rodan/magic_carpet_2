@@ -187,8 +187,8 @@ install(
 )
 install(
     FILES
-    ${CMAKE_SOURCE_DIR}/assets/fonts/16x16-font.bmp
-    ${CMAKE_SOURCE_DIR}/assets/fonts/8x8-font.bmp
+    ${CMAKE_SOURCE_DIR}/assets/font/16x16-font.bmp
+    ${CMAKE_SOURCE_DIR}/assets/font/8x8-font.bmp
     DESTINATION font
 )
 install(
@@ -197,6 +197,11 @@ install(
     ${CMAKE_SOURCE_DIR}/assets/config_3d_pro.ini
     ${CMAKE_SOURCE_DIR}/assets/config_attack_3.ini
     ${CMAKE_SOURCE_DIR}/assets/config_xbox.ini
+    ${CMAKE_SOURCE_DIR}/README_controllers
+    ${CMAKE_SOURCE_DIR}/README_OpenAL
+    ${CMAKE_SOURCE_DIR}/README.md
+    ${CMAKE_SOURCE_DIR}/assets/scripts/mcarpet2
+    ${CMAKE_SOURCE_DIR}/assets/scripts/mcarpet2_install.sh
     DESTINATION ./
 )
 
