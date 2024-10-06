@@ -1,13 +1,16 @@
-#!/bin/bash
+#!/bin/sh
 
-[ "$EUID" = "0" ] && {
-    echo 'error: run this script with low privileges, not as root'
-}
+# asset install script used by the Magic Carpet 2 game engine
+# Copyright 2023-2024  Petre Rodan <petre.rodan@subdimension.ro>
+#
+# ChangeLog
+#   20241006:
+#       make script compatible with both bash and FreeBSD's default 'sh' IEEE Std 1003.1 (“POSIX.1”) spec interpreter
 
 usage() {
     echo ''
     echo ' the remc2 engine currently needs R/W access to most of the game asset files.'
-    echo ' this is why we currently install to a directory where the user has access.'
+    echo ' this is why we currently install to a directory where the user has full access.'
     echo ''
     echo 'Usage:'
     echo '   - check install'
@@ -36,10 +39,11 @@ usage() {
 }
 
 # config that contains a known good install dir location
-conf="${HOME}/.config/mcarpet2/game.cfg"
+conf="${HOME}/.config/remc2/game.cfg"
 
 check_CD_Files() {
-    cat << EOF | sha256sum --quiet --check
+    rm -f /tmp/.mcarpet2_hashes
+    cat << EOF > /tmp/.mcarpet2_hashes
 a8d2aa84b8ffc7d5f7313c244ca45d632d748e19370c4744788818ab1b4b4b67  ./SOUND/MPU401.MDI
 d258ed5119eaf3c1499ddd49536efab238d228ef5ff60a49c0caf710f613d19a  ./SOUND/ESFM.MDI
 03d90c1c0e5c029b9016e593fce2ce3d4ceb6f67d016d291821031f0406388f8  ./SOUND/AILDRVR.LST
@@ -192,10 +196,12 @@ c927a388ca4c66ef00cc23a7493743324f2f63bfc8bbd9842c7ec1d0b5fd4d7c  ./LANGUAGE/L3.
 179a65f04d4aa7bc147cfd56ffb63a0da400dfd85542eb0fbda10265d6bc1bea  ./LEVELS/LEVELS.TAB
 3b7fae5d7c350486a4f62ad4b2e9fa2e4e52023a216b8a7f043ce02439b50222  ./LEVELS/LEVELS.DAT
 EOF
+    sha256sum --quiet --check /tmp/.mcarpet2_hashes
 }
 
 check_GAME() {
-    cat << EOF | sha256sum --quiet --check
+    rm -f /tmp/.mcarpet2_hashes
+    cat << EOF > /tmp/.mcarpet2_hashes
 84af85f568e2b909a5a881a3beb7b0d4dfdbe7d3b7a89d572a49a35ff7413074  ./NETHERW/CDATA/TMAPS0-0.DAT
 4aef0bfa2317402a6b29e1ef324b01c316280e10f0a0a58ea4cbacd5d4d58841  ./NETHERW/CDATA/TMAPS0-0.TAB
 b091204ec21c0cf99716f3ae5c426a37113e57dda48a0d4d2eef98167e6ed0ff  ./NETHERW/CDATA/TMAPS1-0.DAT
@@ -232,6 +238,7 @@ a1a9470e8f16811a6e9a83f1766a5c76080b27948d4d9d9a124e4f41948d0ada  ./NETHERW/SOUN
 4e63a94e272f37907910cc2a73120d2d21f3651a66bd06fcac7e80c93af55478  ./NETHERW/SOUND/ULTRA.DIG
 e7034fb38cd05821bb0960537745db75348c193c7a9889373bbcc86eb1cac17f  ./NETHERW/SOUND/ULTRA.MDI
 EOF
+    sha256sum --quiet --check /tmp/.mcarpet2_hashes
 }
 
 check_usr_share() {
@@ -242,7 +249,8 @@ check_usr_share() {
 }
 
 check_HD_assets() {
-    cat << EOF | sha256sum --quiet --check
+    rm -f /tmp/.mcarpet2_hashes
+    cat << EOF > /tmp/.mcarpet2_hashes
 54bd2ae9b62fc5b3d602cfc412427ef1c2bf2f117dc3924f4ffecd43050a11e6  ./speech/track02.cdr
 ae2fedaf375ce9cc61dbbd4a41d96d91036297e27cf501ca4a18675241098a53  ./speech/track03.cdr
 fece87402abf2b9010a1616dd57c80e80cccbdf412be194f064ffdfb7c27c4ce  ./speech/track04.cdr
@@ -5251,6 +5259,7 @@ d9171feae777c010abf0b750edc5fb66a390bfab5a5215b5e34c4936ce9d7745  ./biggraphics/
 45f141c235bbb23d6d3f32b7d5bfa1141f63ac51e176686f975d34260629f114  ./biggraphics/TMAPS/TMAPS2-2-503-18.data
 a516377756566e980923877ad1eab754593a2bc3ea21682d454919b8d21a5a3f  ./biggraphics/TMAPS/TMAPS2-2-503-19.data
 EOF
+    sha256sum --quiet --check /tmp/.mcarpet2_hashes
 }
 
 mv_files() {
@@ -5284,10 +5293,10 @@ ebegin() {
 }
 
 eend() {
-    local retval="${1:-0}" efunc="${2:-eerror}" msg
-    shift 2
+    retval="${1:-0}"
+    efunc="${2:-eerror}"
 
-    if [[ ${retval} == "0" ]] ; then
+    if [ "${retval}" = "0" ] ; then
         msg="${BRACKET}[ ${GOOD}ok${BRACKET} ]${NORMAL}"
     else
         msg="${BRACKET}[ ${BAD}!!${BRACKET} ]${NORMAL} $*"
@@ -5296,25 +5305,29 @@ eend() {
 }
 
 cp_usr_share() {
-    cp -r /usr/share/mcarpet2/* "${1}/"
+    for loc in '/usr/share/mcarpet2' '/usr/local/share/mcarpet2'; do
+        [ -e "${loc}" ] && {
+            cp -r ${loc}/* "${1}/"
+        }
+    done
     chmod +x "${1}/remc2"
 }
 
 get_HD_assets() {
     prefix="${1}"
-    pushd "${prefix}" > /dev/null || return 1
+    cd "${prefix}" > /dev/null || return 1
     wget -q 'https://subdimension.ro/distfiles/remc2_HD.tar.bz2' -P /tmp
     tar -xf /tmp/remc2_HD.tar.bz2
     rm -f /tmp/remc2_HD.tar.bz2
-    popd > /dev/null || return 1
+    cd - > /dev/null || return 1
 }
 
 config_install_dir() {
     dir=$(realpath "${1}")
-    mkdir -p ~/.config/mcarpet2
+    mkdir -p "${HOME}/.config/remc2"
     if [ -e "${conf}" ]; then
         if grep -q install_dir "${conf}"; then
-            sed -i "s|.*install_dir.*|install_dir='${dir}'|" "${conf}"
+            sed -i~ "s|.*install_dir.*|install_dir='${dir}'|" "${conf}"
         else
             echo "install_dir='${dir}'" >> "${conf}"
         fi
@@ -5344,12 +5357,12 @@ check_base_inst() {
     }
 
     ebegin "     CD_Files directory"
-    pushd "${prefix}/CD_Files/" > /dev/null || exit 1
+    cd "${prefix}/CD_Files/" > /dev/null || exit 1
 
-    find ./ -type d | tac | while read -r line; do
+    find ./ -type d | while read -r line; do
         mv_dirs "${line}"
     done
-    find ./ -type f | tac | while read -r line; do
+    find ./ -type f | while read -r line; do
         mv_files "${line}"
     done
 
@@ -5360,15 +5373,15 @@ check_base_inst() {
         err_cnt=$((err_cnt + 1))
         eend 1 failed
     fi
-    popd > /dev/null || exit 1
+    cd - > /dev/null || exit 1
 
     ebegin "     GAME directory"
-    pushd "${prefix}/GAME/" > /dev/null || exit 1
+    cd "${prefix}/GAME/" > /dev/null || exit 1
 
-    find ./ -type d | tac | while read -r line; do
+    find ./ -type d | while read -r line; do
         mv_dirs "${line}"
     done
-    find ./ -type f | tac | while read -r line; do
+    find ./ -type f | while read -r line; do
         mv_files "${line}"
     done
 
@@ -5378,17 +5391,17 @@ check_base_inst() {
         err_cnt=$((err_cnt + 1))
         eend 1 failed
     fi
-    popd > /dev/null || exit 1
+    cd - > /dev/null || exit 1
 
     ebegin "     recode engine"
-    pushd "${prefix}" > /dev/null || exit 1
+    cd "${prefix}" > /dev/null || exit 1
     if check_usr_share; then
         eend
     else
         err_cnt=$((err_cnt + 1))
         eend 1 failed
     fi
-    popd > /dev/null || exit 1
+    cd - > /dev/null || exit 1
 
     [ "${err_cnt}" = "0" ] && config_install_dir "${prefix}"
 }
@@ -5399,13 +5412,17 @@ check_HD_inst() {
     err_cnt=0
 
     ebegin "     HD assets"
-    pushd "${prefix}" > /dev/null || return 1
+    cd "${prefix}" > /dev/null || return 1
     if check_HD_assets; then
         eend
     else
         eend 1 failed
     fi
-    popd > /dev/null || return 1
+    cd - > /dev/null || return 1
+}
+
+id | grep -q 'uid=0' && {
+    echo "${BAD}warning${NORMAL}: $0 should NOT be run as root. use a low privilege account instead."
 }
 
 unset src
@@ -5413,12 +5430,12 @@ unset dst
 get_HD='false'
 get_speech='false'
 
-[ $# == 0 ] && {
+[ $# = 0 ] && {
     usage
     exit 1
 }
 
-while (( "$#" )); do
+while [ $(( "$#" )) -gt 0 ]; do
     if [ "$1" = "-s" ]; then
         shift;
         src="$1"
@@ -5480,12 +5497,12 @@ done
     mkdir -p "${dst}/CD_Files"
     mkdir -p "${dst}/speech"
     if [ -e "${src}/game.gog" ] && [ -e "${src}/game.ins" ]; then
-        pushd "${dst}/CD_Files" > /dev/null || exit 1
+        cd "${dst}/CD_Files" > /dev/null || exit 1
         bchunk "${src}/game.gog" "${src}/game.ins" track > /dev/null
         7z x -y -bso0 track01.iso
         rm -f track01.iso
         ${get_speech} && mv -f track*.cdr ../speech/
-        popd > /dev/null || exit 1
+        cd - > /dev/null || exit 1
     else
         echo "${BAD}error${NORMAL}: game.gog, game.ins are missing from '${src}'"
         exit 1
@@ -5538,17 +5555,17 @@ done
     mkdir -p "${dst}/GAME/NETHERW/SOUND"
     mkdir -p "${dst}/speech"
 
-    pushd "${dst}" > /dev/null || exit 1
+    cd "${dst}" > /dev/null || exit 1
     cdrdao read-cd --device "${src}" --read-raw --datafile image.bin image.toc
     toc2cue image.toc image.cue
-    popd > /dev/null || exit 1
+    cd - > /dev/null || exit 1
 
-    pushd "${dst}/CD_Files" > /dev/null || exit 1
+    cd "${dst}/CD_Files" > /dev/null || exit 1
     bchunk ../image.bin ../image.cue track
     7z x -y -bso0 track01.iso
     rm -f track01.iso
     mv -f track*.cdr ../speech/
-    popd > /dev/null || exit 1
+    cd - > /dev/null || exit 1
 
     rm -f image.bin image.cue image.toc
 
@@ -5570,7 +5587,6 @@ done
 
 # just install the HD assets
 [ -e "${dst}" ] && ${get_HD} && {
-
     get_HD_assets "${dst}"
     check_HD_inst "${dst}"
     exit $?
@@ -5583,6 +5599,11 @@ done
 
 [ -n "${dst}" ] && [ -e "${dst}" ] && {
     check_base_inst "${dst}"
-    [ -e "${dst}/biggraphics" ] && check_HD_inst "${dst}"
-    exit $?
+    [ $? != 0 ] && exit 1
+    [ -e "${dst}/biggraphics" ] && {
+        check_HD_inst "${dst}"
+        [ $? != 0 ] && exit 1
+    }
+    exit 0
 }
+

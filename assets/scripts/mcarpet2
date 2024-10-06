@@ -1,12 +1,20 @@
-#!/bin/bash
+#!/bin/sh
 
-[ "$EUID" = "0" ] && {
-    echo 'error: run this with low privileges, not as root'
+# wrapper script used by the Magic Carpet 2 game engine
+# Copyright 2023-2024  Petre Rodan <petre.rodan@subdimension.ro>
+#
+# ChangeLog
+#   20241006:
+#       make script compatible with both bash and FreeBSD's default 'sh' IEEE Std 1003.1 (“POSIX.1”) spec interpreter
+
+id | grep -q 'uid=0' && {
+    echo "warning: $0 should NOT be run as root. use a low privilege account instead."
 }
 
-# config that contains a known good install dir location
-conf="${HOME}/.config/mcarpet2/game.cfg"
-engine_conf="${HOME}/.config/mcarpet2/config.ini"
+conf="${HOME}/.config/remc2/game.cfg"
+engine_conf="${HOME}/.config/remc2/config.ini"
+
+default_config='config_attack_3.ini'
 
 exit_err() {
     echo 'please follow the instructions by running'
@@ -18,31 +26,43 @@ exit_err() {
 }
 
 cp_engine_conf() {
-    [ ! -e "${engine_conf}" ] && {
-        cp /usr/share/mcarpet2/config.ini "${HOME}/.config/mcarpet2/"
-    }
+    mkdir -p "${HOME}/.config/remc2/"
 
-    echo '# ignore this config file, it is temporary' > "${install_dir}/config.ini"
-    echo -e '# edit $HOME/.config/mcarpet2/config.ini instead.\n\n\n' >> "${install_dir}/config.ini"
-    cat "${engine_conf}" >> "${install_dir}/config.ini"
+    found=false
+    for loc in '/usr/share/mcarpet2' '/usr/local/share/mcarpet2'; do
+        [ -e "${loc}/${default_config}" ] && {
+            cp -f "/${loc}/${default_config}" "${engine_conf}"
+            echo ''
+            echo "  default engine config copied to '${engine_conf}'"
+            echo '  make sure to customize to your liking'
+            echo ''
+            found=true
+        }
+    done
+
+    [ "${found}" = "false" ] && {
+        echo 'error: cannot find game install directory, exiting'
+        exit 1
+    }
 }
 
 [ ! -e "${conf}" ] && {
-    echo "${conf} file not found, exiting"
+    echo "error: ${conf} file not found, exiting"
     exit_err
 }
 
 . "${conf}"
 
 cd "${install_dir}" || {
-    echo '${install_dir} is an invalid install directory, exiting'
+    echo "'${install_dir}' is an invalid install directory, exiting"
     exit_err
 }
 
-cp_engine_conf
+[ ! -e "${engine_conf}" ] &&
+    cp_engine_conf
 
-[ ! -e "${install_dir}/config.ini" ] && {
-    echo "${install_dir}/config.ini not found, exiting"
+[ ! -e "${engine_conf}" ] && {
+    echo "${engine_conf} not found, exiting"
     exit_err
 }
 
@@ -61,18 +81,48 @@ ${check_assets} && {
         exit_err
     }
 
-    [ -e "${install_dir}/biggraphics" ] && [ "${ret}" = "0" ] && {
-        grep -q 'useEnhancedGraphics = false' "${install_dir}/config.ini" && {
-            echo ''
-            echo ''
-            echo 'since you have the HD assets, you can set'
-            echo 'useEnhancedGraphics = true'
-            echo "inside ${HOME}/.config/mcarpet2/config.ini"
-            echo ''
-            echo ''
-        }
-    }
+    date > "${HOME}/.config/remc2/.last_successful_asset_check"
 }
 
-./remc2
-rm -f config.ini
+# engine config sanity checks
+if [ -e "${install_dir}/biggraphics" ]; then
+    grep -q '^useEnhancedGraphics = true' "${engine_conf}" || {
+        echo ''
+        echo ''
+        echo '  since you have the HD assets, you can set'
+        echo '  useEnhancedGraphics = true'
+        echo "  inside ${HOME}/.config/mcarpet2/config.ini"
+        echo ''
+        echo ''
+    }
+else
+    grep -q '^useEnhancedGraphics = true' "${engine_conf}" && {
+        echo ''
+        echo ''
+        echo "  error: useEnhancedGraphics is enabled in ${engine_conf}"
+        echo "  but '${install_dir}/biggraphics' is missing"
+        echo '  either set'
+        echo '  useEnhancedGraphics = false'
+        echo '  or download the HD pack via'
+        echo ''
+        echo "    mcarpet2_install.sh -x -d '${install_dir}'"
+        exit 1
+    }
+fi
+
+if [ -L "${HOME}/.local/share/remc2" ]; then
+    rm -f "${HOME}/.local/share/remc2"
+    ln -s "${install_dir}" "${HOME}/.local/share/remc2"
+elif [ -e "${HOME}/.local/share/remc2" ]; then
+    if [ "${HOME}/.local/share/remc2" != "${install_dir}" ]; then
+        echo ''
+        echo "  error: '${HOME}/.local/share/remc2' exists"
+        echo "  remove it before re-trying to run $0"
+        exit 1
+    fi
+else
+    ln -s "${install_dir}" "${HOME}/.local/share/remc2"
+fi
+
+"${install_dir}/remc2"
+
