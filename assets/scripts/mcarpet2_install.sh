@@ -5286,10 +5286,10 @@ GOOD=$'\e[32;01m'
 BAD=$'\e[31;01m'
 BRACKET=$'\e[34;01m'
 NORMAL=$'\e[0m'
-ENDCOL=$'\e[A\e['$(( COLS - 8 ))'C'
+ENDCOL=$'\e[A'
 
 ebegin() {
-    echo -e " ${GOOD}*${NORMAL} $*"
+    echo -e " ${GOOD}*${NORMAL}  $*"
 }
 
 eend() {
