@@ -5307,10 +5307,12 @@ eend() {
 cp_usr_share() {
     for loc in '/usr/share/mcarpet2' '/usr/local/share/mcarpet2'; do
         [ -e "${loc}" ] && {
-            cp -r ${loc}/* "${1}/"
+            rm -rf "${1}/font"
+            rm -rf "${1}/remc2"
+            ln -s ${loc}/font "${1}/font"
+            ln -s ${loc}/remc2 "${1}/remc2"
         }
     done
-    chmod +x "${1}/remc2"
 }
 
 get_HD_assets() {
